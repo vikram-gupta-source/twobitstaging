@@ -1,0 +1,286 @@
+// Home CSS
+body.home {
+  overflow: hidden;
+  .entry-block {
+    .block-wrapper {
+      max-width: 400px;
+    }
+  }
+  #main {
+    .embed-responsive {
+      @media (max-width: $break-mobile) {
+        margin-top: 2em;
+      }
+    }
+  }
+  #arrow-cta {
+    position: absolute;
+    z-index: 900;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 2px solid $theme-color2;
+    background-color: rgba(255, 255, 255, 0.85);
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    transition: all 0.4s ease;
+    span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 15px;
+      height: 15px;
+      top: -2px;
+      font-size: 28px;
+      &:before {
+        color: $theme-color2;
+        content: "\f105";
+        display: block;
+        font-family: "FontAwesome";
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        @include transform(rotate(90deg));
+        margin-left: 3px;
+      }
+      &:first-child {
+        @include animation(bounceAlpha 1.4s infinite linear);
+      }
+      &:last-child {
+        top: 5px;
+        @include animation(bounceAlpha 1.4s 0.2s infinite linear);
+      }
+    }
+  }
+  #home-social-menu {
+    li {
+      display: inline-block;
+      margin: 0 5px;
+      a {
+        display: block;
+        font-size: 1.3em;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        background-color: #c4c4c4;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        transition: all 0.6s ease;
+        &:hover {
+          background-color: $hover;
+        }
+      }
+    }
+  }
+  #about-section {
+    background-color: $theme-color2;
+    padding: 5em 0;
+    color: #fff;
+    h2 {
+      color: #fff;
+      text-align: center;
+      @media (max-width: $break-mobile) {
+        text-align: left;
+      }
+    }
+  }
+  #studio-section {
+    margin: 4em;
+    @media (max-width: $break-mobile) {
+      margin: 4em 0;
+    }
+    .studio-wrapper {
+      background-color: #fff;
+      padding: 3em;
+      position: relative;
+      overflow: hidden;
+      @media (max-width: $break-mobile) {
+        padding: 3em;
+      }
+      .studio-bkg {
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        padding-bottom: 7em;
+        @media (max-width: $break-mobile) {
+          padding-bottom: 3em;
+        }
+        &:after {
+          content: "";
+          position: absolute;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          background: rgba(31, 74, 100, 0.8);
+        }
+      }
+      .studio-slider {
+        position: relative;
+        z-index: 2;
+        top: 5em;
+        margin: 0 -2em;
+        h2 {
+          color: #fff;
+        }
+      }
+    }
+  }
+  #contact-section {
+    .navbar-brand {
+      max-width: 180px;
+      margin: 5% auto 2em;
+    }
+    .info {
+      h4,
+      h6 {
+        color: $theme-color2;
+      }
+      @media (max-width: $break-mobile) {
+        text-align: center;
+      }
+    }
+  }
+  #studio-section {
+    .grid-section {
+      margin: 30px -15px;
+      overflow: hidden;
+      .grid-row {
+        @media (max-width: $break-mobile) {
+          overflow-x: scroll;
+          overflow-y: hidden;
+          padding-bottom: 3em;
+          -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+          display: flex;
+          .grid-item {
+            margin: 0 2px;
+            min-width: 280px;
+          }
+        }
+
+        .slick-slide {
+          padding: 8px;
+        }
+        .grid-item {
+          position: relative;
+          width: 280px;
+          height: 440px;
+          background-color: #e5e5e5;
+          padding: 0;
+          overflow: hidden;
+          .bkg-img {
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transition: all 2s ease;
+            object-fit: scale-down;
+            &:after {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              height: 100%;
+              width: 100%;
+              transition: all 2s ease;
+              background-color: rgba(0, 0, 0, 0.3);
+            }
+          }
+          .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 25px;
+            height: auto;
+            transition: all 0.4s ease;
+            h4 {
+              position: relative;
+              color: #fff;
+              text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+              margin-bottom: 20px;
+              &:after {
+                content: "";
+                position: absolute;
+                bottom: -6px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: $theme-color2;
+              }
+            }
+            .bio-button,
+            .bio-close {
+              position: absolute;
+              right: 10px;
+              bottom: 8px;
+              span.text {
+                vertical-align: top;
+                line-height: 30px;
+                color: #fff;
+                margin-right: 5px;
+              }
+            }
+            .bio-close {
+              display: none;
+            }
+            .bars {
+              display: inline-block;
+              background-color: #a1a9ad;
+              border-radius: 50%;
+              width: 30px;
+              height: 30px;
+              text-align: center;
+              line-height: 28px;
+              transition: all 0.4s ease;
+              .octicon {
+                color: #576268;
+              }
+              &:hover {
+                background-color: $theme-color;
+              }
+            }
+            .copy {
+              opacity: 0;
+              visibility: hidden;
+              height: 0;
+              color: #bfbfbf;
+            }
+            &.active {
+              background-color: rgba(0, 0, 0, 0.85);
+              height: 100%;
+              h4:after {
+                width: 80px;
+              }
+              .copy {
+                opacity: 1;
+                visibility: visible;
+                height: 100%;
+              }
+              .bio-close {
+                display: block;
+              }
+              .bio-button {
+                display: none;
+              }
+            }
+          }
+          &:hover {
+            .bkg-img {
+              @include transform(scale(1.2));
+              &:after {
+                background-color: rgba(0, 0, 0, 0);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

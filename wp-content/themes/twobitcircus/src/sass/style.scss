@@ -1,0 +1,21 @@
+@charset "UTF-8"; /*
+Theme Name: Two Bit Circus
+Author: Petrol Team
+Description: Two Bit Circus for Two Bit Circus Template.
+Requires at least: WordPress 4.9.6
+Version: 1.0
+Text Domain: twobitcircus
+*/
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600");
+@import "vars";
+@import "~bootstrap/scss/bootstrap";
+@import "~animate-sass/animate";
+@import "~font-awesome/scss/font-awesome";
+@import "~ionicons/dist/scss/ionicons";
+@import "~slick-carousel/slick/slick";
+@import "~slick-carousel/slick/slick-theme";
+@import "mixins";
+@import "keyframes";
+@import "main";
+@import "header";
+@import "footer";
