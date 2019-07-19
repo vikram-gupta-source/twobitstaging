@@ -6,6 +6,7 @@ Requires at least: WordPress 4.9.6
 Version: 1.0
 Text Domain: twobitcircus
 */
+
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600");
 @import "vars";
 @import "~bootstrap/scss/bootstrap";
@@ -18,4 +19,7 @@ Text Domain: twobitcircus
 @import "keyframes";
 @import "main";
 @import "header";
+@import "home";
+@import "food";
+@import "promo";
 @import "footer";

@@ -11,9 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $wp_includes = array(
   '/setup.php',                           // Load setup.
+  '/widget.php',                          // Load Wdget.
 	'/enqueue.php',                         // Enqueue scripts and styles.
-	'/class-wp-bootstrap-navwalker.php',    // Load custom WordPress nav walker. 
+	'/class-wp-bootstrap-navwalker.php',    // Load custom WordPress nav walker.
   '/login.php',                           // Load custom login.
+  '/class-calendar.php',                  // Load calendar class.
+  '/admin.php'                            // Load Admin Custom Setting
 );
 
 foreach ( $wp_includes as $file ) {
@@ -23,6 +26,3 @@ foreach ( $wp_includes as $file ) {
 	}
 	require_once $filepath;
 }
-
-// Disable all user admin top bar
-add_filter('show_admin_bar', '__return_false');

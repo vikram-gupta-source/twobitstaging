@@ -9,9 +9,12 @@ module.exports = (env, argv) => {
     performance: {
       hints: false
     },
-    entry: ["./src/js/app.js", "./src/sass/style.scss"],
+    entry: {
+      theme: ["./src/js/app.js", "./src/sass/style.scss"],
+      admin: ["./src/sass/admin.scss"]
+    },
     output: {
-      filename: "theme.min.js",
+      filename: "[name].min.js",
       path: path.resolve(__dirname, "js")
     },
     module: {
@@ -47,7 +50,7 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: "../css/theme.min.css"
+        filename: "../css/[name].min.css"
       })
     ],
     stats: {

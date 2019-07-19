@@ -7,18 +7,27 @@
 
 ?>
 
-<article id="page" <?php post_class('container mb-6'); ?>>
-	<div class="entry-content inview animated">
-    <?php the_title( '<h1 class="headline">', '</h1>' ); ?>
+<article id="page" <?php post_class('mb-6'); ?>>
+  <div class="container-fluid text-center main-headline">
+    <?php the_title( '<h1 class="headline inview animated" data-ease="fadeInDown">', '</h1>' ); ?>
+  </div>
+  <?php if (!empty( get_the_content())):?>
+  <div class="container-fluid text-center sub-headline">
+    <div class="inview animated w-50 mx-auto delay-2"><?php the_content(); ?></div>
+  </div>
+  <?php endif ?>
+  <section class="entry-wrapper-padding inview animated delay-2">
+    <div class="container">
     <?php
-		the_content();
+  		the_content();
 
-		wp_link_pages(
-			array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'twobitcircus' ),
-				'after'  => '</div>',
-			)
-		);
-		?>
-	</div>
+  		wp_link_pages(
+  			array(
+  				'before' => '<div class="page-links">' . __( 'Pages:', 'twobitcircus' ),
+  				'after'  => '</div>',
+  			)
+  		);
+  		?>
+    </div>
+	</section>
 </article>

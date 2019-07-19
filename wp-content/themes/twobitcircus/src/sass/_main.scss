@@ -2,7 +2,7 @@
 body {
   -webkit-font-smoothing: antialiased;
   color: $theme-color-text;
-  font-size: 15px;
+  font-size: 14px;
   padding-top: 4.5rem;
 }
 h1,
@@ -26,8 +26,14 @@ a {
 .entry-content a {
   color: $theme-color2;
 }
-.entry-wrapper-margin {
-  margin: 3em auto;
+.entry-wrapper-padding {
+  padding: 4em 0;
+}
+.bkg-color {
+  background-color: $theme-color2;
+}
+.t-shadow {
+  text-shadow: 0 0 3px #000;
 }
 .lazy-hidden {
   opacity: 0;
@@ -63,44 +69,26 @@ a {
 .delay-4 {
   animation-delay: 1.4s;
 }
-.btn-theme {
-  background: $theme-color2 !important;
-}
-.btn-slide {
+.btn-twobit {
   position: relative;
   transition: 0.25s;
-  background-color: transparent;
+  background-color: $theme-color;
   transition: all 0.4s ease;
   border-radius: 0;
   padding: 0.375rem 2rem;
   border: 3px solid $theme-color;
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    z-index: 0;
-    height: 100%;
-    background-color: $hover;
-    transition: all 0.4s ease;
-  }
-  span {
-    position: relative;
-    z-index: 1;
-    color: $hover;
-    transition: color 0.4s ease;
-  }
+  color: #fff !important;
   &:focus,
   &:hover {
     border-color: $hover;
-    &:before {
-      width: 100%;
-    }
-    span {
-      color: #fff;
-    }
   }
+  &.btn-sm {
+    padding: 0rem 0.9rem;
+  }
+}
+.container-spacing {
+  padding-top: 4em;
+  padding-bottom: 4em;
 }
 .slick-slider {
   .slick-prev,
@@ -147,6 +135,7 @@ form {
     color: #a0a0a0;
     background-color: #fff;
     border-radius: 0 !important;
+    font-size: 0.9rem;
   }
   .custom-file-label {
     border-radius: 0 !important;
@@ -155,10 +144,19 @@ form {
 }
 h1.headline {
   margin: 30px 0 15px;
-  color: $theme-color;
+  color: $theme-color-text;
 }
 main {
   margin: 0;
+}
+.w-50,
+.w-75 {
+  @media (max-width: $break-mid) {
+    width: 80% !important;
+  }
+  @media (max-width: $break-mobile) {
+    width: 90% !important;
+  }
 }
 article.page.type-page {
   position: relative;
@@ -250,6 +248,50 @@ h5:not(.collapsed) {
     }
   }
 }
+.offset-left-md-6 {
+  margin-right: 50%;
+}
+.carousel {
+  .carousel-item {
+    height: calc(100vh - 72px);
+    background-color: #000;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    &.darken:before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: $black;
+    }
+    &.darken-20:before {
+      opacity: 0.2;
+    }
+    &.darken-40:before {
+      opacity: 0.4;
+    }
+    &.darken-60:before {
+      opacity: 0.6;
+    }
+    &.darken-80:before {
+      opacity: 0.8;
+    }
+    .carousel-caption {
+      &.top {
+        top: 20vh;
+        bottom: inherit;
+      }
+      &.bottom {
+        top: inherit;
+        bottom: 20vh;
+      }
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+  }
+}
 .accordion-icon {
   position: relative;
   top: 12px;
@@ -274,7 +316,7 @@ h5:not(.collapsed) {
     margin-top: -11px;
   }
 }
-.hero {
+.wrapper-section {
   position: relative;
   width: 100%;
   &.parallax-container {
@@ -332,6 +374,14 @@ h5:not(.collapsed) {
     z-index: 0;
     background-color: rgba(0, 0, 0, 0.3);
   }
+}
+.main-headline {
+  padding: 4em 15px;
+  background-color: $theme-color;
+}
+.sub-headline {
+  padding: 4em 15px;
+  background-color: $theme-color2;
 }
 #return-to-top {
   position: fixed;

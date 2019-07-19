@@ -1,12 +1,4 @@
 // Keyframes CSS
-@include keyframes(logo-sprite-animate) {
-  from {
-    background-position: 0;
-  }
-  to {
-    background-position: $logo-sprite;
-  }
-}
 @include keyframes(bounceAlpha) {
   0% {
     opacity: 1;

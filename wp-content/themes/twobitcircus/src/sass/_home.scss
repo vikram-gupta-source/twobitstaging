@@ -1,282 +1,186 @@
 // Home CSS
-body.home {
-  overflow: hidden;
-  .entry-block {
-    .block-wrapper {
-      max-width: 400px;
+#home {
+  #events-block {
+    .link-wrapper {
+      height: 28px;
     }
   }
-  #main {
-    .embed-responsive {
-      @media (max-width: $break-mobile) {
-        margin-top: 2em;
+  #featured-block {
+    .slick-dots {
+      li button:before {
+        color: $black;
+      }
+    }
+    .slick-next:before {
+      font-size: 40px;
+      font-family: "FontAwesome";
+      content: "\f105";
+      width: 180px;
+      height: 100px;
+      color: $black;
+    }
+    .slick-prev:before {
+      font-size: 40px;
+      font-family: "FontAwesome";
+      content: "\f104";
+      width: 50px;
+      height: 100px;
+      color: $black;
+    }
+    .slick-next {
+      right: 25px;
+      height: 100px;
+      width: 50px;
+    }
+    .slick-prev {
+      left: 25px;
+      z-index: 11;
+      width: 50px;
+      height: 100px;
+    }
+    .slick-list {
+      padding: 32px 50px !important;
+      .slick-slide {
+        margin: 0 6px;
+        position: relative;
+        transition: all 0.3s ease;
+        @include transform(1);
+        &.slick-center {
+          @include transform(scale(1.2));
+          z-index: 100;
+          .card {
+            opacity: 1;
+          }
+        }
+        .card {
+          height: 300px;
+          width: 680px !important;
+          transition: all 0.3s ease;
+          opacity: 0.3;
+        }
       }
     }
   }
-  #arrow-cta {
-    position: absolute;
-    z-index: 900;
-    bottom: 5%;
-    left: 0;
-    right: 0;
-    margin: auto;
-    border: 2px solid $theme-color2;
-    background-color: rgba(255, 255, 255, 0.85);
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    transition: all 0.4s ease;
-    span {
-      position: absolute;
-      left: 0;
-      right: 0;
-      margin: auto;
-      width: 15px;
-      height: 15px;
-      top: -2px;
-      font-size: 28px;
-      &:before {
-        color: $theme-color2;
-        content: "\f105";
-        display: block;
+  .calender-wrapper {
+    max-width: 1413px;
+    margin: 0 auto;
+    padding: 25px;
+    @media (max-width: 1230px) {
+      max-width: 1199px;
+    }
+    @media (max-width: 991px) {
+      max-width: 900px;
+    }
+    @media (max-width: 767px) {
+      margin: 0 auto;
+      padding: 15px 25px 15px 40px;
+    }
+    .calender {
+      .slick-next:before {
+        font-size: 40px;
         font-family: "FontAwesome";
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        @include transform(rotate(90deg));
-        margin-left: 3px;
+        content: "\f105";
+        width: 180px;
+        height: 200px;
+        color: $black;
       }
-      &:first-child {
-        @include animation(bounceAlpha 1.4s infinite linear);
+      .slick-prev:before {
+        font-size: 40px;
+        font-family: "FontAwesome";
+        content: "\f104";
+        width: 180px;
+        height: 260px;
+        color: $black;
       }
-      &:last-child {
-        top: 5px;
-        @include animation(bounceAlpha 1.4s 0.2s infinite linear);
+      .slick-next {
+        right: -25px;
       }
-    }
-  }
-  #home-social-menu {
-    li {
-      display: inline-block;
-      margin: 0 5px;
-      a {
-        display: block;
-        font-size: 1.3em;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        background-color: #c4c4c4;
-        text-align: center;
-        line-height: 40px;
-        color: #fff;
+      .slick-prev {
+        left: -25px;
+      }
+      .slick-arrow {
+        z-index: 1;
+        width: 25px;
+        height: 80px;
+      }
+      .slick-dots li button:before {
+        color: $black;
+      }
+      .slick-slide {
+        margin: 2px;
+      }
+      .grid {
+        width: 280px;
+        height: 320px;
+        display: inline-block;
+        vertical-align: top;
+        border: 1px solid #8d8d8d;
         transition: all 0.6s ease;
-        &:hover {
-          background-color: $hover;
-        }
-      }
-    }
-  }
-  #about-section {
-    background-color: $theme-color2;
-    padding: 5em 0;
-    color: #fff;
-    h2 {
-      color: #fff;
-      text-align: center;
-      @media (max-width: $break-mobile) {
-        text-align: left;
-      }
-    }
-  }
-  #studio-section {
-    margin: 4em;
-    @media (max-width: $break-mobile) {
-      margin: 4em 0;
-    }
-    .studio-wrapper {
-      background-color: #fff;
-      padding: 3em;
-      position: relative;
-      overflow: hidden;
-      @media (max-width: $break-mobile) {
-        padding: 3em;
-      }
-      .studio-bkg {
-        position: relative;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        padding-bottom: 7em;
-        @media (max-width: $break-mobile) {
-          padding-bottom: 3em;
-        }
-        &:after {
-          content: "";
-          position: absolute;
-          z-index: 1;
-          top: 0;
-          left: 0;
-          height: 100%;
+        .grid-time {
           width: 100%;
-          background: rgba(31, 74, 100, 0.8);
-        }
-      }
-      .studio-slider {
-        position: relative;
-        z-index: 2;
-        top: 5em;
-        margin: 0 -2em;
-        h2 {
-          color: #fff;
-        }
-      }
-    }
-  }
-  #contact-section {
-    .navbar-brand {
-      max-width: 180px;
-      margin: 5% auto 2em;
-    }
-    .info {
-      h4,
-      h6 {
-        color: $theme-color2;
-      }
-      @media (max-width: $break-mobile) {
-        text-align: center;
-      }
-    }
-  }
-  #studio-section {
-    .grid-section {
-      margin: 30px -15px;
-      overflow: hidden;
-      .grid-row {
-        @media (max-width: $break-mobile) {
-          overflow-x: scroll;
-          overflow-y: hidden;
-          padding-bottom: 3em;
-          -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap;
-          display: flex;
-          .grid-item {
-            margin: 0 2px;
-            min-width: 280px;
+          .header {
+            background-color: #8d8d8d;
           }
-        }
-
-        .slick-slide {
-          padding: 8px;
-        }
-        .grid-item {
-          position: relative;
-          width: 280px;
-          height: 440px;
-          background-color: #e5e5e5;
-          padding: 0;
-          overflow: hidden;
-          .bkg-img {
-            height: 100%;
-            width: 100%;
-            background-size: cover;
-            background-repeat: no-repeat;
-            transition: all 2s ease;
-            object-fit: scale-down;
-            &:after {
-              content: "";
-              position: absolute;
-              top: 0;
-              left: 0;
-              height: 100%;
-              width: 100%;
-              transition: all 2s ease;
-              background-color: rgba(0, 0, 0, 0.3);
-            }
-          }
-          .overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            padding: 25px;
-            height: auto;
+          .date,
+          .day {
+            color: #fff;
+            font-weight: 500;
+            width: 50%;
+            text-align: left;
+            float: left;
+            padding: 5px 8px;
             transition: all 0.4s ease;
-            h4 {
-              position: relative;
-              color: #fff;
-              text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-              margin-bottom: 20px;
-              &:after {
-                content: "";
-                position: absolute;
-                bottom: -6px;
-                left: 0;
-                width: 0;
-                height: 2px;
-                background-color: $theme-color2;
-              }
+          }
+          .date {
+            text-align: right;
+          }
+          .entry {
+            padding: 15px 5px;
+            display: table;
+            height: 294px;
+            width: 100%;
+            .cell {
+              display: table-cell;
+              vertical-align: middle;
             }
-            .bio-button,
-            .bio-close {
-              position: absolute;
-              right: 10px;
-              bottom: 8px;
-              span.text {
-                vertical-align: top;
-                line-height: 30px;
-                color: #fff;
-                margin-right: 5px;
-              }
-            }
-            .bio-close {
-              display: none;
-            }
-            .bars {
-              display: inline-block;
-              background-color: #a1a9ad;
-              border-radius: 50%;
-              width: 30px;
-              height: 30px;
-              text-align: center;
-              line-height: 28px;
+            .button {
+              display: block;
+              margin: 5px auto 14px;
+              padding: 2px 10px;
+              border-radius: 10px;
+              border: 1px solid #e1e1e1;
+              background-color: #e1e1e1;
               transition: all 0.4s ease;
-              .octicon {
-                color: #576268;
-              }
+              text-transform: uppercase;
+              width: 90%;
               &:hover {
-                background-color: $theme-color;
+                background-color: #fff;
               }
             }
-            .copy {
-              opacity: 0;
-              visibility: hidden;
-              height: 0;
-              color: #bfbfbf;
-            }
-            &.active {
-              background-color: rgba(0, 0, 0, 0.85);
-              height: 100%;
-              h4:after {
-                width: 80px;
-              }
-              .copy {
-                opacity: 1;
-                visibility: visible;
-                height: 100%;
-              }
-              .bio-close {
-                display: block;
-              }
-              .bio-button {
-                display: none;
-              }
+            .time {
+              font-size: 16px;
+              line-height: 17px;
+              width: 100%;
+              font-weight: 500;
+              text-transform: uppercase;
             }
           }
-          &:hover {
-            .bkg-img {
-              @include transform(scale(1.2));
-              &:after {
-                background-color: rgba(0, 0, 0, 0);
-              }
+        }
+        &.active,
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.5);
+        }
+        &.closed {
+          background-color: #757575 !important;
+          border: 1px solid #373737;
+          .grid-time {
+            .header {
+              background-color: #373737;
+            }
+          }
+          .cell {
+            .time {
+              color: #fff;
             }
           }
         }

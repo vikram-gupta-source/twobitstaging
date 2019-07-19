@@ -1,0 +1,30 @@
+// Food
+#food-drink {
+  #events-block {
+    .event {
+      padding: 0;
+      .event-header {
+        float: left;
+        width: 60%;
+        .top,
+        .bottom {
+          min-height: 110px;
+          background-color: #eaeaea;
+          padding: 2em 1em;
+        }
+        .top {
+          background-color: #d5d5d5;
+        }
+      }
+      .event-image {
+        float: left;
+        width: 40%;
+      }
+    }
+  }
+  #banner-block {
+    .content-block {
+      padding: 0 3em;
+    }
+  }
+}

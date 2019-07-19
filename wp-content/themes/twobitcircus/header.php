@@ -20,6 +20,7 @@
 		<a class="skip-link sr-only sr-only-focusable" href="#content"><?php _e( 'Skip to content', 'twobitcircus' ); ?></a>
 		<nav class="navbar">
 			<div class="container">
+        <?php do_shortcode('[geot country="US"] USA only content [/geot]'); ?>
 
         <?php the_custom_logo(); ?>
 
@@ -27,7 +28,7 @@
 				<?php wp_nav_menu( array(
           	'theme_location'  => 'header',
             'container'         => 'div',
-            'container_class'   => 'collapse show',
+            'container_class'   => 'collapse show d-none d-lg-block',
             'container_id'      => 'navigation',
           	'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
           	'menu_class'      => 'menu-table d-flex flex-column flex-md-row justify-content-between',
@@ -36,7 +37,7 @@
           ) );
         ?>
 
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#expanded-menu" aria-controls="expanded-menu" aria-expanded="false" aria-label="<?php _e( 'Toggle navigation', 'twobitcircus' ); ?>">
+        <button class="navbar-toggler collapsed d-lg-none"" type="button" data-toggle="collapse" data-target="#expanded-menu" aria-controls="expanded-menu" aria-expanded="false" aria-label="<?php _e( 'Toggle navigation', 'twobitcircus' ); ?>">
           <div class="hamburger-wrapper">
             <span></span>
             <span></span>
