@@ -10,12 +10,7 @@
 <article id="page" <?php post_class('mb-6'); ?>>
   <div class="container-fluid text-center main-headline">
     <?php the_title( '<h1 class="headline inview animated" data-ease="fadeInDown">', '</h1>' ); ?>
-  </div>
-  <?php if (!empty( get_the_content())):?>
-  <div class="container-fluid text-center sub-headline">
-    <div class="inview animated w-50 mx-auto delay-2"><?php the_content(); ?></div>
-  </div>
-  <?php endif ?>
+  </div> 
   <section class="entry-wrapper-padding inview animated delay-2">
     <div class="container">
     <?php
