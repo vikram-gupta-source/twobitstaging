@@ -1,0 +1,49 @@
+// parties
+#parties-block {
+  .grid-item {
+    .card-title {
+      padding: 12px 15px;
+      background-color: #eee;
+      height: 60px;
+      position: relative;
+      h5 {
+        margin: 0;
+        line-height: 0.9;
+        font-size: 18px;
+        text-align: left;
+        span {
+          font-size: 14px;
+          color: #666;
+        }
+      }
+      i.fa-angle-down:before {
+        position: absolute;
+        top: 23px;
+        right: 10px;
+        transition: all 0.5s ease-in-out;
+      }
+      &.collapsed {
+        i.fa-angle-down:before {
+          @include transform(rotate(180deg));
+        }
+      }
+    }
+  }
+}
+#event-form {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  width: 60vw;
+  min-width: 300px;
+  z-index: 3000;
+  left: -60vw;
+  transition: all 0.6s ease;
+  background-color: rgba(0, 0, 0, 0.8);
+  &.active {
+    left: 0;
+  }
+  .event-form-wrapper {
+    padding: 15px;
+  }
+}

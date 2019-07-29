@@ -124,6 +124,7 @@ if ( ! function_exists( 'twobitcircus_show_post_type' ) ) {
     		'public'                => true,
     		'has_archive'           => true,
     		'capability_type'       => 'post',
+        'taxonomies'            => array( 'category' ),
         'menu_icon'     => 'dashicons-format-gallery',
     );
     // Registering your Custom Post Type
@@ -134,22 +135,23 @@ add_theme_support('post-thumbnails');
 add_post_type_support( 'shows', 'thumbnail' );
 add_action( 'init', 'twobitcircus_shows_post_type', 0 );
 
-if ( ! function_exists( 'twobitcircus_faqs_post_type' ) ) {
-  // Set FAQ labels for Custom Post Type
-  function twobitcircus_faqs_post_type() {
+if ( ! function_exists( 'twobitcircus_news_post_type' ) ) {
+  // Set News labels for Custom Post Type
+  function twobitcircus_news_post_type() {
     $supports = array(
       'title',
       'editor',
+      'excerpt',
       'page-attributes',
       );
     $labels = array(
-      'menu_name'     => __( 'FAQ', 'twobitcircus' ),
-      'name'          => __( 'FAQ', 'twobitcircus' ),
-      'singular_name' => __('FAQ', 'twobitcircus' ),
-      'all_items' => __( 'All FAQ', 'twobitcircus' ),
-      'add_new_item'  => __( 'Add New FAQ', 'twobitcircus' ),
-      'edit_item'     => __( 'Edit FAQ', 'twobitcircus' ),
-      'add_new'       => __( 'Add FAQ', 'twobitcircus' ),
+      'menu_name'     => __( 'News', 'twobitcircus' ),
+      'name'          => __( 'News', 'twobitcircus' ),
+      'singular_name' => __('News', 'twobitcircus' ),
+      'all_items' => __( 'All News', 'twobitcircus' ),
+      'add_new_item'  => __( 'Add New News', 'twobitcircus' ),
+      'edit_item'     => __( 'Edit News', 'twobitcircus' ),
+      'add_new'       => __( 'Add News', 'twobitcircus' ),
     );
     $args = array(
         'labels'              => $labels,
@@ -157,14 +159,16 @@ if ( ! function_exists( 'twobitcircus_faqs_post_type' ) ) {
     		'hierarchical'          => false,
     		'public'                => true,
     		'has_archive'           => true,
-    		'capability_type'       => 'post',
-        'menu_icon'     => 'dashicons-editor-help',
+    		'capability_type'       => 'post', 
+        'menu_icon'     => 'dashicons-admin-site-alt3',
     );
     // Registering your Custom Post Type
-    register_post_type( 'faqs', $args );
+    register_post_type( 'news', $args );
   }
 }
-add_action( 'init', 'twobitcircus_faqs_post_type', 0 );
+add_theme_support('post-thumbnails');
+add_post_type_support( 'news', 'thumbnail' );
+add_action( 'init', 'twobitcircus_news_post_type', 0 );
 
 // Handle Custom Shortcode
 function twobitcircus_button_shortcode( $atts, $content=null ) {
@@ -194,10 +198,10 @@ add_shortcode( 'is_session', 'twobitcircus_session_shortcode' );
 add_filter('next_posts_link_attributes', 'posts_link_attributes');
 add_filter('previous_posts_link_attributes', 'posts_link_attributes');
 
-add_action('acf/init', function() {
-    remove_filter('acf_the_content', 'wpautop' );
-    remove_filter('the_content', 'wpautop' );
-});
+//add_action('acf/init', function() {
+    //remove_filter('acf_the_content', 'wpautop' );
+    //remove_filter('the_content', 'wpautop' );
+//});
 
 function posts_link_attributes() {
     return 'class="btn btn-slide"';
@@ -205,12 +209,23 @@ function posts_link_attributes() {
 // Handle Region & filters
 // Collect Region
 $region = (empty($_COOKIE['geo_location'])) ?  $geo->get_location_by_ip() : (json_decode(stripslashes($_COOKIE['geo_location'])));
-//print_r($region);
+$location = @get_locations(get_field('location_selection', 'option'))[0];
 
+// Clean Location so it find only location that in region
+function filter_location_by_field($field) {
+  global $region;
+  if(empty($field) || $region->status == 'fail') return false;
+  // Test City
+  $_item = explode('|', $field);
+  if($_item[0] == 'all' || ($_item[0] == $region->city) || $_item[1] == $region->regionName) {
+    return true;
+  }
+  return false;
+}
 // Clean Location so it find only location that in region
 function filter_locations($array) {
   global $region;
-  if(empty($array)) return $array;
+  if(empty($field) || $region->status == 'fail') return $array;
   $_array = [];
   // Test City
   foreach($array as $item) {
@@ -228,7 +243,7 @@ function filter_locations($array) {
 // Clean Location so it find only location that in region
 function get_locations($array) {
   global $region;
-  if(empty($array)) return $array;
+  if(empty($array) || $region->status == 'fail') return $array;
   $_array = [];
   // Test Locations
   foreach($array as $item) {
@@ -237,6 +252,6 @@ function get_locations($array) {
     } elseif($item['region'] == $region->regionName) {
       $_array[] = $item;
     }
-  } 
+  }
   return $_array;
 }

@@ -24,7 +24,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
     public function __construct() {
       $this->name = 'geoip';
       $this->prefix = 'geo_';
-      $this->title = ucwords(str_replace('_', ' ', $this->name));
+      $this->title = 'Geo IP Settings';
       $this->slug = str_replace('_', '-', $this->name);
       if ( is_admin() ){ // admin actions
         add_action('admin_menu', [$this, $this->prefix . 'add_admin_page']);
@@ -143,7 +143,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
   		$ip = str_replace( array( '::ffff:', ', 127.0.0.1'), '', $ip );
   		// get varnish first ip
   		$ip = strstr( $ip, ',') === false ? $ip : strstr( $ip, ',');
-      if($ip == '127.0.0.1') $ip = '24.176.217.66';
+      if($ip == '127.0.0.1' || $ip == '::1') $ip = '24.176.217.66';
   		return $ip;
   	}
   }

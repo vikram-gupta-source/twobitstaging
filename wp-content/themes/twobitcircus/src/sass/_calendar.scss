@@ -1,0 +1,22 @@
+// Calendar
+#full-calendar {
+  th {
+    background-color: #dee2e6;
+  }
+  .fc-event,
+  .fc-event-dot {
+    background-color: #6f6f6f;
+    border: 1px solid #6f6f6f;
+    border-radius: 0;
+    padding: 2px 4px;
+  }
+  .fc-event {
+    cursor: pointer;
+  }
+  #event-window {
+    .card-header {
+      background-color: #8d8d8d;
+      padding: 5px 8px;
+    }
+  }
+}

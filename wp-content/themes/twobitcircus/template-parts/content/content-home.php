@@ -4,11 +4,13 @@
  *
  * @package twobitcircus
  */
- global $region;
  $cal = new Calendar();
  $calendar = $cal->init();
  $_enddate = $cal->get_endDate();
  $_closed = $cal->get_closed();
+ $sf = new SocialFeed();
+ $social_feed = $sf->get_social_feeds();
+ $social_cat = $sf->get_distinct_social();
 ?>
 <article id="home" <?php post_class(); ?>>
 
@@ -54,8 +56,8 @@
       <?php endif ?>
       <?php if(!empty(get_field('featured_events'))) :?>
       <?php $feature_events = filter_locations(get_field('featured_events'));?>
-      <h4 class="text-uppercase inview animated delay-1">Featured</h4>
-      <div class="featured mt-3 row inview animated delay-2">
+      <h4 class="text-uppercase inview animated">Featured</h4>
+      <div class="featured mt-3 row inview animated delay-1">
         <?php foreach($feature_events as $feature) : ?>
         <div class="col-lg-4">
           <div class="card">
@@ -78,84 +80,23 @@
         <?php endforeach ?>
       </div>
       <?php endif ?>
-
-      <?php if(!empty($calendar)) :?>
-      <div class="calender-planner">
-        <div class="calender-wrapper inview animated">
-          <div class="calender slick slick-init">
-
-          <?php
-            $current_date = time();
-            $day_count = 0;
-
-            do {
-              $isClosed = false;
-              $day = date('d', $current_date);
-              $dayname = date('D', $current_date);
-            ?>
-            <?php if(in_array($dayname, $_closed)) $isClosed = true; ?>
-              <div class="grid <?php echo ($isClosed) ? 'closed' : '';?> <?php echo ($day_count==0)?'active':'';?>">
-                <div class="grid-time text-center">
-                  <div class="header clearfix">
-                    <div class="day text-uppercase"><?php echo $dayname;?></div>
-                    <div class="date text-uppercase"><?php echo date('M d', $current_date);?></div>
-                  </div>
-                  <?php if($isClosed) : ?>
-                  <div class="entry text-uppercase"><div class="cell"><span class="time"><?php echo get_field('calendar_closed_text', 'option');?></span></div></div>
-                <?php elseif(!empty($calendar[$day])) :?>
-                  <div class="entry">
-                    <div class="cell">
-                      <?php ksort($calendar[$day]); ?>
-                      <?php foreach($calendar[$day] as $times) : ?>
-                      <?php foreach($times as $time) :?>
-                      <?php if(!empty($time->link)) :?>
-                      <a href="<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>" class="time" target="<?php echo (isset($time->target) && $time->target == '_self') ? '_self' : '_blank';?>" rel="noopener" onclick="gtag('event', '<?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?>', {'event_category': 'Calendar Link', 'event_label': '<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>'});">
-                      <?php else :?>
-                      <span class="time">
-                      <?php endif ?>
-                        <?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?>
-                        <?php if(!empty($time->ticket_alt) || !empty($time->ticket)) :?>
-                        <button type="button" class="button"><?php echo (!empty($time->ticket_alt)) ? $time->ticket_alt : ltrim($time->ticket, '0');?></button>
-                        <?php endif ?>
-                      <?php if(!empty($time->link)) :?>
-                      </a>
-                      <?php else :?>
-                      </span>
-                      <?php endif ?>
-                      <?php endforeach ?>
-                      <?php endforeach ?>
-                    </div>
-                  </div>
-                  <?php else :?>
-                  <div class="entry no-shows text-uppercase"><div class="cell"><span class="time"><?php echo get_field('calendar_blank_text', 'option');?></span></div></div>
-                  <?php endif ?>
-                </div>
-              </div>
-            <?php
-                $current_date = strtotime('+1 day', $current_date);
-                $day_count ++;
-            } while ($current_date <= $_enddate);
-            ?>
-          </div>
-        </div>
-      </div>
-      <?php endif ?>
-
     </div>
   </section>
+  <?php get_template_part( 'template-parts/partial/partial', 'calendar' ); ?>
+
+
+
 
   <section id="about-block" class="entry-wrapper-padding text-center">
     <div class="container">
-      <h2 class="headline text-uppercase text-center mb-5 inview animated delay-1"><?php echo get_field('about_title'); ?></h2>
-      <div class="w-75 mx-auto inview animated delay-2" data-ease="fadeInDown"><?php echo get_field('about_description');?></div>
+      <h2 class="headline text-uppercase text-center mb-5 inview animated"><?php echo get_field('about_title'); ?></h2>
+      <div class="w-75 mx-auto inview animated delay-1" data-ease="fadeInDown"><?php echo get_field('about_description');?></div>
     </div>
   </section>
 
-  <section id="social-block" class="entry-wrapper-padding bkg-color">
+  <section id="newsletter-block" class="entry-wrapper-padding bkg-color">
     <div class="container">
-      <div class="row inview animated delay-1">
-      <?php echo get_field('newsletter');?>
-      </div>
+      <?php echo get_field('newsletter_block', 'option');?>
     </div>
   </section>
 
@@ -164,6 +105,107 @@
       <h2 class="headline text-uppercase text-center mb-5 inview animated"><?php echo get_field('social_title'); ?></h2>
       <h4 class="text-center text-uppercase inview animated delay-1" data-ease="fadeInDown">Follow what we're up to</h4>
       <div class="row inview animated delay-2">
+
+        <?php if(!empty($social_feed)):?>
+        <div class="item-content">
+
+          <?php if(!empty($social_cat)):?>
+          <div class="grid-social slick slick-feed">
+
+            <?php foreach($social_cat as $cat): ?>
+            <div class="grid-item <?php echo $cat->type;?>">
+              <div class="header text-uppercase">
+                <?php
+                    if($cat->type == 'facebook')
+                        $title = '<i class="fa fa-facebook mr-2"></i> <span>Facebook</span>';
+                    elseif($cat->type == 'twitter')
+                        $title = '<i class="fa fa-twitter mr-2"></i> <span>Twitter</span>';
+                    elseif($cat->type == 'youtube')
+                        $title = '<i class="fa fa-youtube mr-2"></i> <span>Youtube</span>';
+                    elseif($cat->type == 'instagram')
+                        $title = '<i class="fa fa-instagram mr-2"></i> <span>Instagram</span>';
+                    else $title = '';
+                    echo $title;
+                ?>
+              </div>
+              <div class="slick slick-social">
+                <?php foreach($social_feed[$cat->type] as $feed): ?>
+                <div class="grid-feed">
+                  <?php
+                      if($feed->type == 'facebook')
+                          $likes = $feed->count. ' <i class="fa fa-thumbs-up"></i><span>Likes</span>  Views <i class="fa fa-comment"></i> <span>Comments</span>';
+                      elseif($feed->type == 'twitter')
+                          $likes = $feed->count. ' <i class="fa fa-retweet"></i><span>Retweet</span>  Views <i class="fa fa-heart"></i><span>Favorited</span>';
+                      elseif($feed->type == 'youtube')
+                          $likes = $feed->count. ' <i class="fa fa-eye"></i> &nbsp; Views <i class="fa fa-thumbs-up"></i> <span>Likes</span>';
+                      elseif($feed->type == 'instagram')
+                          $likes = $feed->count. ' <i class="fa fa-thumbs-up"></i> <span>Likes</span>  Views <i class="fa fa-heart"></i><span>Favorited</span>';
+                      else $likes = '';
+                  ?>
+                  <div class="overlay-content">
+                    <?php if(!empty($feed->user)):?>
+                    <h2 class="profile">
+                      <div class="user">
+                          <?php if($feed->link) :?><a href="<?php echo $feed->link;?>"  target="_blank"><?php endif ?>
+                          <?php echo $feed->user;?><?php if($feed->link) :?></a><?php endif ?>
+                          <div class="date"><?php echo human_time_diff($feed->pubdate, current_time('timestamp'));?></div>
+                      </div>
+                    </h2>
+                    <?php endif ?>
+                    <?php if($feed->type=='youtube'):?>
+                    <div class="video-wrapper">
+                      <div class="embed-responsive embed-responsive-16by9">
+                          <div class="embed-data" data-src="//www.youtube.com/embed/<?php echo str_replace('https://www.youtube.com/watch?v=', '', $feed->link);?>"></div>
+                      </div>
+                    </div>
+                    <?php elseif(!empty($feed->image)):?>
+                    <div class="set"><img class="img-fluid w-100" src="<?php echo $feed->image;?>"/></div>
+                    <?php else:?>
+                    <div class="set empty"></div>
+                    <?php endif ?>
+                    <?php if($feed->type != 'youtube'):?>
+                    <div class="content">
+                        <?php if(!empty($feed->title)):?>
+                        <?php if($feed->link) :?><a class="title" href="<?php echo $feed->link;?>" target="_blank"><?php endif ?>
+                        <?php echo $feed->title;?><?php if($feed->link) :?></a><?php endif ?>
+                        <?php elseif(!empty($feed->text)):?>
+                        <p class="text <?php echo @$feed->image;?>">
+                        <?php if(!empty($feed->image)):?>
+                        <?php if($feed->link) :?><a href="<?php echo $feed->link;?>" target="_blank"><?php endif ?>
+                        <?php echo wp_trim_words($feed->text, 160, true);?><?php if($feed->link) :?></a><?php endif ?>
+                        <?php else: ?>
+                        <?php if($feed->link) :?><a href="<?php echo $feed->link;?>" target="_blank"><?php endif ?>
+                        <?php echo wp_trim_words($feed->text, 460, true);?><?php if($feed->link) :?></a><?php endif ?>
+                        <?php endif ?>
+                        </p>
+                        <?php endif ?>
+                    </div>
+                    <?php elseif($feed->type == 'youtube'):?>
+                    <div class="content">
+                      <?php if(!empty($feed->title)):?>
+                      <?php if($feed->link) :?><a class="title" href="<?php echo $feed->link;?>" target="_blank"><?php endif ?>
+                      <?php echo $feed->title;?>
+                      <?php if($feed->link) :?></a><?php endif ?>
+                    </div>
+                    <?php endif ?>
+                    <?php endif ?>
+                    <?php if(!empty($likes)):?>
+                    <div class="likes"><?php echo $likes;?></div>
+                    <?php endif ?>
+                  </div>
+
+                </div>
+                <?php endforeach ?>
+              </div>
+            </div>
+            <?php endforeach ?>
+
+          </div>
+          <?php endif ?>
+
+        </div>
+        <?php endif ?>
+
       </div>
     </div>
   </section>

@@ -1,0 +1,66 @@
+// Attractions
+#attractions {
+  #filters {
+    .nav-item {
+      padding: 20px;
+      font-size: 1.2em;
+    }
+  }
+  .slick-shows {
+    .slick-prev {
+      right: 30px;
+      left: inherit;
+    }
+    .slick-arrow {
+      top: -50px;
+      @include transform(none);
+    }
+  }
+  .slick-days {
+    .items {
+      .card-header {
+        padding: 0.75rem 1rem;
+      }
+    }
+    .slick-current {
+      background-color: $theme-color2;
+    }
+  }
+}
+#modal-showtimes,
+#attractions {
+  .card {
+    border-radius: 0;
+    border-color: $theme-color2;
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    &.hide-dates {
+      height: 0;
+      opacity: 0;
+      visibility: 0;
+    }
+    .card-header {
+      border-radius: 0;
+      transition: all 0.4s ease;
+      background-color: $theme-color3;
+      a {
+        display: block;
+        font-size: 14px;
+        color: #fff;
+        font-weight: 500;
+      }
+    }
+    &:hover {
+      .card-header {
+        border-radius: 0;
+      }
+    }
+  }
+  .slick-times {
+    .btn-twobit {
+      padding: 0.375rem 1rem;
+      margin-bottom: 3px;
+    }
+  }
+}

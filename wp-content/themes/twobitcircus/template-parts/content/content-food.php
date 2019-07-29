@@ -3,8 +3,7 @@
  * Template part for displaying posts
  *
  * @package twobitcircus
- */
- global $region;
+ */ 
 ?>
 <article id="food-drink" <?php post_class(); ?>>
 

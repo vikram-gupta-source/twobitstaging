@@ -249,8 +249,6 @@
   .wp-core-ui .acf-input-append,
   .wp-core-ui .acf-input-wrap {
     height: 37px; }
-  .wp-core-ui .acf-fields > .acf-field:nth-child(odd) {
-    background-color: #fff; }
   .wp-core-ui .acf-fields > .acf-field:nth-child(even) {
     background-color: #fafafa; }
 

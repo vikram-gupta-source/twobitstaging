@@ -1,0 +1,14 @@
+// Locations
+#locations {
+  .map-wrapper {
+    position: relative;
+    .overlay {
+      position: absolute;
+      bottom: 70px;
+      z-index: 1;
+      padding: 2em;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+}

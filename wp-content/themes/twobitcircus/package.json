@@ -25,10 +25,15 @@
     "prod": "webpack --mode production"
   },
   "dependencies": {
+    "@fullcalendar/bootstrap": "^4.2.0",
+    "@fullcalendar/core": "^4.2.0",
+    "@fullcalendar/daygrid": "^4.2.0",
+    "@fullcalendar/timegrid": "^4.2.0",
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "imagesloaded": "^4.1.4",
     "ionicons": "^4.5.5",
+    "isotope-layout": "^3.0.6",
     "jquery": "^3.2.1",
     "lazyloadxt": "^1.1.0",
     "popper.js": "^1.12.9",

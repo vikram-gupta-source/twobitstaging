@@ -5,6 +5,7 @@ WP-Cache Config Sample File
 See wp-cache.php for author details.
 */
 
+$wpsc_version = 169;
 $dismiss_readable_warning = 1;
 $wpsc_fix_164 = 1;
 $wp_cache_home_path = '/';

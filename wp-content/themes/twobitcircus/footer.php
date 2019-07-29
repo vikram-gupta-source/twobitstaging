@@ -4,7 +4,7 @@
  *
  * @package twobitcircus
  */
-
+global $location;
 ?>
   </main>
   <footer>
@@ -31,6 +31,24 @@
     <div class="legal text-center mt-4 pt-2 pb-2">&copy; <?php echo date('Y');?> <?php echo get_option('theme_mods_twobitcircus')['footer_copyright'];?></div>
   </footer>
   <a href="#" id="return-to-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+
+  <?php get_template_part( 'template-parts/partial/partial', 'map' ); ?>
+
   <?php wp_footer(); ?>
+  <?php if(is_page('attractions')): ?>
+  <div class="modal fade" id="modal-showtimes" tabindex="-1" role="dialog" aria-labelledby="modal-showtimes" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><?php _e( 'Showtimes', 'twobitcircus' );?></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body"></div>
+      </div>
+    </div>
+  </div>
+  <?php endif ?> 
 </body>
 </html>

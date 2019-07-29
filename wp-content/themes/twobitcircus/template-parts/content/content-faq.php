@@ -4,7 +4,6 @@
  *
  * @package twobitcircus
  */
- global $region;
 ?>
 <article id="faq" <?php post_class(); ?>>
   <div class="container-fluid text-center main-headline">
@@ -16,38 +15,27 @@
   </div>
   <?php endif ?>
 
-  <?php
-  $args = array(
-      'post_type' => 'faqs',
-      'orderby' => 'menu_order title',
-      'order'   => 'DESC',
-  );
-  $faq = new WP_Query( $args );
-  if(!empty($faq)):
-  ?>
   <section id="faq-accordion" class="entry-wrapper-padding inview animated delay-3">
+    <?php if(get_field('question_answers')) :?>
+    <div class="faq-wrapper accordion-wrapper container clearfix">
+      <?php $faqs = filter_locations(get_field('question_answers'));?>
+      <?php foreach($faqs as $fkey => $faq) :?>
 
-    <div class="faq-wrapper container">
-      <?php while ( $faq->have_posts() ) : $faq->the_post(); 
-      ?>
       <div class="card">
-        <div class="card-header" id="heading--<?php the_ID(); ?>">
-          <h5 class="mb-0 clearfix collapse-title collapsed" data-toggle="collapse" data-target="#collapse-<?php the_ID(); ?>" aria-expanded="true" aria-controls="collapse-<?php the_ID(); ?>">
-              <?php the_title(); ?>
-              <div class="d-line pull-right accordion-icon">
-                <div class="horizontal"></div>
-                <div class="vertical"></div>
-              </div>
+        <div class="card-header" id="heading--<?php echo $fkey; ?>">
+          <h5 class="mb-0 clearfix collapse-title collapsed" data-toggle="collapse" data-target="#collapse-<?php echo $fkey; ?>" aria-expanded="true" aria-controls="collapse-<?php echo $fkey; ?>">
+              <?php echo $faq['question']; ?>
+              <i class="fa fa-angle-down"></i>
           </h5>
         </div>
-        <div id="collapse-<?php the_ID(); ?>" class="collapse" aria-labelledby="heading-<?php the_ID(); ?>" data-parent="#faq-accordion">
+        <div id="collapse-<?php echo $fkey; ?>" class="collapse" aria-labelledby="heading-<?php echo $fkey; ?>" data-parent="#faq-accordion">
           <div class="card-body">
-            <?php the_content(); ?>
+            <?php echo $faq['answer']; ?>
           </div>
         </div>
       </div>
 
-      <?php endwhile; wp_reset_query(); ?>
+    <?php endforeach ?>
     </div>
 
   <?php endif ?>

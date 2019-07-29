@@ -4,7 +4,6 @@
  *
  * @package twobitcircus
  */
- global $region;
 ?>
 <article id="parties" <?php post_class(); ?>>
   <div class="container-fluid text-center main-headline">
@@ -16,23 +15,29 @@
   </div>
   <?php endif ?>
   <section id="parties-block" class="entry-wrapper-padding inview animated delay-3">
-    <?php if(!empty(get_field('parties'))) :?>
-    <div class="container-fluid">
-      <div class="party">
-        <?php foreach($parties as $shows) : ?>
-        <div class="card">
-          <img class="card-img-top" src="https://via.placeholder.com/329x289"/>
-          <div class="card-body">
-            <?php if(!empty($shows['title'])) :?>
-            <h5 class="card-title"><?php echo $shows['title'];?></h5>
+    <?php if(!empty(get_field('event'))) :?>
+      <?php $events = filter_locations(get_field('event'));?>
+    <div class="container">
+      <div class="grid-isotope">
+        <?php foreach($events as $shows) : ?>
+        <div class="grid-item card" data-event="<?php echo $shows['event_type'];?>">
+          <a href="#" class="event-link"><img class="img-fluid w-100" src="https://via.placeholder.com/329x289"/></a>
+          <?php if(!empty($shows['title'])) :?>
+          <div class="card-title mb-0 d-flex justify-content-between align-items-center event-link">
+            <h5><?php echo $shows['title'];?>
+            <?php if(!empty($shows['event_subtitle'])) :?>
+            <br><span><?php echo $shows['event_subtitle'];?></span>
             <?php endif ?>
-            <?php if(!empty($shows['description'])) :?>
-            <p><?php echo $shows['description'];?></p>
+            </h5>
+            <i class="fa fa-lg fa-angle-down" aria-hidden="true"></i>
+          </div>
+          <?php endif ?>
+          <div class="card-body text-left collapse fade">
+            <?php if(!empty($shows['event_summary'])) :?>
+            <p><?php echo $shows['event_summary'];?></p>
             <?php endif ?>
             <div class="link-wrapper">
-              <?php if(!empty($shows['book_now'])) :?>
-              <a href="<?php echo $shows['book_now'];?>" class="btn btn-twobit"><?php _e( 'Book Now', 'twobitcircus' )?></a>
-              <?php endif ?>
+              <a href="#" class="btn btn-twobit"><?php _e( 'Book Now', 'twobitcircus' )?></a>
             </div>
           </div>
         </div>
@@ -41,5 +46,14 @@
     </div>
     <?php endif ?>
   </section>
+  <div id="hidden-block"></div>
+  <div id="event-form">
+    <div class="event-form-wrapper">
+      <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <?php echo do_shortcode('[contact-form-7 id="431" title="Parties & Events"]');?>
+    </div>
+	</div>
 
 </article>

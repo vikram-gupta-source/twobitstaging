@@ -3,8 +3,7 @@
  * Template part for displaying posts
  *
  * @package twobitcircus
- */
- global $region;
+ */ 
 ?>
 <article id="promotions" <?php post_class(); ?>>
   <div class="container-fluid text-center main-headline">
