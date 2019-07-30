@@ -41,21 +41,6 @@
     </div>
   </section>
 
-  <?php if(get_field('hours')) :?>
-  <section id="hours-block" class="entry-wrapper-padding bkg-color">
-    <div class="container">
-      <h2 class="headline inview animated text-center mb-5"><?php echo get_field('hours_title'); ?></h2>
-      <div class="row">
-        <div class="col-md-6 offset-md-6 inview animated">
-        <?php foreach($hours as $hour) :?>
-          <?php echo $hour['hours'];?>
-        <?php endforeach ?>
-        </div>
-      </div>
-    </div>
-  </section>
-  <?php endif ?>
-
   <section id="calendar-block" class="entry-wrapper-padding">
     <div class="container-fluid">
       <h2 class="headline inview animated text-center"><?php echo get_field('calendar_title'); ?></h2>
