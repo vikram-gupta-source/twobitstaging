@@ -27,6 +27,8 @@
     </ul>
   </div>
   <?php endif ?>
+  <!-- Go to www.addthis.com/dashboard to customize your tools -->
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d40d77186a2f4a8"></script>
   <section id="attractions-block" class="entry-wrapper-padding inview animated delay-1">
     <div class="container">
       <?php if(!empty($attractions)) :?>
@@ -34,7 +36,7 @@
         <?php foreach($attractions as $cat => $shows) :?>
         <div class="tab-pane fade" id="<?php echo $cat;?>" role="tabpanel" aria-labelledby="<?php echo $cat;?>-tab">
           <div class="slick slick-shows">
-            <?php foreach($shows as $show) :?>
+            <?php foreach($shows as $skey => $show) :?>
               <?php if(!filter_location_by_field(get_field('available_in', $show->ID))) continue; ?>
               <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
               <?php $info = filter_locations(get_field('information', $show->ID));?>
@@ -119,7 +121,11 @@
                     </div>
                     <?php endif ?>
                     <?php endif ?>
-                    <p><?php echo $show->post_content;?></p>
+                    <p><?php echo $show->post_content;?></p> 
+                    <?php $_cat = get_the_category($show->ID);?>
+                    <?php if(isset($_cat[0])) :?>
+                    <div class="addthis_inline_share_toolbox" data-url="<?php echo get_site_url() ?>/attractions/?cat=<?php echo $_cat[0]->slug ?>&id=<?php echo $skey ?>" data-title="<?php echo $show->post_title;?>"></div>
+                    <?php endif ?>
                   </div>
                 </div>
 

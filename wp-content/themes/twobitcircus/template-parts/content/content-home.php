@@ -48,7 +48,8 @@
     </div>
     <?php endif ?>
   </section>
-
+  <!-- Go to www.addthis.com/dashboard to customize your tools -->
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d40d77186a2f4a8"></script>
   <section id="events-block" class="entry-wrapper-padding bkg-color">
     <div class="container">
       <?php if(!empty( get_field('events_title'))) :?>
@@ -61,7 +62,7 @@
         <?php foreach($feature_events as $feature) : ?>
         <div class="col-lg-4">
           <div class="card">
-            <img class="card-img-top lazy-load img-fluid" data-src="https://via.placeholder.com/352x198"/>
+            <a href="<?php echo $feature['link'];?>"><img class="card-img-top lazy-load img-fluid" data-src="https://via.placeholder.com/352x198"/></a>
             <div class="card-body text-center">
               <?php if(!empty($feature['title'])) :?>
               <h5 class="card-title"><?php echo $feature['title'];?></h5>
@@ -73,6 +74,7 @@
                 <?php if(!empty($feature['link_title'])) :?>
                 <div class="d-inline-block link"><a href="<?php echo $feature['link'];?>" class="btn btn-sm btn-twobit" target="_blank" rel="noopener noreferrer"><?php echo $feature['link_title'];?></a></div>
                 <?php endif ?>
+                <div class="addthis_inline_share_toolbox" data-url="<?php echo $feature['link'];?>" data-title="<?php echo $feature['title'];?>"></div>
               </div>
             </div>
           </div>

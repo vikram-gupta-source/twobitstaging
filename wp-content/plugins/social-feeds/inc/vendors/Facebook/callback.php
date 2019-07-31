@@ -19,15 +19,6 @@ if(!empty($api_options)) {
 
   try {
     $accessToken = $helper->getAccessToken();
-    if (isset($accessToken) && $accessToken->isLongLived()) {
-      // Exchanges a short-lived access token for a long-lived one
-      try {
-        $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
-      } catch (Facebook\Exceptions\FacebookSDKException $e) {
-        echo "<p>Error getting long-lived access token: " . $helper->getMessage() . "</p>\n\n";
-        exit;
-      }
-    }
   } catch(Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
     echo 'Graph returned an error: ' . $e->getMessage();
@@ -37,6 +28,7 @@ if(!empty($api_options)) {
     echo 'Facebook SDK returned an error: ' . $e->getMessage();
     exit;
   }
+
   if (! isset($accessToken)) {
     echo 'No OAuth data could be obtained from the signed request. User has not authorized your app yet. <br>';
     $permissions = ['email', 'user_likes']; // optional
@@ -45,5 +37,33 @@ if(!empty($api_options)) {
   } else {
      echo '<h3>Access Token</h3>';
      var_dump($accessToken->getValue());
+     // The OAuth 2.0 client handler helps us manage access tokens
+    $oAuth2Client = $fb->getOAuth2Client();
+
+    // Get the access token metadata from /debug_token
+    $tokenMetadata = $oAuth2Client->debugToken($accessToken);
+    echo '<h3>Metadata</h3>';
+    var_dump($tokenMetadata);
+
+    // Validation (these will throw FacebookSDKException's when they fail)
+    $tokenMetadata->validateAppId($api_options['appid']); // Replace {app-id} with your app id
+    // If you know the user ID this access token belongs to, you can validate it here
+    //$tokenMetadata->validateUserId('123');
+    $tokenMetadata->validateExpiration();
+
+    if (! $accessToken->isLongLived()) {
+      // Exchanges a short-lived access token for a long-lived one
+      try {
+        $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+      } catch (Facebook\Exceptions\FacebookSDKException $e) {
+        echo "<p>Error getting long-lived access token: " . $e->getMessage() . "</p>\n\n";
+        exit;
+      }
+      echo '<h3>Long-lived</h3>';
+      var_dump($accessToken->getValue());
+    } else {
+      echo '<h3>Is Long-lived</h3>';
+      var_dump($accessToken->getValue());
+    }
   }
 }

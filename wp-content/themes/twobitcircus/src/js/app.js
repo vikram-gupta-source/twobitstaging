@@ -243,6 +243,17 @@ $(function() {
         .clone()
         .appendTo("#modal-showtimes .modal-body");
     });
+
+    // Check Deep link
+    let urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("cat") && urlParams.has("id")) {
+      let cat = urlParams.get("cat");
+      let focus = urlParams.get("id");
+      $("#" + cat + "-tab").trigger("click");
+      setTimeout(function() {
+        $("#" + cat + " .slick-shows").slick("slickGoTo", focus);
+      }, 1000);
+    }
   }
   // Handle CLick for Nav Map
   $('#menu-main-menu a[href="#direction"]').on("click", function(evt) {

@@ -3,7 +3,7 @@
  * Template part for displaying posts
  *
  * @package twobitcircus
- */ 
+ */
 ?>
 <article id="promotions" <?php post_class(); ?>>
   <div class="container-fluid text-center main-headline">
@@ -14,6 +14,8 @@
     <div class="inview animated w-50 mx-auto delay-2"><?php the_content(); ?></div>
   </div>
   <?php endif ?>
+  <!-- Go to www.addthis.com/dashboard to customize your tools -->
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d40d77186a2f4a8"></script>
   <section id="promo-block" class="entry-wrapper-padding inview animated delay-3">
     <?php if(!empty(get_field('promotions'))) :?>
     <?php $promotions = filter_locations(get_field('promotions'));?>
@@ -30,6 +32,7 @@
               <?php if(!empty($promo['description'])) :?>
               <p><?php echo $promo['description'];?></p>
               <?php endif ?>
+              <div class="addthis_inline_share_toolbox" data-url="<?php echo $promo['link'];?>" data-title="<?php echo $promo['title'];?>"></div>
               <div class="link-wrapper">
                 <?php if(!empty($promo['link_title'])) :?>
                 <div class="more"><a href="<?php echo $promo['link'];?>" class="btn btn-sm btn-twobit"><?php echo $promo['link_title'];?></a></div>
