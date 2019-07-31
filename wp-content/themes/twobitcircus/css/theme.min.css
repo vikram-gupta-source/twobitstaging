@@ -15875,7 +15875,6 @@ article.page.type-page {
     margin: 2px; }
   .calender-wrapper .calender .grid {
     width: 280px;
-    height: 320px;
     display: inline-block;
     vertical-align: top;
     border: 1px solid #8d8d8d;
@@ -15898,7 +15897,7 @@ article.page.type-page {
       .calender-wrapper .calender .grid .grid-time .entry {
         padding: 15px 5px;
         display: table;
-        height: 294px;
+        height: 354px;
         width: 100%; }
         .calender-wrapper .calender .grid .grid-time .entry .cell {
           display: table-cell;
@@ -16237,78 +16236,6 @@ article.page.type-page {
       width: 680px !important;
       transition: all 0.3s ease;
       opacity: 0.3; }
-
-#home .calender-wrapper {
-  max-width: 1413px;
-  margin: 0 auto;
-  padding: 25px 0; }
-  @media (max-width: 1230px) {
-    #home .calender-wrapper {
-      max-width: 1199px; } }
-  @media (max-width: 991px) {
-    #home .calender-wrapper {
-      max-width: 900px; } }
-  @media (max-width: 767px) {
-    #home .calender-wrapper {
-      margin: 0 auto;
-      padding: 15px 25px 15px 40px; } }
-  #home .calender-wrapper .calender .grid {
-    width: 280px;
-    height: 320px;
-    display: inline-block;
-    vertical-align: top;
-    border: 1px solid #8d8d8d;
-    transition: all 0.6s ease; }
-    #home .calender-wrapper .calender .grid .grid-time {
-      width: 100%; }
-      #home .calender-wrapper .calender .grid .grid-time .header {
-        background-color: #8d8d8d; }
-      #home .calender-wrapper .calender .grid .grid-time .date,
-      #home .calender-wrapper .calender .grid .grid-time .day {
-        color: #fff;
-        font-weight: 500;
-        width: 50%;
-        text-align: left;
-        float: left;
-        padding: 5px 8px;
-        transition: all 0.4s ease; }
-      #home .calender-wrapper .calender .grid .grid-time .date {
-        text-align: right; }
-      #home .calender-wrapper .calender .grid .grid-time .entry {
-        padding: 15px 5px;
-        display: table;
-        height: 294px;
-        width: 100%; }
-        #home .calender-wrapper .calender .grid .grid-time .entry .cell {
-          display: table-cell;
-          vertical-align: middle; }
-        #home .calender-wrapper .calender .grid .grid-time .entry .button {
-          display: block;
-          margin: 5px auto 14px;
-          padding: 2px 10px;
-          border-radius: 10px;
-          border: 1px solid #e1e1e1;
-          background-color: #e1e1e1;
-          transition: all 0.4s ease;
-          text-transform: uppercase;
-          width: 90%; }
-          #home .calender-wrapper .calender .grid .grid-time .entry .button:hover {
-            background-color: #fff; }
-        #home .calender-wrapper .calender .grid .grid-time .entry .time {
-          font-size: 16px;
-          line-height: 17px;
-          width: 100%;
-          font-weight: 500;
-          text-transform: uppercase; }
-    #home .calender-wrapper .calender .grid.active, #home .calender-wrapper .calender .grid:hover {
-      background-color: rgba(255, 255, 255, 0.5); }
-    #home .calender-wrapper .calender .grid.closed {
-      background-color: #757575 !important;
-      border: 1px solid #373737; }
-      #home .calender-wrapper .calender .grid.closed .grid-time .header {
-        background-color: #373737; }
-      #home .calender-wrapper .calender .grid.closed .cell .time {
-        color: #fff; }
 
 #home #social-block .grid-social {
   width: 1150px;

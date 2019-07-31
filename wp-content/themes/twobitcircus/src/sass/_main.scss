@@ -420,7 +420,6 @@ article.page.type-page {
     }
     .grid {
       width: 280px;
-      height: 320px;
       display: inline-block;
       vertical-align: top;
       border: 1px solid #8d8d8d;
@@ -446,7 +445,7 @@ article.page.type-page {
         .entry {
           padding: 15px 5px;
           display: table;
-          height: 294px;
+          height: 354px;
           width: 100%;
           .cell {
             display: table-cell;
@@ -495,8 +494,6 @@ article.page.type-page {
       }
     }
   }
-}
-.accordion {
 }
 .directions {
   a {

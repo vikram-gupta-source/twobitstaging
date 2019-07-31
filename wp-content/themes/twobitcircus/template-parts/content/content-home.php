@@ -72,10 +72,10 @@
                 <div class="d-inline-block time"><?php echo $feature['time'];?></div>
                 <?php endif ?>
                 <?php if(!empty($feature['link_title'])) :?>
-                <div class="d-inline-block link"><a href="<?php echo $feature['link'];?>" class="btn btn-sm btn-twobit" target="_blank" rel="noopener noreferrer"><?php echo $feature['link_title'];?></a></div>
+                <div class="d-inline-block link ml-2"><a href="<?php echo $feature['link'];?>" class="btn btn-sm btn-twobit" target="_blank" rel="noopener noreferrer"><?php echo $feature['link_title'];?></a></div>
                 <?php endif ?>
-                <div class="addthis_inline_share_toolbox" data-url="<?php echo $feature['link'];?>" data-title="<?php echo $feature['title'];?>"></div>
               </div>
+              <div class="mt-2 addthis_inline_share_toolbox" data-url="<?php echo $feature['link'];?>" data-title="<?php echo $feature['title'];?>"></div>
             </div>
           </div>
         </div>
@@ -85,9 +85,6 @@
     </div>
   </section>
   <?php get_template_part( 'template-parts/partial/partial', 'calendar' ); ?>
-
-
-
 
   <section id="about-block" class="entry-wrapper-padding text-center">
     <div class="container">
