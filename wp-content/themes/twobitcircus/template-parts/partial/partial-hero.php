@@ -36,7 +36,7 @@
           <h3 class="t-shadow"><?php echo $slide['sub_title'];?></h3>
           <?php endif ?>
           <?php if(!empty($slide['description'])):?>
-          <p class="t-shadow"><?php echo $slide['description'];?></p>
+          <p class="t-shadow"><?php echo wpautop($slide['description'], false);?></p>
           <?php endif ?>
           </div>
         </div>
