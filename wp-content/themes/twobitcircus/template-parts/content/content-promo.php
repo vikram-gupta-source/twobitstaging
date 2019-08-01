@@ -20,26 +20,27 @@
     <?php if(!empty(get_field('promotions'))) :?>
     <?php $promotions = filter_locations(get_field('promotions'));?>
     <div class="container">
-      <div class="promos row row-eq-height mt-4">
+      <div class="grid-isotope">
         <?php foreach($promotions as $promo) : ?>
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <img class="card-img-top" src="https://via.placeholder.com/329x289"/>
-            <div class="card-body">
-              <?php if(!empty($promo['title'])) :?>
-              <h5 class="card-title"><?php echo $promo['title'];?></h5>
-              <?php endif ?>
-              <?php if(!empty($promo['description'])) :?>
-              <p><?php echo $promo['description'];?></p>
-              <?php endif ?>
-              <div class="addthis_inline_share_toolbox" data-url="<?php echo $promo['link'];?>" data-title="<?php echo $promo['title'];?>"></div>
-              <div class="link-wrapper">
-                <?php if(!empty($promo['link_title'])) :?>
-                <div class="more"><a href="<?php echo $promo['link'];?>" class="btn btn-sm btn-twobit"><?php echo $promo['link_title'];?></a></div>
-                <?php endif ?>
-              </div>
-            </div>
+        <div class="grid-item card">
+          <a href="#" class="event-link"><img class="card-img-top" src="https://via.placeholder.com/329x289"/></a>
+          <div class="card-title mb-0 d-flex justify-content-between align-items-center event-link">
+            <h5><?php echo $promo['title'];?></h5>
+            <i class="fa fa-lg fa-angle-down" aria-hidden="true"></i>
+          </div><div class="card-body text-left">
+            <?php if(!empty($promo['summary'])) :?>
+            <h6><?php echo $promo['summary'];?></h6>
+            <?php endif ?>
           </div>
+          <div class="card-body text-left collapse fade">
+            <?php if(!empty($promo['description'])) :?>
+            <p><?php echo $promo['description'];?></p>
+            <?php endif ?>
+            <div class="addthis_inline_share_toolbox mb-2" data-url="<?php echo $promo['link'];?>" data-title="<?php echo $promo['title'];?>"></div>
+            <div class="link-wrapper">
+              <a href="#" class="btn btn-twobit"><?php _e( 'Book Now', 'twobitcircus' )?></a>
+            </div>
+          </div>  
         </div>
         <?php endforeach ?>
       </div>

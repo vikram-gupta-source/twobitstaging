@@ -57,7 +57,6 @@
       <?php endif ?>
       <?php if(!empty(get_field('featured_events'))) :?>
       <?php $feature_events = filter_locations(get_field('featured_events'));?>
-      <h4 class="text-uppercase inview animated">Featured</h4>
       <div class="featured mt-3 row inview animated delay-1">
         <?php foreach($feature_events as $feature) : ?>
         <div class="col-lg-4">
@@ -66,13 +65,16 @@
             <div class="card-body text-center">
               <?php if(!empty($feature['title'])) :?>
               <h5 class="card-title"><?php echo $feature['title'];?></h5>
+              <?php if(!empty($feature['date'])) :?>
+              <div class="dateline text-center"><?php echo $feature['date'];?></div>
               <?php endif ?>
-              <div class="link-wrapper">
-                <?php if(!empty($feature['time'])) :?>
-                <div class="d-inline-block time"><?php echo $feature['time'];?></div>
-                <?php endif ?>
+              <?php if(!empty($feature['time'])) :?>
+              <div class="time"><?php echo $feature['time'];?></div>
+              <?php endif ?>
+              <?php endif ?>
+              <div class="link-wrapper mt-2">
                 <?php if(!empty($feature['link_title'])) :?>
-                <div class="d-inline-block link ml-2"><a href="<?php echo $feature['link'];?>" class="btn btn-sm btn-twobit" target="_blank" rel="noopener noreferrer"><?php echo $feature['link_title'];?></a></div>
+                <div class="link ml-2"><a href="<?php echo $feature['link'];?>" class="btn btn-sm btn-twobit" target="_blank" rel="noopener noreferrer"><?php echo $feature['link_title'];?></a></div>
                 <?php endif ?>
               </div>
               <div class="mt-2 addthis_inline_share_toolbox" data-url="<?php echo $feature['link'];?>" data-title="<?php echo $feature['title'];?>"></div>

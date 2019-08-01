@@ -120,6 +120,10 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 			// Join any icon classes plucked from $classes into a string.
 			$icon_class_string = join( ' ', $icon_classes );
+      $dir_output = '';
+      if(preg_match('/fa-location-arrow/', $icon_class_string)) {
+        $dir_output = $args->directions;
+      }
 
 			/**
 			 * Filters the arguments for a single nav menu item.
@@ -241,7 +245,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$icon_html = '';
 			if ( ! empty( $icon_class_string ) ) {
 				// append an <i> with the icon classes to what is output before links.
-				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';
+				$icon_html = $dir_output . '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';
 			}
 
 			/** This filter is documented in wp-includes/post-template.php */

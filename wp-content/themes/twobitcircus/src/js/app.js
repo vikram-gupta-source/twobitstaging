@@ -47,6 +47,18 @@ $(function() {
   // Scroll Handler
   if ($("#arrow-cta").length && $(window).height() < scrollHeightTop)
     $("#arrow-cta").addClass("show");
+
+  // Handle resize
+  let clearInt = 0;
+  var navBarHt = $("#main-nav").height();
+  $("body").css({"padding-top": navBarHt + "px"});
+  $(window).on("resize", function() {
+    clearTimeout(clearInt);
+    clearInt = setTimeout(function() {
+      navBarHt = $("#main-nav").height();
+      $("body").css({"padding-top": navBarHt + "px"});
+    }, 500);
+  });
   var lastY = 0;
   $(window)
     .scroll(function() {
@@ -61,13 +73,11 @@ $(function() {
       }
       if ($(this).scrollTop() >= scrollHeightNav) {
         let lt = $(this).scrollTop();
-        if (lt > lastY) {
+        if (lt >= lastY) {
           // Down
-          //console.log("down");
-          $("#main-nav").addClass("hide-away");
+          $("#main-nav").css({top: "-" + navBarHt + "px"});
         } else {
-          //console.log("up");
-          $("#main-nav").removeClass("hide-away");
+          $("#main-nav").css({top: 0});
         }
         lastY = lt;
       }
@@ -75,105 +85,132 @@ $(function() {
     .trigger("scroll");
 
   // Handle Slider Slick
-  if ($(".slick").length) {
-    var slick_settings = {
-      dots: true,
-      infinite: false,
-      speed: 600,
-      arrows: true,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      responsive: [
-        {
-          breakpoint: 1199,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3
-          }
-        },
-        {
-          breakpoint: 991,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
-          }
-        },
-        {
-          breakpoint: 767,
-          settings: "unslick"
+  var slick_settings = {
+    dots: true,
+    infinite: false,
+    speed: 600,
+    arrows: true,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    responsive: [
+      {
+        breakpoint: 1199,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3
         }
-      ]
-    };
-    var slick_center_settings = {
-      dots: true,
-      centerMode: true,
-      slidesToShow: 3,
-      arrows: true,
-      variableWidth: true,
-      responsive: [
-        {
-          breakpoint: 767,
-          settings: "unslick"
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
         }
-      ]
-    };
-    var slick_shows_settings = {
-      dots: false,
-      swipe: false,
-      touchMove: false,
-      slidesToShow: 1,
-      arrows: true,
-      adaptiveHeight: true
-    };
-    var slick_feed_settings = {
-      infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      responsive: [
-        {
-          breakpoint: 767,
-          settings: {
-            dots: true,
-            arrows: false,
-            slidesToShow: 2,
-            slidesToScroll: 1
-          }
-        },
-        {
-          breakpoint: 530,
-          settings: {
-            dots: true,
-            arrows: false,
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
+      },
+      {
+        breakpoint: 767,
+        settings: "unslick"
+      }
+    ]
+  };
+  var slick_center_settings = {
+    dots: true,
+    centerMode: true,
+    slidesToShow: 3,
+    arrows: true,
+    variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 767,
+        settings: "unslick"
+      }
+    ]
+  };
+  var slick_attractions_settings = {
+    infinite: false,
+    dots: false,
+    swipe: false,
+    touchMove: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    adaptiveHeight: true,
+    fade: true
+  };
+  var slick_shows_settings = {
+    dots: false,
+    swipe: false,
+    touchMove: false,
+    slidesToShow: 1,
+    arrows: false,
+    adaptiveHeight: true,
+    fade: true
+  };
+  var slick_feed_settings = {
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 767,
+        settings: {
+          dots: true,
+          arrows: false,
+          slidesToShow: 2,
+          slidesToScroll: 1
         }
-      ]
-    };
-    var slick_social_settings = {
-      infinite: false,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-    var slick_days_settings = {
-      infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      arrows: false,
-      centerMode: true,
-      asNavFor: ".slick-times",
-      focusOnSelect: true,
-      adaptiveHeight: true
-    };
-    var slick_times_settings = {
-      infinite: false,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: false,
-      swipe: false,
-      touchMove: false
-    };
-  }
+      },
+      {
+        breakpoint: 530,
+        settings: {
+          dots: true,
+          arrows: false,
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+  var slick_social_settings = {
+    infinite: false,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+  var slick_days_settings = {
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: false,
+    asNavFor: ".slick-times",
+    focusOnSelect: true,
+    centerMode: true
+  };
+  var slick_times_settings = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    arrows: false,
+    swipe: false,
+    touchMove: false
+  };
+  var slick_media_nav_settings = {
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: false,
+    asNavFor: ".slick-media",
+    focusOnSelect: true,
+    centerMode: true
+  };
+  var slick_media_settings = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    asNavFor: ".slick-media-nav",
+    fade: true
+  };
   if ($(".slick-init").length || $(".slick-center-init").length) {
     if ($(".slick-init").length) $(".slick-init").slick(slick_settings);
     if ($(".slick-center-init").length)
@@ -217,31 +254,97 @@ $(function() {
       '<iframe class="embed-responsive-item" src="' + firstEmbed + '"></iframe>'
     );
   }
-  if ($(".slick-shows").length) {
+
+  // Handle all Attraction Events
+  if ($("#attractions-block").length) {
+    var defaultHt = 0;
+    $(".attractions-slick").slick(slick_attractions_settings);
+    $(".slick-shows")
+      .slick(slick_shows_settings)
+      .on("afterChange", function(ev, slick, cur) {
+        $(slick.$slides.get(cur))
+          .find(".slick-days .slick-slide:not(.slick-cloned):first")
+          .trigger("click");
+      });
+    $(".slick-media").slick(slick_media_settings);
+    $(".slick-media-nav").slick(slick_media_nav_settings);
+    $(".slick-days").slick(slick_days_settings);
+    $(".slick-times")
+      .slick(slick_times_settings)
+      .on("beforeChange", function(ev, slick, cur, next) {
+        $(".available-dates > .btn-twobit")
+          .removeClass("show visible")
+          .addClass("invisible");
+      });
     // Append to Filter show
-    $("#filters a[data-toggle='tab']").on("shown.bs.tab", function(e) {
-      e.target;
-      e.relatedTarget;
-      let slug = $(this).attr("aria-controls");
-      if ($("#" + slug + " .slick-shows").length) {
-        $("#" + slug + " .slick-shows").slick("setPosition");
-        $("#" + slug + " .slick-days").slick("setPosition");
-        $("#" + slug + " .slick-times").slick("setPosition");
+    $("#filters a.nav-link").on("click", function(e) {
+      e.preventDefault();
+      if (!$(this).hasClass("active")) {
+        $("#filters a.nav-link").removeClass("active");
+        $(this).addClass("active");
+        let slug = $(this).attr("aria-controls");
+        if ($("#" + slug).length) {
+          let index = $("#" + slug)
+            .parents(".slick-slide")
+            .data("slick-index");
+          $(".attractions-slick").slick("slickGoTo", index);
+          $("#" + slug)
+            .find(".slick-days .slick-slide:not(.slick-cloned):first")
+            .trigger("click");
+        }
       }
     });
-    $(".slick-shows").slick(slick_shows_settings);
-    $(".slick-days").slick(slick_days_settings);
-    $(".slick-times").slick(slick_times_settings);
     $("#filters .nav-item:first-child a").trigger("click");
 
+    //Extend Days slick
+    $(".slick-days .slick-slide").on("click", function(evt) {
+      evt.preventDefault();
+      let _ht = $(this)
+        .parents(".show-content-block")
+        .outerHeight();
+      let realHt = parseInt(_ht + 60);
+      $(this)
+        .parents(".slick-shows")
+        .find("> .slick-list")
+        .height(realHt + "px");
+      $(".attractions-slick > .slick-list").height(realHt + "px");
+    });
+
+    // Handle Model all times
     $(".open-times-modal").on("click", function(evt) {
       evt.preventDefault();
       $("#modal-showtimes .modal-body").empty();
-      let $times = $(this)
-        .next()
+      $(this)
+        .parents(".show-content-block")
+        .find(".showtimes")
         .find(".accordion")
         .clone()
         .appendTo("#modal-showtimes .modal-body");
+    });
+
+    // Handlers Show
+    $(".show-content-block .btn-group .btn-twobit").on("click", function(evt) {
+      if ($(this).hasClass("next")) {
+        $(this)
+          .parents(".slick-shows")
+          .slick("slickNext");
+      } else {
+        $(this)
+          .parents(".slick-shows")
+          .slick("slickPrev");
+      }
+    });
+
+    // Confirm Purcahse
+    $(".slick-times .btn-twobit").on("click", function(evt) {
+      evt.preventDefault();
+      let href = $(this).prop("href");
+      $(this)
+        .parents(".show-content-block")
+        .find(".available-dates > .btn-twobit")
+        .removeClass("invisible")
+        .addClass("show visible")
+        .prop("href", href);
     });
 
     // Check Deep link
@@ -290,6 +393,20 @@ $(function() {
         let subfilter = $(this).data("filter");
         $iso.arrange({filter: subfilter});
       }
+    });
+  }
+  if ($("#promo-block").length) {
+    $("#promo-block .grid-item .event-link").on("click", function(evt) {
+      evt.preventDefault();
+      let $parent = $(this).parents(".grid-item");
+      if (!$parent.find(".card-title").hasClass("collapsed")) {
+        $parent.find(".card-title").addClass("collapsed");
+        $parent.find(".card-body").addClass("show");
+      } else {
+        $parent.find(".card-title").removeClass("collapsed");
+        $parent.find(".card-body").removeClass("show");
+      }
+      $iso.arrange();
     });
   }
   if ($("#parties-block").length) {
@@ -381,6 +498,9 @@ $(function() {
         let $target = $("#event-window .card");
         let sd = new Date(info.event.start);
         let ed = new Date(info.event.end);
+        $("#event-window")
+          .parent()
+          .addClass("show");
         $(".day", $target).text(weekday[sd.getDay()]);
         $(".date", $target).text(month[sd.getMonth()] + " " + sd.getDay());
         $(".card-title", $target).text(info.event.title);

@@ -55,5 +55,16 @@
       <?php echo do_shortcode('[contact-form-7 id="431" title="Parties & Events"]');?>
     </div>
 	</div>
+  <?php if(!empty(get_field('footer_block'))) :?>
+  <?php $footer = filter_locations(get_field('footer_block'));?>
+  <?php foreach($footer as $banner) : ?>
+  <section id="footer-event-block" class="entry-wrapper-padding inview animated delay bkg-color">
+    <div class="container text-center">
+      <h5><?php echo $banner['title'];?></h5>
+      <?php echo apply_filters('the_content', $banner['description']);?>
+    </div>
+  </section>
+  <?php endforeach ?>
+  <?php endif ?>
 
 </article>

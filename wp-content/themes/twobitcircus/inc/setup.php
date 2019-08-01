@@ -159,7 +159,7 @@ if ( ! function_exists( 'twobitcircus_news_post_type' ) ) {
     		'hierarchical'          => false,
     		'public'                => true,
     		'has_archive'           => true,
-    		'capability_type'       => 'post', 
+    		'capability_type'       => 'post',
         'menu_icon'     => 'dashicons-admin-site-alt3',
     );
     // Registering your Custom Post Type
@@ -254,4 +254,21 @@ function get_locations($array) {
     }
   }
   return $_array;
+}
+// Get Time Close of Open
+function openClosed($days) {
+  if(empty($days)) return 'closed';
+  $dayofweek = date('l');
+  $timestamp = time();
+  foreach($days as $day) {
+    if($dayofweek == $day['day']) {
+      $startTime = strtotime($day['open']);
+      $endTime = strtotime($day['close']); 
+      // check if current time is within a range
+      if ($startTime <= $timestamp && $timestamp <= $endTime ) {
+          return 'open';
+      }
+    }
+  }
+  return 'closed';
 }

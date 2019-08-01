@@ -21,7 +21,7 @@
     <ul class="nav justify-content-center" role="tablist">
     <?php foreach($categories as $category) : ?>
       <li class="nav-item">
-        <a class="nav-link" id="<?php echo $category->slug;?>-tab" data-toggle="tab" href="#<?php echo $category->slug;?>" role="tab" aria-controls="<?php echo $category->slug;?>" aria-selected="true" href="#<?php echo $category->slug;?>"><i class="<?php echo @get_term_meta($category->term_id, 'category_icon', true) ;?>" aria-hidden="true"></i> <?php echo $category->name;?></a>
+        <a class="nav-link" href="#<?php echo $category->slug;?>" aria-controls="<?php echo $category->slug;?>"><i class="<?php echo @get_term_meta($category->term_id, 'category_icon', true) ;?>" aria-hidden="true"></i> <?php echo $category->name;?></a>
       </li>
     <?php endforeach ?>
     </ul>
@@ -32,110 +32,151 @@
   <section id="attractions-block" class="entry-wrapper-padding inview animated delay-1">
     <div class="container">
       <?php if(!empty($attractions)) :?>
-      <div class="tab-content attraction" id="showTabContent">
-        <?php foreach($attractions as $cat => $shows) :?>
-        <div class="tab-pane fade" id="<?php echo $cat;?>" role="tabpanel" aria-labelledby="<?php echo $cat;?>-tab">
-          <div class="slick slick-shows">
-            <?php foreach($shows as $skey => $show) :?>
-              <?php if(!filter_location_by_field(get_field('available_in', $show->ID))) continue; ?>
-              <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
-              <?php $info = filter_locations(get_field('information', $show->ID));?>
-              <div class="item">
+        <div class="attractions-slick">
+          <?php foreach($attractions as $cat => $shows) :?>
+          <div class="item-attraction">
 
-                <div class="row">
-                  <div class="col-md-5 mb-4">
-                    <img class="img-fluid w-100" src="https://via.placeholder.com/400x300"/>
+            <div class="slick-shows" id="<?php echo $cat;?>">
+              <?php $num = count($shows); ?>
+              <?php foreach($shows as $skey => $show) :?>
+                <?php if(!filter_location_by_field(get_field('available_in', $show->ID))) continue; ?>
+                <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
+                <?php $info = filter_locations(get_field('information', $show->ID));?>
+                <?php $_cat = get_the_category($show->ID);?>
+                <div class="item-shows">
 
-                    <?php if(!empty($composedDates)) :?>
-                    <h4 class="mt-3"><?php _e( 'Showtimes' , 'twobitcircus'); ?></h4>
-                    <div class="showtimes-cycle">
-                      <div id="cycle-<?php echo $show->ID;?>">
-                        <div class="slick-days">
-                          <?php foreach($composedDates as $date => $tickets) :?>
-                          <div class="items">
-                            <div class="card-header">
-                              <?php echo date('D, M j', strtotime(str_replace('-', '/', $date)));?>
-                            </div>
-                          </div>
-                          <?php endforeach ?>
+                  <div class="row">
+                    <div class="col-md-7 mb-4">
+                      <div class="show-asset-wrapper">
+                        <div class="slick-media">
+                          <div class="img"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
+                          <div class="img"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
+                          <div class="img"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
+                          <div class="img"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
+                          <div class="img"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
+                          <div class="img"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
                         </div>
-                        <div class="slick-times">
-                          <?php foreach($composedDates as $date => $tickets) :?>
-                          <div class="items">
-                            <div class="card-body">
-                            <?php foreach($tickets as $timeInfo) : ?>
-                            <?php if(!preg_match('/(Out)/', $timeInfo->ticket)): ?>
-                              <a href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" class="btn btn-twobit" target="_blank"><?php echo $timeInfo->ticket;?></a>
-                            <?php endif ?>
-                            <?php endforeach ?>
-                            </div>
+                        <div class="overlay">
+                          <div class="slick-media-nav">
+                            <div class="thumb"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
+                            <div class="thumb"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
+                            <div class="thumb"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
+                            <div class="thumb"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
+                            <div class="thumb"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
+                            <div class="thumb"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
                           </div>
-                          <?php endforeach ?>
                         </div>
                       </div>
+                      <?php if(isset($_cat[0])) :?>
+                      <div class="mt-2 addthis_inline_share_toolbox pull-right" data-url="<?php echo get_site_url() ?>/attractions/?cat=<?php echo $_cat[0]->slug ?>&id=<?php echo $skey ?>" data-title="<?php echo $show->post_title;?>"></div>
+                      <?php endif ?>
                     </div>
-                    <div class="available-dates text-center">
-     									<button type="button" class="btn btn-twobit open-times-modal" data-toggle="modal" data-target="#modal-showtimes"><?php _e( 'All Showtimes' , 'twobitcircus'); ?></button>
-
-                      <div class="showtimes d-none">
-                        <div id="accordion-<?php echo $show->ID;?>" class="accordion">
-                          <?php foreach($composedDates as $date => $tickets) :?>
-                          <div class="card">
-                            <div class="card-header">
-                              <a class="card-link" data-toggle="collapse" href="#collapse-<?php echo $show->ID;?>-<?php echo $date;?>">
-                                <?php echo date('l, F j', strtotime(str_replace('-', '/', $date)));?>
-                              </a>
-                            </div>
-                            <div id="collapse-<?php echo $show->ID;?>-<?php echo $date;?>" class="collapse" data-parent="#accordion-<?php echo $show->ID;?>">
-                              <div class="card-body">
-                                <?php foreach($tickets as $timeInfo) : ?>
-                                <?php if(!preg_match('/(Out)/', $timeInfo->ticket)): ?>
-                                  <a href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" class="btn btn-twobit" target="_blank"><?php echo $timeInfo->ticket;?></a>
-                                <?php endif ?>
-                                <?php endforeach ?>
+                    <div class="show-content-block col-md-5">
+                      <div class="row">
+                        <div class="col-9">
+                          <h2 class="title"><?php echo $show->post_title;?></h2>
+                        </div>
+                        <?php if($num > 1) :?>
+                        <div class="col-3 btn-group">
+                          <button type="button" class="btn btn-twobit prev">
+                            <span class="fa fa-chevron-left"></span>
+                          </button>
+                          <button type="button" class="btn btn-twobit next">
+                            <span class="fa fa-chevron-right"></span>
+                          </button>
+                        </div>
+                        <?php endif ?>
+                      </div>
+                      <?php if(!empty(get_field('sub_title', $show->ID))):?>
+                      <h4 class="subtitle"><?php echo get_field('sub_title', $show->ID);?></h4>
+                      <?php endif ?>
+                      <?php if(!empty($info[0])):?>
+                      <div class="info-block mt-4 mb-3">
+                        <div class="d-inline-block"><i class="fa fa-user pr-1"></i><?php echo $info[0]['players'];?></div>
+                        <div class="d-inline-block pl-3 pr-4"><i class="fa fa-clock-o pr-1"></i><?php echo $info[0]['show_duration'];?></div>
+                        <div class="d-inline-block"><i class="fa fa-money pr-1"></i><?php echo $info[0]['price'];?></div>
+                      </div>
+                      <?php if(!empty($info[0]['buy_link']) && empty($composedDates)): ?>
+                      <div class="buy-link">
+                        <a class="btn btn-sm btn-twobit" href="<?php echo $info[0]['buy_link'];?>" rel="noopener noreferrer" target="_blank"><?php _e('Buy Tickets', 'twobitcircus');?></a>
+                      </div>
+                      <?php endif ?>
+                      <?php endif ?>
+                      <p><?php echo apply_filters('the_content', $show->post_content);?></p>
+                      <?php if(!empty($composedDates)) :?>
+                      <h4 class="mt-5 clearfix"><?php _e( 'Showtimes' , 'twobitcircus'); ?> <button type="button" class="btn btn-sm btn-twobit open-times-modal pull-right" data-toggle="modal" data-target="#modal-showtimes"><?php _e( 'All Times' , 'twobitcircus'); ?></button></h4>
+                      <div class="showtimes-cycle">
+                        <div id="cycle-<?php echo $show->ID;?>">
+                          <div class="slick-days">
+                            <?php foreach($composedDates as $date => $tickets) :?>
+                            <div class="item-days text-center">
+                              <div class="day-header">
+                                <?php echo date('D', strtotime(str_replace('-', '/', $date)));?>
+                              </div>
+                              <div class="day-date">
+                                <div class="month"><?php echo date('M', strtotime(str_replace('-', '/', $date)));?></div>
+                                <div class="day"><?php echo date('j', strtotime(str_replace('-', '/', $date)));?></div>
                               </div>
                             </div>
+                            <?php endforeach ?>
                           </div>
-                          <?php endforeach ?>
+                          <div class="slick-times">
+                            <?php foreach($composedDates as $date => $tickets) :?>
+                            <div class="item-time">
+                              <div class="card-body">
+                              <?php foreach($tickets as $timeInfo) : ?>
+                              <?php if(!preg_match('/(Out)/', $timeInfo->ticket)): ?>
+                                <a href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" class="btn btn-sm btn-twobit"><?php echo $timeInfo->ticket;?></a>
+                              <?php endif ?>
+                              <?php endforeach ?>
+                              </div>
+                            </div>
+                            <?php endforeach ?>
+                          </div>
                         </div>
                       </div>
+                      <div class="available-dates text-center">
 
-     								</div>
-                    <?php endif ?>
+                        <a href="#" class="btn btn-twobit text-uppercase fade" target="_blank"><?php _e( 'Go to Purcahse' , 'twobitcircus'); ?></a>
 
-                  </div>
-                  <div class="col-md-7">
-                    <h2 class="title"><?php echo $show->post_title;?></h2>
-                    <?php if(!empty(get_field('sub_title', $show->ID))):?>
-                    <h3 class="subtitle"><?php echo get_field('sub_title', $show->ID);?></h3>
-                    <?php endif ?>
-                    <?php if(!empty($info[0])):?>
-                    <div class="info-block">
-                      <div class="d-inline-block"><i class="fa fa-user pr-1"></i><?php echo $info[0]['players'];?></div>
-                      <div class="d-inline-block pl-3 pr-4"><i class="fa fa-clock-o pr-1"></i><?php echo $info[0]['show_duration'];?></div>
-                      <div class="d-inline-block"><i class="fa fa-money pr-1"></i><?php echo $info[0]['price'];?></div>
+                        <div class="showtimes d-none">
+                          <div id="accordion-<?php echo $show->ID;?>" class="accordion">
+                            <?php foreach($composedDates as $date => $tickets) :?>
+                            <div class="card">
+                              <div class="card-header">
+                                <a class="card-link" data-toggle="collapse" href="#collapse-<?php echo $show->ID;?>-<?php echo $date;?>">
+                                  <?php echo date('l, F j', strtotime(str_replace('-', '/', $date)));?>
+                                </a>
+                              </div>
+                              <div id="collapse-<?php echo $show->ID;?>-<?php echo $date;?>" class="collapse" data-parent="#accordion-<?php echo $show->ID;?>">
+                                <div class="card-body">
+                                  <?php foreach($tickets as $timeInfo) : ?>
+                                  <?php if(!preg_match('/(Out)/', $timeInfo->ticket)): ?>
+                                    <a href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" class="btn btn-sm btn-twobit" target="_blank"><?php echo $timeInfo->ticket;?></a>
+                                  <?php endif ?>
+                                  <?php endforeach ?>
+                                </div>
+                              </div>
+                            </div>
+                            <?php endforeach ?>
+                          </div>
+                        </div>
+
+                      </div>
+                      <?php endif ?>
+
                     </div>
-                    <?php if(!empty($info[0]['buy_link']) && empty($composedDates)): ?>
-                    <div class="buy-link">
-                      <a class="btn btn-sm btn-twobit" href="<?php echo $info[0]['buy_link'];?>" rel="noopener noreferrer" target="_blank"><?php _e('Buy Tickets', 'twobitcircus');?></a>
-                    </div>
-                    <?php endif ?>
-                    <?php endif ?>
-                    <p><?php echo $show->post_content;?></p> 
-                    <?php $_cat = get_the_category($show->ID);?>
-                    <?php if(isset($_cat[0])) :?>
-                    <div class="addthis_inline_share_toolbox" data-url="<?php echo get_site_url() ?>/attractions/?cat=<?php echo $_cat[0]->slug ?>&id=<?php echo $skey ?>" data-title="<?php echo $show->post_title;?>"></div>
-                    <?php endif ?>
                   </div>
+
                 </div>
+              <?php endforeach ?>
+            </div>
 
-              </div>
-            <?php endforeach ?>
           </div>
+          <?php endforeach ?>
         </div>
-        <?php endforeach ?>
+        <?php endif ?>
       </div>
-      <?php endif ?>
     </div>
   </section>
 

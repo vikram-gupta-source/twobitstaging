@@ -122,16 +122,13 @@
   transition: opacity 0.4s ease;
   background-color: #fff;
   box-shadow: 0 4px 10px -10px rgba(0, 0, 0, 0.6);
-  transition: transform 0.5s ease-in-out;
-  @include transform(translate3d(0px, 0px, 0px));
-  &.hide-away {
-    @include transform(translate3d(0px, -72px, 0px));
-  }
+  transition: top 0.5s ease-in-out;
+  top: 0;
   &.start {
     opacity: 1;
   }
   .navbar-brand {
-    max-width: 150px;
+    max-width: 58px;
     padding: 8px 4px;
   }
   .navbar {
@@ -145,12 +142,19 @@
       list-style: none;
       .nav-link {
         padding: 0 1rem;
-        &:after {
-        }
-        span {
-          position: relative;
-          font-weight: 500;
-          font-size: 0.9rem;
+        font-size: 13px;
+        .direction {
+          display: inline-block;
+          line-height: 20px;
+          vertical-align: middle;
+          margin-right: 10px;
+          font-size: 12px;
+          .state {
+            color: red;
+            &.open {
+              color: green;
+            }
+          }
         }
       }
       &.active,
@@ -159,6 +163,10 @@
           &:after {
           }
         }
+      }
+
+      &.highlight {
+        background-color: $theme-color2;
       }
     }
   }
@@ -260,5 +268,13 @@
         background-color: $hover;
       }
     }
+  }
+}
+#notification-bar {
+  background-color: $theme-color3;
+  color: #fff;
+  padding: 4px 0;
+  p {
+    margin: 0;
   }
 }
