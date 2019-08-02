@@ -16124,7 +16124,7 @@ article.page.type-page {
       position: relative;
       list-style: none; }
       #main-nav #menu-main-menu .menu-item .nav-link {
-        padding: 0 1rem;
+        padding: 0 0.5rem;
         font-size: 13px; }
         #main-nav #menu-main-menu .menu-item .nav-link i {
           margin-right: 4px; }
