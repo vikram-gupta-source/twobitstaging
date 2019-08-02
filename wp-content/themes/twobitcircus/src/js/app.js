@@ -280,6 +280,7 @@ $(function() {
     // Append to Filter show
     $("#filters a.nav-link").on("click", function(e) {
       e.preventDefault();
+      $('[data-toggle="tooltip"]').tooltip("hide");
       if (!$(this).hasClass("active")) {
         $("#filters a.nav-link").removeClass("active");
         $(this).addClass("active");

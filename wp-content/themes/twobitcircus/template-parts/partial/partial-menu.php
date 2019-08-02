@@ -4,8 +4,8 @@
  *
  * @package twobitcircus
  */
- global $location;
- $isOpen = openClosed($location['days'])
+ global $location; 
+ $isOpen = openClosed($location['days'], $location['timezone'])
 ?>
 <!-- ******************* Navbar ******************* -->
 <header id="main-nav" class="fixed-top" itemscope itemtype="http://schema.org/WebSite">
@@ -20,6 +20,9 @@
   <nav class="navbar">
     <div class="container">
       <?php the_custom_logo(); ?>
+      <a title="Directions" href="#direction" class="nav-link-direction">
+        <i class="fa fa-lg fa-location-arrow" aria-hidden="true"></i> <span class="direction"><?php echo $location['city'] ?> <span class="state <?php echo $isOpen ?>">(<?php echo ucwords($isOpen) ?>)</span><br/>Directions</span>
+      </a>
 
       <!-- The WordPress Menu goes here -->
       <?php wp_nav_menu( array(
@@ -31,7 +34,6 @@
           'menu_class'      => 'menu-table d-flex flex-column flex-md-row justify-content-between',
           'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
           'walker'          => new WP_Bootstrap_Navwalker(),
-          'directions'       => '<span class="direction">'. $location['city'] . ' <span class="state '.$isOpen.'">('.ucwords($isOpen).')</span><br/>Directions</span>'
         ) );
       ?>
 

@@ -256,14 +256,20 @@ function get_locations($array) {
   return $_array;
 }
 // Get Time Close of Open
-function openClosed($days) {
+function openClosed($days, $timezone) {
+  date_default_timezone_set($timezone);
   if(empty($days)) return 'closed';
   $dayofweek = date('l');
   $timestamp = time();
   foreach($days as $day) {
     if($dayofweek == $day['day']) {
       $startTime = strtotime($day['open']);
-      $endTime = strtotime($day['close']); 
+      $endTime = strtotime($day['close']);
+      if($startTime >= $endTime) {
+        $endTime = strtotime('+1 day' . $day['close']);
+      } else {
+        $endTime = strtotime($day['close']);
+      }
       // check if current time is within a range
       if ($startTime <= $timestamp && $timestamp <= $endTime ) {
           return 'open';

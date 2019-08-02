@@ -119,11 +119,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$classes = self::separate_linkmods_and_icons_from_classes( $classes, $linkmod_classes, $icon_classes, $depth );
 
 			// Join any icon classes plucked from $classes into a string.
-			$icon_class_string = join( ' ', $icon_classes );
-      $dir_output = '';
-      if(preg_match('/fa-location-arrow/', $icon_class_string)) {
-        $dir_output = $args->directions;
-      }
+			$icon_class_string = join( ' ', $icon_classes ); 
 
 			/**
 			 * Filters the arguments for a single nav menu item.
@@ -245,7 +241,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$icon_html = '';
 			if ( ! empty( $icon_class_string ) ) {
 				// append an <i> with the icon classes to what is output before links.
-				$icon_html =  '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ' . $dir_output;
+				$icon_html =  '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';
 			}
 
 			/** This filter is documented in wp-includes/post-template.php */
@@ -273,12 +269,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					unset( $linkmod_classes[ $k ] );
 				}
 			}
-      $_html_link = $icon_html . $title;
-      if($dir_output) {
-        $_html_link = $icon_html;
-      }
 			// Put the item contents into $output.
-			$item_output .= isset( $args->link_before ) ? $args->link_before . $_html_link . $args->link_after : '';
+			$item_output .= isset( $args->link_before ) ? $args->link_before . $icon_html . $title . $args->link_after : '';
 			/**
 			 * This is the end of the internal nav item. We need to close the
 			 * correct element depending on the type of link or link mod.

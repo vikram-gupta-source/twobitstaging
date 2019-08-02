@@ -3,7 +3,7 @@
  * Template part for displaying posts
  *
  * @package twobitcircus
- */ 
+ */
 ?>
 <article id="food-drink" <?php post_class(); ?>>
 
@@ -46,12 +46,12 @@
   <section id="banner-block" class="entry-wrapper-padding">
     <div class="container">
       <div class="row">
-        <div class="col-md-8 text-center content-block inview animated delay-1">
+        <div class="col-md-6 text-center content-block inview animated delay-1">
           <h2 class="headline"><?php echo get_field('banner_title'); ?></h2>
           <h4><?php echo get_field('banner_sub_title'); ?></h4>
           <h5><?php echo get_field('banner_description'); ?></h5>
         </div>
-        <div class="col-md-4 inview animated delay-2"><img class="lazy-load img-fluid" data-src="https://via.placeholder.com/500x300"/></div>
+        <div class="col-md-6 inview animated delay-2"><img class="lazy-load img-fluid" data-src="https://via.placeholder.com/500x300"/></div>
       </div>
     </div>
   </section>
