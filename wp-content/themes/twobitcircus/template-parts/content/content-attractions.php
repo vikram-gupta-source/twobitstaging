@@ -20,7 +20,7 @@
   <div id="filters" class="inview animated mx-auto delay-1">
     <ul class="nav justify-content-center" role="tablist">
     <?php foreach($categories as $category) : ?>
-      <li class="nav-item">
+      <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="<?php echo $category->category_description;?>">
         <a class="nav-link" href="#<?php echo $category->slug;?>" aria-controls="<?php echo $category->slug;?>"><i class="<?php echo @get_term_meta($category->term_id, 'category_icon', true) ;?>" aria-hidden="true"></i> <?php echo $category->name;?></a>
       </li>
     <?php endforeach ?>
@@ -90,19 +90,25 @@
                       <?php if(!empty(get_field('sub_title', $show->ID))):?>
                       <h4 class="subtitle"><?php echo get_field('sub_title', $show->ID);?></h4>
                       <?php endif ?>
-                      <?php if(!empty($info[0])):?>
+                      <?php if(!empty($info[0]['players']) || !empty($info[0]['show_duration']) || !empty($info[0]['price'])):?>
                       <div class="info-block mt-4 mb-3">
+                        <?php if(!empty($info[0]['players'])):?>
                         <div class="d-inline-block"><i class="fa fa-user pr-1"></i><?php echo $info[0]['players'];?></div>
+                        <?php endif ?>
+                        <?php if(!empty($info[0]['show_duration'])):?>
                         <div class="d-inline-block pl-3 pr-4"><i class="fa fa-clock-o pr-1"></i><?php echo $info[0]['show_duration'];?></div>
+                        <?php endif ?>
+                        <?php if(!empty($info[0]['price'])):?>
                         <div class="d-inline-block"><i class="fa fa-money pr-1"></i><?php echo $info[0]['price'];?></div>
+                        <?php endif ?>
                       </div>
-                      <?php if(!empty($info[0]['buy_link']) && empty($composedDates)): ?>
-                      <div class="buy-link">
-                        <a class="btn btn-sm btn-twobit" href="<?php echo $info[0]['buy_link'];?>" rel="noopener noreferrer" target="_blank"><?php _e('Buy Tickets', 'twobitcircus');?></a>
-                      </div>
-                      <?php endif ?>
                       <?php endif ?>
                       <p><?php echo apply_filters('the_content', $show->post_content);?></p>
+                      <?php if(!empty($info[0]['buy_link']) && empty($composedDates)): ?>
+                      <div class="buy-link mt-4">
+                        <a class="btn btn-sm btn-twobit" href="<?php echo $info[0]['buy_link'];?>" rel="noopener noreferrer" target="_blank"><?php _e('Buy Players Card', 'twobitcircus');?></a>
+                      </div>
+                      <?php endif ?>
                       <?php if(!empty($composedDates)) :?>
                       <h4 class="mt-5 clearfix"><?php _e( 'Showtimes' , 'twobitcircus'); ?> <button type="button" class="btn btn-sm btn-twobit open-times-modal pull-right" data-toggle="modal" data-target="#modal-showtimes"><?php _e( 'All Times' , 'twobitcircus'); ?></button></h4>
                       <div class="showtimes-cycle">
@@ -137,7 +143,7 @@
                       </div>
                       <div class="available-dates text-center">
 
-                        <a href="#" class="btn btn-twobit text-uppercase fade" target="_blank"><?php _e( 'Go to Purcahse' , 'twobitcircus'); ?></a>
+                        <a href="#" class="btn btn-twobit text-uppercase fade" target="_blank"><?php _e( 'Go to Purchase' , 'twobitcircus'); ?></a>
 
                         <div class="showtimes d-none">
                           <div id="accordion-<?php echo $show->ID;?>" class="accordion">

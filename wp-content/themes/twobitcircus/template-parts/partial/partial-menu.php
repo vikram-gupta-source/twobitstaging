@@ -31,8 +31,8 @@
           'menu_class'      => 'menu-table d-flex flex-column flex-md-row justify-content-between',
           'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
           'walker'          => new WP_Bootstrap_Navwalker(),
-          'directions'       => '<span class="direction">'. $location['city'] . ' <span class="state '.$isOpen.'">('.ucwords($isOpen).')</span><br/>'. $location['phone'] .'</span>'
-        ) ); 
+          'directions'       => '<span class="direction">'. $location['city'] . ' <span class="state '.$isOpen.'">('.ucwords($isOpen).')</span><br/>Directions</span>'
+        ) );
       ?>
 
       <button class="navbar-toggler collapsed d-lg-none"" type="button" data-toggle="collapse" data-target="#expanded-menu" aria-controls="expanded-menu" aria-expanded="false" aria-label="<?php _e( 'Toggle navigation', 'twobitcircus' ); ?>">

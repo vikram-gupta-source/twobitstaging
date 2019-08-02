@@ -257,6 +257,7 @@ $(function() {
 
   // Handle all Attraction Events
   if ($("#attractions-block").length) {
+    $('[data-toggle="tooltip"]').tooltip();
     var defaultHt = 0;
     $(".attractions-slick").slick(slick_attractions_settings);
     $(".slick-shows")

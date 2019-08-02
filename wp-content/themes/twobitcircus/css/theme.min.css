@@ -16126,11 +16126,31 @@ article.page.type-page {
       #main-nav #menu-main-menu .menu-item .nav-link {
         padding: 0 1rem;
         font-size: 13px; }
+        #main-nav #menu-main-menu .menu-item .nav-link i {
+          margin-right: 4px; }
+          #main-nav #menu-main-menu .menu-item .nav-link i.fa-location-arrow {
+            position: relative; }
+            #main-nav #menu-main-menu .menu-item .nav-link i.fa-location-arrow:before {
+              content: "";
+              position: absolute;
+              top: -7px;
+              left: -4px;
+              right: 0;
+              margin: auto;
+              text-align: center;
+              height: 25px;
+              width: 25px;
+              border-radius: 50%;
+              border: 2px solid #8d8d8d; }
+            #main-nav #menu-main-menu .menu-item .nav-link i.fa-location-arrow:after {
+              font-size: 1.1em;
+              content: "\F124"; }
         #main-nav #menu-main-menu .menu-item .nav-link .direction {
           display: inline-block;
           line-height: 20px;
           vertical-align: middle;
           margin-right: 10px;
+          margin-left: 6px;
           font-size: 12px; }
           #main-nav #menu-main-menu .menu-item .nav-link .direction .state {
             color: red; }

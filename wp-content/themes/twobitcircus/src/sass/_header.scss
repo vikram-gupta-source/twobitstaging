@@ -143,11 +143,35 @@
       .nav-link {
         padding: 0 1rem;
         font-size: 13px;
+        i {
+          margin-right: 4px;
+          &.fa-location-arrow {
+            position: relative;
+            &:before {
+              content: "";
+              position: absolute;
+              top: -7px;
+              left: -4px;
+              right: 0;
+              margin: auto;
+              text-align: center;
+              height: 25px;
+              width: 25px;
+              border-radius: 50%;
+              border: 2px solid $theme-color3;
+            }
+            &:after {
+              font-size: 1.1em;
+              content: "\F124";
+            }
+          }
+        }
         .direction {
           display: inline-block;
           line-height: 20px;
           vertical-align: middle;
           margin-right: 10px;
+          margin-left: 6px;
           font-size: 12px;
           .state {
             color: red;
