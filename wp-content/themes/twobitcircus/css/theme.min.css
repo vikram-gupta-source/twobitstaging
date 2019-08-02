@@ -16391,27 +16391,31 @@ article.page.type-page {
   padding: 5px 15px;
   background-color: #e1e1e1; }
 
-#attractions .slick-days {
-  border: 1px solid #ebebeb; }
-  #attractions .slick-days .item-days {
-    border-left: 1px solid #ebebeb; }
-    #attractions .slick-days .item-days .day-header {
-      font-size: 16px;
-      padding: 5px 0;
-      width: 100%;
-      white-space: normal;
-      background-color: #fff; }
-    #attractions .slick-days .item-days .day-date {
-      padding: 0.5rem;
-      background-color: #fff; }
-      #attractions .slick-days .item-days .day-date .month {
-        text-transform: uppercase; }
-      #attractions .slick-days .item-days .day-date .day {
-        font-size: 20px; }
-  #attractions .slick-days .slick-current .day-header {
-    background-color: #cfcfcf; }
-  #attractions .slick-days .slick-current .day-date {
-    background-color: #e1e1e1; }
+#attractions .slick-days .slick-track {
+  border: 1px solid #ebebeb;
+  margin: 0; }
+
+#attractions .slick-days .item-days {
+  border-left: 1px solid #ebebeb; }
+  #attractions .slick-days .item-days .day-header {
+    font-size: 16px;
+    padding: 5px 0;
+    width: 100%;
+    white-space: normal;
+    background-color: #fff; }
+  #attractions .slick-days .item-days .day-date {
+    padding: 0.5rem;
+    background-color: #fff; }
+    #attractions .slick-days .item-days .day-date .month {
+      text-transform: uppercase; }
+    #attractions .slick-days .item-days .day-date .day {
+      font-size: 20px; }
+
+#attractions .slick-days .slick-current .day-header {
+  background-color: #cfcfcf; }
+
+#attractions .slick-days .slick-current .day-date {
+  background-color: #e1e1e1; }
 
 #modal-showtimes .card {
   border-radius: 0;

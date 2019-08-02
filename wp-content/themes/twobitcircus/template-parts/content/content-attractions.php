@@ -113,7 +113,8 @@
                       <h4 class="mt-5 clearfix"><?php _e( 'Showtimes' , 'twobitcircus'); ?> <button type="button" class="btn btn-sm btn-twobit open-times-modal pull-right" data-toggle="modal" data-target="#modal-showtimes"><?php _e( 'All Times' , 'twobitcircus'); ?></button></h4>
                       <div class="showtimes-cycle">
                         <div id="cycle-<?php echo $show->ID;?>">
-                          <div class="slick-days">
+                          <?php $slickObj = (count($composedDates) > 5) ? '{"centerMode": true }' : ''; ?>
+                          <div class="slick-days" data-slick='<?php echo $slickObj;?>'>
                             <?php foreach($composedDates as $date => $tickets) :?>
                             <div class="item-days text-center">
                               <div class="day-header">

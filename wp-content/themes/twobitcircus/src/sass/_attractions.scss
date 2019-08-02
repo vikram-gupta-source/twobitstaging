@@ -26,7 +26,10 @@
     }
   }
   .slick-days {
-    border: 1px solid #ebebeb;
+    .slick-track {
+      border: 1px solid #ebebeb;
+      margin: 0;
+    }
     .item-days {
       border-left: 1px solid #ebebeb;
       .day-header {

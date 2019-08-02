@@ -182,8 +182,7 @@ $(function() {
     slidesToScroll: 1,
     arrows: false,
     asNavFor: ".slick-times",
-    focusOnSelect: true,
-    centerMode: true
+    focusOnSelect: true
   };
   var slick_times_settings = {
     infinite: true,
@@ -257,7 +256,7 @@ $(function() {
 
   // Handle all Attraction Events
   if ($("#attractions-block").length) {
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip({html: true});
     var defaultHt = 0;
     $(".attractions-slick").slick(slick_attractions_settings);
     $(".slick-shows")
