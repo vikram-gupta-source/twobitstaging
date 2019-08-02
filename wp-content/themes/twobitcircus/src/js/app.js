@@ -361,7 +361,7 @@ $(function() {
     }
   }
   // Handle CLick for Nav Map
-  $('#menu-main-menu a[href="#direction"]').on("click", function(evt) {
+  $(".nav-link-direction").on("click", function(evt) {
     evt.preventDefault();
     $("#map-modal").modal("toggle");
   });
