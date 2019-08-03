@@ -57,6 +57,7 @@ $(function() {
     clearInt = setTimeout(function() {
       navBarHt = $("#main-nav").height();
       $("body").css({"padding-top": navBarHt + "px"});
+      $(".slick-days .slick-slide.slick-current").trigger("click");
     }, 500);
   });
   var lastY = 0;
@@ -85,7 +86,7 @@ $(function() {
     .trigger("scroll");
 
   // Handle Slider Slick
-  var slick_settings = {
+  var slick_calendar_settings = {
     dots: true,
     infinite: false,
     speed: 600,
@@ -103,13 +104,18 @@ $(function() {
       {
         breakpoint: 991,
         settings: {
+          dots: false,
           slidesToShow: 2,
           slidesToScroll: 2
         }
       },
       {
         breakpoint: 767,
-        settings: "unslick"
+        settings: {
+          dots: false,
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
       }
     ]
   };
@@ -122,7 +128,81 @@ $(function() {
     responsive: [
       {
         breakpoint: 767,
-        settings: "unslick"
+        settings: {
+          dots: true,
+          arrows: false,
+          centerMode: false,
+          variableWidth: false,
+          adaptiveHeight: true,
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+  var slick_event_settings = {
+    dots: false,
+    infinite: false,
+    speed: 600,
+    arrows: true,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    adaptiveHeight: true,
+    responsive: [
+      {
+        breakpoint: 991,
+        settings: {
+          dots: false,
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          infinite: true,
+          dots: true,
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+  var slick_filter_settings = {
+    dots: false,
+    infinite: false,
+    speed: 600,
+    arrows: false,
+    slidesToShow: 7,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1199,
+        settings: {
+          arrows: true,
+          slidesToShow: 6
+        }
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          arrows: true,
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          arrows: true,
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          arrows: true,
+          slidesToShow: 2
+        }
       }
     ]
   };
@@ -147,15 +227,15 @@ $(function() {
     fade: true
   };
   var slick_feed_settings = {
-    infinite: true,
+    infinite: false,
     slidesToShow: 3,
     slidesToScroll: 1,
+    arrows: false,
     responsive: [
       {
-        breakpoint: 767,
+        breakpoint: 1199,
         settings: {
           dots: true,
-          arrows: false,
           slidesToShow: 2,
           slidesToScroll: 1
         }
@@ -164,7 +244,6 @@ $(function() {
         breakpoint: 530,
         settings: {
           dots: true,
-          arrows: false,
           slidesToShow: 1,
           slidesToScroll: 1
         }
@@ -191,7 +270,8 @@ $(function() {
     adaptiveHeight: true,
     arrows: false,
     swipe: false,
-    touchMove: false
+    touchMove: false,
+    fade: true
   };
   var slick_media_nav_settings = {
     infinite: true,
@@ -200,7 +280,21 @@ $(function() {
     arrows: false,
     asNavFor: ".slick-media",
     focusOnSelect: true,
-    centerMode: true
+    centerMode: true,
+    responsive: [
+      {
+        breakpoint: 1199,
+        settings: {
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 3
+        }
+      }
+    ]
   };
   var slick_media_settings = {
     infinite: true,
@@ -210,331 +304,351 @@ $(function() {
     asNavFor: ".slick-media-nav",
     fade: true
   };
-  if ($(".slick-init").length || $(".slick-center-init").length) {
-    if ($(".slick-init").length) $(".slick-init").slick(slick_settings);
-    if ($(".slick-center-init").length)
+
+  imagesLoaded("main", {background: true}, function() {
+    if ($(".slick-filter").length) {
+      $(".slick-filter").slick(slick_filter_settings);
+    }
+    if ($(".slick-center-init").length) {
       $(".slick-center-init").slick(slick_center_settings);
-    $(window).on("resize", function() {
-      if ($(window).width() > 690) {
-        if ($(".slick-init").length) {
-          if (!$(".slick-init").hasClass("slick-initialized")) {
-            return $(".slick-init").slick(slick_settings);
-          }
-        }
-        if ($(".slick-center-init").length) {
-          if (!$(".slick-center-init").hasClass("slick-initialized")) {
-            return $(".slick-center-init").slick(slick_center_settings);
-          }
-        }
-        return;
-      }
-    });
-  }
-  if ($(".slick-social").length) {
-    $(".slick-feed").slick(slick_feed_settings);
-    $(".slick-social")
-      .slick(slick_social_settings)
-      .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
-        var srcid = $(slick.$slides.get(nextSlide))
-          .find(".embed-data")
-          .data("src");
-        if (srcid) {
-          $(slick.$slides.get(nextSlide))
-            .find(".embed-data")
-            .append(
-              '<iframe class="embed-responsive-item" src="' +
-                srcid +
-                '"></iframe>'
-            );
-        }
-      });
-    var firstEmbed = $(".youtube .grid-feed:first .embed-data").data("src");
-    $(".youtube .grid-feed:first .embed-data").append(
-      '<iframe class="embed-responsive-item" src="' + firstEmbed + '"></iframe>'
-    );
-  }
-
-  // Handle all Attraction Events
-  if ($("#attractions-block").length) {
-    $('[data-toggle="tooltip"]').tooltip({html: true});
-    var defaultHt = 0;
-    $(".attractions-slick").slick(slick_attractions_settings);
-    $(".slick-shows")
-      .slick(slick_shows_settings)
-      .on("afterChange", function(ev, slick, cur) {
-        $(slick.$slides.get(cur))
-          .find(".slick-days .slick-slide:not(.slick-cloned):first")
-          .trigger("click");
-      });
-    $(".slick-media").slick(slick_media_settings);
-    $(".slick-media-nav").slick(slick_media_nav_settings);
-    $(".slick-days").slick(slick_days_settings);
-    $(".slick-times")
-      .slick(slick_times_settings)
-      .on("beforeChange", function(ev, slick, cur, next) {
-        $(".available-dates > .btn-twobit")
-          .removeClass("show visible")
-          .addClass("invisible");
-      });
-    // Append to Filter show
-    $("#filters a.nav-link").on("click", function(e) {
-      e.preventDefault();
-      $('[data-toggle="tooltip"]').tooltip("hide");
-      if (!$(this).hasClass("active")) {
-        $("#filters a.nav-link").removeClass("active");
-        $(this).addClass("active");
-        let slug = $(this).attr("aria-controls");
-        if ($("#" + slug).length) {
-          let index = $("#" + slug)
-            .parents(".slick-slide")
-            .data("slick-index");
-          $(".attractions-slick").slick("slickGoTo", index);
-          $("#" + slug)
-            .find(".slick-days .slick-slide:not(.slick-cloned):first")
-            .trigger("click");
-        }
-      }
-    });
-    $("#filters .nav-item:first-child a").trigger("click");
-
-    //Extend Days slick
-    $(".slick-days .slick-slide").on("click", function(evt) {
-      evt.preventDefault();
-      let _ht = $(this)
-        .parents(".show-content-block")
-        .outerHeight();
-      let realHt = parseInt(_ht + 60);
-      $(this)
-        .parents(".slick-shows")
-        .find("> .slick-list")
-        .height(realHt + "px");
-      $(".attractions-slick > .slick-list").height(realHt + "px");
-    });
-
-    // Handle Model all times
-    $(".open-times-modal").on("click", function(evt) {
-      evt.preventDefault();
-      $("#modal-showtimes .modal-body").empty();
-      $(this)
-        .parents(".show-content-block")
-        .find(".showtimes")
-        .find(".accordion")
-        .clone()
-        .appendTo("#modal-showtimes .modal-body");
-    });
-
-    // Handlers Show
-    $(".show-content-block .btn-group .btn-twobit").on("click", function(evt) {
-      if ($(this).hasClass("next")) {
-        $(this)
-          .parents(".slick-shows")
-          .slick("slickNext");
-      } else {
-        $(this)
-          .parents(".slick-shows")
-          .slick("slickPrev");
-      }
-    });
-
-    // Confirm Purcahse
-    $(".slick-times .btn-twobit").on("click", function(evt) {
-      evt.preventDefault();
-      let href = $(this).prop("href");
-      $(this)
-        .parents(".show-content-block")
-        .find(".available-dates > .btn-twobit")
-        .removeClass("invisible")
-        .addClass("show visible")
-        .prop("href", href);
-    });
-
-    // Check Deep link
-    let urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has("cat") && urlParams.has("id")) {
-      let cat = urlParams.get("cat");
-      let focus = urlParams.get("id");
-      $("#" + cat + "-tab").trigger("click");
-      setTimeout(function() {
-        $("#" + cat + " .slick-shows").slick("slickGoTo", focus);
-      }, 1000);
     }
-  }
-  // Handle CLick for Nav Map
-  $(".nav-link-direction").on("click", function(evt) {
-    evt.preventDefault();
-    $("#map-modal").modal("toggle");
-  });
-  // Handle Arrow Scroll Top
-  $("#return-to-top").on("click", function(evt) {
-    evt.preventDefault();
-    $("html, body").animate({scrollTop: 0}, "slow");
-  });
-  // Enable parallax
-  if ($(".parallax").length) {
-    $(".parallax").parallax();
-  }
-  // Scroll to Top
-  $(window).scroll(function() {
-    if ($(this).scrollTop() >= 100) {
-      $("#return-to-top").addClass("active");
-    } else {
-      $("#return-to-top").removeClass("active");
+    if ($(".slick-event").length) {
+      $(".slick-event").slick(slick_event_settings);
     }
-  });
-  if ($(".grid-isotope").length) {
-    var $iso = new Isotope(".grid-isotope", {
-      itemSelector: ".grid-item"
-    });
-
-    $("#grid-filter a").on("click", function(evt) {
-      evt.preventDefault();
-      if (!$(this).hasClass("active")) {
-        $("#grid-filter a").removeClass("active");
-        $(this).addClass("active");
-        let subfilter = $(this).data("filter");
-        $iso.arrange({filter: subfilter});
-      }
-    });
-  }
-  if ($("#promo-block").length) {
-    $("#promo-block .grid-item .event-link").on("click", function(evt) {
-      evt.preventDefault();
-      let $parent = $(this).parents(".grid-item");
-      if (!$parent.find(".card-title").hasClass("collapsed")) {
-        $parent.find(".card-title").addClass("collapsed");
-        $parent.find(".card-body").addClass("show");
-      } else {
-        $parent.find(".card-title").removeClass("collapsed");
-        $parent.find(".card-body").removeClass("show");
-      }
-      $iso.arrange();
-    });
-  }
-  if ($("#parties-block").length) {
-    $("#parties-block .grid-item .event-link").on("click", function(evt) {
-      evt.preventDefault();
-      let $parent = $(this).parents(".grid-item");
-      if (!$parent.find(".card-title").hasClass("collapsed")) {
-        $parent.find(".card-title").addClass("collapsed");
-        $parent.find(".card-body").addClass("show");
-      } else {
-        $parent.find(".card-title").removeClass("collapsed");
-        $parent.find(".card-body").removeClass("show");
-      }
-      $iso.arrange();
-    });
-    $("#parties-block .link-wrapper .btn").on("click", function(evt) {
-      evt.preventDefault();
-      let _event = $(this)
-        .parents(".grid-item")
-        .data("event");
-      let $select = $("#event-form select[name='inquiry']");
-      $('option[value="' + _event + '"]', $select).prop("selected", true);
-      $select.trigger("click");
-      $("#event-form").addClass("active");
-      $("#hidden-block").modal("show");
-    });
-    $("#hidden-block").on("shown.bs.modal", function(e) {
-      $(".modal-backdrop.show, #event-form .close").on("click", function() {
-        $("#event-form").removeClass("active");
-        $("#hidden-block").modal("hide");
-      });
-    });
-  }
-  if ($(".more-calendar-block").length) {
-    var weekday = [];
-    var month = [];
-    weekday[0] = "Sun";
-    weekday[1] = "Mon";
-    weekday[2] = "Tues";
-    weekday[3] = "Wed";
-    weekday[4] = "Thur";
-    weekday[5] = "Fri";
-    weekday[6] = "Sat";
-    month[0] = "Jan";
-    month[1] = "Feb";
-    month[2] = "Mar";
-    month[3] = "Apr";
-    month[4] = "May";
-    month[5] = "Jun";
-    month[6] = "Jul";
-    month[7] = "Aug";
-    month[8] = "Sept";
-    month[9] = "Oct";
-    month[10] = "Nov";
-    month[11] = "Dec";
-    var calendarEl = document.getElementById("full-calendar");
-    var addZero = function(i) {
-        if (i < 10) {
-          i = "0" + i;
-        }
-        return i;
-      },
-      formatAMPM = function(hours, minutes) {
-        let hrs = (hours + 24 - 2) % 24;
-        let ampm = hrs >= 12 ? "PM" : "AM";
-        if (hrs == 0) {
-          hrs = 12;
-        } else if (hrs > 12) {
-          hrs = hrs % 12;
-        }
-        return hours + ":" + addZero(minutes) + ampm;
-      };
-    var calendar = new Calendar(calendarEl, {
-      plugins: [dayGridPlugin, timeGridPlugin, bootstrapPlugin],
-      themeSystem: "bootstrap",
-      header: {
-        left: "dayGridMonth,timeGridWeek,timeGridDay",
-        center: "title"
-      },
-      events: _cal_events,
-      displayEventTime: false,
-      eventClick: function(info) {
-        info.jsEvent.preventDefault();
-        if (!$("#event-window").is(":visible")) {
-          $("#event-window").addClass("show");
-        }
-        //console.log(info);
-        let $obj = $(info.el);
-        let $target = $("#event-window .card");
-        let sd = new Date(info.event.start);
-        let ed = new Date(info.event.end);
-        $("#event-window")
-          .parent()
-          .addClass("show");
-        $(".day", $target).text(weekday[sd.getDay()]);
-        $(".date", $target).text(month[sd.getMonth()] + " " + sd.getDay());
-        $(".card-title", $target).text(info.event.title);
-        $(".start", $target).text(
-          "Starts: " + formatAMPM(sd.getHours(), sd.getMinutes())
+    if ($(".slick-calendar").length) {
+      $(".slick-calendar").slick(slick_calendar_settings);
+    }
+    if ($(".slick-feeds").length) {
+      $(".slick-feeds").slick(slick_feed_settings);
+      if ($(".slick-social").length) {
+        $(".slick-social")
+          .slick(slick_social_settings)
+          .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
+            var srcid = $(slick.$slides.get(nextSlide))
+              .find(".embed-data")
+              .data("src");
+            if (srcid) {
+              $(slick.$slides.get(nextSlide))
+                .find(".embed-data")
+                .append(
+                  '<iframe class="embed-responsive-item" src="' +
+                    srcid +
+                    '"></iframe>'
+                );
+            }
+          });
+        var firstEmbed = $(".youtube .grid-feed:first .embed-data").data("src");
+        $(".youtube .grid-feed:first .embed-data").append(
+          '<iframe class="embed-responsive-item" src="' +
+            firstEmbed +
+            '"></iframe>'
         );
-        if (info.event.end)
-          $(".end", $target).text(
-            "Ends: " + formatAMPM(ed.getHours(), ed.getMinutes())
-          );
-        else {
-          $(".end", $target).text("");
+      }
+    }
+
+    // Handle all Attraction Events
+    if ($("#attractions-block").length) {
+      $('[data-toggle="tooltip"]').tooltip({html: true});
+      $(".attractions-slick").slick(slick_attractions_settings);
+      $(".slick-shows")
+        .slick(slick_shows_settings)
+        .on("afterChange", function(ev, slick, cur) {
+          if ($(slick.$slides.get(cur)).find(".slick-days").length) {
+            $(slick.$slides.get(cur))
+              .find(
+                ".slick-days > .slick-list > .slick-track > .slick-slide:first-child"
+              )
+              .trigger("click");
+          }
+        });
+      $(".slick-media").slick(slick_media_settings);
+      $(".slick-media-nav").slick(slick_media_nav_settings);
+      $(".slick-days").slick(slick_days_settings);
+      $(".slick-times")
+        .slick(slick_times_settings)
+        .on("beforeChange", function(ev, slick, cur, next) {
+          $(".available-dates > .btn-twobit").removeClass("show");
+        });
+      // Append to Filter show
+      $("#filters a.nav-link").on("click", function(e) {
+        e.preventDefault();
+        $('[data-toggle="tooltip"]').tooltip("hide");
+        if (!$(this).hasClass("active")) {
+          $("#filters a.nav-link").removeClass("active");
+          $(this).addClass("active");
+          let slug = $(this).attr("aria-controls");
+          if ($("#" + slug).length) {
+            let index = $("#" + slug)
+              .parents(".slick-slide")
+              .data("slick-index");
+            $(".attractions-slick").slick("slickGoTo", index);
+            $("#" + slug)
+              .find(".slick-slide:first-child")
+              .addClass(".slick-current .slick-active");
+            $("#" + slug)
+              .find(
+                ".slick-days > .slick-list > .slick-track > .slick-slide:first-child"
+              )
+              .trigger("click");
+          }
         }
-        $(".card-img-top", $target).prop("src", info.event.id);
-        $(".text", $target).text(info.event.textColor);
-        if (info.event.url) {
-          $(".link", $target)
-            .removeClass("d-none")
-            .prop("href", info.event.url);
+      });
+      $("#filters .slick-current a.nav-link").trigger("click");
+
+      //Extend Days slick
+      $(".slick-days .slick-slide").on("click", function(evt) {
+        var $_this = $(this);
+        var timer = 0;
+        timer = setTimeout(function() {
+          clearTimeout(timer);
+          let ht = $_this
+            .parents(".slick-shows")
+            .find("> .slick-list > .slick-track")
+            .outerHeight();
+          let newHt = parseInt(ht + 40) + "px";
+          console.log(newHt);
+          $_this
+            .parents(".slick-shows")
+            .find("> .slick-list")
+            .height(newHt);
+          $(".attractions-slick > .slick-list").height(newHt);
+        }, 400);
+      });
+
+      // Handle Model all times
+      $(".open-times-modal").on("click", function(evt) {
+        evt.preventDefault();
+        $("#modal-showtimes .modal-body").empty();
+        $(this)
+          .parents(".show-content-block")
+          .find(".showtimes")
+          .find(".accordion")
+          .clone()
+          .appendTo("#modal-showtimes .modal-body");
+      });
+
+      // Handlers Show
+      $(".show-content-block .btn-group .btn-twobit").on("click", function(
+        evt
+      ) {
+        if ($(this).hasClass("next")) {
+          $(this)
+            .parents(".slick-shows")
+            .slick("slickNext");
         } else {
-          $(".link", $target).addClass("d-none");
+          $(this)
+            .parents(".slick-shows")
+            .slick("slickPrev");
         }
+      });
+
+      // Confirm Purcahse
+      $(".slick-times .btn-twobit").on("click", function(evt) {
+        evt.preventDefault();
+        let href = $(this).prop("href");
+        $(this)
+          .parents(".show-content-block")
+          .find(".available-dates > .btn-twobit")
+          .addClass("show")
+          .prop("href", href);
+      });
+
+      // Check Deep link
+      let urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has("cat") && urlParams.has("id")) {
+        let cat = urlParams.get("cat");
+        let focus = urlParams.get("id");
+        $("#" + cat + "-tab").trigger("click");
+        setTimeout(function() {
+          $("#" + cat + " .slick-shows").slick("slickGoTo", focus);
+        }, 1000);
+      }
+    }
+    // Handle CLick for Nav Map
+    $(".nav-link-direction").on("click", function(evt) {
+      evt.preventDefault();
+      $("#map-modal").modal("toggle");
+    });
+    // Handle Arrow Scroll Top
+    $("#return-to-top").on("click", function(evt) {
+      evt.preventDefault();
+      $("html, body").animate({scrollTop: 0}, "slow");
+    });
+    // Enable parallax
+    if ($(".parallax").length) {
+      $(".parallax").parallax();
+    }
+    // Scroll to Top
+    $(window).scroll(function() {
+      if ($(this).scrollTop() >= 100) {
+        $("#return-to-top").addClass("active");
+      } else {
+        $("#return-to-top").removeClass("active");
       }
     });
-    $(".btn.full-calendar").on("click", function(evt) {
-      evt.preventDefault();
-      $(this).toggleClass("show");
-      $(".more-calendar-block").toggleClass("show");
-      if (!$("#full-calendar.fc").length) calendar.render();
+    if ($(".grid-isotope").length) {
+      var $iso = new Isotope(".grid-isotope", {
+        itemSelector: ".grid-item"
+      });
+
+      $("#grid-filter a").on("click", function(evt) {
+        evt.preventDefault();
+        if (!$(this).hasClass("active")) {
+          $("#grid-filter a").removeClass("active");
+          $(this).addClass("active");
+          let subfilter = $(this).data("filter");
+          $iso.arrange({filter: subfilter});
+        }
+      });
+    }
+    if ($("#promo-block").length) {
+      $("#promo-block .grid-item .event-link").on("click", function(evt) {
+        evt.preventDefault();
+        let $parent = $(this).parents(".grid-item");
+        if (!$parent.find(".card-title").hasClass("collapsed")) {
+          $parent.find(".card-title").addClass("collapsed");
+          $parent.find(".card-body").addClass("show");
+        } else {
+          $parent.find(".card-title").removeClass("collapsed");
+          $parent.find(".card-body").removeClass("show");
+        }
+        $iso.arrange();
+      });
+    }
+    if ($("#parties-block").length) {
+      $("#parties-block .grid-item .event-link").on("click", function(evt) {
+        evt.preventDefault();
+        let $parent = $(this).parents(".grid-item");
+        if (!$parent.find(".card-title").hasClass("collapsed")) {
+          $parent.find(".card-title").addClass("collapsed");
+          $parent.find(".card-body").addClass("show");
+        } else {
+          $parent.find(".card-title").removeClass("collapsed");
+          $parent.find(".card-body").removeClass("show");
+        }
+        $iso.arrange();
+      });
+      $("#parties-block .link-wrapper .btn").on("click", function(evt) {
+        evt.preventDefault();
+        let _event = $(this)
+          .parents(".grid-item")
+          .data("event");
+        let $select = $("#event-form select[name='inquiry']");
+        $('option[value="' + _event + '"]', $select).prop("selected", true);
+        $select.trigger("click");
+        $("#event-form").addClass("active");
+        $("#hidden-block").modal("show");
+      });
+      $("#hidden-block").on("shown.bs.modal", function(e) {
+        $(".modal-backdrop.show, #event-form .close").on("click", function() {
+          $("#event-form").removeClass("active");
+          $("#hidden-block").modal("hide");
+        });
+      });
+    }
+    if ($(".more-calendar-block").length) {
+      var weekday = [];
+      var month = [];
+      weekday[0] = "Sun";
+      weekday[1] = "Mon";
+      weekday[2] = "Tues";
+      weekday[3] = "Wed";
+      weekday[4] = "Thur";
+      weekday[5] = "Fri";
+      weekday[6] = "Sat";
+      month[0] = "Jan";
+      month[1] = "Feb";
+      month[2] = "Mar";
+      month[3] = "Apr";
+      month[4] = "May";
+      month[5] = "Jun";
+      month[6] = "Jul";
+      month[7] = "Aug";
+      month[8] = "Sept";
+      month[9] = "Oct";
+      month[10] = "Nov";
+      month[11] = "Dec";
+      var calendarEl = document.getElementById("full-calendar");
+      var addZero = function(i) {
+          if (i < 10) {
+            i = "0" + i;
+          }
+          return i;
+        },
+        formatAMPM = function(hours, minutes) {
+          let hrs = (hours + 24 - 2) % 24;
+          let ampm = hrs >= 12 ? "PM" : "AM";
+          if (hrs == 0) {
+            hrs = 12;
+          } else if (hrs > 12) {
+            hrs = hrs % 12;
+          }
+          return hours + ":" + addZero(minutes) + ampm;
+        };
+      var calendar = new Calendar(calendarEl, {
+        plugins: [dayGridPlugin, timeGridPlugin, bootstrapPlugin],
+        themeSystem: "bootstrap",
+        header: {
+          left: "dayGridMonth,timeGridWeek,timeGridDay",
+          center: "title"
+        },
+        events: _cal_events,
+        displayEventTime: false,
+        eventClick: function(info) {
+          info.jsEvent.preventDefault();
+          if (!$("#event-window").is(":visible")) {
+            $("#event-window").addClass("show");
+          }
+          //console.log(info);
+          let $obj = $(info.el);
+          let $target = $("#event-window .card");
+          let sd = new Date(info.event.start);
+          let ed = new Date(info.event.end);
+          $("#event-window")
+            .parent()
+            .addClass("show");
+          $(".day", $target).text(weekday[sd.getDay()]);
+          $(".date", $target).text(month[sd.getMonth()] + " " + sd.getDay());
+          $(".card-title", $target).text(info.event.title);
+          $(".start", $target).text(
+            "Starts: " + formatAMPM(sd.getHours(), sd.getMinutes())
+          );
+          if (info.event.end)
+            $(".end", $target).text(
+              "Ends: " + formatAMPM(ed.getHours(), ed.getMinutes())
+            );
+          else {
+            $(".end", $target).text("");
+          }
+          $(".card-img-top", $target).prop("src", info.event.id);
+          $(".text", $target).text(info.event.textColor);
+          if (info.event.url) {
+            $(".link", $target)
+              .removeClass("d-none")
+              .prop("href", info.event.url);
+          } else {
+            $(".link", $target).addClass("d-none");
+          }
+        }
+      });
+      $(".btn.full-calendar").on("click", function(evt) {
+        evt.preventDefault();
+        $(this).toggleClass("show");
+        $(".more-calendar-block").toggleClass("show");
+        if (!$("#full-calendar.fc").length) calendar.render();
+      });
+      $(".more-calendar-block .close").on("click", function() {
+        $(".full-calendar").toggleClass("show");
+        $(".more-calendar-block").toggleClass("show");
+      });
+    }
+    // Close Main Menu
+    $("#close-btn").on("click", function() {
+      $("body").removeClass("scroll-hidden");
+      $("#main-nav .navbar-toggler").trigger("click");
     });
-    $(".more-calendar-block .close").on("click", function() {
-      $(".full-calendar").toggleClass("show");
-      $(".more-calendar-block").toggleClass("show");
+    $("#expanded-menu").on("show.bs.collapse", function() {
+      $("body").addClass("scroll-hidden");
     });
-  }
+  });
 });

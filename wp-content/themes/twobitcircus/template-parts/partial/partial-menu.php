@@ -4,9 +4,34 @@
  *
  * @package twobitcircus
  */
- global $location; 
+ global $location;
  $isOpen = openClosed($location['days'], $location['timezone'])
 ?>
+<!-- ******************* Mobile ******************* -->
+<div id="expanded-menu">
+  <div class="menu-block">
+    <div class="expanded-logo">
+      <img src="/wp-content/uploads/2019/07/2BC_Email_Logo.png" class="img-fluid" />
+    </div>
+    <!-- The WordPress Menu goes here -->
+    <?php wp_nav_menu( array(
+        'theme_location'  => 'header',
+        'container'         => 'div',
+        'container_class'   => 'collapse show',
+        'container_id'      => 'navigation-expand',
+        'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
+        'menu_id'         => 'main-expanded-menu',
+        'menu_class'      => 'menu-table',
+        'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+        'walker'          => new WP_Bootstrap_Navwalker(),
+      ) );
+    ?>
+  </div>
+  <div id="close-btn">
+    <span></span>
+    <span></span>
+  </div>
+</div>
 <!-- ******************* Navbar ******************* -->
 <header id="main-nav" class="fixed-top" itemscope itemtype="http://schema.org/WebSite">
   <a class="skip-link sr-only sr-only-focusable" href="#content"><?php _e( 'Skip to content', 'twobitcircus' ); ?></a>
@@ -18,7 +43,7 @@
   </div>
   <?php endif ?>
   <nav class="navbar">
-    <div class="container">
+    <div class="container position-relative">
       <?php the_custom_logo(); ?>
       <a title="Directions" href="#direction" class="nav-link-direction">
         <i class="fa fa-lg fa-location-arrow" aria-hidden="true"></i> <span class="direction"><?php echo $location['city'] ?> <span class="state <?php echo $isOpen ?>">(<?php echo ucwords($isOpen) ?>)</span><br/>Directions</span>

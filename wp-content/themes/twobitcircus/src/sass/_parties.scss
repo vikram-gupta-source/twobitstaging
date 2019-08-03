@@ -1,5 +1,10 @@
 // parties
 #parties-block {
+  .container {
+    @media (max-width: $break-large) {
+      max-width: inherit;
+    }
+  }
   .grid-item {
     .card-title {
       padding: 12px 15px;

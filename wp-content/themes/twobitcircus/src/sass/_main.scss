@@ -20,8 +20,30 @@ a {
     text-decoration: none;
   }
 }
-.mb-6 {
+#hero-block {
+  .carousel-control-next,
+  .carousel-control-prev {
+    z-index: 99;
+  }
+  .carousel-inner {
+    @media (max-width: $break-phone) {
+      .btn {
+        float: none !important;
+      }
+    }
+  }
+}
+.mb-5 {
   margin-bottom: 5em;
+}
+.mt-5 {
+  margin-top: 5em;
+}
+.mb-6 {
+  margin-bottom: 6em;
+}
+.mt-6 {
+  margin-top: 6em;
 }
 .entry-content a {
   color: $theme-color2;
@@ -324,15 +346,25 @@ article.page.type-page {
 .grid-isotope {
   text-align: center;
   margin: 0 auto;
+  @media (max-width: $break-large) {
+    max-width: 722px;
+  }
+  @media (max-width: $break-mobile) {
+    max-width: 360px;
+  }
+  .grid {
+    margin: 0 auto;
+  }
+  .grid-item {
+    width: 346px;
+    float: left;
+    margin: 7px;
+  }
 }
-.grid {
-  margin: 0 auto;
+.slick-dots {
+  bottom: -40px;
 }
-.grid-item {
-  width: 350px;
-  float: left;
-  margin: 10px;
-}
+
 .wrapper-section {
   position: relative;
   width: 100%;
@@ -403,20 +435,9 @@ article.page.type-page {
 .calender-wrapper {
   max-width: 1413px;
   margin: 0 auto;
-  padding: 25px;
-  @media (max-width: 1230px) {
-    max-width: 1199px;
-  }
-  @media (max-width: 991px) {
-    max-width: 900px;
-  }
-  @media (max-width: 767px) {
-    margin: 0 auto;
-    padding: 15px 25px 15px 40px;
-  }
   .calender {
     .slick-slide {
-      margin: 2px;
+      margin: 0 2px;
     }
     .grid {
       width: 280px;

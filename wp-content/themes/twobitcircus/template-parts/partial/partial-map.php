@@ -12,6 +12,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <h6 class="modal-title"><?php echo $location['address'];?>, <?php echo $location['city'];?>,<?php echo $location['state_abrv'];?><br><a href="tel:<?php echo cleanPhone($location['phone']);?>"><?php echo $location['phone'];?></a></h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

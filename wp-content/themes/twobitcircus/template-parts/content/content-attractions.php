@@ -18,13 +18,15 @@
   <?php endif ?>
   <?php if(!empty($categories)):?>
   <div id="filters" class="inview animated mx-auto delay-1">
-    <ul class="nav justify-content-center" role="tablist">
-    <?php foreach($categories as $category) : ?>
-      <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="<?php echo $category->category_description;?>">
-        <a class="nav-link" href="#<?php echo $category->slug;?>" aria-controls="<?php echo $category->slug;?>"><i class="<?php echo @get_term_meta($category->term_id, 'category_icon', true) ;?>" aria-hidden="true"></i> <?php echo $category->name;?></a>
-      </li>
-    <?php endforeach ?>
-    </ul>
+    <div class="container">
+      <div class="slick-filter" role="tablist">
+        <?php foreach($categories as $category) : ?>
+          <div class="nav-item text-center" data-toggle="tooltip" data-placement="bottom" title="<?php echo $category->category_description;?>">
+            <a class="nav-link" href="#<?php echo $category->slug;?>" aria-controls="<?php echo $category->slug;?>"><i class="<?php echo @get_term_meta($category->term_id, 'category_icon', true) ;?>" aria-hidden="true"></i> <?php echo $category->name;?></a>
+          </div>
+        <?php endforeach ?>
+      </div>
+    </div>
   </div>
   <?php endif ?>
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
@@ -46,7 +48,7 @@
                 <div class="item-shows">
 
                   <div class="row">
-                    <div class="col-md-7 mb-4">
+                    <div class="assets-wrapper col-md-7 mb-4">
                       <div class="show-asset-wrapper">
                         <div class="slick-media">
                           <div class="img"><img class="img-fluid w-100" src="https://via.placeholder.com/640x360"/></div>
@@ -74,7 +76,7 @@
                     <div class="show-content-block col-md-5">
                       <div class="row">
                         <div class="col-9">
-                          <h2 class="title"><?php echo $show->post_title;?></h2>
+                          <h2 class="title mb-0"><?php echo $show->post_title;?></h2>
                         </div>
                         <?php if($num > 1) :?>
                         <div class="col-3 btn-group">
@@ -88,18 +90,18 @@
                         <?php endif ?>
                       </div>
                       <?php if(!empty(get_field('sub_title', $show->ID))):?>
-                      <h4 class="subtitle"><?php echo get_field('sub_title', $show->ID);?></h4>
+                      <h4 class="subtitle mt-2"><?php echo get_field('sub_title', $show->ID);?></h4>
                       <?php endif ?>
                       <?php if(!empty($info[0]['players']) || !empty($info[0]['show_duration']) || !empty($info[0]['price'])):?>
-                      <div class="info-block mt-4 mb-3">
+                      <div class="info-block mt-3 mb-3">
                         <?php if(!empty($info[0]['players'])):?>
                         <div class="d-inline-block"><i class="fa fa-user pr-1"></i><?php echo $info[0]['players'];?></div>
                         <?php endif ?>
                         <?php if(!empty($info[0]['show_duration'])):?>
-                        <div class="d-inline-block pl-3 pr-4"><i class="fa fa-clock-o pr-1"></i><?php echo $info[0]['show_duration'];?></div>
+                        <div class="d-inline-block pl-3"><i class="fa fa-clock-o pr-1"></i><?php echo $info[0]['show_duration'];?></div>
                         <?php endif ?>
                         <?php if(!empty($info[0]['price'])):?>
-                        <div class="d-inline-block"><i class="fa fa-money pr-1"></i><?php echo $info[0]['price'];?></div>
+                        <div class="d-inline-block pl-3"><i class="fa fa-money pr-1"></i><?php echo $info[0]['price'];?></div>
                         <?php endif ?>
                       </div>
                       <?php endif ?>
@@ -114,7 +116,7 @@
                       <div class="showtimes-cycle">
                         <div id="cycle-<?php echo $show->ID;?>">
                           <?php $slickObj = (count($composedDates) > 5) ? '{"centerMode": true }' : ''; ?>
-                          <div class="slick-days" data-slick='<?php echo $slickObj;?>'>
+                          <div class="slick-days" data-slick='<?php echo $slickObj;?>' data-target="<?php echo $cat;?>">
                             <?php foreach($composedDates as $date => $tickets) :?>
                             <div class="item-days text-center">
                               <div class="day-header">
@@ -144,7 +146,7 @@
                       </div>
                       <div class="available-dates text-center">
 
-                        <a href="#" class="btn btn-twobit text-uppercase fade" target="_blank"><?php _e( 'Go to Purchase' , 'twobitcircus'); ?></a>
+                        <a href="#" class="btn btn-twobit confirm text-uppercase fade" target="_blank"><?php _e( 'Go to Purchase' , 'twobitcircus'); ?></a>
 
                         <div class="showtimes d-none">
                           <div id="accordion-<?php echo $show->ID;?>" class="accordion">

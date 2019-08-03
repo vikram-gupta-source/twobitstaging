@@ -11,11 +11,11 @@ $_enddate = $cal->get_endDate();
 $_closed = $cal->get_closed();
 ?>
 <?php if ( !empty($calendar) ) : ?>
-<div id="calendar-block">
+<div id="calendar-block" class="mt-4">
   <div class="container">
     <div class="calender-planner">
       <div class="calender-wrapper inview animated delay-1">
-        <div class="calender slick slick-init">
+        <div class="calender slick-calendar">
 
         <?php
           $current_date = time();
@@ -35,7 +35,9 @@ $_closed = $cal->get_closed();
                   <div class="date text-uppercase"><?php echo date('M d', $current_date);?></div>
                 </div>
                 <?php if($isClosed) : ?>
-                <div class="entry text-uppercase"><div class="cell"><span class="time"><?php echo get_field('calendar_closed_text', 'option');?></span></div></div>
+                <div class="entry text-uppercase">
+                  <div class="cell"><span class="time"><?php echo get_field('calendar_closed_text', 'option');?></span></div>
+                </div>
               <?php elseif(!empty($calendar[$day])) :?>
                 <div class="entry">
                   <div class="cell">
@@ -91,7 +93,7 @@ $_closed = $cal->get_closed();
         </div>
       </div>
     </div>
-    <div class="mx-auto mt-2 mb-2 text-center inview animated delay-3 d-none d-lg-block">
+    <div class="mx-auto mt-6 mb-2 text-center inview animated delay-2 d-none d-lg-block">
       <button type="button" class="btn btn-twobit fade show full-calendar"><?php _e('View Full Calendar', 'twobitcircus') ?></button>
     </div>
   </div>

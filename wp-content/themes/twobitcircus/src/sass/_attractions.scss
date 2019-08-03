@@ -1,6 +1,12 @@
 // Attractions
 #attractions {
   #filters {
+    background-color: $theme-color2;
+    .container {
+      @media (max-width: $break-large) {
+        max-width: inherit;
+      }
+    }
     .nav-link {
       padding: 20px;
       font-size: 1.2em;
@@ -22,6 +28,14 @@
       .info-block {
         padding: 5px 15px;
         background-color: $theme-color2;
+      }
+      .available-dates {
+        .confirm {
+          visibility: hidden;
+          &.show {
+            visibility: visible;
+          }
+        }
       }
     }
   }
@@ -140,8 +154,25 @@
       height: 70px;
       visibility: hidden;
       transition: opacity 0.6s ease;
+      @media (max-width: $break-large) {
+        bottom: 5px;
+      }
+      @media (max-width: $break-mobile) {
+        position: relative;
+        bottom: inherit;
+        opacity: 1 !important;
+        visibility: visible !important;
+        background-color: transparent;
+        height: auto;
+      }
       .slick-slide {
         padding: 7px 4px;
+        @media (max-width: $break-large) {
+          padding: 10px 4px;
+        }
+        @media (max-width: $break-mobile) {
+          padding: 4px;
+        }
       }
       .slick-current {
         .thumb {

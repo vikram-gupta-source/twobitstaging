@@ -278,3 +278,8 @@ function openClosed($days, $timezone) {
   }
   return 'closed';
 }
+
+// Format to Telephone
+function cleanPhone($phoneNumber) {
+  return '+1' . preg_replace('/[^0-9]/','',$phoneNumber);
+}

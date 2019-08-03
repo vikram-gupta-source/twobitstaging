@@ -125,10 +125,7 @@ if ( ! class_exists( 'Calendar' ) ) {
         $this->current_date = strtotime('+1 day', $this->current_date);
       } while ($this->current_date <= $this->end_date);
     }
-    private function getRecurringDays($date, $exc, $day, $end, $collect, $limit=0) {
-      //  if($_SERVER['REMOTE_ADDR'] == '107.185.171.17') {
-          //echo $date . '------' . $day. '|||';
-      //  }
+    private function getRecurringDays($date, $exc, $day, $end, $collect, $limit=0) { 
       if(empty($date)) return false;
       if($this->limit > 5) return false;
       $checkDate = '';

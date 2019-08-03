@@ -33,7 +33,7 @@ get_header();
           get_template_part( 'template-parts/content/content', 'faq' );
         } elseif(is_page('locations')) {
           get_template_part( 'template-parts/content/content', 'locations' );
-        } elseif(is_page('news')) {
+        } elseif(is_page('latest-news')) {
           get_template_part( 'template-parts/content/content', 'news' );
         } else {
           get_template_part( 'template-parts/content/content' );
