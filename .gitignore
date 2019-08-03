@@ -7,3 +7,7 @@
 /wp-content/themes/twobitcircus/node_modules
 /wp-content/uploads/wp-migrate-db
 /wp-content/uploads
+/wp-content/plugins/centeredge-booking-new/inc/complex_processing.txt
+/wp-content/plugins/centeredge-booking-new/inc/complex_out.txt
+/wp-content/aiowps_backups/backup.wp-config.php
+/wp-content/aiowps_backups/.htaccess.backup
