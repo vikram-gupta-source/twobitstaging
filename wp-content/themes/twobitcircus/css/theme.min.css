@@ -15509,6 +15509,9 @@ a {
   #hero-block .carousel-inner .btn {
     float: none !important; } }
 
+[role="button"] {
+  cursor: pointer; }
+
 .mb-5 {
   margin-bottom: 5em; }
 
