@@ -15509,9 +15509,6 @@ a {
   #hero-block .carousel-inner .btn {
     float: none !important; } }
 
-[role="button"] {
-  cursor: pointer; }
-
 .mb-5 {
   margin-bottom: 5em; }
 
@@ -16400,6 +16397,9 @@ article.page.type-page {
 #food-drink #banner-block .content-block {
   padding: 0 3em; }
 
+#faq #faq-accordion .card-header h5 {
+  cursor: pointer; }
+
 @media (max-width: 767px) {
   #locations #findus-block .container {
     max-width: 100%; } }
@@ -16413,6 +16413,9 @@ article.page.type-page {
     padding: 2em;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.4); }
+
+#locations #venue-block .card-header h5 {
+  cursor: pointer; }
 
 #attractions #filters {
   background-color: #e1e1e1; }
