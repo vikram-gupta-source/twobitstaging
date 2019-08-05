@@ -22,12 +22,12 @@
       <?php foreach($faqs as $fkey => $faq) :?>
 
       <div class="card">
-        <div class="card-header" id="heading--<?php the_ID(); ?>">
-          <h5 class="mb-0 clearfix collapse-title collapsed" data-toggle="collapse" data-target="#collapse-<?php the_ID(); ?>" aria-expanded="true" aria-controls="collapse-<?php echo $fkey; ?>">
+        <div class="card-header" id="heading-<?php echo $fkey; ?>">
+          <h5 class="mb-0 clearfix collapse-title collapsed" data-toggle="collapse" data-target="#collapse-<?php echo $fkey; ?>" aria-expanded="true" aria-controls="collapse-<?php echo $fkey; ?>">
               <?php the_title(); ?>
               <i class="fa fa-angle-down"></i>
           </h5>
-        </div> 
+        </div>
         <div id="collapse-<?php echo $fkey; ?>" class="collapse" aria-labelledby="heading-<?php echo $fkey; ?>" data-parent="#faq-accordion">
           <div class="card-body">
             <?php echo $faq['answer']; ?>

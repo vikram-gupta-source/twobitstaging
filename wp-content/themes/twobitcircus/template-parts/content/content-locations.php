@@ -67,7 +67,7 @@
       <?php foreach($venues as $vkey => $venue) :?>
 
         <div class="card">
-          <div class="card-header" id="heading--<?php echo $vkey; ?>" role="button">
+          <div class="card-header" id="heading-<?php echo $vkey; ?>" role="button">
             <h5 class="mb-0 clearfix collapse-title collapsed" data-toggle="collapse" data-target="#collapse-<?php echo $vkey; ?>" aria-expanded="true" aria-controls="collapse-<?php echo $vkey; ?>">
                 <i class="<?php echo $venue['icon']; ?>"></i> <?php echo $venue['title']; ?>
                 <i class="fa fa-angle-down"></i>
