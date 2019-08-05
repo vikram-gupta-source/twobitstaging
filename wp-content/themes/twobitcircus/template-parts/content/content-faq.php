@@ -22,7 +22,7 @@
       <?php foreach($faqs as $fkey => $faq) :?>
 
       <div class="card">
-        <div class="card-header" id="heading-<?php echo $fkey; ?>">
+        <div class="card-header" id="heading-<?php echo $fkey; ?>" role="tab">
           <h5 class="mb-0 clearfix collapse-title collapsed" data-toggle="collapse" data-target="#collapse-<?php echo $fkey; ?>" aria-expanded="true" aria-controls="collapse-<?php echo $fkey; ?>">
               <?php the_title(); ?>
               <i class="fa fa-angle-down"></i>
