@@ -25,6 +25,8 @@ if ( ! class_exists( 'SocialAdmin' ) ) {
       if ( is_admin() ){ // admin actions
         add_action('admin_menu', [$this, $this->prefix . 'add_admin_page']);
         add_action('admin_init', [$this, $this->prefix . 'add_custom_settings']);
+        // Create a handler for the AJAX toolbar requests.
+        add_action( 'wp_ajax_feed_delete_cache', array('SocialAdmin', 'delete_cache' ) );
       }
     }
 
@@ -77,7 +79,14 @@ if ( ! class_exists( 'SocialAdmin' ) ) {
       $insta_api_options = get_option($this->prefix . 'insta_api_keys');
       $yt_api_options = get_option($this->prefix . 'yt_api_keys');
       ?>
+      <p><b>Wipe All Feeds <a id="wipe-feed-cache" href="/wp-admin/options-general.php?page=feeds">Clear Feed</a></b></p>
+      <div id="wipe-message"></div>
+      <hr>
       <div class="form-wrap" style="max-width: 500px;">
+        <div class="form-field">
+          <label style="display:inline" for="<?php echo $this->prefix; ?>fb_api_keys[enable]">Enable Facebook </label>
+          <input name="<?php echo $this->prefix; ?>fb_api_keys[enable]" type="checkbox" <?php echo (isset($fb_api_options['enable']) && $fb_api_options['enable']) ? 'checked' : ''; ?> />
+        </div>
         <div class="form-field">
           <label for="<?php echo $this->prefix; ?>fb_api_keys[appid]">Facebook APP ID</label>
           <input name="<?php echo $this->prefix; ?>fb_api_keys[appid]" type="text" value="<?php echo $fb_api_options['appid']; ?>" />
@@ -105,6 +114,10 @@ if ( ! class_exists( 'SocialAdmin' ) ) {
       <h2>Twitter API Settings</h2>
       <div class="form-wrap" style="max-width: 500px;">
         <div class="form-field">
+          <label style="display:inline" for="<?php echo $this->prefix; ?>tw_api_keys[enable]">Enable Twitter </label>
+          <input name="<?php echo $this->prefix; ?>tw_api_keys[enable]" type="checkbox" <?php echo (isset($tw_api_options['enable']) && $tw_api_options['enable']) ? 'checked' : ''; ?> />
+        </div>
+        <div class="form-field">
           <label for="<?php echo $this->prefix; ?>tw_api_keys[appid]">Twitter APP ID</label>
           <input name="<?php echo $this->prefix; ?>tw_api_keys[appid]" type="text" value="<?php echo $tw_api_options['appid']; ?>" />
         </div>
@@ -129,6 +142,10 @@ if ( ! class_exists( 'SocialAdmin' ) ) {
       <h2>Instagram API Settings</h2>
       <div class="form-wrap" style="max-width: 500px;">
         <div class="form-field">
+          <label style="display:inline" for="<?php echo $this->prefix; ?>insta_api_keys[enable]">Enable Instagram </label>
+          <input name="<?php echo $this->prefix; ?>insta_api_keys[enable]" type="checkbox" <?php echo (isset($insta_api_options['enable']) && $insta_api_options['enable']) ? 'checked' : ''; ?> />
+        </div>
+        <div class="form-field">
           <label for="<?php echo $this->prefix; ?>insta_api_keys[appid]">Instagram APP ID</label>
           <input name="<?php echo $this->prefix; ?>insta_api_keys[appid]" type="text" value="<?php echo $insta_api_options['appid']; ?>" />
         </div>
@@ -145,6 +162,10 @@ if ( ! class_exists( 'SocialAdmin' ) ) {
       <br><hr>
       <h2>Youtube API Settings</h2>
       <div class="form-wrap" style="max-width: 500px;">
+        <div class="form-field">
+          <label style="display:inline" for="<?php echo $this->prefix; ?>yt_api_keys[enable]">Enable Youtube </label>
+          <input name="<?php echo $this->prefix; ?>yt_api_keys[enable]" type="checkbox" <?php echo (isset($yt_api_options['enable']) && $yt_api_options['enable']) ? 'checked' : ''; ?> />
+        </div>
         <div class="form-field">
           <label for="<?php echo $this->prefix; ?>yt_api_keys[appid]">Youtube APP ID</label>
           <input name="<?php echo $this->prefix; ?>yt_api_keys[appid]" type="text" value="<?php echo $yt_api_options['appid']; ?>" />
@@ -174,6 +195,15 @@ if ( ! class_exists( 'SocialAdmin' ) ) {
         </form>
       </div>
       <?php
+    }
+    public function delete_cache(){
+      global $wpdb;
+      if ( current_user_can( 'manage_options' ) ) {
+        $table_name = $wpdb->prefix . 'social_feeds';
+        $querystr = 'TRUNCATE TABLE ' . $table_name;
+        $wpdb->query($querystr);
+      }
+      die();
     }
 
   }

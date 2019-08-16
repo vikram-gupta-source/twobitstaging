@@ -315,3 +315,14 @@ $adminLogo: "/wp-content/uploads/2019/05/animated-logo.gif";
     background-color: #fafafa;
   }
 }
+#wipe-message,
+#get-instagram-message {
+  display: none;
+  &.show {
+    padding: 5px 15px;
+    background-color: #a7eca7;
+    display: inline-block;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+}

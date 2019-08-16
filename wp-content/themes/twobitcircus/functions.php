@@ -25,7 +25,8 @@ foreach ( $wp_includes as $file ) {
 		trigger_error( sprintf( 'Error locating /inc%s for inclusion', $file ), E_USER_ERROR );
 	}
 	require_once $filepath;
-} 
+}
+ 
 function composeShows() {
   $shows = [];
   $args = array(

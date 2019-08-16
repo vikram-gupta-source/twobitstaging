@@ -36,53 +36,61 @@ if ( ! class_exists( 'SocialFeed' ) ) {
         $tw_expire = get_option('twitter_feed_expire');
         $insta_expire = get_option('instagram_feed_expire');
         $yt_expire = get_option('youtube_feed_expire');
-        //Test FB Connection
-        if(empty($fb_expire) || (isset($fb_expire) && $fb_expire < time())) {
-            $fb_api_options = get_option('social_fb_api_keys');
-            if(!empty($fb_api_options['appid'])) {
-              $fb = new Facebook( $fb_api_options['appid'], $fb_api_options['secret'] );
-              $fb->fbid = $fb_api_options['sid'];
-              $fb->token = $fb_api_options['token'];
-              $fb->sid = $fb_api_options['name'];
-              $fb->redirect = get_site_url() . '/inc/vendors/Facebook/callback.php';
-              $fb->limit = 30;
-              $fbfeeds = $fb->load_facebook_api();
-              if(!empty($fbfeeds)) update_option('facebook_feed_expire', strtotime("+1 day"));
-            }
+        if(!empty(get_option('facebook_enabled'))) {
+          //Test FB Connection
+          if(empty($fb_expire) || (isset($fb_expire) && $fb_expire < time())) {
+              $fb_api_options = get_option('social_fb_api_keys');
+              if(!empty($fb_api_options['appid'])) {
+                $fb = new Facebook( $fb_api_options['appid'], $fb_api_options['secret'] );
+                $fb->fbid = $fb_api_options['sid'];
+                $fb->token = $fb_api_options['token'];
+                $fb->sid = $fb_api_options['name'];
+                $fb->redirect = get_site_url() . '/inc/vendors/Facebook/callback.php';
+                $fb->limit = 30;
+                $fbfeeds = $fb->load_facebook_api();
+                if(!empty($fbfeeds)) update_option('facebook_feed_expire', strtotime("+1 day"));
+              }
+          }
         }
-        //Test TW Connection
-        if(empty($tw_expire) || (isset($tw_expire) && $tw_expire < time())) {
-            $tw_api_options = get_option('social_tw_api_keys');
-            if(!empty($tw_api_options['appid'])) {
-              $tw = new Twitter($tw_api_options['appid'], $tw_api_options['secret'], $tw_api_options['token_access'], $tw_api_options['token_secret']);
-              $tw->limit = 30;
-              $tw->twid = $tw_api_options['name'];
-              $twfeed = $tw->load_twitter_feed();
-              if(!empty($twfeed)) update_option('twitter_feed_expire', strtotime("+1 day"));
-            }
+        if(!empty(get_option('twitter_enabled'))) {
+          //Test TW Connection
+          if(empty($tw_expire) || (isset($tw_expire) && $tw_expire < time())) {
+              $tw_api_options = get_option('social_tw_api_keys');
+              if(!empty($tw_api_options['appid'])) {
+                $tw = new Twitter($tw_api_options['appid'], $tw_api_options['secret'], $tw_api_options['token_access'], $tw_api_options['token_secret']);
+                $tw->limit = 30;
+                $tw->twid = $tw_api_options['name'];
+                $twfeed = $tw->load_twitter_feed();
+                if(!empty($twfeed)) update_option('twitter_feed_expire', strtotime("+1 day"));
+              }
+          }
         }
-        //Test Instagram Connection
-        if(empty($insta_expire) || (isset($insta_expire) && $insta_expire < time())) {
-            $insta_api_options = get_option('social_insta_api_keys');
-            if(!empty($insta_api_options['appid'])) {
-              $isg = new Instagrams();
-              $isg->limit = 30;
-              $isg->token = $insta_api_options['token'];
-              $isgfeed = $isg->load_instagram_feed();
-              if(!empty($isgfeed)) update_option('instagram_feed_expire', strtotime("+1 day"));
-            }
+        if(!empty(get_option('instagram_enabled'))) {
+          //Test Instagram Connection
+          if(empty($insta_expire) || (isset($insta_expire) && $insta_expire < time())) {
+              $insta_api_options = get_option('social_insta_api_keys');
+              if(!empty($insta_api_options['appid'])) {
+                $isg = new Instagrams();
+                $isg->limit = 30;
+                $isg->token = $insta_api_options['token'];
+                $isgfeed = $isg->load_instagram_feed();
+                if(!empty($isgfeed)) update_option('instagram_feed_expire', strtotime("+1 day"));
+              }
+          }
         }
-        //Test YT Connection
-        if(empty($yt_expire) || (isset($yt_expire) && $yt_expire < time())) {
-            $yt_api_options = get_option('social_yt_api_keys');
-            if(!empty($yt_api_options['appid'])) {
-              $yt = new Youtube($yt_api_options['appid']);
-              $yt->limit = 30;
-              $yt->ytid = $yt_api_options['sid'];
-              $yt->name = $yt_api_options['name'];
-              $ytfeed = $yt->load_youtube_playlist_api();
-              if(!empty($ytfeed)) update_option('youtube_feed_expire', strtotime("+1 day"));
-            }
+        if(!empty(get_option('youtube_enabled'))) {
+          //Test YT Connection
+          if(empty($yt_expire) || (isset($yt_expire) && $yt_expire < time())) {
+              $yt_api_options = get_option('social_yt_api_keys');
+              if(!empty($yt_api_options['appid'])) {
+                $yt = new Youtube($yt_api_options['appid']);
+                $yt->limit = 30;
+                $yt->ytid = $yt_api_options['sid'];
+                $yt->name = $yt_api_options['name'];
+                $ytfeed = $yt->load_youtube_playlist_api();
+                if(!empty($ytfeed)) update_option('youtube_feed_expire', strtotime("+1 day"));
+              }
+          }
         }
       }
     }
@@ -143,5 +151,12 @@ function social_feeds_create_db() {
 register_deactivation_hook( __FILE__, 'social_feeds_remove_database' );
 function social_feeds_remove_database() {
     global $wpdb;
-    $wpdb::delete( $table_name );
+    $table_name = $wpdb->prefix . 'social_feeds';
+    $sql = "DROP TABLE IF EXISTS $table_name";
+    $wpdb->query($sql);
+    $table_options = $wpdb->prefix . 'options';
+    $querystr = 'DELETE FROM ' . $table_options . ' WHERE `option_name` LIKE "%_feed_expire"';
+    $wpdb->query($querystr);
+    $querystr = 'DELETE FROM ' . $table_options . ' WHERE `option_name` LIKE "social_%_api_keys"';
+    $wpdb->query($querystr); 
 }

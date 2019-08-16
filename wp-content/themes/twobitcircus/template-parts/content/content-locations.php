@@ -102,4 +102,5 @@
   locations.push([parking<?php echo $pkey; ?>.info, parking<?php echo $pkey; ?>.lat, parking<?php echo $pkey; ?>.long, <?php echo ($pkey+1); ?>, parking<?php echo $pkey; ?>.icon]);
 <?php endforeach ?>
 </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuPfCUIN21wT-f6ovkmAiDJgbpudblFF4&callback=initMap"></script>
 <?php endif ?>

@@ -1,5 +1,5 @@
 // webpack.config.js
-// Requires NPM
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
@@ -51,6 +51,11 @@ module.exports = (env, argv) => {
     plugins: [
       new MiniCssExtractPlugin({
         filename: "../css/[name].min.css"
+      }),
+      new OptimizeCSSAssetsPlugin({
+        cssProcessorOptions: {
+          zindex: false
+        }
       })
     ],
     stats: {
