@@ -8,9 +8,8 @@
  $calendar = $cal->init();
  $_enddate = $cal->get_endDate();
  $_closed = $cal->get_closed();
- $sf = new SocialFeed();
- $social_feed = $sf->get_social_feeds();
- $social_cat = $sf->get_distinct_social();
+ $insta_feed = new InstagramFeed();
+ $social_feed = $insta_feed->get_instagram_feeds();
 ?>
 <article id="home" <?php post_class(); ?>>
 
@@ -105,29 +104,7 @@
       <div class="inview animated delay-2">
       <?php if(!empty($social_feed)):?>
 
-        <?php if(!empty($social_cat)):?>
-        <div class="grid-social slick-feeds">
-
-          <?php foreach($social_cat as $cat): ?>
-          <div class="social-item <?php echo $cat->type;?>">
-            <div class="header text-uppercase">
-              <?php
-                  if($cat->type == 'facebook')
-                      $title = '<i class="fa fa-facebook mr-2"></i> <span>Facebook</span>';
-                  elseif($cat->type == 'twitter')
-                      $title = '<i class="fa fa-twitter mr-2"></i> <span>Twitter</span>';
-                  elseif($cat->type == 'youtube')
-                      $title = '<i class="fa fa-youtube mr-2"></i> <span>Youtube</span>';
-                  elseif($cat->type == 'instagram')
-                      $title = '<i class="fa fa-instagram mr-2"></i> <span>Instagram</span>';
-                  else $title = '';
-                  echo $title;
-              ?>
-            </div>
-
-
-
-            <div class="slick slick-social">
+        <div class="slick slick-social">
               <?php foreach($social_feed[$cat->type] as $feed): ?>
               <div class="grid-feed">
                 <?php
@@ -196,13 +173,6 @@
               </div>
               <?php endforeach ?>
             </div>
-
-          </div>
-
-          <?php endforeach ?>
-
-        </div>
-        <?php endif ?>
 
       <?php endif ?>
       </div>
