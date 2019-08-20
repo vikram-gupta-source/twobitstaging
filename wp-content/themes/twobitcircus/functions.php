@@ -26,7 +26,7 @@ foreach ( $wp_includes as $file ) {
 	}
 	require_once $filepath;
 }
- 
+
 function composeShows() {
   $shows = [];
   $args = array(
@@ -39,8 +39,9 @@ function composeShows() {
   if(!empty($posts)) {
     foreach($posts as $post) {
       $term = get_the_category($post->ID);
-      $catSlug = (!empty($term[0])) ? $term[0]->slug : '';
-      $shows[$catSlug][] = $post;
+      $terms = $term[0];
+      $shows[$term[0]->slug]['posts'][] = $post;
+      $shows[$term[0]->slug]['terms'] = $terms;
     }
   }
   return $shows;

@@ -36,20 +36,3 @@
     }
   }
 }
-#event-form {
-  position: fixed;
-  top: 0px;
-  bottom: 0px;
-  width: 60vw;
-  min-width: 300px;
-  z-index: 3000;
-  left: -60vw;
-  transition: all 0.6s ease;
-  background-color: rgba(0, 0, 0, 0.8);
-  &.active {
-    left: 0;
-  }
-  .event-form-wrapper {
-    padding: 15px;
-  }
-}

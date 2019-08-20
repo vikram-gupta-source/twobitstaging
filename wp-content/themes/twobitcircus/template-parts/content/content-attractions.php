@@ -4,7 +4,6 @@
  *
  * @package twobitcircus
  */
- $categories = get_categories();
  $attractions = composeShows();
 ?>
 <article id="attractions" <?php post_class(); ?>>
@@ -16,22 +15,48 @@
     <div class="inview animated w-50 mx-auto delay-1"><?php the_content(); ?></div>
   </div>
   <?php endif ?>
-  <?php if(!empty($categories)):?>
+
   <div id="filters" class="inview animated mx-auto delay-1">
     <div class="container">
-      <div class="slick-filter" role="tablist">
-        <?php foreach($categories as $category) : ?>
-          <div class="nav-item text-center" data-toggle="tooltip" data-placement="bottom" title="<?php echo $category->category_description;?>">
-            <a class="nav-link" href="#<?php echo $category->slug;?>" aria-controls="<?php echo $category->slug;?>"><i class="<?php echo @get_term_meta($category->term_id, 'category_icon', true) ;?>" aria-hidden="true"></i> <?php echo $category->name;?></a>
-          </div>
-        <?php endforeach ?>
-      </div>
+      <nav id="subnav" class="navbar navbar-expand-sm" role="navigation">
+        <ul class="navbar-nav mx-auto">
+          <?php foreach($attractions as $cat => $shows) : ?>
+            <?php $hasDrop = (count($shows['posts']) > 1) ? true : false; ?>
+
+            <li class="nav-item text-center nav-parent" data-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>">
+              <?php if($hasDrop) :?>
+              <a class="nav-link link-parent dropdown-toggle" href="#" aria-controls="<?php echo $shows['terms']->slug;?>" id="navbarDropdown-<?php echo $shows['terms']->slug;?>" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="<?php echo @get_term_meta($shows['terms']->term_id, 'category_icon', true) ;?>"></i>
+                <?php echo $shows['terms']->name;?>
+              </a>
+              <?php else: ?>
+              <a class="nav-link link-parent" href="#" aria-controls="<?php echo $shows['terms']->slug;?>">
+                <i class="<?php echo @get_term_meta($shows['terms']->term_id, 'category_icon', true) ;?>"></i>
+                <?php echo $shows['terms']->name;?>
+              </a>
+              <?php endif ?>
+              <?php if($hasDrop) :?>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown-<?php echo $shows['terms']->slug;?>">
+                <div class="navbar navbar-expand-sm">
+                  <ul class="navbar-nav mx-auto">
+                    <?php foreach($shows['posts'] as $skey => $show) :?>
+                    <li class="nav-item"><a class="nav-link" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a></li>
+                    <?php endforeach ?>
+                  </ul>
+                </div>
+              </div>
+              <?php endif ?>
+            </li>
+
+          <?php endforeach ?>
+        </ul>
+      </nav>
     </div>
   </div>
-  <?php endif ?>
+
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d40d77186a2f4a8"></script>
-  <section id="attractions-block" class="entry-wrapper-padding inview animated delay-1">
+  <section id="attractions-block" class="entry-wrapper-padding inview animated mt-4 delay-1">
     <div class="container">
       <?php if(!empty($attractions)) :?>
         <div class="attractions-slick">
@@ -39,13 +64,13 @@
           <div class="item-attraction">
 
             <div class="slick-shows" id="<?php echo $cat;?>">
-              <?php $num = count($shows); ?>
-              <?php foreach($shows as $skey => $show) :?>
+              <?php $num = count($shows['posts']); ?>
+              <?php foreach($shows['posts'] as $skey => $show) :?>
                 <?php if(!filter_location_by_field(get_field('available_in', $show->ID))) continue; ?>
                 <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
                 <?php $info = filter_locations(get_field('information', $show->ID));?>
                 <?php $_cat = get_the_category($show->ID);?>
-                <div class="item-shows">
+                <div id="<?php echo sanitize_title($show->post_title);?>" class="item-shows">
 
                   <div class="row">
                     <div class="assets-wrapper col-md-7 mb-4">

@@ -20,7 +20,7 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
     public function __construct() {
       $this->name = 'instagram';
       $this->prefix = 'instagram_';
-      $this->title = 'Instagram Feed API';
+      $this->title = 'Instagram Feed';
       $this->slug = str_replace('_', '-', $this->name);
       if ( is_admin() ){ // admin actions
         add_action('admin_menu', [$this, $this->prefix . 'add_admin_page']);
@@ -31,12 +31,14 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
     }
 
     public function instagram_add_admin_page() {
-      add_options_page(
+      add_menu_page(
         __( $this->title, 'textdomain' ),
         __( $this->title, 'textdomain' ),
         'manage_options',
         $this->slug,
-        [$this, $this->prefix . 'render_settings_page']
+        [$this, $this->prefix . 'render_settings_page'],
+        'dashicons-instagram',
+        50
       );
     }
 
@@ -60,24 +62,15 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
     public function instagram_api_settings_callback() {
       $insta_api_options = get_option($this->prefix . 'insta_api_keys');
       ?>
-      <p><b>Wipe All Instagram Feeds <a id="wipe-feed-cache" href="/wp-admin/options-general.php?page=instagram">Clear Feed</a></b></p>
+      <p><input type="button" name="wipe-feed-cache" id="wipe-feed-cache" class="button button-primary" value="Clear Instagram Cache">
+      <a href="/wp-admin/admin.php?page=instagram&action=populate"><input type="button" name="get-instagram" id="get-instagram" class="button button-primary" value="Get Latest Instagram"></a></p>
       <div id="wipe-message"></div>
-      <p><input type="button" name="get-instagram" id="get-instagram" class="button button-primary" value="Get Latest Instagram Posts"></p>
-      <div id="get-instagram-message"></div> 
       <hr>
       <h2>Instagram API Settings</h2>
       <div class="form-wrap" style="max-width: 500px;">
         <div class="form-field">
           <label style="display:inline" for="<?php echo $this->prefix; ?>insta_api_keys[enable]">Enable Instagram </label>
           <input name="<?php echo $this->prefix; ?>insta_api_keys[enable]" type="checkbox" <?php echo (isset($insta_api_options['enable']) && $insta_api_options['enable']) ? 'checked' : ''; ?> />
-        </div>
-        <div class="form-field">
-          <label for="<?php echo $this->prefix; ?>insta_api_keys[appid]">Instagram APP ID</label>
-          <input name="<?php echo $this->prefix; ?>insta_api_keys[appid]" type="text" value="<?php echo $insta_api_options['appid']; ?>" />
-        </div>
-        <div class="form-field">
-          <label for="<?php echo $this->prefix; ?>insta_api_keys[secret]">Instagram APP Secret</label>
-          <input name="<?php echo $this->prefix; ?>insta_api_keys[secret]" type="text" value="<?php echo $insta_api_options['secret']; ?>" />
         </div>
         <div class="form-field">
           <label for="<?php echo $this->prefix; ?>insta_api_keys[hash]">Instagram Hash Tag</label>
@@ -87,13 +80,8 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
           <label for="<?php echo $this->prefix; ?>insta_api_keys[limit]">Instagram Limit</label>
           <input name="<?php echo $this->prefix; ?>insta_api_keys[limit]" type="text" value="<?php echo $insta_api_options['limit']; ?>" />
         </div>
-        <div class="form-field">
-          <label for="<?php echo $this->prefix; ?>insta_api_keys[token]">Instagram Token</label>
-          <input name="<?php echo $this->prefix; ?>insta_api_keys[token]" type="text" value="<?php echo $insta_api_options['token']; ?>" />
-          <p>Token is required to pull data.  You can generate this token <a href="/wp-content/plugins/instagram-feeds/inc/vendors/instagram/callback.php" target="_blank">Get Token</a>.</p>
-        </div>
+        <input id="action-instagram" name="action_instagram" type="hidden" value="" />
       </div>
-      <br><hr>
       <?php
     }
 
@@ -107,6 +95,7 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
           submit_button('Save Instagram Settings', 'primary', 'submit');
           ?>
         </form>
+        <hr>
       </div>
       <?php
     }

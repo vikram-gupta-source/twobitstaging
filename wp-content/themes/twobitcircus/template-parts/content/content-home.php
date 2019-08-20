@@ -47,7 +47,7 @@
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d40d77186a2f4a8"></script>
   <section id="events-block" class="entry-wrapper-padding bkg-color">
-    <div class="container">
+    <div class="container-fluid">
       <?php if(!empty( get_field('events_title'))) :?>
       <h2 class="headline text-uppercase text-center mb-5 inview animated"><?php echo get_field('events_title'); ?></h2>
       <?php endif ?>
@@ -98,73 +98,20 @@
   </section>
 
   <section id="social-block" class="entry-wrapper-padding">
-    <div class="container">
+    <div class="container-fluid">
       <h2 class="headline text-uppercase text-center mb-5 inview animated"><?php echo get_field('social_title'); ?></h2>
       <h4 class="text-center text-uppercase inview animated delay-1" data-ease="fadeInDown">Follow what we're up to</h4>
-      <div class="inview animated delay-2">
+      <div class="inview animated delay-2 mt-4">
       <?php if(!empty($social_feed)):?>
 
-        <div class="slick slick-social">
-              <?php foreach($social_feed[$cat->type] as $feed): ?>
+        <div class="slick slick-social social-item">
+              <?php foreach($social_feed as $feed): ?>
               <div class="grid-feed">
-                <?php
-                    if($feed->type == 'facebook')
-                        $likes = $feed->count. ' <i class="fa fa-thumbs-up"></i><span>Likes</span>  Views <i class="fa fa-comment"></i> <span>Comments</span>';
-                    elseif($feed->type == 'twitter')
-                        $likes = $feed->count. ' <i class="fa fa-retweet"></i><span>Retweet</span>  Views <i class="fa fa-heart"></i><span>Favorited</span>';
-                    elseif($feed->type == 'youtube')
-                        $likes = $feed->count. ' <i class="fa fa-eye"></i> &nbsp; Views <i class="fa fa-thumbs-up"></i> <span>Likes</span>';
-                    elseif($feed->type == 'instagram')
-                        $likes = $feed->count. ' <i class="fa fa-thumbs-up"></i> <span>Likes</span>  Views <i class="fa fa-heart"></i><span>Favorited</span>';
-                    else $likes = '';
-                ?>
                 <div class="overlay-content">
-                  <?php if(!empty($feed->user)):?>
-                  <h2 class="profile">
-                    <div class="user">
-                        <?php if($feed->link) :?><a href="<?php echo $feed->link;?>"  target="_blank"><?php endif ?>
-                        <?php echo $feed->user;?><?php if($feed->link) :?></a><?php endif ?>
-                        <div class="date"><?php echo human_time_diff($feed->pubdate, current_time('timestamp'));?></div>
-                    </div>
-                  </h2>
-                  <?php endif ?>
-                  <?php if($feed->type=='youtube'):?>
-                  <div class="video-wrapper">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <div class="embed-data" data-src="//www.youtube.com/embed/<?php echo str_replace('https://www.youtube.com/watch?v=', '', $feed->link);?>"></div>
-                    </div>
-                  </div>
-                  <?php elseif(!empty($feed->image)):?>
-                  <div class="set"><img class="img-fluid w-100" src="<?php echo $feed->image;?>"/></div>
-                  <?php else:?>
-                  <div class="set empty"></div>
-                  <?php endif ?>
-                  <?php if($feed->type != 'youtube'):?>
-                  <div class="content">
-                    <?php if(!empty($feed->title)):?>
-                    <?php if($feed->link) :?><a class="title" href="<?php echo $feed->link;?>" target="_blank"><?php endif ?>
-                    <?php echo $feed->title;?><?php if($feed->link) :?></a><?php endif ?>
-                    <?php elseif(!empty($feed->text)):?>
-                    <p class="text <?php echo @$feed->image;?>">
-                    <?php if(!empty($feed->image)):?>
-                    <?php if($feed->link) :?><a href="<?php echo $feed->link;?>" target="_blank"><?php endif ?>
-                    <?php echo wp_trim_words($feed->text, 28);?><?php if($feed->link) :?></a><?php endif ?>
-                    <?php else: ?>
-                    <?php if($feed->link) :?><a href="<?php echo $feed->link;?>" target="_blank"><?php endif ?>
-                    <?php echo wp_trim_words($feed->text, 60);?><?php if($feed->link) :?></a><?php endif ?>
-                    <?php endif ?>
-                    </p>
-                    <?php endif ?>
-                  </div>
-                  <?php elseif($feed->type == 'youtube'):?>
-                  <div class="content">
-                    <?php if(!empty($feed->title)):?>
-                    <?php if($feed->link) :?><a class="title" href="<?php echo $feed->link;?>" target="_blank"><?php endif ?>
-                    <?php echo $feed->title;?>
-                    <?php if($feed->link) :?></a><?php endif ?>
-                  </div>
-                  <?php endif ?>
-                  <?php endif ?>
+                  <img class="img-fluid w-100" src="<?php echo $feed->image;?>"/>
+                  <?php
+                    $likes = $feed->count. ' <i class="fa fa-thumbs-up"></i> <span>Likes</span>  Views <i class="fa fa-heart"></i><span>Favorited</span>';
+                  ?>
                   <?php if(!empty($likes)):?>
                   <div class="likes"><?php echo $likes;?></div>
                   <?php endif ?>

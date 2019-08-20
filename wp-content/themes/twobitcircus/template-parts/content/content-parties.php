@@ -37,7 +37,7 @@
             <p><?php echo $shows['event_summary'];?></p>
             <?php endif ?>
             <div class="link-wrapper">
-              <a href="#" class="btn btn-twobit"><?php _e( 'Book Now', 'twobitcircus' )?></a>
+              <a href="#" class="btn btn-twobit" data-toggle="modal" data-target="#event-form"><?php _e( 'Book Now', 'twobitcircus' )?></a>
             </div>
           </div>
         </div>
@@ -46,15 +46,23 @@
     </div>
     <?php endif ?>
   </section>
-  <div id="hidden-block"></div>
-  <div id="event-form">
-    <div class="event-form-wrapper">
-      <button type="button" class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <?php echo do_shortcode('[contact-form-7 id="431" title="Parties & Events"]');?>
+
+  <div class="modal fade" id="event-form" tabindex="-1" role="dialog" aria-labelledby="event-form" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <?php echo do_shortcode('[contact-form-7 id="431" title="Parties & Events"]');?>
+        </div>
+      </div>
     </div>
-	</div>
+  </div>
+
   <?php if(!empty(get_field('footer_block'))) :?>
   <?php $footer = filter_locations(get_field('footer_block'));?>
   <?php foreach($footer as $banner) : ?>

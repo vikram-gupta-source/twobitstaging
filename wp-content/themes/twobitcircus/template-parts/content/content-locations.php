@@ -50,16 +50,8 @@
     </div>
   </section>
 
-  <section id="newsletter-block" class="entry-wrapper-padding bkg-color">
-    <div class="container">
-      <div class="inview animated">
-      <?php echo get_field('newsletter_block', 'option');?>
-      </div>
-    </div>
-  </section>
-
   <?php if(get_field('venue_details')) :?>
-  <section id="venue-block" class="entry-wrapper-padding">
+  <section id="venue-block" class="entry-wrapper-padding bkg-color">
     <div class="container">
       <h2 class="headline inview animated text-center"><?php echo get_field('venue_title'); ?></h2>
       <div class="venue-wrapper accordion-wrapper inview animated delay-1 clearfix">
@@ -85,6 +77,15 @@
     </div>
   </section>
   <?php endif?>
+
+  <section id="newsletter-block" class="entry-wrapper-padding">
+    <div class="container">
+      <div class="inview animated">
+      <?php echo get_field('newsletter_block', 'option');?>
+      </div>
+    </div>
+  </section>
+  
 </article>
 <?php if(isset($location)) : ?>
 <script>

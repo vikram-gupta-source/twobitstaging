@@ -145,10 +145,18 @@ $(function() {
     infinite: false,
     speed: 600,
     arrows: true,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: 4,
+    slidesToScroll: 4,
     adaptiveHeight: true,
     responsive: [
+      {
+        breakpoint: 1199,
+        settings: {
+          dots: false,
+          slidesToShow: 3,
+          slidesToScroll: 3
+        }
+      },
       {
         breakpoint: 991,
         settings: {
@@ -251,9 +259,40 @@ $(function() {
     ]
   };
   var slick_social_settings = {
-    infinite: false,
-    slidesToShow: 1,
-    slidesToScroll: 1
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    dots: true,
+    responsive: [
+      {
+        breakpoint: 1199,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4
+        }
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 580,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   };
   var slick_days_settings = {
     infinite: true,
@@ -318,36 +357,34 @@ $(function() {
     if ($(".slick-calendar").length) {
       $(".slick-calendar").slick(slick_calendar_settings);
     }
-    if ($(".slick-feeds").length) {
-      $(".slick-feeds").slick(slick_feed_settings);
-      if ($(".slick-social").length) {
-        $(".slick-social")
-          .slick(slick_social_settings)
-          .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
-            var srcid = $(slick.$slides.get(nextSlide))
+    if ($(".slick-social").length) {
+      $(".slick-social")
+        .slick(slick_social_settings)
+        .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
+          var srcid = $(slick.$slides.get(nextSlide))
+            .find(".embed-data")
+            .data("src");
+          if (srcid) {
+            $(slick.$slides.get(nextSlide))
               .find(".embed-data")
-              .data("src");
-            if (srcid) {
-              $(slick.$slides.get(nextSlide))
-                .find(".embed-data")
-                .append(
-                  '<iframe class="embed-responsive-item" src="' +
-                    srcid +
-                    '"></iframe>'
-                );
-            }
-          });
-        var firstEmbed = $(".youtube .grid-feed:first .embed-data").data("src");
-        $(".youtube .grid-feed:first .embed-data").append(
-          '<iframe class="embed-responsive-item" src="' +
-            firstEmbed +
-            '"></iframe>'
-        );
-      }
+              .append(
+                '<iframe class="embed-responsive-item" src="' +
+                  srcid +
+                  '"></iframe>'
+              );
+          }
+        });
+      var firstEmbed = $(".youtube .grid-feed:first .embed-data").data("src");
+      $(".youtube .grid-feed:first .embed-data").append(
+        '<iframe class="embed-responsive-item" src="' +
+          firstEmbed +
+          '"></iframe>'
+      );
     }
 
     // Handle all Attraction Events
     if ($("#attractions-block").length) {
+      var allowStart = false;
       $('[data-toggle="tooltip"]').tooltip({html: true});
       $(".attractions-slick").slick(slick_attractions_settings);
       $(".slick-shows")
@@ -370,12 +407,43 @@ $(function() {
           $(".available-dates > .btn-twobit").removeClass("show");
         });
       // Append to Filter show
-      $("#filters a.nav-link").on("click", function(e) {
-        e.preventDefault();
+      $("#filters .dropdown-menu .nav-link").on("click", function(e) {
+        $('[data-toggle="tooltip"]').tooltip("hide");
+        $(this)
+          .parents(".dropdown-menu")
+          .addClass("always-show");
+        $(this)
+          .parents(".dropdown-menu")
+          .parent()
+          .find(".dropdown-toggle")
+          .addClass("always-show");
+        if (!$(this).hasClass("active")) {
+          $("#filters .dropdown-menu .nav-link").removeClass("active");
+          $(this).addClass("active");
+          let slug = $(this).attr("aria-controls");
+          if ($("#" + slug).length) {
+            let index = $("#" + slug)
+              .parents(".slick-slide")
+              .data("slick-index");
+            $(".slick-shows").slick("slickGoTo", index);
+            $("#" + slug)
+              .find(".slick-slide:first-child")
+              .addClass(".slick-current .slick-active");
+          }
+        }
+      });
+      // Append to Filter show
+      $("#filters a.nav-link.link-parent").on("click", function(e) {
         $('[data-toggle="tooltip"]').tooltip("hide");
         if (!$(this).hasClass("active")) {
+          $("#filters .dropdown-toggle").removeClass("always-show");
+          $("#filters .dropdown-menu").removeClass("always-show");
           $("#filters a.nav-link").removeClass("active");
           $(this).addClass("active");
+          $(this)
+            .parent()
+            .find(".dropdown-menu .nav-item:first .nav-link")
+            .addClass("active");
           let slug = $(this).attr("aria-controls");
           if ($("#" + slug).length) {
             let index = $("#" + slug)
@@ -393,8 +461,12 @@ $(function() {
           }
         }
       });
-      $("#filters .slick-current a.nav-link").trigger("click");
-
+      $('[data-toggle="tooltip"]').tooltip("disable");
+      $("#filters .nav-parent:first .nav-link.link-parent").trigger("click");
+      setTimeout(function() {
+        $('[data-toggle="tooltip"]').tooltip("toggleEnabled");
+        $("#filters .nav-parent:first .nav-link.link-parent").trigger("click");
+      }, 200);
       //Extend Days slick
       $(".slick-days .slick-slide").on("click", function(evt) {
         var $_this = $(this);
@@ -406,7 +478,6 @@ $(function() {
             .find("> .slick-list > .slick-track")
             .outerHeight();
           let newHt = parseInt(ht + 40) + "px";
-          console.log(newHt);
           $_this
             .parents(".slick-shows")
             .find("> .slick-list")
@@ -501,8 +572,8 @@ $(function() {
         }
       });
     }
-    if ($("#promo-block").length) {
-      $("#promo-block .grid-item .event-link").on("click", function(evt) {
+    if ($("#parties-block").length || $("#promo-block").length) {
+      $(".grid-item .event-link").on("click", function(evt) {
         evt.preventDefault();
         let $parent = $(this).parents(".grid-item");
         if (!$parent.find(".card-title").hasClass("collapsed")) {
@@ -514,21 +585,7 @@ $(function() {
         }
         $iso.arrange();
       });
-    }
-    if ($("#parties-block").length) {
-      $("#parties-block .grid-item .event-link").on("click", function(evt) {
-        evt.preventDefault();
-        let $parent = $(this).parents(".grid-item");
-        if (!$parent.find(".card-title").hasClass("collapsed")) {
-          $parent.find(".card-title").addClass("collapsed");
-          $parent.find(".card-body").addClass("show");
-        } else {
-          $parent.find(".card-title").removeClass("collapsed");
-          $parent.find(".card-body").removeClass("show");
-        }
-        $iso.arrange();
-      });
-      $("#parties-block .link-wrapper .btn").on("click", function(evt) {
+      $(".link-wrapper .btn").on("click", function(evt) {
         evt.preventDefault();
         let _event = $(this)
           .parents(".grid-item")
@@ -536,14 +593,14 @@ $(function() {
         let $select = $("#event-form select[name='inquiry']");
         $('option[value="' + _event + '"]', $select).prop("selected", true);
         $select.trigger("click");
-        $("#event-form").addClass("active");
-        $("#hidden-block").modal("show");
-      });
-      $("#hidden-block").on("shown.bs.modal", function(e) {
-        $(".modal-backdrop.show, #event-form .close").on("click", function() {
-          $("#event-form").removeClass("active");
-          $("#hidden-block").modal("hide");
-        });
+        let title = $(this)
+          .parents(".grid-item.card")
+          .find(".card-title")
+          .text();
+        $("#event-form")
+          .find(".modal-title")
+          .text(title);
+        $("#event-form").modal("toggle");
       });
     }
     if ($(".more-calendar-block").length) {

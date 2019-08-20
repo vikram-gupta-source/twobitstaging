@@ -49,72 +49,20 @@
     }
   }
   #social-block {
-    .grid-social {
-      margin: 25px auto 3em;
-    }
-    .slick-dots {
-      position: relative;
-      bottom: -25px;
-    }
-    .slick-slide {
-      margin: 0 5px;
-    }
     .social-item {
-      width: 354px;
-      height: 434px;
-      background-color: #fff;
-      color: $dark;
-      border: 1px solid $theme-color;
-      .header {
-        padding: 12px 15px;
-        text-align: left;
-        background-color: $theme-color3;
-        height: 47px;
-      }
       .slick-slide {
-        margin: 0;
+        margin: 0 3px;
       }
       .grid-feed {
-        height: 385px;
+        background-color: #fff;
+        color: $dark;
+        border: 1px solid $theme-color;
+        margin: 0 3px;
         .overlay-content {
           position: relative;
           padding: 0;
-          height: 100%;
-          overflow: hidden;
           a {
             color: $dark;
-          }
-          .profile {
-            font-size: 13px;
-            padding: 6px 15px;
-            min-height: 50px;
-            margin: 0;
-            width: 100%;
-            background-color: $theme-color;
-            .profile-image {
-              display: inline-block;
-              margin-right: 10px;
-              max-width: 38px;
-              vertical-align: top;
-            }
-            .date {
-              font-size: 12px;
-            }
-            .user {
-              display: inline-block;
-              font-size: 20px;
-            }
-          }
-          .set {
-            height: 158px;
-            overflow: hidden;
-            &.empty {
-              height: 0;
-            }
-          }
-          .content {
-            padding: 15px;
-            height: 151px;
           }
           .likes {
             position: absolute;

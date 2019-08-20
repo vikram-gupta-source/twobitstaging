@@ -1,19 +1,61 @@
 // Attractions
+.tooltip-inner {
+  max-width: 280px;
+  width: 280px;
+}
 #attractions {
   #filters {
     background-color: $theme-color2;
+    position: relative;
+    z-index: 1;
     .container {
       @media (max-width: $break-large) {
         max-width: inherit;
       }
     }
-    .nav-link {
-      padding: 20px;
-      font-size: 1.2em;
-      background-color: $theme-color2;
-      &:hover,
-      &.active {
-        background-color: $theme-color;
+    .navbar {
+      padding: 0;
+      .nav-item {
+        .nav-link {
+          position: relative;
+          z-index: 2;
+          padding: 20px;
+          font-size: 1.2em;
+          background-color: $theme-color2;
+          &.dropdown-toggle.active + .dropdown-menu {
+            display: block !important;
+          }
+          &:hover,
+          &.active {
+            background-color: $theme-color;
+          }
+          &.active,
+          &.always-show {
+            background-color: $theme-color;
+          }
+          &:after {
+            content: none;
+          }
+        }
+        .dropdown-menu {
+          z-index: 1;
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          border-radius: 0;
+          background-color: $theme-color;
+          &.always-show {
+            display: block !important;
+          }
+          .nav-link {
+            padding: 20px;
+            background-color: $theme-color;
+            &:hover,
+            &.active {
+              background-color: $theme-color2;
+            }
+          }
+        }
       }
     }
   }
