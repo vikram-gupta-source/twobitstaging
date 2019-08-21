@@ -461,10 +461,8 @@ $(function() {
           }
         }
       });
-      $('[data-toggle="tooltip"]').tooltip("disable");
       $("#filters .nav-parent:first .nav-link.link-parent").trigger("click");
       setTimeout(function() {
-        $('[data-toggle="tooltip"]').tooltip("toggleEnabled");
         $("#filters .nav-parent:first .nav-link.link-parent").trigger("click");
       }, 200);
       //Extend Days slick

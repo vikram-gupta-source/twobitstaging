@@ -23,14 +23,14 @@
           <?php foreach($attractions as $cat => $shows) : ?>
             <?php $hasDrop = (count($shows['posts']) > 1) ? true : false; ?>
 
-            <li class="nav-item text-center nav-parent" data-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>">
+            <li class="nav-item text-center nav-parent">
               <?php if($hasDrop) :?>
-              <a class="nav-link link-parent dropdown-toggle" href="#" aria-controls="<?php echo $shows['terms']->slug;?>" id="navbarDropdown-<?php echo $shows['terms']->slug;?>" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link link-parent dropdown-toggle" href="#" aria-controls="<?php echo $shows['terms']->slug;?>" data-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" id="navbarDropdown-<?php echo $shows['terms']->slug;?>" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="<?php echo @get_term_meta($shows['terms']->term_id, 'category_icon', true) ;?>"></i>
                 <?php echo $shows['terms']->name;?>
               </a>
               <?php else: ?>
-              <a class="nav-link link-parent" href="#" aria-controls="<?php echo $shows['terms']->slug;?>">
+              <a class="nav-link link-parent" href="#" aria-controls="<?php echo $shows['terms']->slug;?>" data-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>">
                 <i class="<?php echo @get_term_meta($shows['terms']->term_id, 'category_icon', true) ;?>"></i>
                 <?php echo $shows['terms']->name;?>
               </a>

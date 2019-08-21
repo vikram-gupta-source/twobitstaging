@@ -263,8 +263,8 @@ function openClosed($days, $timezone) {
   $timestamp = time();
   foreach($days as $day) {
     if($dayofweek == $day['day']) {
-      echo $startTime = strtotime($day['open']);
-      echo $endTime = strtotime($day['close']);
+      $startTime = strtotime($day['open']);
+      $endTime = strtotime($day['close']);
       if(!empty($startTime) && ($startTime >= $endTime)) {
         $endTime = strtotime('+1 day' . $day['close']);
       } else {
@@ -282,4 +282,4 @@ function openClosed($days, $timezone) {
 // Format to Telephone
 function cleanPhone($phoneNumber) {
   return '+1' . preg_replace('/[^0-9]/','',$phoneNumber);
-} 
+}
