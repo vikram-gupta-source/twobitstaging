@@ -12,6 +12,8 @@ import {Calendar} from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
+import ScrollMagic from "scrollmagic/scrollmagic/minified/ScrollMagic.min.js";
+import addIndicators from "scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js";
 
 $(function() {
   //Wait for Preload Sprite before Starting
@@ -34,6 +36,8 @@ $(function() {
             handler: function(direction) {
               if (direction == "down" && !$(this.element).hasClass(easeType)) {
                 $(this.element).addClass(easeType);
+              } else {
+                // /  $(this.element).removeClass(easeType);
               }
             },
             offset: delay
@@ -706,4 +710,24 @@ $(function() {
       $("body").addClass("scroll-hidden");
     });
   });
+  if ($("#about").length) {
+    /*
+    var controller = new ScrollMagic.Controller();
+    new ScrollMagic.Scene({
+      triggerElement: "#red-layer"
+    })
+      .setClassToggle("#red-layer", "active")
+      .addTo(controller);
+    new ScrollMagic.Scene({
+      triggerElement: "#yellow-layer"
+    })
+      .setClassToggle("#yellow-layer", "active")
+      .addTo(controller);
+    new ScrollMagic.Scene({
+      triggerElement: "#green-layer"
+    })
+      .setClassToggle("#green-layer", "active")
+      .addTo(controller);
+      */
+  }
 });

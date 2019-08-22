@@ -19,6 +19,8 @@ get_header();
 				the_post();
         if(is_front_page()) {
           get_template_part( 'template-parts/content/content', 'home' );
+        } elseif(is_page('about')) {
+          get_template_part( 'template-parts/content/content', 'about' );
         } elseif(is_page('food-drink')) {
           get_template_part( 'template-parts/content/content', 'food' );
         } elseif(is_page('promotions')) {

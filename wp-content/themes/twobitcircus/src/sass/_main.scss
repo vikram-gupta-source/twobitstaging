@@ -278,6 +278,13 @@ article.page.type-page {
 .offset-left-md-6 {
   margin-right: 50%;
 }
+.bkg-img {
+  height: auto;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
 .carousel {
   .carousel-item {
     height: calc(100vh - 72px);
@@ -574,5 +581,25 @@ article.page.type-page {
   &.active {
     visibility: visible;
     opacity: 1;
+  }
+}
+@include keyframes(diagonal) {
+  0% {
+    opacity: 0;
+    @include transform(translatex(-50%) translatey(-30%));
+  }
+  100% {
+    opacity: 1;
+    @include transform(translatex(0) translatey(0));
+  }
+}
+@include keyframes(diagonal-right) {
+  0% {
+    opacity: 0;
+    @include transform(translatex(50%) translatey(30%));
+  }
+  100% {
+    opacity: 1;
+    @include transform(translatex(0) translatey(0));
   }
 }
