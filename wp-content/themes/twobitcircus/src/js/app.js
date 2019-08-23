@@ -321,13 +321,12 @@ $(function() {
     fade: true
   };
   var slick_media_nav_settings = {
-    infinite: true,
+    infinite: false,
     slidesToShow: 5,
     slidesToScroll: 1,
     arrows: false,
     asNavFor: ".slick-media",
     focusOnSelect: true,
-    centerMode: true,
     responsive: [{
         breakpoint: 1199,
         settings: {
@@ -347,8 +346,7 @@ $(function() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
-    asNavFor: ".slick-media-nav",
-    fade: true
+    asNavFor: ".slick-media-nav"
   };
 
   imagesLoaded("main", {
@@ -415,7 +413,7 @@ $(function() {
       $(".slick-times")
         .slick(slick_times_settings)
         .on("beforeChange", function(ev, slick, cur, next) {
-          $(".available-dates > .btn-twobit").removeClass("show");
+          $(".available-dates .cta-btn").removeClass("show");
         });
       // Append to Filter show
       $("#filters .dropdown-menu .nav-link").on("click", function(e) {
@@ -528,8 +526,8 @@ $(function() {
         let href = $(this).prop("href");
         $(this)
           .parents(".show-content-block")
-          .find(".available-dates > .btn-twobit")
-          .addClass("show")
+          .find(".available-dates .cta-btn")
+          .addClass("show").find('.btn-twobit')
           .prop("href", href);
       });
 

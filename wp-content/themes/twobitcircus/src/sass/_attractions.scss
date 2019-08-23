@@ -2,8 +2,37 @@
 .tooltip-inner {
   max-width: 280px;
   width: 280px;
+  padding: 15px 8px 5px;
 }
 #attractions {
+  #attractions-block {
+    background-image: url("/wp-content/themes/twobitcircus/img/attractions/attraction_bkg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+    .bkg-red-angle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 52%;
+      background-color: $red;
+      &:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        background: $red;
+        border-left: 4px solid $yellow;
+        transform-origin: top left;
+        @include transform(skewX(-20deg));
+      }
+    }
+  }
   #filters {
     background-color: $dark-red;
     position: relative;
@@ -20,18 +49,21 @@
           position: relative;
           z-index: 2;
           padding: 20px;
-          font-size: 1.2em;
-          background-color: $dark-red;
+          font-size: 1em;
+          color: $white;
+          text-transform: uppercase;
+          transition: all 0.5s ease;
           &.dropdown-toggle.active + .dropdown-menu {
             display: block !important;
           }
           &:hover,
           &.active {
-            background-color: $red;
+            background-color: $yellow;
+            color: $dark-red;
           }
-          &.active,
           &.always-show {
-            background-color: $red;
+            background-color: $yellow;
+            color: $dark-red;
           }
           &:after {
             content: none;
@@ -43,17 +75,13 @@
           padding: 0;
           width: 100%;
           border-radius: 0;
-          background-color: $red;
+          border: 0;
+          background-color: $black;
           &.always-show {
             display: block !important;
           }
           .nav-link {
             padding: 20px;
-            background-color: $red;
-            &:hover,
-            &.active {
-              background-color: $dark-red;
-            }
           }
         }
       }
@@ -61,17 +89,32 @@
   }
   .slick-shows {
     .show-content-block {
-      .btn-group {
-        .btn-twobit {
-          padding: 0;
-          height: 40px;
+      color: $white;
+      .title {
+        font-size: 3em;
+        color: $offwhite;
+        position: relative;
+        &:before {
+          position: absolute;
+          bottom: 0;
+          content: "";
+          height: 1px;
+          width: 100%;
+          background-color: $yellow;
+        }
+      }
+      h3 {
+        .cta-btn {
+          margin-top: -10px;
         }
       }
       .info-block {
         padding: 5px 15px;
-        background-color: $dark-red;
+        background-color: $green;
+        color: $white;
       }
       .available-dates {
+        padding-bottom: 10px;
         .confirm {
           visibility: hidden;
           &.show {
@@ -81,23 +124,38 @@
       }
     }
   }
+  .slick-times {
+    .cta-btn {
+      display: inline-block;
+      margin-right: 7px;
+      .btn-twobit {
+        padding: 2px 15px;
+        width: 100px;
+      }
+      .sm {
+        padding: 2px 15px;
+      }
+    }
+  }
+  .slick-slide {
+    margin: 0 1px;
+  }
   .slick-days {
     .slick-track {
-      border: 1px solid #ebebeb;
+      border: 0 solid $white;
       margin: 0;
     }
     .item-days {
-      border-left: 1px solid #ebebeb;
       .day-header {
         font-size: 16px;
         padding: 5px 0;
         width: 100%;
         white-space: normal;
-        background-color: #fff;
+        background-color: $green;
       }
       .day-date {
         padding: 0.5rem;
-        background-color: #fff;
+        background-color: $dark-red;
         .month {
           text-transform: uppercase;
         }
@@ -108,10 +166,8 @@
     }
     .slick-current {
       .day-header {
-        background-color: $red;
-      }
-      .day-date {
-        background-color: $dark-red;
+        background-color: $yellow;
+        color: $black;
       }
     }
   }
@@ -123,6 +179,9 @@
     opacity: 1;
     visibility: visible;
     height: auto;
+    .card-body {
+      padding: 17px;
+    }
     .card-header {
       border-radius: 0;
       transition: all 0.4s ease;
@@ -139,18 +198,17 @@
         border-radius: 0;
       }
     }
-  }
-  .accordion {
-    .btn-twobit {
-      padding: 0.375rem 0.94rem;
-      margin-bottom: 4px;
-    }
-  }
-  .slick-times {
-    .btn-twobit {
-      padding: 0.375rem 0.8rem;
-      width: 98px;
-      margin-bottom: 4px;
+    .cta-btn {
+      display: inline-block;
+      margin-right: 7px;
+      margin-bottom: 7px;
+      .btn-twobit {
+        padding: 2px 15px;
+        width: 100px;
+      }
+      .sm {
+        padding: 2px 15px;
+      }
     }
   }
 }
@@ -178,32 +236,39 @@
       }
     }
   }
-  .slick-times {
-    .btn-twobit {
-      padding: 0.375rem 0.8rem;
-      width: 98px;
-      margin-bottom: 4px;
-    }
-  }
   .show-asset-wrapper {
     position: relative;
+    .slick-prev:before {
+      left: -10px;
+      top: -10%;
+    }
+    .slick-next:before {
+      left: -35px;
+      top: -10%;
+    }
+    .img {
+      background-color: $black;
+    }
     .overlay {
       opacity: 0;
       background-color: rgba(0, 0, 0, 0.55);
       position: absolute;
-      bottom: 0;
+      bottom: 7px;
+      left: 0;
+      right: 0;
+      margin: auto;
       width: 100%;
-      height: 70px;
+      height: 22%;
       visibility: hidden;
       transition: opacity 0.6s ease;
       @media (max-width: $laptop) {
-        bottom: 5px;
+        height: 29%;
       }
-      @media (max-width: $mobile) {
-        position: relative;
-        bottom: inherit;
+      @media (max-width: $tablet) {
         opacity: 1 !important;
         visibility: visible !important;
+        position: relative;
+        bottom: inherit;
         background-color: transparent;
         height: auto;
       }
@@ -216,16 +281,25 @@
           padding: 4px;
         }
       }
+      .thumb {
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          top: -4px;
+          left: 0;
+          right: 0;
+          width: 0;
+          height: 4px;
+          margin: auto;
+          background-color: $yellow;
+          transition: width 0.6s ease;
+        }
+      }
       .slick-current {
         .thumb {
-          position: relative;
           &:before {
-            content: "";
-            position: absolute;
-            top: -4px;
             width: 100%;
-            height: 4px;
-            background-color: $red;
           }
         }
       }

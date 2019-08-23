@@ -50,7 +50,7 @@
           &:hover,
           &:active {
             span {
-              color: #fff;
+              color: $white;
             }
           }
           i {
@@ -88,7 +88,7 @@
       &:before {
         content: "";
         cursor: pointer;
-        background: #fff;
+        background: $white;
         height: 2px;
         position: absolute;
         right: 0;
@@ -178,7 +178,7 @@
 #main-nav {
   opacity: 0;
   transition: opacity 0.4s ease;
-  background-color: #fff;
+  background-color: $offwhite;
   box-shadow: 0 4px 10px -10px rgba(0, 0, 0, 0.6);
   transition: top 0.5s ease-in-out;
   top: 0;

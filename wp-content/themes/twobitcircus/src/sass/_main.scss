@@ -2,14 +2,29 @@
 body {
   -webkit-font-smoothing: antialiased;
   color: $black;
-  font-size: 15px;
+  font-size: 16px;
   padding-top: 4.5rem;
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1300px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: $laptop) {
+    .container {
+      max-width: 100%;
+    }
+  }
+}
+h1.headline {
+  font-size: 6rem;
+  line-height: 1em;
 }
 h2.headline {
   font-size: 5rem;
   line-height: 1em;
 }
 .headline {
+  text-transform: uppercase;
   font-family: "Franchise Bold", "Roboto", sans-serif;
 }
 a {
@@ -25,6 +40,7 @@ a {
 }
 .lubalin {
   font-family: "Lubalin Graph Demi", "Roboto", sans-serif;
+  letter-spacing: 0.8px;
 }
 .lubalinB {
   font-family: "LubalinGraphStd-Bold", "Roboto", sans-serif;
@@ -43,8 +59,14 @@ a {
 .black {
   color: $black;
 }
+.yellow {
+  color: $yellow;
+}
 .white {
   color: $white;
+}
+.offwhite {
+  color: $offwhite;
 }
 #hero-block {
   .carousel-control-next,
@@ -149,6 +171,9 @@ a {
       border: 3px solid $white;
       color: $black !important;
     }
+    &.btn-sm {
+      font-size: 22px;
+    }
     &:focus,
     &:hover {
       @include transform(translate(-4px, -4px));
@@ -167,6 +192,11 @@ a {
     font-size: 1.8em;
     line-height: 1;
     width: 100%;
+    &.sm {
+      font-size: 22px;
+      bottom: -3px;
+      left: 3px;
+    }
   }
 }
 .container-spacing {
@@ -541,8 +571,20 @@ article.page.type-page {
   }
 }
 .main-headline {
-  padding: 4em 15px;
-  background-color: $red;
+  background-color: $black;
+  .header-bkg-left {
+    height: 300px;
+    width: 100%;
+    background-image: url("/wp-content/themes/twobitcircus/img/attractions/header_main.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right top;
+  }
+  &.header-bkg-right {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: right 20%;
+  }
 }
 .sub-headline {
   padding: 4em 15px;
