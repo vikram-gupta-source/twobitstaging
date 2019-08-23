@@ -1,7 +1,7 @@
 // parties
 #parties-block {
   .container {
-    @media (max-width: $break-large) {
+    @media (max-width: $laptop) {
       max-width: inherit;
     }
   }

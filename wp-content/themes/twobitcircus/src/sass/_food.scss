@@ -6,7 +6,7 @@
       .event-header {
         float: left;
         width: 60%;
-        @media (max-width: $break-mobile) {
+        @media (max-width: $mobile) {
           float: none;
           width: 100%;
         }
@@ -23,7 +23,7 @@
       .event-image {
         float: left;
         width: 40%;
-        @media (max-width: $break-mobile) {
+        @media (max-width: $mobile) {
           float: none;
           width: 100%;
         }

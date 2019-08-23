@@ -8,7 +8,9 @@ import "slick-carousel";
 import imagesLoaded from "imagesloaded";
 import parallax from "./jquery.parallax.js";
 import Isotope from "isotope-layout/dist/isotope.pkgd.min";
-import {Calendar} from "@fullcalendar/core";
+import {
+  Calendar
+} from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
@@ -28,9 +30,9 @@ $(function() {
       if ($(".inview").length) {
         $(".inview").each(function() {
           let delay = $(this).data("offset") ? $(this).data("offset") : "90%";
-          let easeType = $(this).data("ease")
-            ? $(this).data("ease")
-            : "fadeInUp";
+          let easeType = $(this).data("ease") ?
+            $(this).data("ease") :
+            "fadeInUp";
           let waypoint = new Waypoint({
             element: this,
             handler: function(direction) {
@@ -55,12 +57,16 @@ $(function() {
   // Handle resize
   let clearInt = 0;
   var navBarHt = $("#main-nav").height();
-  $("body").css({"padding-top": navBarHt + "px"});
+  $("body").css({
+    "padding-top": navBarHt + "px"
+  });
   $(window).on("resize", function() {
     clearTimeout(clearInt);
     clearInt = setTimeout(function() {
       navBarHt = $("#main-nav").height();
-      $("body").css({"padding-top": navBarHt + "px"});
+      $("body").css({
+        "padding-top": navBarHt + "px"
+      });
       $(".slick-days .slick-slide.slick-current").trigger("click");
     }, 500);
   });
@@ -80,9 +86,13 @@ $(function() {
         let lt = $(this).scrollTop();
         if (lt >= lastY) {
           // Down
-          $("#main-nav").css({top: "-" + navBarHt + "px"});
+          $("#main-nav").css({
+            top: "-" + navBarHt + "px"
+          });
         } else {
-          $("#main-nav").css({top: 0});
+          $("#main-nav").css({
+            top: 0
+          });
         }
         lastY = lt;
       }
@@ -97,8 +107,7 @@ $(function() {
     arrows: true,
     slidesToShow: 4,
     slidesToScroll: 4,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           slidesToShow: 3,
@@ -127,33 +136,30 @@ $(function() {
     dots: true,
     centerMode: true,
     slidesToShow: 3,
-    arrows: true,
+    arrows: false,
     variableWidth: true,
-    responsive: [
-      {
-        breakpoint: 767,
-        settings: {
-          dots: true,
-          arrows: false,
-          centerMode: false,
-          variableWidth: false,
-          adaptiveHeight: true,
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
+    responsive: [{
+      breakpoint: 767,
+      settings: {
+        dots: true,
+        arrows: false,
+        centerMode: false,
+        variableWidth: false,
+        adaptiveHeight: true,
+        slidesToShow: 1,
+        slidesToScroll: 1
       }
-    ]
+    }]
   };
   var slick_event_settings = {
     dots: false,
     infinite: false,
     speed: 600,
-    arrows: true,
+    arrows: false,
     slidesToShow: 4,
     slidesToScroll: 4,
     adaptiveHeight: true,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           dots: false,
@@ -187,8 +193,7 @@ $(function() {
     arrows: false,
     slidesToShow: 7,
     slidesToScroll: 1,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           arrows: true,
@@ -243,8 +248,7 @@ $(function() {
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: false,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           dots: true,
@@ -266,9 +270,9 @@ $(function() {
     infinite: true,
     slidesToShow: 5,
     slidesToScroll: 5,
+    arrows: false,
     dots: true,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           slidesToShow: 4,
@@ -324,8 +328,7 @@ $(function() {
     asNavFor: ".slick-media",
     focusOnSelect: true,
     centerMode: true,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           slidesToShow: 4
@@ -348,7 +351,9 @@ $(function() {
     fade: true
   };
 
-  imagesLoaded("main", {background: true}, function() {
+  imagesLoaded("main", {
+    background: true
+  }, function() {
     if ($(".slick-filter").length) {
       $(".slick-filter").slick(slick_filter_settings);
     }
@@ -373,23 +378,25 @@ $(function() {
               .find(".embed-data")
               .append(
                 '<iframe class="embed-responsive-item" src="' +
-                  srcid +
-                  '"></iframe>'
+                srcid +
+                '"></iframe>'
               );
           }
         });
       var firstEmbed = $(".youtube .grid-feed:first .embed-data").data("src");
       $(".youtube .grid-feed:first .embed-data").append(
         '<iframe class="embed-responsive-item" src="' +
-          firstEmbed +
-          '"></iframe>'
+        firstEmbed +
+        '"></iframe>'
       );
     }
 
     // Handle all Attraction Events
     if ($("#attractions-block").length) {
       var allowStart = false;
-      $('[data-toggle="tooltip"]').tooltip({html: true});
+      $('[data-toggle="tooltip"]').tooltip({
+        html: true
+      });
       $(".attractions-slick").slick(slick_attractions_settings);
       $(".slick-shows")
         .slick(slick_shows_settings)
@@ -545,7 +552,9 @@ $(function() {
     // Handle Arrow Scroll Top
     $("#return-to-top").on("click", function(evt) {
       evt.preventDefault();
-      $("html, body").animate({scrollTop: 0}, "slow");
+      $("html, body").animate({
+        scrollTop: 0
+      }, "slow");
     });
     // Enable parallax
     if ($(".parallax").length) {
@@ -570,7 +579,9 @@ $(function() {
           $("#grid-filter a").removeClass("active");
           $(this).addClass("active");
           let subfilter = $(this).data("filter");
-          $iso.arrange({filter: subfilter});
+          $iso.arrange({
+            filter: subfilter
+          });
         }
       });
     }

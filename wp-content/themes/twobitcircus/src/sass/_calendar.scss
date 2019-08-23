@@ -1,4 +1,64 @@
 // Calendar
+.calender-wrapper {
+  max-width: 1413px;
+  margin: 0 auto;
+  .calender {
+    .slick-slide {
+      margin: 0 1px;
+    }
+    .grid {
+      width: 290px;
+      display: inline-block;
+      vertical-align: top;
+      border: 0px solid $green;
+      transition: all 0.6s ease;
+      background-color: $red;
+      .grid-time {
+        width: 100%;
+        .header {
+          background-color: $green;
+          font-size: 1.2em;
+        }
+        .date,
+        .day {
+          color: $black;
+          width: 50%;
+          text-align: left;
+          float: left;
+          padding: 5px 8px;
+          transition: all 0.4s ease;
+        }
+        .date {
+          text-align: right;
+        }
+        .entry {
+          padding: 15px 5px;
+          display: table;
+          height: 430px;
+          width: 100%;
+          .cell {
+            color: $white;
+            display: table-cell;
+            vertical-align: middle;
+          }
+          .time {
+            color: $white;
+            width: 100%;
+            margin: 0 auto;
+            font-family: "Franchise Bold", "Roboto", sans-serif;
+            .btn {
+              font-size: 1.2em;
+            }
+          }
+        }
+      }
+      &.closed {
+        background-color: $dark-red !important;
+        border: 0 solid $dark-red;
+      }
+    }
+  }
+}
 #full-calendar {
   th {
     background-color: #dee2e6;

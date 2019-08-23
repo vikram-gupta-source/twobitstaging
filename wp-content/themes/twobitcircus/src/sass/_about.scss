@@ -77,7 +77,7 @@
       left: 5vw;
     }
     .bkg-layer {
-      @media (max-width: $break-xlrg) {
+      @media (max-width: $desktop) {
       }
     }
   }
@@ -97,7 +97,7 @@
       &.active {
         @include animation(diagonal-right 8s forwards ease-in-out);
       }
-      @media (max-width: $break-xlrg) {
+      @media (max-width: $desktop) {
       }
     }
   }
@@ -116,7 +116,7 @@
       max-width: 200px;
     }
     .bkg-layer {
-      @media (max-width: $break-xlrg) {
+      @media (max-width: $desktop) {
       }
     }
   }

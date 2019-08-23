@@ -175,11 +175,15 @@ function twobitcircus_button_shortcode( $atts, $content=null ) {
   $attr = shortcode_atts( array(
 		'link' => 'link',
     'class' => '',
+    'parent' => '',
     'ref' => '',
     'target' => '',
 	), $atts );
-  $target = ($attr['target']) ? 'target="' . esc_attr($attr['target']) . '"' : '';
-  return '<a class="btn btn-twobit '.esc_attr($attr['class']).'" href="'.esc_attr($attr['link']).'" '.$target.'data-ref="'.esc_attr($attr['ref']).'"><span>'.$content.'</span></a>';
+  $target = ($attr['target']) ? 'target="' . esc_attr($attr['target']) . '" rel="noopener noreferrer"' : '';
+  $link = ($attr['link']) ? 'href="' . esc_attr($attr['link']) . '"' : '';
+  $ref = ($attr['ref']) ? 'data-ref="' . esc_attr($attr['ref']) . '"' : '';
+  $class = ($attr['class']) ? esc_attr($attr['class']) : '';
+  return '<div class="cta-btn '.esc_attr($attr['parent']).'"><a class="btn btn-twobit '.$class.'" '.$link.' '.$target.' '. $ref.'><span>'.$content.'</span></a><div class="btn-behind">&nbsp;</div></div>';
 }
 add_shortcode( 'button', 'twobitcircus_button_shortcode' );
 

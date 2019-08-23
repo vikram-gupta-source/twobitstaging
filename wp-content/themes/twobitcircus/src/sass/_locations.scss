@@ -2,7 +2,7 @@
 #locations {
   #findus-block {
     .container {
-      @media (max-width: $break-mobile) {
+      @media (max-width: $mobile) {
         max-width: 100%;
       }
       .map-wrapper {

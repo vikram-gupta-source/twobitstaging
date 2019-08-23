@@ -105,12 +105,18 @@
                         </div>
                         <?php if($num > 1) :?>
                         <div class="col-3 btn-group">
-                          <button type="button" class="btn btn-twobit prev">
-                            <span class="fa fa-chevron-left"></span>
-                          </button>
-                          <button type="button" class="btn btn-twobit next">
-                            <span class="fa fa-chevron-right"></span>
-                          </button>
+                          <div class="cta-btn">
+                            <button type="button" class="btn btn-twobit prev">
+                              <span class="fa fa-chevron-left"></span>
+                            </button>
+                            <div class="btn-behind">&nbsp;</div>
+                          </div>
+                          <div class="cta-btn">
+                            <button type="button" class="btn btn-twobit next">
+                              <span class="fa fa-chevron-right"></span>
+                            </button>
+                            <div class="btn-behind">&nbsp;</div>
+                          </div>
                         </div>
                         <?php endif ?>
                       </div>
@@ -133,11 +139,11 @@
                       <p><?php echo apply_filters('the_content', $show->post_content);?></p>
                       <?php if(!empty($info[0]['buy_link']) && empty($composedDates)): ?>
                       <div class="buy-link mt-4">
-                        <a class="btn btn-sm btn-twobit" href="<?php echo $info[0]['buy_link'];?>" rel="noopener noreferrer" target="_blank"><?php _e('Buy Players Card', 'twobitcircus');?></a>
+                        <?php echo do_shortcode('[button link="'.$info[0]['buy_link'].'" target="_blank"]Buy Players Card[/button]') ?>
                       </div>
                       <?php endif ?>
                       <?php if(!empty($composedDates)) :?>
-                      <h4 class="mt-5 clearfix"><?php _e( 'Showtimes' , 'twobitcircus'); ?> <button type="button" class="btn btn-sm btn-twobit open-times-modal pull-right" data-toggle="modal" data-target="#modal-showtimes"><?php _e( 'All Times' , 'twobitcircus'); ?></button></h4>
+                      <h4 class="mt-5 clearfix"><?php _e( 'Showtimes' , 'twobitcircus'); ?> <button type="button" class="btn btn-twobit open-times-modal pull-right" data-toggle="modal" data-target="#modal-showtimes"><?php _e( 'All Times' , 'twobitcircus'); ?></button></h4>
                       <div class="showtimes-cycle">
                         <div id="cycle-<?php echo $show->ID;?>">
                           <?php $slickObj = (count($composedDates) > 5) ? '{"centerMode": true }' : ''; ?>
@@ -160,7 +166,7 @@
                               <div class="card-body">
                               <?php foreach($tickets as $timeInfo) : ?>
                               <?php if(!preg_match('/(Out)/', $timeInfo->ticket)): ?>
-                                <a href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" class="btn btn-sm btn-twobit"><?php echo $timeInfo->ticket;?></a>
+                                <a href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" class="btn btn-twobit"><?php echo $timeInfo->ticket;?></a>
                               <?php endif ?>
                               <?php endforeach ?>
                               </div>
@@ -186,7 +192,7 @@
                                 <div class="card-body">
                                   <?php foreach($tickets as $timeInfo) : ?>
                                   <?php if(!preg_match('/(Out)/', $timeInfo->ticket)): ?>
-                                    <a href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" class="btn btn-sm btn-twobit" target="_blank"><?php echo $timeInfo->ticket;?></a>
+                                    <a href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" class="btn btn-twobit" target="_blank"><?php echo $timeInfo->ticket;?></a>
                                   <?php endif ?>
                                   <?php endforeach ?>
                                 </div>

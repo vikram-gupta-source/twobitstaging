@@ -2,7 +2,7 @@
 footer {
   font-size: 0.9em;
   color: $white;
-  background-color: $red;
+  background-color: $dark-red;
   a {
     color: $offwhite;
     &:hover {
@@ -10,7 +10,7 @@ footer {
     }
   }
   .wrapper {
-    @media (max-width: $break-mobile) {
+    @media (max-width: $mobile) {
       text-align: center;
     }
     .navbar-brand {
@@ -24,6 +24,13 @@ footer {
       margin-top: 10px;
       font-size: 1.3em;
       text-transform: uppercase;
+    }
+    .input-group-text {
+      background-color: $black;
+      border: 1px solid $black;
+      .fa.fa-envelope {
+        color: $white;
+      }
     }
   }
   .social_icons {

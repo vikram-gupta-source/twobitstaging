@@ -5,11 +5,11 @@
 }
 #attractions {
   #filters {
-    background-color: $theme-color2;
+    background-color: $dark-red;
     position: relative;
     z-index: 1;
     .container {
-      @media (max-width: $break-large) {
+      @media (max-width: $laptop) {
         max-width: inherit;
       }
     }
@@ -21,17 +21,17 @@
           z-index: 2;
           padding: 20px;
           font-size: 1.2em;
-          background-color: $theme-color2;
+          background-color: $dark-red;
           &.dropdown-toggle.active + .dropdown-menu {
             display: block !important;
           }
           &:hover,
           &.active {
-            background-color: $theme-color;
+            background-color: $red;
           }
           &.active,
           &.always-show {
-            background-color: $theme-color;
+            background-color: $red;
           }
           &:after {
             content: none;
@@ -43,16 +43,16 @@
           padding: 0;
           width: 100%;
           border-radius: 0;
-          background-color: $theme-color;
+          background-color: $red;
           &.always-show {
             display: block !important;
           }
           .nav-link {
             padding: 20px;
-            background-color: $theme-color;
+            background-color: $red;
             &:hover,
             &.active {
-              background-color: $theme-color2;
+              background-color: $dark-red;
             }
           }
         }
@@ -69,7 +69,7 @@
       }
       .info-block {
         padding: 5px 15px;
-        background-color: $theme-color2;
+        background-color: $dark-red;
       }
       .available-dates {
         .confirm {
@@ -108,10 +108,10 @@
     }
     .slick-current {
       .day-header {
-        background-color: $theme-color;
+        background-color: $red;
       }
       .day-date {
-        background-color: $theme-color2;
+        background-color: $dark-red;
       }
     }
   }
@@ -119,14 +119,14 @@
 #modal-showtimes {
   .card {
     border-radius: 0;
-    border-color: $theme-color2;
+    border-color: $dark-red;
     opacity: 1;
     visibility: visible;
     height: auto;
     .card-header {
       border-radius: 0;
       transition: all 0.4s ease;
-      background-color: $theme-color3;
+      background-color: $dark;
       a {
         display: block;
         font-size: 14px;
@@ -157,14 +157,14 @@
 #attractions {
   .card {
     border-radius: 0;
-    border-color: $theme-color2;
+    border-color: $dark-red;
     opacity: 1;
     visibility: visible;
     height: auto;
     .card-header {
       border-radius: 0;
       transition: all 0.4s ease;
-      background-color: $theme-color3;
+      background-color: $dark;
       a {
         display: block;
         font-size: 14px;
@@ -196,10 +196,10 @@
       height: 70px;
       visibility: hidden;
       transition: opacity 0.6s ease;
-      @media (max-width: $break-large) {
+      @media (max-width: $laptop) {
         bottom: 5px;
       }
-      @media (max-width: $break-mobile) {
+      @media (max-width: $mobile) {
         position: relative;
         bottom: inherit;
         opacity: 1 !important;
@@ -209,10 +209,10 @@
       }
       .slick-slide {
         padding: 7px 4px;
-        @media (max-width: $break-large) {
+        @media (max-width: $laptop) {
           padding: 10px 4px;
         }
-        @media (max-width: $break-mobile) {
+        @media (max-width: $mobile) {
           padding: 4px;
         }
       }

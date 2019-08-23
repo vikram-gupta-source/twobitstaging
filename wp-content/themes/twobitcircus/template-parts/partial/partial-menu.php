@@ -45,8 +45,8 @@
   <nav class="navbar">
     <div class="container position-relative">
       <?php the_custom_logo(); ?>
-      <a title="Directions" href="#direction" class="nav-link-direction">
-        <i class="fa fa-lg fa-location-arrow" aria-hidden="true"></i> <span class="direction"><?php echo $location['city'] ?> <span class="state <?php echo $isOpen ?>">(<?php echo ucwords($isOpen) ?>)</span><br/>Directions</span>
+      <a title="Directions" href="#direction" class="nav-link-direction text-center">
+        <span class="direction text-uppercase"><?php echo $location['city'] ?><br/><span class="state <?php echo $isOpen ?>"><?php echo ucwords($isOpen) ?> <i class="fa fa-lg fa-location-arrow" aria-hidden="true"></i></span></span>
       </a>
 
       <!-- The WordPress Menu goes here -->
