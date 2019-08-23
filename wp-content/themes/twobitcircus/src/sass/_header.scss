@@ -216,6 +216,7 @@
         background-color: $dark-red;
         width: 120px;
         transition: all 0.5s ease;
+        position: relative;
         .nav-link {
           font-family: "LubalinGraphStd-Bold", sans-serif;
           letter-spacing: 0.8px;
@@ -225,8 +226,21 @@
           line-height: 22px;
           padding: 14px 10px;
         }
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 5px;
+          height: 100%;
+          transition: all 0.5s ease;
+          background-color: $yellow;
+        }
         &:hover {
           background-color: $yellow;
+          &:after {
+            background-color: $red;
+          }
           .nav-link {
             color: $black;
           }
