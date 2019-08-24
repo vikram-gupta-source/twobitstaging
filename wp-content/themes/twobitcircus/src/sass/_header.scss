@@ -130,6 +130,9 @@
   position: absolute;
   left: 205px;
   font-family: "Lubalin Graph Demi", sans-serif;
+  @media (max-width: 1090px) {
+    display: none;
+  }
   .direction {
     display: inline-block;
     line-height: 20px;
@@ -205,6 +208,9 @@
         font-family: "Lubalin Graph Demi", sans-serif;
         i {
           margin-right: 4px;
+        }
+        @media (max-width: 1090px) {
+          padding: 0 12px 0 0;
         }
       }
       &:hover {

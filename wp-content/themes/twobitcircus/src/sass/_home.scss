@@ -29,7 +29,7 @@ body.home {
         margin: 0 6px;
         position: relative;
         transition: all 0.3s ease;
-        &.slick-center {
+        &.slick-current {
           @include transform(scale(1.2));
           z-index: 100;
           @media (max-width: $tablet) {
@@ -70,7 +70,7 @@ body.home {
             background-color: $dark-red;
           }
           .card-body {
-            padding: 0 1.25rem;
+            padding: 0 1.25rem 1.25rem;
           }
           .bkg-img {
             height: 300px;
@@ -105,7 +105,8 @@ body.home {
         border-radius: 0;
       }
       .card-body {
-        min-height: 211px;
+        min-height: 214px;
+        padding: 15px 15px 20px;
         color: $white;
         background-color: $red;
       }

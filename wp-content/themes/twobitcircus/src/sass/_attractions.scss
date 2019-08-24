@@ -18,6 +18,13 @@
       height: 100%;
       width: 52%;
       background-color: $red;
+      @media (max-width: $mobile) {
+        width: 99%;
+        border-left: 4px solid $yellow;
+        &:before {
+          content: none !important;
+        }
+      }
       &:before {
         content: "";
         position: absolute;

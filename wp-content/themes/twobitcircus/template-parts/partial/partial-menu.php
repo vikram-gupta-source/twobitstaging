@@ -43,7 +43,7 @@
   </div>
   <?php endif ?>
   <nav class="navbar">
-    <div class="container position-relative">
+    <div class="container position-relative pr-0">
       <?php the_custom_logo(); ?>
       <a title="Directions" href="#direction" class="nav-link-direction text-center">
         <span class="direction text-uppercase"><?php echo $location['city'] ?><br/><span class="state <?php echo $isOpen ?>"><?php echo ucwords($isOpen) ?> <i class="fa fa-lg fa-location-arrow" aria-hidden="true"></i></span></span>
@@ -62,7 +62,7 @@
         ) );
       ?>
 
-      <button class="navbar-toggler collapsed d-lg-none"" type="button" data-toggle="collapse" data-target="#expanded-menu" aria-controls="expanded-menu" aria-expanded="false" aria-label="<?php _e( 'Toggle navigation', 'twobitcircus' ); ?>">
+      <button class="navbar-toggler collapsed d-lg-none mr-2" type="button" data-toggle="collapse" data-target="#expanded-menu" aria-controls="expanded-menu" aria-expanded="false" aria-label="<?php _e( 'Toggle navigation', 'twobitcircus' ); ?>">
         <div class="hamburger-wrapper">
           <span></span>
           <span></span>

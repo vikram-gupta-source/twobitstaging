@@ -39,7 +39,7 @@ $(function() {
               if (direction == "down" && !$(this.element).hasClass(easeType)) {
                 $(this.element).addClass(easeType);
               } else {
-                // /  $(this.element).removeClass(easeType);
+                //$(this.element).removeClass(easeType);
               }
             },
             offset: delay
@@ -720,23 +720,42 @@ $(function() {
     });
   });
   if ($("#about").length) {
-    /*
+    var _h = $('#about-header').height();
     var controller = new ScrollMagic.Controller();
-    new ScrollMagic.Scene({
-      triggerElement: "#red-layer"
-    })
-      .setClassToggle("#red-layer", "active")
+    var scene = new ScrollMagic.Scene({
+        triggerElement: "#trigger-element",
+        offset: -_h / 2
+      })
+      .on("start end", function(e) {
+        if (e.scrollDirection == 'FORWARD') {
+          $("html, body").stop().animate({
+            scrollTop: $('#trigger-element').offset().top
+          }, 700);
+        }
+      })
+      .setClassToggle("#about-header", "scrolled")
       .addTo(controller);
-    new ScrollMagic.Scene({
-      triggerElement: "#yellow-layer"
-    })
-      .setClassToggle("#yellow-layer", "active")
+
+    var scene2 = new ScrollMagic.Scene({
+        triggerElement: "#trigger-element",
+        offset: _h / 2
+      })
+      .on("start", function(e) {
+        if (e.scrollDirection == 'REVERSE') {
+          $("html, body").stop().animate({
+            scrollTop: 0
+          }, 700);
+        }
+      })
+      .setClassToggle("#about-header", "scrolled")
       .addTo(controller);
-    new ScrollMagic.Scene({
-      triggerElement: "#green-layer"
-    })
-      .setClassToggle("#green-layer", "active")
-      .addTo(controller);
-      */
+
+    let count = 0;
+    $(window).on('resize', function() {
+      clearTimeout(count);
+      count = setTimeout(function() {
+        _h = $('#about-header').height();
+      });
+    });
   }
 });
