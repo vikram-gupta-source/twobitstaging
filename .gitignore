@@ -12,3 +12,4 @@
 /wp-content/aiowps_backups/backup.wp-config.php
 /wp-content/aiowps_backups/.htaccess.backup
 /wp-content/plugins/centeredge-booking/inc/*.txt
+/wp-content/plugins/centeredge-booking/inc/standard_complete.txt
