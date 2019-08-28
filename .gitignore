@@ -5,15 +5,9 @@
 /wp-content/themes/twobitcircus/css/theme.min.css.map
 /wp-content/themes/twobitcircus/js/theme.min.js.map
 /wp-content/themes/twobitcircus/node_modules
-/wp-content/uploads/wp-migrate-db
-/wp-content/uploads
 /wp-content/plugins/centeredge-booking-new/inc/complex_processing.txt
 /wp-content/plugins/centeredge-booking-new/inc/complex_out.txt
 /wp-content/aiowps_backups/backup.wp-config.php
 /wp-content/aiowps_backups/.htaccess.backup
-<<<<<<< HEAD
 /wp-content/plugins/centeredge-booking/inc/*.txt
-/wp-content/plugins/centeredge-booking/inc/standard_complete.txt
-=======
 /wp-content/cache/autoptimize
->>>>>>> 4e616b98b10401f67a59230748b6852a735a0c66
