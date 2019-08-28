@@ -19,21 +19,22 @@
     <div class="featured mt-3 slick-center-init">
       <?php foreach($featured as $feature) : ?>
       <div class="card">
-        <div class="row no-gutters">
+        <div class="row no-gutters bkg-<?php echo $feature['background_color']; ?>">
+          <div class="col-md-6 bkg-img" style="background-image: url('<?php echo $feature['image']; ?>');"></div>
           <div class="col-md-6">
-            <img class="img-fluid w-100" src="https://via.placeholder.com/329x289"/>
-          </div>
-          <div class="col-md-6">
+            <h6 class="card-heading lubalinB text-uppercase"><?php echo $feature['highlight_heading'];?></h6>
             <div class="card-body">
               <?php if(!empty($feature['title'])) :?>
-              <h5 class="card-title"><?php echo $feature['title'];?></h5>
+              <h4 class="lubalinB card-title text-uppercase"><?php echo $feature['title'];?></h4>
               <?php endif ?>
               <?php if(!empty($feature['summary'])) :?>
               <p><?php echo $feature['summary'];?></p>
               <?php endif ?>
               <div class="link-wrapper mt-3">
                 <?php if(!empty($feature['more_title'])) :?>
-                <div class="more"><a href="<?php echo $feature['more_link'];?>" class="btn btn-sm btn-twobit"><?php echo $feature['more_title'];?></a></div>
+                <div class="more">
+                  <?php echo do_shortcode('[button link="'.$feature['more_link'].'"]'.$feature['more_title'].'[/button]') ?>
+                </div>
                 <?php endif ?>
               </div>
             </div>
@@ -56,23 +57,21 @@
       <div class="featured mt-3 slick-event inview animated delay-1">
         <?php foreach($feature_events as $feature) : ?>
         <div class="card">
-          <a href="<?php echo $feature['link'];?>"><img class="card-img-top img-fluid" src="https://via.placeholder.com/352x198"/></a>
-          <div class="card-body text-center">
+          <a href="<?php echo $feature['link'];?>"><img class="card-img-top img-fluid" src="<?php echo $feature['image']; ?>"/></a>
+          <div class="card-body">
             <?php if(!empty($feature['title'])) :?>
-            <h5 class="card-title"><?php echo $feature['title'];?></h5>
-            <?php if(!empty($feature['date'])) :?>
-            <div class="dateline text-center"><?php echo $feature['date'];?></div>
-            <?php endif ?>
-            <?php if(!empty($feature['time'])) :?>
+            <h5 class="lubalinB card-title text-uppercase"><?php echo $feature['title'];?></h5>
+            <div class="dateline"><?php echo $feature['date'];?></div>
             <div class="time"><?php echo $feature['time'];?></div>
             <?php endif ?>
-            <?php endif ?>
+            <div class="mt-3 mx-auto addthis_inline_share_toolbox" data-url="<?php echo $feature['link'];?>" data-title="<?php echo $feature['title'];?>"></div>
             <div class="link-wrapper mt-2">
               <?php if(!empty($feature['link_title'])) :?>
-              <div class="link ml-2"><a href="<?php echo $feature['link'];?>" class="btn btn-sm btn-twobit" target="_blank" rel="noopener noreferrer"><?php echo $feature['link_title'];?></a></div>
+              <div class="link">
+                <?php echo do_shortcode('[button target="_blank" link="'.$feature['link'].'"]'.$feature['link_title'].'[/button]') ?>
+              </div>
               <?php endif ?>
             </div>
-            <div class="mt-2 addthis_inline_share_toolbox" data-url="<?php echo $feature['link'];?>" data-title="<?php echo $feature['title'];?>"></div>
           </div>
         </div>
 
@@ -86,19 +85,21 @@
 
   <section id="about-block" class="entry-wrapper-padding text-center">
     <div class="container">
-      <h2 class="headline text-uppercase text-center mb-5 inview animated"><?php echo get_field('about_title'); ?></h2>
-      <div class="w-75 mx-auto inview animated delay-1" data-ease="fadeInDown"><?php echo get_field('about_description');?></div>
+      <div class="vector vector-left inview animated delay-2" data-ease="fadeIn"><img class="lazy-loaded img-fluid" data-src="/wp-content/themes/twobitcircus/img/home/home_about_left.png" alt="<?php echo get_field('about_title'); ?>" /></div>
+      <div class="vector vector-right inview animated delay-2" data-ease="fadeIn"><img class="lazy-loaded img-fluid" data-src="/wp-content/themes/twobitcircus/img/home/home_about_right.png" alt="<?php echo get_field('about_title'); ?>" /></div>
+      <h2 class="headline text-uppercase text-center mb-2 inview animated"><?php echo get_field('about_title'); ?></h2>
+      <div class="w-65 mx-auto mb-4 inview animated delay-1 white" data-ease="fadeInDown"><?php echo get_field('about_description');?></div>
     </div>
   </section>
 
-  <section id="newsletter-block" class="entry-wrapper-padding bkg-color">
+  <section id="newsletter-block" class="entry-wrapper-padding">
     <div class="container">
       <?php echo get_field('newsletter_block', 'option');?>
     </div>
   </section>
 
   <section id="social-block" class="entry-wrapper-padding">
-    <div class="container-fluid">
+    <div class="container-fluid white">
       <h2 class="headline text-uppercase text-center mb-5 inview animated"><?php echo get_field('social_title'); ?></h2>
       <h4 class="text-center text-uppercase inview animated delay-1" data-ease="fadeInDown">Follow what we're up to</h4>
       <div class="inview animated delay-2 mt-4">

@@ -1,38 +1,48 @@
 // Food
 #food-drink {
   #events-block {
+    background-color: $black;
     .event {
       padding: 0;
       .event-header {
         float: left;
         width: 60%;
-        @media (max-width: $break-mobile) {
+        @media (max-width: $mobile) {
           float: none;
           width: 100%;
         }
         .top,
         .bottom {
           min-height: 110px;
-          background-color: #eaeaea;
+          background-color: $dark-red;
           padding: 2em 1em;
+          color: $yellow;
         }
         .top {
-          background-color: #d5d5d5;
+          color: $white;
+          background-color: $green;
         }
       }
       .event-image {
         float: left;
+        height: 100%;
         width: 40%;
-        @media (max-width: $break-mobile) {
-          float: none;
-          width: 100%;
-        }
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
       }
     }
   }
   #banner-block {
+    background-color: $green;
     .content-block {
       padding: 0 3em;
     }
+    .banner-image {
+      padding: 0;
+    }
+  }
+  #menu-block {
+    background-color: $yellow;
   }
 }

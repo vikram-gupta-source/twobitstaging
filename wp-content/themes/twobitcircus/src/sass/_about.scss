@@ -1,6 +1,7 @@
 // About
 #about {
   background-color: $dark-red;
+  overflow: hidden;
   .bkg-layer {
     position: absolute;
     z-index: 0;
@@ -11,119 +12,313 @@
     position: relative;
     z-index: 2;
   }
-  #hero-block {
-    .carousel-item {
+  .section-wrapper {
+    background-color: $dark-red;
+  }
+  #trigger-element {
+  }
+  #about-header {
+    position: relative;
+    background-color: #000;
+    height: 100vh;
+    overflow: hidden;
+    transition: height 0.8s ease;
+    &.scrolled .bkg-wrapper {
+      @include transform(scale(1.2));
+      &:after {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    .bkg-wrapper {
+      position: absolute;
+      top: 0;
       background-image: url("/wp-content/themes/twobitcircus/img/about/about_header_bkg.jpg");
       background-position: center 18%;
-      .about-logo {
-        display: block;
-        margin: 0 15px;
-        text-align: center;
-        max-width: 40vh;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      width: 100%;
+      height: 100vh;
+      transition: transform 0.6s ease;
+      &:after {
+        content: "";
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        background: rgba(0, 0, 0, 0.6);
+        transition: opacity 0.6s ease;
       }
-      .carousel-caption {
-        bottom: 10vh;
-        h1 {
-          color: $black;
-        }
-        p {
-          color: $dark-red;
-        }
-        .arrow-down {
-          max-width: 75px;
-        }
+    }
+    .about-logo {
+      display: block;
+      margin: 0 auto !important;
+      text-align: center;
+      padding-top: 2em;
+      max-width: 40vh;
+      position: relative;
+      z-index: 1;
+    }
+    .caption-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      bottom: 10vh;
+      h1 {
+        color: $black;
       }
+      p {
+        color: $dark-red;
+      }
+      .arrow-down {
+        max-width: 75px;
+      }
+    }
+  }
+  .header-line {
+    display: inline-block;
+    position: relative;
+    &:before,
+    &:after {
+      content: "";
+      width: 24px;
+      height: 2px;
+      position: absolute;
+      top: 50%;
+      @include transform(translateY(-50%));
+    }
+    &:after {
+      right: -34px;
+    }
+    &:before {
+      left: -34px;
+    }
+    &.yellow:before,
+    &.yellow:after {
+      background-color: $yellow;
+    }
+    &.red:before,
+    &.red:after {
+      background-color: $dark-red;
     }
   }
   .bkg-layer {
     position: absolute;
-    z-index: 0;
+    z-index: 1;
     left: 0;
-    opacity: 1 !important;
-    bottom: -5vh;
-    &.active {
-      @include animation(diagonal 8s forwards ease-in-out);
+    bottom: -1.7vw;
+    &#dark-red-layer {
+      color: $dark-red;
+    }
+    &#red-layer {
+      color: $red;
+      svg {
+        g {
+          @include animation-duration(4s);
+        }
+      }
+    }
+    &#yellow-layer {
+      color: $yellow;
+      svg {
+        g {
+          @include animation-duration(10s);
+        }
+      }
+    }
+    &#green-layer {
+      color: $green;
+      svg {
+        g {
+          @include animation-duration(6s);
+        }
+      }
+    }
+    svg {
+      width: 100%;
+      height: auto;
+      g {
+        @include animation(matrix 8s infinite ease-in-out);
+      }
     }
   }
-  .vector {
-    overflow: hidden;
-    position: absolute;
-    z-index: 5;
-    bottom: -30%;
+  .about-sections {
+    position: relative;
+    .text {
+      position: relative;
+      z-index: 1;
+    }
+    .vector {
+      overflow: hidden;
+      position: absolute;
+      z-index: 5;
+      bottom: -30%;
+      &.vector-icons {
+        z-index: 0;
+        @media (max-width: $laptop) {
+          display: none;
+        }
+      }
+    }
   }
   .col-md-6 {
     position: initial;
   }
   #level-escape-block {
-    margin-bottom: 12vh;
+    background-color: $dark-red;
+    padding-bottom: 12vh;
     .vector-rooms {
       left: 0;
       right: 0;
       margin: auto;
+      width: 27vw;
     }
     .vector-icons {
       right: 5vw;
-      bottom: -10%;
+      bottom: -8vh;
+      width: 17vw;
     }
   }
   #level-gear-block {
-    margin-bottom: 15vh;
+    padding-bottom: 15vh;
+    background-color: $red;
     .vector-rooms {
       left: 0;
       right: 0;
       margin: auto;
+      width: 26vw;
     }
     .vector-icons {
       left: 5vw;
+      width: 22vw;
     }
     .bkg-layer {
-      @media (max-width: $break-xlrg) {
+      @media (max-width: $desktop) {
       }
     }
   }
   #level-club-block {
-    margin-bottom: 14vh;
+    background-color: $yellow;
+    padding-bottom: 14vh;
     .vector-rooms {
       left: 0;
       right: 0;
       margin: auto;
+      width: 33vw;
     }
     .vector-icons {
       right: 5vw;
-      max-width: 360px;
-      bottom: -10%;
+      width: 18vw;
+      bottom: -8vh;
     }
     .bkg-layer {
       &.active {
         @include animation(diagonal-right 8s forwards ease-in-out);
       }
-      @media (max-width: $break-xlrg) {
-      }
     }
   }
   #level-food-block {
-    margin-bottom: 20vh;
+    background-color: $green;
+    padding-bottom: 20vh;
     .vector-rooms {
       left: 0;
       right: 0;
       margin: auto;
+      width: 27vw;
     }
     .vector-icons.delay-3 {
       left: 5vw;
+      width: 22vw;
     }
     .vector-icons.delay-4 {
       right: 5vw;
-      max-width: 200px;
-    }
-    .bkg-layer {
-      @media (max-width: $break-xlrg) {
-      }
+      width: 10vw;
+      bottom: -12vh;
+      z-index: 1;
     }
   }
   #level-robo-block {
+    position: relative;
+    overflow: hidden;
     background-image: url("/wp-content/themes/twobitcircus/img/about/about_drink_shape.png");
     .robo-drink {
       max-width: 800px;
+      margin: 0 auto;
+      padding: 3em 0 6em;
+    }
+    h2.headline {
+      position: absolute;
+      top: 51%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-width: 700px;
+      margin: auto;
+    }
+    .slope {
+      width: 0;
+      height: 0;
+      border-left: 49.8vw solid $white;
+      border-right: 50.2vw solid $white;
+      border-top: 19.1vw solid transparent;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    .arrow {
+      left: 13.5px;
+      right: 0;
+      bottom: 8px;
+      height: 133px;
+      margin: auto;
+      position: absolute;
+      background-image: url("/wp-content/themes/twobitcircus/img/about/about_drink_arrow.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center bottom;
+      @media (min-width: $laptop + 1px) {
+        left: 10px;
+      }
+    }
+  }
+  #packages-block {
+    background-color: $white;
+    .package-block {
+      padding: 35px;
+      h2 {
+        display: table;
+        padding: 5px 35px;
+        color: $white;
+        text-transform: uppercase;
+        font-size: 3em;
+        text-align: center;
+        margin: auto;
+        background-color: $black;
+        border: 4px solid #595255;
+        margin-bottom: -17px;
+        position: relative;
+        z-index: 1;
+      }
+      .package-description {
+        .bkg-block {
+          padding: 30px 10px 10px;
+          background-color: $yellow;
+        }
+        ul {
+          margin-top: 25px;
+          text-transform: uppercase;
+          font-family: "Franchise Bold", "Roboto", sans-serif;
+          li {
+            font-size: 1.6em;
+          }
+        }
+      }
     }
   }
 }

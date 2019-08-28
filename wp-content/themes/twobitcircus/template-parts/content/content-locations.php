@@ -7,18 +7,12 @@
  global $location;
 ?>
 <article id="locations" <?php post_class(); ?>>
-  <div class="container-fluid text-center main-headline">
-    <?php the_title( '<h1 class="headline inview animated" data-ease="fadeInDown">', '</h1>' ); ?>
-  </div>
-  <?php if (!empty( get_the_content())):?>
-  <div class="container-fluid text-center sub-headline">
-    <div class="inview animated w-50 mx-auto delay-2"><?php the_content(); ?></div>
-  </div>
-  <?php endif ?>
+
+  <?php get_template_part( 'template-parts/partial/partial', 'header' ); ?>
 
   <section id="findus-block" class="entry-wrapper-padding">
     <div class="container">
-      <h2 class="headline inview animated text-center mb-5"><?php echo get_field('find_us_title'); ?></h2>
+      <h2 class="headline inview animated text-center mb-5 white"><?php echo get_field('find_us_title'); ?></h2>
       <div class="map-wrapper">
         <div id="main-map" style="height: 500px;"></div>
         <div class="directions">
@@ -41,26 +35,19 @@
     </div>
   </section>
 
-  <section id="calendar-block" class="entry-wrapper-padding">
-    <div class="container-fluid">
-      <h2 class="headline inview animated text-center"><?php echo get_field('calendar_title'); ?></h2>
-    </div>
-    <div class="container-fluid">
-    <?php get_template_part( 'template-parts/partial/partial', 'calendar' ); ?>
-    </div>
-  </section>
+  <?php get_template_part( 'template-parts/partial/partial', 'calendar' ); ?>
 
   <?php if(get_field('venue_details')) :?>
-  <section id="venue-block" class="entry-wrapper-padding bkg-color">
+  <section id="venue-block" class="entry-wrapper-padding">
     <div class="container">
-      <h2 class="headline inview animated text-center"><?php echo get_field('venue_title'); ?></h2>
+      <h2 class="headline inview animated text-center white"><?php echo get_field('venue_title'); ?></h2>
       <div class="venue-wrapper accordion-wrapper inview animated delay-1 clearfix">
       <?php $venues = filter_locations(get_field('venue_details'));?>
       <?php foreach($venues as $vkey => $venue) :?>
 
         <div class="card">
           <div class="card-header" id="heading-<?php echo $vkey; ?>" role="button">
-            <h5 class="mb-0 clearfix collapse-title collapsed" data-toggle="collapse" data-target="#collapse-<?php echo $vkey; ?>" aria-expanded="true" aria-controls="collapse-<?php echo $vkey; ?>">
+            <h5 class="lubalin mb-0 clearfix collapse-title collapsed" data-toggle="collapse" data-target="#collapse-<?php echo $vkey; ?>" aria-expanded="true" aria-controls="collapse-<?php echo $vkey; ?>">
                 <i class="<?php echo $venue['icon']; ?>"></i> <?php echo $venue['title']; ?>
                 <i class="fa fa-angle-down"></i>
             </h5>
@@ -78,14 +65,6 @@
   </section>
   <?php endif?>
 
-  <section id="newsletter-block" class="entry-wrapper-padding">
-    <div class="container">
-      <div class="inview animated">
-      <?php echo get_field('newsletter_block', 'option');?>
-      </div>
-    </div>
-  </section>
-  
 </article>
 <?php if(isset($location)) : ?>
 <script>

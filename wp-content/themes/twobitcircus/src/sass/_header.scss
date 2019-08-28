@@ -1,5 +1,4 @@
 // Header
-// Header
 #expanded-menu {
   position: fixed;
   top: 0;
@@ -40,26 +39,27 @@
         display: block !important;
         padding: 10px;
         text-transform: uppercase;
-        @media (max-width: $break-mobile) {
+        @media (max-width: $mobile) {
           padding: 0;
         }
         .nav-link {
           font-size: 2em;
-          color: $theme-color;
+          color: $red;
           transition: all 0.5s ease;
+          font-family: "Lubalin Graph Demi", "Roboto", sans-serif;
           &:hover,
           &:active {
             span {
-              color: #fff;
+              color: $white;
             }
           }
           i {
             display: none;
           }
-          @media (max-width: $break-mobile) {
+          @media (max-width: $mobile) {
             font-size: 1.8em;
           }
-          @media (max-width: $break-phone) {
+          @media (max-width: $phone) {
             font-size: 1.5em;
           }
         }
@@ -88,7 +88,7 @@
       &:before {
         content: "";
         cursor: pointer;
-        background: #fff;
+        background: $white;
         height: 2px;
         position: absolute;
         right: 0;
@@ -128,26 +128,10 @@
 }
 .nav-link-direction {
   position: absolute;
-  left: 96px;
-  .fa-location-arrow {
-    position: relative;
-    &:before {
-      content: "";
-      position: absolute;
-      top: -6px;
-      left: -3px;
-      right: 0;
-      margin: auto;
-      text-align: center;
-      height: 25px;
-      width: 25px;
-      border-radius: 50%;
-      border: 2px solid $theme-color3;
-    }
-    &:after {
-      font-size: 1.1em;
-      content: "\F124";
-    }
+  left: 205px;
+  font-family: "Lubalin Graph Demi", sans-serif;
+  @media (max-width: 1090px) {
+    display: none;
   }
   .direction {
     display: inline-block;
@@ -156,10 +140,40 @@
     margin-right: 10px;
     margin-left: 6px;
     font-size: 12px;
+    .fa-location-arrow {
+      position: relative;
+      margin-left: 3px;
+      &:before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: -3px;
+        right: 0;
+        margin: auto;
+        text-align: center;
+        height: 21px;
+        width: 21px;
+        border-radius: 50%;
+        border: 2px solid $dark-red;
+      }
+      &:after {
+        color: #c1202f;
+        font-size: 13px;
+        content: "\F124";
+        position: relative;
+        top: -1px;
+        left: 1.5px;
+      }
+    }
     .state {
-      color: red;
+      color: $dark-red;
       &.open {
-        color: green;
+        color: $green;
+        .fa-location-arrow {
+          &:before {
+            border: 2px solid $green;
+          }
+        }
       }
     }
   }
@@ -167,7 +181,7 @@
 #main-nav {
   opacity: 0;
   transition: opacity 0.4s ease;
-  background-color: #fff;
+  background-color: $offwhite;
   box-shadow: 0 4px 10px -10px rgba(0, 0, 0, 0.6);
   transition: top 0.5s ease-in-out;
   top: 0;
@@ -175,7 +189,7 @@
     opacity: 1;
   }
   .navbar-brand {
-    max-width: 58px;
+    max-width: 180px;
     padding: 8px 4px;
   }
   .navbar {
@@ -188,14 +202,55 @@
       position: relative;
       list-style: none;
       .nav-link {
-        padding: 0 0.5rem;
+        padding: 0 20px 0 0;
         font-size: 13px;
+        text-transform: uppercase;
+        font-family: "Lubalin Graph Demi", sans-serif;
         i {
           margin-right: 4px;
         }
+        @media (max-width: 1090px) {
+          padding: 0 12px 0 0;
+        }
+      }
+      &:hover {
+        .nav-link {
+          color: $dark-red;
+        }
       }
       &.highlight {
-        background-color: $theme-color2;
+        background-color: $dark-red;
+        width: 120px;
+        transition: all 0.5s ease;
+        position: relative;
+        .nav-link {
+          font-family: "LubalinGraphStd-Bold", sans-serif;
+          letter-spacing: 0.8px;
+          color: #fff;
+          font-size: 16px;
+          text-align: center;
+          line-height: 22px;
+          padding: 14px 10px;
+        }
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 5px;
+          height: 100%;
+          transition: all 0.5s ease;
+          background-color: $yellow;
+        }
+        &:hover {
+          background-color: $yellow;
+          &:after {
+            background-color: $red;
+          }
+          .nav-link {
+            color: $black;
+          }
+        }
       }
     }
   }
@@ -215,7 +270,7 @@
         &:before {
           content: "";
           cursor: pointer;
-          background: $theme-color-text;
+          background: $black;
           height: 2px;
           position: absolute;
           right: 0;
@@ -258,7 +313,7 @@
           &:nth-child(1) {
             &:before {
               width: 28px;
-              transform: translateY(2px);
+              @include transform(translateY(2px));
             }
           }
           &:nth-child(2) {
@@ -269,7 +324,7 @@
           &:nth-child(3) {
             &:before {
               width: 28px;
-              transform: translateY(-10px) rotate(90deg);
+              @include transform(translateY(-10px) rotate(90deg));
             }
           }
         }
@@ -288,7 +343,7 @@
       border-radius: 50%;
       width: 40px;
       height: 40px;
-      background-color: $theme-color2;
+      background-color: $dark-red;
       text-align: center;
       line-height: 40px;
       color: #fff;
@@ -300,7 +355,7 @@
   }
 }
 #notification-bar {
-  background-color: $theme-color3;
+  background-color: #4d9b91;
   color: #fff;
   padding: 4px 0;
   p {

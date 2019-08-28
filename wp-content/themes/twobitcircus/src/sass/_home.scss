@@ -1,42 +1,81 @@
 // Home CSS
-#home {
-  #events-block {
-    .link-wrapper {
-      height: 28px;
-    }
-    .slick-slide {
-      margin: 0 6px;
-    }
-    .slick-dots {
-      bottom: -45px;
+body.home {
+  #hero-block {
+    .carousel-caption.bottom {
+      top: inherit;
+      bottom: 0;
+      padding: 13% 0 6%;
+      max-width: 100%;
+      background-image: url("/wp-content/themes/twobitcircus/img/home/home_hero_bar.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center bottom;
+      .col-md-12 {
+        margin: auto;
+        max-width: 800px;
+      }
     }
   }
+}
+#home {
   #featured-block {
+    background-color: $red;
     .slick-list {
       padding: 32px 50px !important;
-      @media (max-width: $break-mid) {
+      @media (max-width: $tablet) {
         padding: 0 10px !important;
       }
       .slick-slide {
         margin: 0 6px;
         position: relative;
         transition: all 0.3s ease;
-        &.slick-center {
+        &.slick-current {
           @include transform(scale(1.2));
           z-index: 100;
-          @media (max-width: $break-mid) {
+          @media (max-width: $tablet) {
             @include transform(none);
           }
           .card {
-            opacity: 1;
+            .row {
+              opacity: 1;
+            }
           }
         }
         .card {
+          background-color: $black;
           height: 300px;
           width: 680px !important;
           transition: all 0.3s ease;
-          opacity: 0.3;
-          @media (max-width: $break-mobile) {
+          border-radius: 0;
+          border: 0;
+          .row {
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            &.bkg-yellow {
+              background-color: $yellow;
+            }
+            &.bkg-black {
+              background-color: $black;
+              .card-body {
+                color: $white;
+              }
+            }
+            &.bkg-green {
+              background-color: $green;
+            }
+          }
+          .card-heading {
+            color: $white;
+            padding: 4px 1.25rem;
+            background-color: $dark-red;
+          }
+          .card-body {
+            padding: 0 1.25rem 1.25rem;
+          }
+          .bkg-img {
+            height: 300px;
+          }
+          @media (max-width: $mobile) {
             opacity: 1;
             width: 100% !important;
             height: auto !important;
@@ -48,21 +87,91 @@
       }
     }
   }
+  #events-block {
+    background-color: $green;
+    .link-wrapper {
+      height: 28px;
+    }
+    .slick-slide {
+      margin: 0 1px;
+    }
+    .slick-dots {
+      bottom: -45px;
+    }
+    .card {
+      border-radius: 0;
+      border: 0;
+      .card-img-top {
+        border-radius: 0;
+      }
+      .card-body {
+        min-height: 214px;
+        padding: 15px 15px 20px;
+        color: $white;
+        background-color: $red;
+      }
+    }
+  }
+  #calendar-block {
+    background-color: $yellow;
+  }
+  #about-block {
+    position: relative;
+    background-image: url("/wp-content/themes/twobitcircus/img/home/home_about_bkg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    h2.headline {
+      color: $yellow;
+    }
+    .vector {
+      position: absolute;
+      bottom: 0;
+      @media (max-width: $mobile) {
+        display: none;
+      }
+      &.vector-left {
+        left: 0;
+        width: 30vw;
+        text-align: left;
+      }
+      &.vector-right {
+        right: 0;
+        width: 25vw;
+        text-align: right;
+      }
+    }
+  }
   #social-block {
+    background-color: $green;
     .social-item {
       .slick-slide {
         margin: 0 3px;
       }
       .grid-feed {
-        background-color: #fff;
-        color: $dark;
-        border: 1px solid $theme-color;
+        background-color: $black;
+        color: $white;
+        border: 1px solid $black;
         margin: 0 3px;
         .overlay-content {
           position: relative;
           padding: 0;
+          overflow: hidden;
+          img {
+            transition: all 0.8s ease;
+            opacity: 0.7;
+            @media (max-width: $tablet) {
+              opacity: 1;
+            }
+          }
+          &:hover {
+            img {
+              opacity: 1;
+              @include transform(scale(1.02));
+            }
+          }
           a {
-            color: $dark;
+            color: $white;
           }
           .likes {
             position: absolute;
@@ -71,7 +180,7 @@
             left: 0;
             width: 100%;
             font-size: 14px;
-            background: $theme-color;
+            background: $black;
             span {
               font-size: 13px;
               font-weight: 600;

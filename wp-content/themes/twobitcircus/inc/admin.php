@@ -70,36 +70,7 @@ function custom_acf_flexible_content_layout_title( $title, $field, $layout, $i )
 }
 // name
 add_filter('acf/fields/flexible_content/layout_title', 'custom_acf_flexible_content_layout_title', 10, 4);
-
-/*  Custom Field for Categories.
-    ======================================== */
-
-// Add new term page
-function twobit_taxonomy_add_meta_fields( $taxonomy ) { ?>
-    <div class="form-field term-group">
-        <label for="category_icon">
-          <?php _e( 'Category Icon', 'twobitcircus' ); ?>
-        </label>
-        <input type="text" id="category_icon" name="category_icon" size="40" value=""/>
-    </div><?php
-}
-add_action( 'category_add_form_fields', 'twobit_taxonomy_add_meta_fields', 10, 2 );
-
-// Edit term page
-function twobit_taxonomy_edit_meta_fields( $term, $taxonomy ) {
-    $category_icon = get_term_meta( $term->term_id, 'category_icon', true ); ?>
-
-    <tr class="form-field term-group-wrap">
-        <th scope="row">
-            <label for="category_icon"><?php _e( 'Category Icon', 'twobitcircus' ); ?></label>
-        </th>
-        <td>
-            <input type="text" id="category_icon" name="category_icon" value="<?php echo ( $category_icon );?>" />
-        </td>
-    </tr><?php
-}
-add_action( 'category_edit_form_fields', 'twobit_taxonomy_edit_meta_fields', 10, 2 );
-
+  
 // Save custom meta
 function twobit_taxonomy_save_taxonomy_meta( $term_id, $tag_id ) {
     if ( isset( $_POST[ 'category_icon' ] ) ) {

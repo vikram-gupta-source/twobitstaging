@@ -11,8 +11,11 @@ $_enddate = $cal->get_endDate();
 $_closed = $cal->get_closed();
 ?>
 <?php if ( !empty($calendar) ) : ?>
-<div id="calendar-block" class="mt-4">
+<div id="calendar-block" class="entry-wrapper-padding">
   <div class="container">
+    <?php if ( !empty(get_field('calendar_title')) ) : ?>
+    <h2 class="headline text-uppercase text-center mb-5 inview animated red"><?php echo get_field('calendar_title'); ?></h2>
+    <?php endif ?>
     <div class="calender-planner">
       <div class="calender-wrapper inview animated delay-1">
         <div class="calender slick-calendar">
@@ -30,13 +33,13 @@ $_closed = $cal->get_closed();
           <?php if(in_array($dayname, $_closed)) $isClosed = true; ?>
             <div class="grid <?php echo ($isClosed) ? 'closed' : '';?> <?php echo ($day_count==0)?'active':'';?>">
               <div class="grid-time text-center">
-                <div class="header clearfix">
+                <div class="header clearfix lubalinB">
                   <div class="day text-uppercase"><?php echo $dayname;?></div>
                   <div class="date text-uppercase"><?php echo date('M d', $current_date);?></div>
                 </div>
                 <?php if($isClosed) : ?>
                 <div class="entry text-uppercase">
-                  <div class="cell"><span class="time"><?php echo get_field('calendar_closed_text', 'option');?></span></div>
+                  <div class="cell"><h5 class="time"><?php echo get_field('calendar_closed_text', 'option');?></h5></div>
                 </div>
               <?php elseif(!empty($calendar[$day])) :?>
                 <div class="entry">
@@ -44,20 +47,23 @@ $_closed = $cal->get_closed();
                     <?php ksort($calendar[$day]); ?>
                     <?php foreach($calendar[$day] as $times) : ?>
                     <?php foreach($times as $time) :?>
+                    <h5 class="text-uppercase mt-3 franchise"><?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?></h5>
+                    <div class="cta-btn mx-auto">
                     <?php if(!empty($time->link)) :?>
-                    <a href="<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>" class="time" target="<?php echo (isset($time->target) && $time->target == '_self') ? '_self' : '_blank';?>" rel="noopener" onclick="gtag('event', '<?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?>', {'event_category': 'Calendar Link', 'event_label': '<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>'});">
-                    <?php else :?>
-                    <span class="time">
-                    <?php endif ?>
-                      <?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?>
-                      <?php if(!empty($time->ticket_alt) || !empty($time->ticket)) :?>
-                      <button type="button" class="button"><?php echo (!empty($time->ticket_alt)) ? $time->ticket_alt : ltrim($time->ticket, '0');?></button>
+                      <a href="<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>" class="time btn btn-twobit btn-white" target="<?php echo (isset($time->target) && $time->target == '_self') ? '_self' : '_blank';?>" rel="noopener" onclick="gtag('event', '<?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?>', {'event_category': 'Calendar Link', 'event_label': '<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>'});">
+                      <?php else :?>
+                      <div class="time btn btn-twobit btn-white">
                       <?php endif ?>
-                    <?php if(!empty($time->link)) :?>
-                    </a>
-                    <?php else :?>
-                    </span>
-                    <?php endif ?>
+                        <?php if(!empty($time->ticket_alt) || !empty($time->ticket)) :?>
+                        <span><?php echo (!empty($time->ticket_alt)) ? $time->ticket_alt : ltrim($time->ticket, '0');?></span>
+                        <?php endif ?>
+                      <?php if(!empty($time->link)) :?>
+                      </a>
+                      <?php else :?>
+                      </div>
+                      <?php endif ?>
+                      <div class="btn-behind">&nbsp;</div>
+                    </div>
                     <?php
                     $_timeRaw = str_replace('-','/', $time->posted);
                     $getTime = (!empty($time->ticket_alt)) ? trim($time->ticket_alt) : trim($time->ticket);
@@ -81,7 +87,7 @@ $_closed = $cal->get_closed();
                   </div>
                 </div>
                 <?php else :?>
-                <div class="entry no-shows text-uppercase"><div class="cell"><span class="time"><?php echo get_field('calendar_blank_text', 'option');?></span></div></div>
+                <div class="entry no-shows text-uppercase"><div class="cell"><h5 class="time"><?php echo get_field('calendar_blank_text', 'option');?></h5></div></div>
                 <?php endif ?>
               </div>
             </div>
@@ -94,7 +100,7 @@ $_closed = $cal->get_closed();
       </div>
     </div>
     <div class="mx-auto mt-6 mb-2 text-center inview animated delay-2 d-none d-lg-block">
-      <button type="button" class="btn btn-twobit fade show full-calendar"><?php _e('View Full Calendar', 'twobitcircus') ?></button>
+      <?php echo do_shortcode('[button parent="mx-auto" class="fade show full-calendar"]View Full Calendar[/button]') ?> 
     </div>
   </div>
 </div>

@@ -10,7 +10,7 @@
     $slides = filter_locations(get_field('hero'));
     $heroCnt = count($slides);
   ?>
-  <div id="hero-block" class="carousel slide" data-ride="carousel">
+  <div id="hero-block" class="carousel slide" data-ride="carousel" data-interval="false">
     <?php if($heroCnt > 1) :?>
     <ol class="carousel-indicators">
       <?php foreach($slides as $sky => $slide) :?>
@@ -23,20 +23,14 @@
       <?php foreach($slides as $sky => $slide) : ?>
       <?php $slideActive = ($sky == 0) ? 'active' : '';?>
       <?php $darken = ($slide['darken'] != 'none') ? 'darken ' . $slide['darken'] : ''; ?>
-      <div class="carousel-item <?php echo $slideActive;?> <?php echo $darken;?>" style="background-image: url('https://via.placeholder.com/1920x1080');">
+      <div class="carousel-item <?php echo $slideActive;?> <?php echo $darken;?>" <?php echo (!empty($slide['image']['url'])) ? 'style="background-image: url(\'' . $slide['image']['url'] . '\');"' : '' ;?>>
         <?php $postion_y = ($slide['position_y'] == 'top') ? 'top' : ((($slide['position_y'] == 'bottom')) ? 'bottom' : 'd-flex h-100 align-items-center justify-content-center') ?>
         <div class="container carousel-caption <?php echo $postion_y;?> inview animated delay-2">
           <?php $postion_x = ($slide['position_text'] == 'right') ? 'col-md-6 offset-md-6' : ((($slide['position_text'] == 'left')) ? 'offset-left-md-6 col-md-6' : 'col-md-12') ?>
           <div class="<?php echo $postion_x;?>">
           <?php $slideActive = ($sky == 0) ? 'active' : '';?>
-          <?php if(!empty($slide['title'])):?>
-          <h2 class="t-shadow"><?php echo $slide['title'];?></h2>
-          <?php endif ?>
-          <?php if(!empty($slide['sub_title'])):?>
-          <h3 class="t-shadow"><?php echo $slide['sub_title'];?></h3>
-          <?php endif ?>
           <?php if(!empty($slide['description'])):?>
-          <p class="t-shadow"><?php echo wpautop($slide['description'], false);?></p>
+          <?php echo wpautop($slide['description'], false);?>
           <?php endif ?>
           </div>
         </div>

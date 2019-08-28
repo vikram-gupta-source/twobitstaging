@@ -1,0 +1,31 @@
+// News
+#news {
+  background-color: $green;
+  .main-headline {
+    h1.headline {
+      color: $white;
+    }
+  }
+  .header-bkg-left {
+    background-image: url("/wp-content/themes/twobitcircus/img/header_main_blk.png");
+  }
+  .container {
+    @media (max-width: $laptop) {
+      max-width: inherit;
+    }
+    .grid-isotope {
+      .grid-item {
+        .card-title {
+          background-color: $yellow;
+          a {
+            color: $black;
+          }
+        }
+        .card-body {
+          background-color: $yellow;
+          color: $black;
+        }
+      }
+    }
+  }
+}

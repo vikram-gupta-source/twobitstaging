@@ -1,23 +1,26 @@
-$break-xlrg: 2020px;
-$break-large: 1199px;
-$break-mid: 991px;
-$break-mobile: 767px;
-$break-phone: 479px;
-$hover: #8d8d8d;
+$desktop: 2020px;
+$laptop: 1199px;
+$tablet: 991px;
+$mobile: 767px;
+$phone: 479px;
 $bootstrap-sass-asset-helper: true !important;
-$body-bg: #f7f7f6;
-$red: #761425;
-$dark-red: #29010d;
-$black: #1d151f;
-$white: #fff;
-$offwhite: #cfcfcf;
-$theme-color: #cfcfcf;
-$theme-color2: #e1e1e1;
-$theme-color3: #8d8d8d; // Dark
-$theme-color-text: #83837b; // Main Copy
+
 $use-all: true;
-$font-family-sans-serif: "Open Sans", sans-serif;
+$font-family-sans-serif: "Roboto", sans-serif;
 $slick-font-path: "/wp-content/themes/twobitcircus/fonts/slick/";
 $slick-loader-path: "/wp-content/themes/twobitcircus/img/";
 $fa-font-path: "/wp-content/themes/twobitcircus/fonts/fontawesome"; // Fontawesome
 $ionicons-font-path: "/wp-content/themes/twobitcircus/fonts/ionicons"; // IonIcons Path
+$custom-font-path: "/wp-content/themes/twobitcircus/fonts/custom"; // IonIcons Path
+
+// Colors
+$hover: #9a9a9a;
+$body-bg: #f7f7f6;
+$red: #c1202f;
+$dark-red: #771425;
+$black: #1e1520;
+$yellow: #fca920;
+$green: #23a79f;
+$white: #e2e1df;
+$offwhite: #e1e0db;
+$dark: #4c4c4c;
