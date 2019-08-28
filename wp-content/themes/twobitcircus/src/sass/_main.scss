@@ -741,14 +741,12 @@ article.page.type-page {
     opacity: 1;
   }
 }
-@include keyframes(diagonal) {
+@include keyframes(matrix) {
   0% {
-    opacity: 0;
-    @include transform(translatex(-50%) translatey(-30%));
+    @include transform(matrix(1, 0, 0, 1, 0, 0));
   }
   100% {
-    opacity: 1;
-    @include transform(translatex(0) translatey(0));
+    @include transform(matrix(1, 0, 0, 1, -2880, 0));
   }
 }
 @include keyframes(diagonal-right) {

@@ -139,6 +139,12 @@
   -o-animation-name: $animate;
   animation-name: $animate;
 }
+@mixin animation_duration($animate) {
+  -webkit-animation-duration: $animate;
+  -moz-animation-duration: $animate;
+  -o-animation-duration: $animate;
+  animation-duration: $animate;
+}
 @mixin animation_delay($value) {
   -webkit-animation-delay: $value;
   /* Safari 4.0 - 8.0 */

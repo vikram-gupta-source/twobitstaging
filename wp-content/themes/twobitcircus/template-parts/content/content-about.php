@@ -37,6 +37,9 @@
           </div>
         </div>
       </div>
+      <div id="dark-red-layer" class="bkg-layer w-100">
+        <svg width="1440px" height="25px" viewBox="0 0 1440 25" preserveAspectRatio="none"><g data-svg-origin="0 0"><path fill="currentColor" d="M 0 12.5 q 360 -25 720 0 t 720 0 t 720 0 t 720 0 t 720 0 t 720 0 V 0 H 0 V 12.5"></path></g></svg>
+      </div>
     </section>
 
     <section id="level-gear-block" class="about-sections">
@@ -58,7 +61,9 @@
           <?php endif ?>
         </div>
       </div>
-      <div id="red-layer" class="bkg-layer w-100 inview animated" data-ease="active"><img class="img-fluid w-100" src="<?php echo $imgPath;?>about_red_shape.png" alt="<?php echo get_field('gear_title');?>" /></div>
+      <div id="red-layer" class="bkg-layer w-100">
+        <svg width="1440px" height="25px" viewBox="0 0 1440 25" preserveAspectRatio="none"><g data-svg-origin="0 0"><path fill="currentColor" d="M 0 12.5 q 360 -25 720 0 t 720 0 t 720 0 t 720 0 t 720 0 t 720 0 V 0 H 0 V 12.5"></path></g></svg>
+      </div>
     </section>
 
     <section id="level-club-block" class="about-sections">
@@ -80,7 +85,9 @@
           </div>
         </div>
       </div>
-      <div id="yellow-layer" class="bkg-layer w-100 inview animated" data-ease="active"><img class="img-fluid w-100" src="<?php echo $imgPath;?>about_yellow_shape.png" alt="<?php echo get_field('club_title');?>" /></div>
+      <div id="yellow-layer" class="bkg-layer w-100">
+        <svg width="1440px" height="25px" viewBox="0 0 1440 25" preserveAspectRatio="none"><g data-svg-origin="0 0"><path fill="currentColor" d="M 0 12.5 q 360 -25 720 0 t 720 0 t 720 0 t 720 0 t 720 0 t 720 0 V 0 H 0 V 12.5"></path></g></svg>
+      </div>
     </section>
 
     <section id="level-food-block" class="about-sections">
@@ -105,7 +112,9 @@
           <?php endif ?>
         </div>
       </div>
-      <div id="green-layer" class="bkg-layer w-100 inview animated" data-ease="active"><img class="img-fluid w-100" src="<?php echo $imgPath;?>about_green_shape.png" alt="<?php echo get_field('food_title');?>" /></div>
+      <div id="green-layer" class="bkg-layer w-100">
+        <svg width="1440px" height="25px" viewBox="0 0 1440 25" preserveAspectRatio="none"><g data-svg-origin="0 0"><path fill="currentColor" d="M 0 12.5 q 360 -25 720 0 t 720 0 t 720 0 t 720 0 t 720 0 t 720 0 V 0 H 0 V 12.5"></path></g></svg>
+      </div> 
     </section>
   </div>
   <section id="level-robo-block">

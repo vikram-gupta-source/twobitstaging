@@ -108,12 +108,42 @@
   }
   .bkg-layer {
     position: absolute;
-    z-index: 0;
+    z-index: 1;
     left: 0;
-    opacity: 1 !important;
-    bottom: -5vh;
-    &.active {
-      @include animation(diagonal 8s forwards ease-in-out);
+    bottom: -1.7vw;
+    &#dark-red-layer {
+      color: $dark-red;
+    }
+    &#red-layer {
+      color: $red;
+      svg {
+        g {
+          @include animation-duration(4s);
+        }
+      }
+    }
+    &#yellow-layer {
+      color: $yellow;
+      svg {
+        g {
+          @include animation-duration(10s);
+        }
+      }
+    }
+    &#green-layer {
+      color: $green;
+      svg {
+        g {
+          @include animation-duration(6s);
+        }
+      }
+    }
+    svg {
+      width: 100%;
+      height: auto;
+      g {
+        @include animation(matrix 8s infinite ease-in-out);
+      }
     }
   }
   .about-sections {
@@ -139,7 +169,8 @@
     position: initial;
   }
   #level-escape-block {
-    margin-bottom: 12vh;
+    background-color: $dark-red;
+    padding-bottom: 12vh;
     .vector-rooms {
       left: 0;
       right: 0;
@@ -153,7 +184,8 @@
     }
   }
   #level-gear-block {
-    margin-bottom: 15vh;
+    padding-bottom: 15vh;
+    background-color: $red;
     .vector-rooms {
       left: 0;
       right: 0;
@@ -170,7 +202,8 @@
     }
   }
   #level-club-block {
-    margin-bottom: 14vh;
+    background-color: $yellow;
+    padding-bottom: 14vh;
     .vector-rooms {
       left: 0;
       right: 0;
@@ -189,7 +222,8 @@
     }
   }
   #level-food-block {
-    margin-bottom: 20vh;
+    background-color: $green;
+    padding-bottom: 20vh;
     .vector-rooms {
       left: 0;
       right: 0;
