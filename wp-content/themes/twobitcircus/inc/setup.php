@@ -173,7 +173,8 @@ add_action( 'init', 'twobitcircus_news_post_type', 0 );
 // Handle Custom Shortcode
 function twobitcircus_button_shortcode( $atts, $content=null ) {
   $attr = shortcode_atts( array(
-		'link' => 'link',
+		'link' => '#',
+    'type' => 'link',
     'class' => '',
     'parent' => '',
     'ref' => '',
@@ -183,7 +184,9 @@ function twobitcircus_button_shortcode( $atts, $content=null ) {
   $link = ($attr['link']) ? esc_attr($attr['link']) : '#';
   $ref = ($attr['ref']) ? 'data-ref="' . esc_attr($attr['ref']) . '"' : '';
   $class = ($attr['class']) ? esc_attr($attr['class']) : '';
-  return '<div class="cta-btn '.esc_attr($attr['parent']).'"><a class="btn btn-twobit '.$class.'" href="'.$link.'" '.$target.' '. $ref.'><span>'.$content.'</span></a><div class="btn-behind">&nbsp;</div></div>';
+  $type = ($attr['type'] == 'link') ? '<a class="btn btn-twobit '.$class.'" href="'.$link.'" '.$target.' '. $ref.'><span>'.$content.'</span></a>' : '<button type="'.$attr['type'].'" class="btn btn-twobit '.$class.'"><span>'.$content.'</span></button>';
+  $sm = (preg_match('/btn-sm/', $class)) ? 'sm' : '';
+  return '<div class="cta-btn '.esc_attr($attr['parent']).'">'.$type.'<div class="btn-behind '.$sm.'">&nbsp;</div></div>';
 }
 add_shortcode( 'button', 'twobitcircus_button_shortcode' );
 

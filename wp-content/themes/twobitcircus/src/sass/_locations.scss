@@ -1,12 +1,16 @@
 // Locations
 #locations {
   #findus-block {
+    background-color: $green;
     .container {
       @media (max-width: $mobile) {
         max-width: 100%;
       }
       .map-wrapper {
         position: relative;
+        #main-map {
+          border: 2px solid $yellow;
+        }
         .overlay {
           position: absolute;
           bottom: 70px;
@@ -15,13 +19,32 @@
           color: #fff;
           background-color: rgba(0, 0, 0, 0.4);
         }
+        .directions a {
+          color: $green;
+          border: 0 solid $white;
+          background-color: $white;
+          transition: all 0.4s ease;
+          &:hover {
+            background-color: $dark-red;
+          }
+        }
       }
     }
   }
+  #calendar-block {
+    background-color: $yellow;
+  }
   #venue-block {
-    .card-header {
-      h5 {
-        cursor: pointer;
+    background-color: $black;
+    .card {
+      background-color: $yellow;
+      border: 0 solid rgba(30, 21, 32, 0.125);
+      border-radius: 0;
+      margin-bottom: 2px;
+      .card-header {
+        h5 {
+          cursor: pointer;
+        }
       }
     }
   }

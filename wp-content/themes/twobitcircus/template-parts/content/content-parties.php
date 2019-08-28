@@ -6,14 +6,9 @@
  */
 ?>
 <article id="parties" <?php post_class(); ?>>
-  <div class="container-fluid text-center main-headline">
-    <?php the_title( '<h1 class="headline inview animated" data-ease="fadeInDown">', '</h1>' ); ?>
-  </div>
-  <?php if (!empty( get_the_content())):?>
-  <div class="container-fluid text-center sub-headline">
-    <div class="inview animated w-50 mx-auto delay-2"><?php the_content(); ?></div>
-  </div>
-  <?php endif ?>
+
+  <?php get_template_part( 'template-parts/partial/partial', 'header' ); ?>
+
   <section id="parties-block" class="entry-wrapper-padding inview animated delay-3">
     <?php if(!empty(get_field('event'))) :?>
       <?php $events = filter_locations(get_field('event'));?>
@@ -21,12 +16,12 @@
       <div class="grid-isotope">
         <?php foreach($events as $shows) : ?>
         <div class="grid-item card" data-event="<?php echo $shows['event_type'];?>">
-          <a href="#" class="event-link"><img class="img-fluid w-100" src="https://via.placeholder.com/329x289"/></a>
+          <a href="#" class="event-link"><img class="img-fluid w-100" src="<?php echo $shows['event_image']; ?>"/></a>
           <?php if(!empty($shows['title'])) :?>
           <div class="card-title mb-0 d-flex justify-content-between align-items-center event-link">
-            <h5><?php echo $shows['title'];?>
+            <h5 class="lubalin"><?php echo $shows['title'];?>
             <?php if(!empty($shows['event_subtitle'])) :?>
-            <br><span><?php echo $shows['event_subtitle'];?></span>
+            <br><span class="roboto"><?php echo $shows['event_subtitle'];?></span>
             <?php endif ?>
             </h5>
             <i class="fa fa-lg fa-angle-down" aria-hidden="true"></i>
@@ -36,8 +31,8 @@
             <?php if(!empty($shows['event_summary'])) :?>
             <p><?php echo $shows['event_summary'];?></p>
             <?php endif ?>
-            <div class="link-wrapper">
-              <a href="#" class="btn btn-twobit" data-toggle="modal" data-target="#event-form"><?php _e( 'Book Now', 'twobitcircus' )?></a>
+            <div class="link-wrapper my-2">
+              <div class="cta-btn mx-auto"><a class="btn btn-twobit" data-toggle="modal" data-target="#event-form" href="#"><span><?php _e( 'Book Now', 'twobitcircus' )?></span></a><div class="btn-behind sm">&nbsp;</div></div>
             </div>
           </div>
         </div>

@@ -6,14 +6,9 @@
  */
 ?>
 <article id="media-assets" <?php post_class(); ?>>
-  <div class="container-fluid text-center main-headline">
-    <?php the_title( '<h1 class="headline inview animated" data-ease="fadeInDown">', '</h1>' ); ?>
-  </div>
-  <?php if (!empty( get_the_content())):?>
-  <div class="container-fluid text-center sub-headline">
-    <div class="inview animated w-50 mx-auto delay-1"><?php the_content(); ?></div>
-  </div>
-  <?php endif ?>
+
+  <?php get_template_part( 'template-parts/partial/partial', 'header' ); ?>
+  
   <section id="media-assets-block" class="entry-wrapper-padding">
     <div class="container">
       <div id="grid-filter" class="inview animated mx-auto delay-2 text-center" data-ease="fadeInDown">

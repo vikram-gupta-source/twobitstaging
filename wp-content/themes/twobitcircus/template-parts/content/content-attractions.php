@@ -7,16 +7,8 @@
  $attractions = composeShows();
 ?>
 <article id="attractions" <?php post_class(); ?>>
-  <?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' ); ?>
-  <div class="main-headline header-bkg-right" style="background-image: url('<?php echo $image[0]; ?>')">
-    <div class="row no-gutters">
-      <div class="col-md-7 col-lg-6 col-xl-5 header-bkg-left">
-        <?php the_title( '<h1 class="headline inview animated text-center" data-ease="fadeInDown">', '</h1>' ); ?>
-        <div class="text-center"><?php the_content(); ?></div>
-      </div>
-      <div class="col-md-5 col-lg-6 col-xl-7"></div>
-    </div>
-  </div>
+
+  <?php get_template_part( 'template-parts/partial/partial', 'header' ); ?>
 
   <div id="filters" class="inview animated mx-auto delay-1">
     <div class="wrapper">

@@ -31,12 +31,18 @@ get_header();
           get_template_part( 'template-parts/content/content', 'parties' );
         } elseif(is_page('media')) {
           get_template_part( 'template-parts/content/content', 'media' );
-        } elseif(is_page('faq')) {
-          get_template_part( 'template-parts/content/content', 'faq' );
+        } elseif(is_page('contact')) {
+          get_template_part( 'template-parts/content/content', 'contact' );
+        } elseif(is_page('jobs')) {
+          get_template_part( 'template-parts/content/content', 'jobs' );
         } elseif(is_page('locations')) {
           get_template_part( 'template-parts/content/content', 'locations' );
         } elseif(is_page('latest-news')) {
           get_template_part( 'template-parts/content/content', 'news' );
+        } elseif(is_page('our-manifesto')) {
+          get_template_part( 'template-parts/content/content', 'manifesto' );
+        } elseif(is_page('our-manifesto')) {
+          get_template_part( 'template-parts/content/content', 'manifesto' );
         } else {
           get_template_part( 'template-parts/content/content' );
         }

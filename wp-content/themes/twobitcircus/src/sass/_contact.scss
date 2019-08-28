@@ -1,0 +1,34 @@
+// Contact
+#contact {
+  background-color: $black;
+  .main-headline {
+    h1.headline {
+      color: $white;
+    }
+  }
+  .header-bkg-left {
+    background-image: url("/wp-content/themes/twobitcircus/img/header_main_red.png");
+  }
+  .container {
+    @media (max-width: $laptop) {
+      max-width: inherit;
+    }
+  }
+  #contact-block {
+    background-image: url("/wp-content/themes/twobitcircus/img/home/contact_white_bkg.jpg");
+  }
+  #faq-block {
+    background-color: $green;
+    .card {
+      background-color: $yellow;
+      border: 0 solid rgba(30, 21, 32, 0.125);
+      border-radius: 0;
+      margin-bottom: 2px;
+      .card-header {
+        h5 {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

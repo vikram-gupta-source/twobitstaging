@@ -6,14 +6,8 @@
  */
 ?>
 <article id="news" <?php post_class(); ?>>
-  <div class="container-fluid text-center main-headline">
-    <?php the_title( '<h1 class="headline inview animated" data-ease="fadeInDown">', '</h1>' ); ?>
-  </div>
-  <?php if (!empty( get_the_content())):?>
-  <div class="container-fluid text-center sub-headline">
-    <div class="inview animated w-50 mx-auto delay-2"><?php the_content(); ?></div>
-  </div>
-  <?php endif ?>
+
+  <?php get_template_part( 'template-parts/partial/partial', 'header' ); ?>
 
   <section id="news" class="entry-wrapper-padding inview animated delay-3">
     <div class="container">
@@ -24,12 +18,13 @@
         );
         $query = new WP_Query( $args );
         if($query->have_posts() ) : while ($query->have_posts() ) : $query->the_post(); ?>
+        <?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' ); ?>
         <div class="grid-item card">
-          <a href="<?php echo the_permalink(); ?>"><img class="card-img-top" src="https://via.placeholder.com/329x289"/></a>
+          <a href="<?php the_permalink(); ?>"><img class="card-img-top" src="<?php echo $image[0]; ?>"/></a>
           <div class="card-body">
-            <h5 class="card-title"><a href="<?php echo the_permalink(); ?>"><?php the_title();?></a></h5> 
+            <h5 class="card-title lubalin"><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h5>
             <?php the_excerpt();?>
-            <a href="<?php echo the_permalink(); ?>" class="btn btn-twobit"><?php _e( 'Read More', 'twobitcircus' )?></a>
+            <div class="cta-btn mx-auto"><a class="btn btn-twobit" href="<?php the_permalink() ?>"><span><?php _e( 'Read More', 'twobitcircus' )?></span></a><div class="btn-behind">&nbsp;</div></div>
           </div>
         </div>
       <?php endwhile; wp_reset_query(); endif  ?>
