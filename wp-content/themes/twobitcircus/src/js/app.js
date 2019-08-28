@@ -24,8 +24,8 @@ $(function() {
     $articleElem = $("article.page.type-page"),
     playIntro = true,
     scrollHeightTop = 800,
-    scrollHeightNav = 200,
-    scrollHide = 200,
+    scrollHeightNav = 300,
+    scrollHide = 301,
     handleWaypoints = function() {
       if ($(".inview").length) {
         $(".inview").each(function() {
