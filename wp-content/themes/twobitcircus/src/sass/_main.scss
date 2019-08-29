@@ -226,6 +226,10 @@ a {
     background-color: $green !important;
     border: 3px solid $green !important;
   }
+  .btn-black + .btn-behind {
+    background-color: $white !important;
+    border: 3px solid $white !important;
+  }
 }
 .container-spacing {
   padding-top: 4em;

@@ -1,8 +1,15 @@
 // parties
 #parties-block {
+  .header-bkg-left {
+    color: $white;
+    background-image: url("/wp-content/themes/twobitcircus/img/header_main_red.png");
+  }
   .container {
     @media (max-width: $laptop) {
       max-width: inherit;
     }
   }
+}
+#footer-event-block {
+  background-color: $yellow;
 }
