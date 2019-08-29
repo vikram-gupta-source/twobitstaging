@@ -6,7 +6,7 @@
  */
 ?>
 
-<article id="page" <?php post_class('mb-6'); ?>>
+<article id="page" <?php post_class(); ?>>
 
   <?php get_template_part( 'template-parts/partial/partial', 'header-no-desc' ); ?>
 
