@@ -7,7 +7,7 @@
 ?>
 <article id="contact" <?php post_class(); ?>>
 
-  <?php get_template_part( 'template-parts/partial/partial', 'header' ); ?>
+  <?php get_template_part( 'template-parts/partial/partial', 'header-no-desc' ); ?>
 
   <section id="contact-block" class="entry-wrapper-padding bkg-img">
     <div class="container">
@@ -16,7 +16,7 @@
   </section>
 
   <?php if(get_field('question_answers')) :?>
-  <section id="faq-block" class="entry-wrapper-padding">
+  <section id="faq" class="entry-wrapper-padding">
     <div class="container">
       <h2 class="headline inview animated text-center white"><?php echo __( 'FAQ', 'twobitcircus' ); ?></h2>
       <div class="faq-wrapper accordion-wrapper inview animated delay-1 clearfix my-4">
