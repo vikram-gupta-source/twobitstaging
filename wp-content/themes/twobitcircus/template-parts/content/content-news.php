@@ -10,7 +10,7 @@
   <?php get_template_part( 'template-parts/partial/partial', 'header' ); ?>
 
   <section id="news" class="entry-wrapper-padding inview animated delay-3">
-    <div class="container">
+    <div class="container-fluid">
       <div class="grid-isotope">
       <?php
         $args = array(

@@ -1,4 +1,75 @@
 // Calendar
+.more-calendar-block {
+  background-color: $yellow;
+  padding-bottom: 3em;
+  margin-top: -5em;
+  .btn-primary {
+    color: $white;
+    background-color: $dark-red;
+    border-color: $dark-red;
+  }
+  .table-bordered td {
+    border: 1px solid $yellow;
+  }
+  .fc-day-grid {
+    background-color: $red;
+    color: $white;
+  }
+  #full-calendar {
+    h2 {
+      text-transform: uppercase;
+      font-family: "Franchise Bold", "Roboto", sans-serif;
+      line-height: 1em;
+      font-size: 3em;
+    }
+    th {
+      background-color: $green;
+      padding-top: 2px;
+      text-transform: uppercase;
+      font-family: "Lubalin Graph Demi", "Roboto", sans-serif;
+      letter-spacing: 0.8px;
+    }
+    .alert-info {
+      background-color: transparent;
+      color: $white;
+    }
+    .fc-event {
+      background-color: $white;
+      border: 1px solid $white;
+      color: $black;
+    }
+  }
+
+  #event-window {
+    .card {
+      border-radius: 0;
+      border: 0;
+    }
+    .card-header {
+      background-color: $green;
+      padding: 5px 8px;
+      border-radius: 0;
+      text-transform: uppercase;
+      font-family: "LubalinGraphStd-Bold", "Roboto", sans-serif;
+      letter-spacing: 0.8px;
+    }
+    .card-body {
+      background-color: $red;
+      color: $white;
+      .card-title {
+        text-transform: uppercase;
+        font-family: "Lubalin Graph Demi", "Roboto", sans-serif;
+        letter-spacing: 0.8px;
+      }
+    }
+  }
+  .close {
+    font-size: 3em;
+    position: absolute;
+    right: 15px;
+    top: -1.2em;
+  }
+}
 .calender-wrapper {
   max-width: 1413px;
   margin: 0 auto;
@@ -60,23 +131,12 @@
   }
 }
 #full-calendar {
-  th {
-    background-color: #dee2e6;
-  }
   .fc-event,
   .fc-event-dot {
-    background-color: #6f6f6f;
-    border: 1px solid #6f6f6f;
     border-radius: 0;
     padding: 2px 4px;
   }
   .fc-event {
     cursor: pointer;
-  }
-  #event-window {
-    .card-header {
-      background-color: #8d8d8d;
-      padding: 5px 8px;
-    }
   }
 }

@@ -12,7 +12,7 @@
   <section id="parties-block" class="entry-wrapper-padding inview animated delay-3">
     <?php if(!empty(get_field('event'))) :?>
       <?php $events = filter_locations(get_field('event'));?>
-    <div class="container">
+    <div class="container-fluid">
       <div class="grid-isotope">
         <?php foreach($events as $shows) : ?>
         <div class="grid-item card" data-event="<?php echo $shows['event_type'];?>">

@@ -14,7 +14,7 @@
   <section id="promo-block" class="entry-wrapper-padding inview animated delay-3">
     <?php if(!empty(get_field('promotions'))) :?>
     <?php $promotions = filter_locations(get_field('promotions'));?>
-    <div class="container">
+    <div class="container-fluid">
       <div class="grid-isotope">
         <?php foreach($promotions as $promo) : ?>
         <div class="grid-item card">

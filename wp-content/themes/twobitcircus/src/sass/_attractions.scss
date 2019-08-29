@@ -95,6 +95,22 @@
     }
   }
   .slick-shows {
+    > button {
+      position: absolute;
+      right: 0;
+      left: inherit;
+      top: 0;
+      &.slick-next:before {
+        left: -30px;
+        top: 31%;
+        width: 50px;
+      }
+      &.slick-prev:before {
+        left: -70px;
+        top: 31%;
+        width: 50px;
+      }
+    }
     .show-content-block {
       color: $white;
       .title {
@@ -144,6 +160,9 @@
       }
     }
   }
+  .showtimes-cycle {
+    padding: 0 25px 0 5px;
+  }
   .slick-slide {
     margin: 0 1px;
   }
@@ -151,6 +170,21 @@
     .slick-track {
       border: 0 solid $white;
       margin: 0;
+    }
+    .slick-next {
+      &:before {
+        right: -30px;
+        top: -12%;
+        width: 30px;
+        left: inherit;
+      }
+    }
+    .slick-prev {
+      &:before {
+        left: -30px;
+        top: -12%;
+        width: 30px;
+      }
     }
     .item-days {
       .day-header {

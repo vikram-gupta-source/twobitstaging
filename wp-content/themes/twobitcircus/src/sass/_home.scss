@@ -1,22 +1,4 @@
 // Home CSS
-body.home {
-  #hero-block {
-    .carousel-caption.bottom {
-      top: inherit;
-      bottom: 0;
-      padding: 13% 0 6%;
-      max-width: 100%;
-      background-image: url("/wp-content/themes/twobitcircus/img/home/home_hero_bar.png");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center bottom;
-      .col-md-12 {
-        margin: auto;
-        max-width: 800px;
-      }
-    }
-  }
-}
 #home {
   #featured-block {
     background-color: $red;
@@ -91,24 +73,43 @@ body.home {
     background-color: $green;
     .link-wrapper {
       height: 28px;
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      .cta-btn {
+        margin: auto;
+        width: 80%;
+        .btn-twobit {
+          display: block;
+        }
+      }
     }
     .slick-slide {
       margin: 0 1px;
     }
     .slick-dots {
-      bottom: -45px;
+      bottom: -15px;
     }
     .card {
       border-radius: 0;
       border: 0;
+      margin-bottom: 48px;
       .card-img-top {
         border-radius: 0;
       }
       .card-body {
-        min-height: 214px;
+        //min-height: 214px;
         padding: 15px 15px 20px;
         color: $white;
         background-color: $red;
+        .dateline {
+          height: 24px;
+        }
+        .time {
+          height: 24px;
+        }
       }
     }
   }

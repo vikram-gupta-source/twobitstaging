@@ -7,7 +7,7 @@
 ?>
 <article id="contact" <?php post_class(); ?>>
 
-  <?php get_template_part( 'template-parts/partial/partial', 'header-no-desc' ); ?>
+  <?php get_template_part( 'template-parts/partial/partial', 'header' ); ?>
 
   <section id="contact-block" class="entry-wrapper-padding bkg-img">
     <div class="container">

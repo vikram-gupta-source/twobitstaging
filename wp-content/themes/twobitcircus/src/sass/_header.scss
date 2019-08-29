@@ -190,7 +190,7 @@
   }
   .navbar-brand {
     max-width: 180px;
-    padding: 8px 4px;
+    padding: 8px 4px 11px;
   }
   .navbar {
     padding: 0;
@@ -355,9 +355,10 @@
   }
 }
 #notification-bar {
-  background-color: #4d9b91;
+  background-color: $dark-green;
   color: #fff;
   padding: 4px 0;
+  font-size: 13px;
   p {
     margin: 0;
   }

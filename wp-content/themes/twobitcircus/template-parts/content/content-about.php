@@ -9,13 +9,12 @@
 <article id="about" <?php post_class(); ?>>
 
   <section id="about-header">
-    <a class="about-logo mt-4 mx-auto inview animated reverse"><img class="img-fluid" src="<?php echo $imgPath;?>logo_white.png" alt="<?php echo get_field('header_title');?>"/></a>
-    <div class="bkg-wrapper"></div>
-    <div class="container text-center caption-bottom inview animated reverse ">
+    <div class="container text-center caption-top inview animated reverse">
       <h1 class="headline mx-auto inview animated reverse delay-3"><?php echo get_field('header_title');?></h1>
       <div class="w-75 mx-auto inview animated reverse delay-4"><?php echo get_field('header_description');?></div>
       <div class="arrow-down mx-auto"><img class="img-fluid" src="<?php echo $imgPath;?>dark_red_arrow.png" alt="<?php echo get_field('header_title');?>"/></div>
     </div>
+    <div class="bkg-wrapper"></div>
   </section>
   <div id="trigger-element" class="section-wrapper">
     <section id="level-escape-block" class="about-sections">
@@ -114,7 +113,7 @@
       </div>
       <div id="green-layer" class="bkg-layer w-100">
         <svg width="1440px" height="25px" viewBox="0 0 1440 25" preserveAspectRatio="none"><g data-svg-origin="0 0"><path fill="currentColor" d="M 0 12.5 q 360 -25 720 0 t 720 0 t 720 0 t 720 0 t 720 0 t 720 0 V 0 H 0 V 12.5"></path></g></svg>
-      </div> 
+      </div>
     </section>
   </div>
   <section id="level-robo-block">

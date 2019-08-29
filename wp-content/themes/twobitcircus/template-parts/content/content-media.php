@@ -8,7 +8,7 @@
 <article id="media-assets" <?php post_class(); ?>>
 
   <?php get_template_part( 'template-parts/partial/partial', 'header' ); ?>
-  
+
   <section id="media-assets-block" class="entry-wrapper-padding">
     <div class="container">
       <div id="grid-filter" class="inview animated mx-auto delay-2 text-center" data-ease="fadeInDown">
@@ -16,7 +16,7 @@
         <a href="#" data-filter=".video" class="btn btn-twobit"><?php _e('Videos', 'twobitcircus');?></a>
         <a href="#" data-filter=".podcast" class="btn btn-twobit"><?php _e('Podcasts', 'twobitcircus');?></a>
       </div>
-      <div class="grid-isotope mt-5">
+      <div class="grid-isotope media-grid mt-5">
         <?php if(!empty(get_field('image'))) :?>
         <?php foreach(get_field('image') as $asset) : ?>
         <div class="grid-item image">

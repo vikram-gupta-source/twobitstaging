@@ -11,3 +11,6 @@
 /wp-content/aiowps_backups/.htaccess.backup
 /wp-content/plugins/centeredge-booking/inc/*.txt
 /wp-content/cache/autoptimize
+/wp-content/uploads/instagram
+/wp-content/uploads/wp-migrate-db
+/wp-content/uploads/2019

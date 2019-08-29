@@ -9,7 +9,7 @@
   .header-bkg-left {
     background-image: url("/wp-content/themes/twobitcircus/img/header_main_blk.png");
   }
-  .container {
+  .container-fluid {
     @media (max-width: $laptop) {
       max-width: inherit;
     }
@@ -19,6 +19,9 @@
           background-color: $yellow;
           a {
             color: $black;
+            &:hover {
+              color: $dark-red;
+            }
           }
         }
         .card-body {

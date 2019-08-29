@@ -10,9 +10,9 @@
 
   <?php get_template_part( 'template-parts/partial/partial', 'header' ); ?>
 
-  <div id="filters" class="inview animated mx-auto delay-1">
+  <div id="filters" class="mx-auto">
     <div class="wrapper">
-      <nav id="subnav" class="navbar navbar-expand-sm" role="navigation">
+      <nav id="subnav" class="navbar navbar-expand-sm inview animated" role="navigation">
         <ul class="navbar-nav mx-auto">
           <?php foreach($attractions as $cat => $shows) : ?>
             <?php $hasDrop = (count($shows['posts']) > 1) ? true : false; ?>
@@ -48,11 +48,11 @@
 
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d40d77186a2f4a8"></script>
-  <section id="attractions-block" class="inview animated delay-1">
+  <section id="attractions-block">
     <div class="bkg-red-angle"></div>
     <div class="container">
       <?php if(!empty($attractions)) :?>
-        <div class="attractions-slick entry-wrapper-padding">
+        <div class="attractions-slick entry-wrapper-padding inview animated delay-1">
           <?php foreach($attractions as $cat => $shows) :?>
           <div class="item-attraction">
 
@@ -117,8 +117,7 @@
                       </h3>
                       <div class="showtimes-cycle">
                         <div id="cycle-<?php echo $show->ID;?>">
-                          <?php $slickObj = (count($composedDates) > 5) ? '{"centerMode": true }' : ''; ?>
-                          <div class="slick-days" data-slick='<?php echo $slickObj;?>' data-target="<?php echo $cat;?>">
+                          <div class="slick-days" data-target="<?php echo $cat;?>">
                             <?php foreach($composedDates as $date => $tickets) :?>
                             <div class="item-days text-center">
                               <div class="day-header lubalin">

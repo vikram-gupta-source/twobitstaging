@@ -34,7 +34,7 @@
       position: absolute;
       top: 0;
       background-image: url("/wp-content/themes/twobitcircus/img/about/about_header_bkg.jpg");
-      background-position: center 18%;
+      background-position: center top;
       background-repeat: no-repeat;
       background-size: 100%;
       width: 100%;
@@ -53,26 +53,18 @@
         transition: opacity 0.6s ease;
       }
     }
-    .about-logo {
-      display: block;
-      margin: 0 auto !important;
-      text-align: center;
-      padding-top: 2em;
-      max-width: 40vh;
-      position: relative;
-      z-index: 1;
-    }
-    .caption-bottom {
+    .caption-top {
       position: absolute;
+      z-index: 1;
       left: 0;
       right: 0;
       margin: auto;
-      bottom: 10vh;
+      top: 4%;
       h1 {
-        color: $black;
+        color: $white;
       }
       p {
-        color: $dark-red;
+        color: $white;
       }
       .arrow-down {
         max-width: 75px;

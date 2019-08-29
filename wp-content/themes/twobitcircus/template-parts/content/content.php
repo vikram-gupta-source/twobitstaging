@@ -8,7 +8,7 @@
 
 <article id="page" <?php post_class('mb-6'); ?>>
 
-  <?php get_template_part( 'template-parts/partial/partial', 'header-no-desc' ); ?>
+  <?php get_template_part( 'template-parts/partial/partial', 'header' ); ?>
 
   <section class="entry-wrapper-padding inview animated delay-2">
     <div class="container">

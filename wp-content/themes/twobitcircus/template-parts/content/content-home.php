@@ -13,10 +13,10 @@
 ?>
 <article id="home" <?php post_class(); ?>>
 
-  <section id="featured-block" class="entry-wrapper-padding inview animated">
+  <section id="featured-block" class="entry-wrapper-padding">
     <?php if(!empty(get_field('feature'))) :?>
     <?php $featured = filter_locations(get_field('feature'));?>
-    <div class="featured mt-3 slick-center-init">
+    <div class="featured mt-3 slick-center-init inview animated">
       <?php foreach($featured as $feature) : ?>
       <div class="card">
         <div class="row no-gutters bkg-<?php echo $feature['background_color']; ?>">
@@ -54,7 +54,7 @@
       <?php endif ?>
       <?php if(!empty(get_field('featured_events'))) :?>
       <?php $feature_events = filter_locations(get_field('featured_events'));?>
-      <div class="featured mt-3 slick-event inview animated delay-1">
+      <div class="featured mt-3 slick-event inview animated">
         <?php foreach($feature_events as $feature) : ?>
         <div class="card">
           <a href="<?php echo $feature['link'];?>"><img class="card-img-top img-fluid" src="<?php echo $feature['image']; ?>"/></a>
@@ -85,10 +85,10 @@
 
   <section id="about-block" class="entry-wrapper-padding text-center">
     <div class="container">
-      <div class="vector vector-left inview animated delay-2" data-ease="fadeIn"><img class="lazy-loaded img-fluid" data-src="/wp-content/themes/twobitcircus/img/home/home_about_left.png" alt="<?php echo get_field('about_title'); ?>" /></div>
-      <div class="vector vector-right inview animated delay-2" data-ease="fadeIn"><img class="lazy-loaded img-fluid" data-src="/wp-content/themes/twobitcircus/img/home/home_about_right.png" alt="<?php echo get_field('about_title'); ?>" /></div>
+      <div class="vector vector-left inview animated delay-1" data-ease="fadeIn"><img class="lazy-loaded img-fluid" data-src="/wp-content/themes/twobitcircus/img/home/home_about_left.png" alt="<?php echo get_field('about_title'); ?>" /></div>
+      <div class="vector vector-right inview animated delay-1" data-ease="fadeIn"><img class="lazy-loaded img-fluid" data-src="/wp-content/themes/twobitcircus/img/home/home_about_right.png" alt="<?php echo get_field('about_title'); ?>" /></div>
       <h2 class="headline text-uppercase text-center mb-2 inview animated"><?php echo get_field('about_title'); ?></h2>
-      <div class="w-65 mx-auto mb-4 inview animated delay-1 white" data-ease="fadeInDown"><?php echo get_field('about_description');?></div>
+      <div class="w-65 mx-auto mb-4 inview animated white" data-ease="fadeInDown"><?php echo get_field('about_description');?></div>
     </div>
   </section>
 
@@ -100,9 +100,9 @@
 
   <section id="social-block" class="entry-wrapper-padding">
     <div class="container-fluid white">
-      <h2 class="headline text-uppercase text-center mb-5 inview animated"><?php echo get_field('social_title'); ?></h2>
-      <h4 class="text-center text-uppercase inview animated delay-1" data-ease="fadeInDown">Follow what we're up to</h4>
-      <div class="inview animated delay-2 mt-4">
+      <h2 class="headline text-uppercase text-center mb-2 inview animated"><?php echo get_field('social_title'); ?></h2>
+      <h4 class="text-center text-uppercase inview animated" data-ease="fadeInDown">Follow what we're up to</h4>
+      <div class="inview animated mt-3">
       <?php if(!empty($social_feed)):?>
 
         <div class="slick slick-social social-item">

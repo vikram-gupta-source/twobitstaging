@@ -190,6 +190,11 @@ function twobitcircus_button_shortcode( $atts, $content=null ) {
 }
 add_shortcode( 'button', 'twobitcircus_button_shortcode' );
 
+function cleanHtmlPara($content) {
+  $content = str_replace( [ '<p>', '</p>', '<br />' ], '', $content );
+  return $content;
+}
+
 // Handle Session Shortcode
 function twobitcircus_session_shortcode( $atts, $content=null ) {
   $condition = false;
