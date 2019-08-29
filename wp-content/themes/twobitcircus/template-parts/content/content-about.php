@@ -21,7 +21,7 @@
       <div class="row no-gutters inview animated z-2">
         <div class="col-md-6">
           <?php if(get_field('escape_image')) : ?>
-          <div class="inview animated mt-5" data-ease="fadeInLeftBig"><img class="img-fluid lazyload" data-src="<?php echo get_field('escape_image')['url'];?>" alt="<?php echo get_field('escape_title');?>" /></div>
+          <div class="inview animated mt-5" data-ease="fadeInLeftBig"><img class="img-fluid" src="<?php echo get_field('escape_image')['url'];?>" alt="<?php echo get_field('escape_title');?>" /></div>
           <?php endif ?>
         </div>
         <div class="col-md-6 text-center white">
@@ -45,7 +45,7 @@
       <div class="row no-gutters inview animated z-2">
         <div class="col-md-6 overflow-hidden d-md-none">
           <?php if(get_field('gear_image')) : ?>
-          <div class="inview animated text-right" data-ease="fadeInRightBig"><img class="img-fluid lazyload" data-src="<?php echo get_field('gear_image')['url'];?>" alt="<?php echo get_field('gear_title');?>" /></div>
+          <div class="inview animated text-right" data-ease="fadeInRightBig"><img class="img-fluid" src="<?php echo get_field('gear_image')['url'];?>" alt="<?php echo get_field('gear_title');?>" /></div>
           <?php endif ?>
         </div>
         <div class="col-md-6 text-center white">
@@ -61,7 +61,7 @@
         </div>
         <div class="col-md-6 overflow-hidden d-none d-md-block">
           <?php if(get_field('gear_image')) : ?>
-          <div class="inview animated text-right mt-5" data-ease="fadeInRightBig"><img class="img-fluid lazyload" data-src="<?php echo get_field('gear_image')['url'];?>" alt="<?php echo get_field('gear_title');?>" /></div>
+          <div class="inview animated text-right mt-5" data-ease="fadeInRightBig"><img class="img-fluid" src="<?php echo get_field('gear_image')['url'];?>" alt="<?php echo get_field('gear_title');?>" /></div>
           <?php endif ?>
         </div>
       </div>
@@ -74,7 +74,7 @@
       <div class="row no-gutters inview animated z-2">
         <div class="col-md-6">
           <?php if(get_field('club_image')) : ?>
-          <div class="inview animated mt-5" data-ease="fadeInLeftBig"><img class="img-fluid lazyload" data-src="<?php echo get_field('club_image')['url'];?>" alt="<?php echo get_field('club_title');?>" /></div>
+          <div class="inview animated mt-5" data-ease="fadeInLeftBig"><img class="img-fluid" src="<?php echo get_field('club_image')['url'];?>" alt="<?php echo get_field('club_title');?>" /></div>
           <?php endif ?>
         </div>
         <div class="col-md-6 text-center">
@@ -85,7 +85,7 @@
             <img class="img-fluid" src="<?php echo $imgPath;?>about_club01.png" alt="<?php echo get_field('club_title');?>" />
           </div>
           <div class="vector vector-icons inview animated delay-3" data-ease="fadeInUp">
-            <img class="img-fluid lazyload" data-ease="fadeInRightBig" data-src="<?php echo $imgPath;?>about_club01_icons.png" alt="<?php echo get_field('club_title');?>" />
+            <img class="img-fluid" data-ease="fadeInRightBig" src="<?php echo $imgPath;?>about_club01_icons.png" alt="<?php echo get_field('club_title');?>" />
           </div>
         </div>
       </div>
@@ -98,7 +98,7 @@
       <div class="row no-gutters inview animated z-2">
         <div class="col-md-6 overflow-hidden d-md-none">
           <?php if(get_field('food_image')) : ?>
-          <div class="inview animated text-right" data-ease="fadeInRightBig"><img class="img-fluid lazyload" data-src="<?php echo get_field('food_image')['url'];?>" alt="<?php echo get_field('food_title');?>" /></div>
+          <div class="inview animated text-right" data-ease="fadeInRightBig"><img class="img-fluid" src="<?php echo get_field('food_image')['url'];?>" alt="<?php echo get_field('food_title');?>" /></div>
           <?php endif ?>
         </div>
         <div class="col-md-6 text-center white">
@@ -117,7 +117,7 @@
         </div>
         <div class="col-md-6 overflow-hidden d-none d-md-block">
           <?php if(get_field('food_image')) : ?>
-          <div class="inview animated text-right mt-5" data-ease="fadeInRightBig"><img class="img-fluid lazyload" data-src="<?php echo get_field('food_image')['url'];?>" alt="<?php echo get_field('food_title');?>" /></div>
+          <div class="inview animated text-right mt-5" data-ease="fadeInRightBig"><img class="img-fluid" src="<?php echo get_field('food_image')['url'];?>" alt="<?php echo get_field('food_title');?>" /></div>
           <?php endif ?>
         </div>
       </div>
@@ -130,7 +130,7 @@
     <div class="position-relative">
       <div class="robo-drink inview animated" data-ease="fadeIn">
         <?php if(get_field('food_image')) : ?>
-        <img class="img-fluid lazyload" data-src="<?php echo $imgPath;?>robo_drink.png" alt="<?php echo get_field('robo_title');?>" />
+        <img class="img-fluid" src="<?php echo $imgPath;?>robo_drink.png" alt="<?php echo get_field('robo_title');?>" />
         <?php endif ?>
       </div>
       <h2 class="headline text-center yellow inview animated delay-2"><?php echo get_field('robo_title');?></h2>
