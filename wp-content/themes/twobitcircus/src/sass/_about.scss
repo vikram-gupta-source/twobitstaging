@@ -157,6 +157,12 @@
   .col-md-6 {
     position: initial;
   }
+  .img-75 {
+    width: 75%;
+    @media (max-width: $mobile) {
+      width: 100%;
+    }
+  }
   #level-escape-block {
     background-color: $dark-red;
     padding-bottom: 12vh;
