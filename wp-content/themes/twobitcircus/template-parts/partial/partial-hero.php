@@ -26,7 +26,7 @@
       <div class="carousel-item <?php echo $slideActive;?> <?php echo $darken;?>" <?php echo (!empty($slide['image']['url'])) ? 'style="background-image: url(\'' . $slide['image']['url'] . '\');"' : '' ;?>>
         <?php $postion_y = ($slide['position_y'] == 'top') ? 'top' : ((($slide['position_y'] == 'bottom')) ? 'bottom' : 'd-flex h-100 align-items-center justify-content-center') ?>
         <div class="container-fluid carousel-caption <?php echo $postion_y;?> <?php echo $slide['background_color'];?>-bkg inview animated delay-2">
-          <?php $postion_x = ($slide['position_text'] == 'right') ? 'col-md-6 offset-md-6' : ((($slide['position_text'] == 'left')) ? 'offset-left-md-6 col-md-6' : 'mx-auto w-65') ?>
+          <?php $postion_x = ($slide['position_text'] == 'right') ? 'col-md-6 offset-md-6' : ((($slide['position_text'] == 'left')) ? 'offset-left-md-6 col-md-6' : 'mx-auto w-50') ?>
           <div class="<?php echo $postion_x;?> inview animated">
           <?php $slideActive = ($sky == 0) ? 'active' : '';?>
           <?php if(!empty($slide['headline'])):?>
