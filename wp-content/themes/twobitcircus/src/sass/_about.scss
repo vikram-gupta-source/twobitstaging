@@ -159,7 +159,7 @@
   }
   .img-75 {
     width: 75%;
-    @media (max-width: $mobile) {
+    @media (max-width: $tablet) {
       width: 100%;
     }
   }

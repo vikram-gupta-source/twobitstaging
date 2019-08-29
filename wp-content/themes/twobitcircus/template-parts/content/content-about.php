@@ -12,7 +12,7 @@
     <div class="container text-center caption-top inview animated reverse">
       <h1 class="headline mx-auto inview animated reverse delay-3"><?php echo get_field('header_title');?></h1>
       <div class="w-75 mx-auto inview animated reverse delay-4"><?php echo get_field('header_description');?></div>
-      <div class="arrow-down mx-auto"><img class="img-fluid" src="<?php echo $imgPath;?>dark_red_arrow.png" alt="<?php echo get_field('header_title');?>"/></div>
+      <div class="arrow-down mx-auto"><img class="img-fluid" src="<?php echo $imgPath;?>down_arrow.png" alt="<?php echo get_field('header_title');?>"/></div>
     </div>
     <div class="bkg-wrapper"></div>
   </section>
