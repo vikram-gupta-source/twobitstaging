@@ -21,7 +21,7 @@
       <div class="row no-gutters inview animated z-2">
         <div class="col-md-6">
           <?php if(get_field('escape_image')) : ?>
-          <div class="inview animated" data-ease="fadeInLeftBig"><img class="img-fluid" src="<?php echo get_field('escape_image')['url'];?>" alt="<?php echo get_field('escape_title');?>" /></div>
+          <div class="inview animated" data-ease="fadeInLeftBig"><img class="img-fluid w-75" src="<?php echo get_field('escape_image')['url'];?>" alt="<?php echo get_field('escape_title');?>" /></div>
           <?php endif ?>
         </div>
         <div class="col-md-6 text-center white">
@@ -43,6 +43,11 @@
 
     <section id="level-gear-block" class="about-sections">
       <div class="row no-gutters inview animated z-2">
+        <div class="col-md-6 d-none d-md-block overflow-hidden">
+          <?php if(get_field('gear_image')) : ?>
+          <div class="inview animated text-right" data-ease="fadeInRightBig"><img class="img-fluid w-75" src="<?php echo get_field('gear_image')['url'];?>" alt="<?php echo get_field('gear_title');?>" /></div>
+          <?php endif ?>
+        </div>
         <div class="col-md-6 text-center white">
           <h3 class="header-line lubalinB mt-5 text-uppercase inview animated yellow"><?php echo get_field('gear_title');?></h3>
           <h2 class="headline inview animated delay-1"><?php echo get_field('gear_subtitle');?></h2>
@@ -56,7 +61,7 @@
         </div>
         <div class="col-md-6 overflow-hidden">
           <?php if(get_field('gear_image')) : ?>
-          <div class="inview animated text-right" data-ease="fadeInRightBig"><img class="img-fluid" src="<?php echo get_field('gear_image')['url'];?>" alt="<?php echo get_field('gear_title');?>" /></div>
+          <div class="inview animated text-right" data-ease="fadeInRightBig"><img class="img-fluid w-75" src="<?php echo get_field('gear_image')['url'];?>" alt="<?php echo get_field('gear_title');?>" /></div>
           <?php endif ?>
         </div>
       </div>
@@ -69,7 +74,7 @@
       <div class="row no-gutters inview animated z-2">
         <div class="col-md-6">
           <?php if(get_field('club_image')) : ?>
-          <div class="inview animated" data-ease="fadeInLeftBig"><img class="img-fluid" src="<?php echo get_field('club_image')['url'];?>" alt="<?php echo get_field('club_title');?>" /></div>
+          <div class="inview animated" data-ease="fadeInLeftBig"><img class="img-fluid w-75" src="<?php echo get_field('club_image')['url'];?>" alt="<?php echo get_field('club_title');?>" /></div>
           <?php endif ?>
         </div>
         <div class="col-md-6 text-center">
@@ -91,6 +96,11 @@
 
     <section id="level-food-block" class="about-sections">
       <div class="row no-gutters inview animated z-2">
+        <div class="col-md-6 d-none d-md-block overflow-hidden">
+          <?php if(get_field('food_image')) : ?>
+          <div class="inview animated text-right" data-ease="fadeInRightBig"><img class="img-fluid w-75" src="<?php echo get_field('food_image')['url'];?>" alt="<?php echo get_field('food_title');?>" /></div>
+          <?php endif ?>
+        </div>
         <div class="col-md-6 text-center white">
           <h3 class="header-line lubalinB mt-5 text-uppercase inview animated yellow"><?php echo get_field('food_title');?></h3>
           <h2 class="headline inview animated delay-1"><?php echo get_field('food_subtitle');?></h2>
@@ -107,7 +117,7 @@
         </div>
         <div class="col-md-6 overflow-hidden">
           <?php if(get_field('food_image')) : ?>
-          <div class="inview animated text-right" data-ease="fadeInRightBig"><img class="img-fluid" src="<?php echo get_field('food_image')['url'];?>" alt="<?php echo get_field('food_title');?>" /></div>
+          <div class="inview animated text-right" data-ease="fadeInRightBig"><img class="img-fluid w-75" src="<?php echo get_field('food_image')['url'];?>" alt="<?php echo get_field('food_title');?>" /></div>
           <?php endif ?>
         </div>
       </div>
