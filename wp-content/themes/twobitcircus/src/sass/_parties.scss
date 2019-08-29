@@ -1,9 +1,11 @@
 // parties
-#parties-block {
+#parties {
   .header-bkg-left {
     color: $white;
     background-image: url("/wp-content/themes/twobitcircus/img/header_main_red.png");
   }
+}
+#parties-block {
   .container {
     @media (max-width: $laptop) {
       max-width: inherit;
