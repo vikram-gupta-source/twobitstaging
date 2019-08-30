@@ -64,7 +64,11 @@
             <div class="dateline"><?php echo $feature['date'];?></div>
             <div class="time"><?php echo $feature['time'];?></div>
             <?php endif ?>
-            <div class="mt-3 mx-auto addthis_inline_share_toolbox" data-url="<?php echo $feature['link'];?>" data-title="<?php echo $feature['title'];?>"></div>
+            <div class="mt-3 mx-auto addthis_toolbox" data-url="<?php echo $feature['link'];?>" data-title="<?php echo $feature['title'];?>">
+              <a class="addthis_button_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a class="addthis_button_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a class="addthis_button_instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </div>
             <div class="link-wrapper mt-2">
               <?php if(!empty($feature['link_title'])) :?>
               <div class="link">
