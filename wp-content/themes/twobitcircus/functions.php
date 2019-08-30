@@ -62,3 +62,30 @@ function composeTickets($name) {
   }
   return $composedDates;
 }
+
+// Air Table connection
+add_action('wp_ajax_nopriv_ajaxAirtable', 'ajaxAirtable');
+add_action('wp_ajax_ajaxAirtable', 'ajaxAirtable');
+function ajaxAirtable() {
+    $output = [];
+    $userAnswer = strtolower(stripslashes( $_POST['secret'] ));
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,"https://api.airtable.com/v0/app44GPTYlw2v5cCE/Secrets/recZh4w7UMjNAObWC");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $headers = array();
+    $headers[] = 'Authorization: Bearer keyFZPbWVXAiR6d4A';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    $server_output = curl_exec($ch);
+    $raw = json_decode($server_output);
+    curl_close ($ch);
+    if(!empty($server_output)) {
+      $correctAnswer = strtolower($raw->fields->Answer);
+      if($userAnswer == $correctAnswer){
+        $output['succeed'] = $raw->fields->Succeed;
+      } else{
+        $output['failed'] = $raw->fields->Fail;
+      }
+      echo json_encode($output);
+    }
+    wp_die();
+}

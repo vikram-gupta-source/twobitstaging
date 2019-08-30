@@ -25,9 +25,24 @@ footer {
       font-size: 1.3em;
       text-transform: uppercase;
     }
+    .ajax-loader {
+      display: none !important;
+    }
+    div.wpcf7-mail-sent-ok {
+      margin: 2em 0 1em;
+      border: 2px solid $dark-green;
+      background-color: $green;
+    }
+    div.wpcf7-validation-errors,
+    div.wpcf7-acceptance-missing {
+      margin: 2em 0 1em;
+      border: 1px solid $yellow;
+      background-color: $black;
+    }
     .input-group-text {
       background-color: $black;
       border: 1px solid $black;
+      height: 35.59px;
       .fa.fa-envelope {
         color: $white;
       }
