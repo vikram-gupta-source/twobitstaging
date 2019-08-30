@@ -84,7 +84,11 @@
                       </div>
                       <?php endif ?>
                       <?php if(isset($_cat[0])) :?>
-                      <div class="mt-2 addthis_inline_share_toolbox pull-right" data-url="<?php echo get_site_url() ?>/attractions/?cat=<?php echo $_cat[0]->slug ?>&id=<?php echo $skey ?>" data-title="<?php echo $show->post_title;?>"></div>
+                      <div class="mt-2 pull-right addthis_toolbox" data-url="<?php echo get_site_url() ?>/attractions/?cat=<?php echo $_cat[0]->slug ?>&id=<?php echo $skey ?>" data-title="<?php echo $show->post_title;?>">
+                        <a class="addthis_button_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <a class="addthis_button_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <a class="addthis_button_pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+                      </div>
                       <?php endif ?>
                     </div>
                     <div class="show-content-block col-md-6 col-lg-5">
