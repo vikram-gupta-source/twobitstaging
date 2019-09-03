@@ -21,6 +21,9 @@
   }
 }
 #attractions {
+  @media (max-width: $mobile) {
+    overflow-x: hidden;
+  }
   #attractions-block {
     background-image: url("/wp-content/themes/twobitcircus/img/attractions/attraction_bkg.jpg");
     background-repeat: no-repeat;
@@ -67,18 +70,32 @@
     }
     .navbar {
       padding: 0;
-      .nav-item {
-        &:hover,
-        &.active {
-          .nav-link {
-            background-color: $yellow;
-            color: $dark-red;
+      @media (max-width: $mobile) {
+        display: block !important;
+        .navbar-nav {
+          .slick-list {
+            overflow: visible !important;
+          }
+          .slick-slide {
+            margin: 0;
+            .dropdown-menu {
+              position: absolute !important;
+            }
           }
         }
+      }
+
+      .nav-item {
         .nav-link {
           padding: 15px 20px;
           font-size: 1em;
           color: $white;
+
+          &:hover,
+          &.active {
+            background-color: $yellow;
+            color: $dark-red;
+          }
         }
         .dropdown-menu {
           margin-top: 0;

@@ -6,6 +6,7 @@
  */
  $attractions = composeShows();
  $showCnt = 0;
+ $showCntDrop = 0;
 ?>
 <article id="attractions" <?php post_class(); ?>>
 
@@ -20,13 +21,15 @@
         <?php $hasDrop = (count($shows['posts']) > 1) ? true : false; ?>
         <?php $isFirst = ($showCnt == 0) ? 'active' : ''; ?>
           <?php if($hasDrop) :?>
-          <li class="nav-item dropdown <?php echo $isFirst; ?>">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <?php echo $isFirst; ?>" href="#" data-toggle="dropdown" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>">
               <?php echo $shows['terms']->name;?>
             </a>
             <div class="dropdown-menu">
               <?php foreach($shows['posts'] as $skey => $show) :?>
-              <a class="dropdown-item <?php echo $isFirst; ?>" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a>
+              <?php $isFirstDrop = ($showCntDrop == 0) ? 'active' : ''; ?>
+              <a class="dropdown-item <?php echo $isFirstDrop; ?>" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a>
+              <?php $showCntDrop++;?>
               <?php endforeach ?>
             </div>
           </li>
@@ -53,7 +56,7 @@
           <?php foreach($attractions as $cat => $shows) :?>
           <div class="item-attraction">
 
-            <div class="slick-shows" id="<?php echo $cat;?>">
+            <div class="slick-shows" id="cat-<?php echo $cat;?>">
               <?php $num = count($shows['posts']); ?>
               <?php foreach($shows['posts'] as $skey => $show) :?>
                 <?php if(!filter_location_by_field(get_field('available_in', $show->ID))) continue; ?>
