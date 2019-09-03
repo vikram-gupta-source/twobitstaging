@@ -164,18 +164,3 @@
     @content;
   }
 }
-@mixin heart-beat() {
-  &:after {
-    content: "";
-    background: url("/wp-content/uploads/2018/10/line-heart.png") no-repeat
-      center / contain;
-    width: 60px;
-    height: 17px;
-    position: absolute;
-    bottom: -30px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    display: block;
-  }
-}

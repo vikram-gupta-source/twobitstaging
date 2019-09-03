@@ -9,7 +9,7 @@ get_header();
 ?>
 
 	<section id="error-template" class="container">
-    <article <?php post_class(); ?>>
+    <article <?php post_class('my-4'); ?>>
 			<div class="error-404 not-found">
 			     <h1 class="headline inview animated"><?php _e( 'Oops! That page can&rsquo;t be found.', 'twobitcircus' ); ?></h1>
 

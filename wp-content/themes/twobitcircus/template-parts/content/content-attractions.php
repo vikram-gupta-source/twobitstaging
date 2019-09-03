@@ -5,6 +5,7 @@
  * @package twobitcircus
  */
  $attractions = composeShows();
+ $showCnt = 0;
 ?>
 <article id="attractions" <?php post_class(); ?>>
 
@@ -12,37 +13,33 @@
 
   <div id="filters" class="mx-auto">
     <div class="wrapper">
-      <nav id="subnav" class="navbar navbar-expand-sm inview animated" role="navigation">
-        <ul class="navbar-nav mx-auto">
-          <?php foreach($attractions as $cat => $shows) : ?>
-            <?php $hasDrop = (count($shows['posts']) > 1) ? true : false; ?>
 
-            <li class="nav-item text-center nav-parent lubalinB">
-              <?php if($hasDrop) :?>
-              <a class="nav-link link-parent dropdown-toggle" href="#" aria-controls="<?php echo $shows['terms']->slug;?>" data-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" id="navbarDropdown-<?php echo $shows['terms']->slug;?>" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <?php echo $shows['terms']->name;?>
-              </a>
-              <?php else: ?>
-              <a class="nav-link link-parent" href="#" aria-controls="<?php echo $shows['terms']->slug;?>" data-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>">
-                <?php echo $shows['terms']->name;?>
-              </a>
-              <?php endif ?>
-              <?php if($hasDrop) :?>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown-<?php echo $shows['terms']->slug;?>">
-                <div class="navbar navbar-expand-sm">
-                  <ul class="navbar-nav mx-auto">
-                    <?php foreach($shows['posts'] as $skey => $show) :?>
-                    <li class="nav-item"><a class="nav-link" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a></li>
-                    <?php endforeach ?>
-                  </ul>
-                </div>
-              </div>
-              <?php endif ?>
-            </li>
-
-          <?php endforeach ?>
+      <nav class="navbar navbar-expand-sm">
+        <ul class="navbar-nav mx-auto lubalin text-uppercase text-center">
+        <?php foreach($attractions as $cat => $shows) : ?>
+        <?php $hasDrop = (count($shows['posts']) > 1) ? true : false; ?>
+        <?php $isFirst = ($showCnt == 0) ? 'active' : ''; ?>
+          <?php if($hasDrop) :?>
+          <li class="nav-item dropdown <?php echo $isFirst; ?>">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>">
+              <?php echo $shows['terms']->name;?>
+            </a>
+            <div class="dropdown-menu">
+              <?php foreach($shows['posts'] as $skey => $show) :?>
+              <a class="dropdown-item <?php echo $isFirst; ?>" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a>
+              <?php endforeach ?>
+            </div>
+          </li>
+          <?php else: ?>
+          <li class="nav-item <?php echo $isFirst; ?>">
+            <a class="nav-link" href="#" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>"><?php echo $shows['terms']->name;?></a>
+          </li>
+          <?php endif ?>
+        <?php $showCnt ++; ?>
+        <?php endforeach ?>
         </ul>
       </nav>
+
     </div>
   </div>
 
@@ -99,13 +96,13 @@
                       <?php if(!empty($info[0]['players']) || !empty($info[0]['show_duration']) || !empty($info[0]['price'])):?>
                       <div class="info-block mt-3 mb-3">
                         <?php if(!empty($info[0]['players'])):?>
-                        <div class="d-inline-block"><i class="fa fa-user pr-1"></i><?php echo $info[0]['players'];?></div>
+                        <div class="d-inline-block pr-3"><i class="fa fa-user pr-1"></i><?php echo $info[0]['players'];?></div>
                         <?php endif ?>
                         <?php if(!empty($info[0]['show_duration'])):?>
-                        <div class="d-inline-block pl-3"><i class="fa fa-clock-o pr-1"></i><?php echo $info[0]['show_duration'];?></div>
+                        <div class="d-inline-block pr-3"><i class="fa fa-clock-o pr-1"></i><?php echo $info[0]['show_duration'];?></div>
                         <?php endif ?>
                         <?php if(!empty($info[0]['price'])):?>
-                        <div class="d-inline-block pl-3"><i class="fa fa-money pr-1"></i><?php echo $info[0]['price'];?></div>
+                        <div class="d-inline-block pr-3"><i class="fa fa-money pr-1"></i><?php echo $info[0]['price'];?></div>
                         <?php endif ?>
                       </div>
                       <?php endif ?>

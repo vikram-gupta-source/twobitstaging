@@ -1,8 +1,24 @@
 // Attractions
-.tooltip-inner {
-  max-width: 280px;
-  width: 280px;
-  padding: 15px 8px 5px;
+.tooltip {
+  @media (max-width: $mobile) {
+    display: none !important;
+  }
+  .tooltip-inner {
+    max-width: 280px;
+    width: 280px;
+    padding: 15px 8px 5px;
+    border-radius: 0;
+    border: 1px solid $yellow;
+  }
+  &.bs-tooltip-bottom {
+    display: none !important;
+  }
+  &.bs-tooltip-top {
+    top: 7px !important;
+    .tooltip-inner {
+      border-bottom: 0;
+    }
+  }
 }
 #attractions {
   #attractions-block {
@@ -52,6 +68,39 @@
     .navbar {
       padding: 0;
       .nav-item {
+        &:hover,
+        &.active {
+          .nav-link {
+            background-color: $yellow;
+            color: $dark-red;
+          }
+        }
+        .nav-link {
+          padding: 15px 20px;
+          font-size: 1em;
+          color: $white;
+        }
+        .dropdown-menu {
+          margin-top: 0;
+          border-radius: 0;
+          padding: 8px 15px;
+          text-align: center;
+          text-transform: uppercase;
+          border: 1px solid $yellow;
+          background-color: $black;
+          .dropdown-item {
+            background-color: transparent;
+            color: $white;
+            font-size: 0.9em;
+            &.active,
+            &:hover {
+              color: $yellow;
+            }
+          }
+        }
+      }
+      /*
+      .nav-item {
         .nav-link {
           position: relative;
           z-index: 2;
@@ -63,6 +112,7 @@
           &.dropdown-toggle.active + .dropdown-menu {
             display: block !important;
           }
+
           &:hover,
           &.active {
             background-color: $yellow;
@@ -91,7 +141,8 @@
             padding: 20px;
           }
         }
-      }
+
+      }  */
     }
   }
   .slick-shows {
@@ -100,15 +151,18 @@
       right: 0;
       left: inherit;
       top: 0;
+      @media (max-width: $mobile) {
+        top: 45.5%;
+      }
       &.slick-next:before {
-        left: -30px;
-        top: 31%;
-        width: 50px;
+        left: -10px;
+        top: 45%;
+        width: 40px;
       }
       &.slick-prev:before {
-        left: -70px;
-        top: 31%;
-        width: 50px;
+        left: -37px;
+        top: 45%;
+        width: 40px;
       }
     }
     .show-content-block {
@@ -117,13 +171,12 @@
         font-size: 3em;
         color: $offwhite;
         position: relative;
-        &:before {
-          position: absolute;
-          bottom: 0;
-          content: "";
-          height: 1px;
-          width: 100%;
-          background-color: $yellow;
+        width: calc(100% - 57px);
+        @media (max-width: $laptop) {
+          font-size: 2.5em;
+        }
+        @media (max-width: $mobile) {
+          font-size: 2em;
         }
       }
       h3 {
@@ -132,9 +185,19 @@
         }
       }
       .info-block {
+        position: relative;
         padding: 5px 15px;
         background-color: $green;
         color: $white;
+        &:before {
+          position: absolute;
+          top: -10px;
+          left: 0;
+          content: "";
+          height: 1px;
+          width: 100%;
+          background-color: $yellow;
+        }
       }
       .available-dates {
         padding-bottom: 10px;

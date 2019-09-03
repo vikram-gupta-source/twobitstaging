@@ -39,55 +39,69 @@ $_closed = $cal->get_closed();
                 </div>
                 <?php if($isClosed) : ?>
                 <div class="entry text-uppercase">
-                  <div class="cell"><h5 class="time"><?php echo get_field('calendar_closed_text', 'option');?></h5></div>
+                  <div class="cell">
+                    <div class="cell-box">
+                      <h5 class="time"><?php echo get_field('calendar_closed_text', 'option');?></h5>
+                    </div>
+                  </div>
                 </div>
               <?php elseif(!empty($calendar[$day])) :?>
                 <div class="entry">
                   <div class="cell">
+
                     <?php ksort($calendar[$day]); ?>
                     <?php foreach($calendar[$day] as $times) : ?>
                     <?php foreach($times as $time) :?>
-                    <h5 class="text-uppercase mt-3 franchise"><?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?></h5>
-                    <div class="cta-btn mx-auto">
-                    <?php if(!empty($time->link)) :?>
-                      <a href="<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>" class="time btn btn-twobit btn-white" target="<?php echo (isset($time->target) && $time->target == '_self') ? '_self' : '_blank';?>" rel="noopener" onclick="gtag('event', '<?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?>', {'event_category': 'Calendar Link', 'event_label': '<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>'});">
-                      <?php else :?>
-                      <div class="time btn btn-twobit btn-white">
-                      <?php endif ?>
-                        <?php if(!empty($time->ticket_alt) || !empty($time->ticket)) :?>
-                        <span><?php echo (!empty($time->ticket_alt)) ? $time->ticket_alt : ltrim($time->ticket, '0');?></span>
-                        <?php endif ?>
+                    <div class="cell-box">
+                      <h5 class="text-uppercase franchise"><?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?></h5>
+                      <div class="cta-btn mx-auto">
                       <?php if(!empty($time->link)) :?>
-                      </a>
-                      <?php else :?>
+                        <a href="<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>" class="time btn btn-twobit btn-white" target="<?php echo (isset($time->target) && $time->target == '_self') ? '_self' : '_blank';?>" rel="noopener" onclick="gtag('event', '<?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?>', {'event_category': 'Calendar Link', 'event_label': '<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>'});">
+                        <?php else :?>
+                        <div class="time btn btn-twobit btn-white">
+                        <?php endif ?>
+                          <?php if(!empty($time->ticket_alt) || !empty($time->ticket)) :?>
+                          <span><?php echo (!empty($time->ticket_alt)) ? $time->ticket_alt : ltrim($time->ticket, '0');?></span>
+                          <?php endif ?>
+                        <?php if(!empty($time->link)) :?>
+                        </a>
+                        <?php else :?>
+                        </div>
+                        <?php endif ?>
+                        <div class="btn-behind">&nbsp;</div>
                       </div>
-                      <?php endif ?>
-                      <div class="btn-behind">&nbsp;</div>
+                      <?php
+                      $_timeRaw = str_replace('-','/', $time->posted);
+                      $getTime = (!empty($time->ticket_alt)) ? trim($time->ticket_alt) : trim($time->ticket);
+                      $_link = (isset($time->target) && $time->link) ? $time->link : (($time->link) ? 'https://twobitcircus.centeredgeonline.com'.$time->link : '');
+                      $startTime = 0;
+                      $endTime = 0;
+                      $arrayStr = ['title' => $time->name, 'url' => $_link, 'textColor' => 'hello', 'id' => 'https://via.placeholder.com/329x289'];
+                      if(preg_match('/-/', $getTime)) {
+                        $parseTime = explode('-', $getTime);
+                        $startTime = date('Y-m-d h:i', (strtotime($_timeRaw  .' ' .trim($parseTime[0]))));
+                        $endTime = date('Y-m-d h:i', (strtotime($_timeRaw  .' ' .trim($parseTime[1]))));
+                        $arrayStr += ['start' => $startTime];
+                        $arrayStr += ['end' => $endTime];
+                      } else {
+                        $startTime = date('Y-m-d h:i', (strtotime($_timeRaw .' '. $getTime)));
+                        $arrayStr += ['start' => $startTime];
+                      }
+                      $addEventCal[] = $arrayStr; ?>
                     </div>
-                    <?php
-                    $_timeRaw = str_replace('-','/', $time->posted);
-                    $getTime = (!empty($time->ticket_alt)) ? trim($time->ticket_alt) : trim($time->ticket);
-                    $_link = (isset($time->target) && $time->link) ? $time->link : (($time->link) ? 'https://twobitcircus.centeredgeonline.com'.$time->link : '');
-                    $startTime = 0;
-                    $endTime = 0;
-                    $arrayStr = ['title' => $time->name, 'url' => $_link, 'textColor' => 'hello', 'id' => 'https://via.placeholder.com/329x289'];
-                    if(preg_match('/-/', $getTime)) {
-                      $parseTime = explode('-', $getTime);
-                      $startTime = date('Y-m-d h:i', (strtotime($_timeRaw  .' ' .trim($parseTime[0]))));
-                      $endTime = date('Y-m-d h:i', (strtotime($_timeRaw  .' ' .trim($parseTime[1]))));
-                      $arrayStr += ['start' => $startTime];
-                      $arrayStr += ['end' => $endTime];
-                    } else {
-                      $startTime = date('Y-m-d h:i', (strtotime($_timeRaw .' '. $getTime)));
-                      $arrayStr += ['start' => $startTime];
-                    }
-                    $addEventCal[] = $arrayStr; ?>
                     <?php endforeach ?>
                     <?php endforeach ?>
+
                   </div>
                 </div>
                 <?php else :?>
-                <div class="entry no-shows text-uppercase"><div class="cell"><h5 class="time"><?php echo get_field('calendar_blank_text', 'option');?></h5></div></div>
+                <div class="entry no-shows text-uppercase">
+                  <div class="cell">
+                    <div class="cell-box">
+                      <h5 class="time"><?php echo get_field('calendar_blank_text', 'option');?></h5>
+                    </div>
+                  </div>
+                </div>
                 <?php endif ?>
               </div>
             </div>

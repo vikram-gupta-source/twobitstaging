@@ -20,13 +20,35 @@ footer {
     }
   }
   .footer-widget {
+    .textwidget {
+      max-width: 290px;
+      @media (max-width: $mobile) {
+        margin: auto;
+      }
+    }
     .widgettitle {
       margin-top: 10px;
       font-size: 1.3em;
       text-transform: uppercase;
     }
+    .input-wrapper {
+      @media (max-width: $mobile) {
+        margin: auto;
+        max-width: 282px;
+      }
+    }
     .ajax-loader {
       display: none !important;
+    }
+    .form-control {
+      width: 240px;
+      padding: 6px 15px 6px;
+      @media (max-width: $tablet) {
+        width: 179px;
+      }
+      @media (max-width: $mobile) {
+        width: 240px;
+      }
     }
     div.wpcf7-mail-sent-ok {
       margin: 2em 0 1em;
@@ -40,11 +62,11 @@ footer {
       background-color: $black;
     }
     .input-group-text {
-      background-color: $black;
-      border: 1px solid $black;
-      height: 35.59px;
+      background-color: $white;
+      border: 1px solid $white;
+      height: 35px;
       .fa.fa-envelope {
-        color: $white;
+        color: $dark-red;
       }
     }
   }

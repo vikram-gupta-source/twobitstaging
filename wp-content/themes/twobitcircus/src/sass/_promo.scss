@@ -1,9 +1,6 @@
 // Promo
 #promotions {
   background-color: $black;
-  .header-bkg-left {
-    background-image: url("/wp-content/themes/twobitcircus/img/header_main_white.png");
-  }
   .container {
     @media (max-width: $laptop) {
       max-width: inherit;

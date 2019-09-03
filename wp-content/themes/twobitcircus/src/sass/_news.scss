@@ -6,9 +6,6 @@
       color: $white;
     }
   }
-  .header-bkg-left {
-    background-image: url("/wp-content/themes/twobitcircus/img/header_main_blk.png");
-  }
   .container-fluid {
     @media (max-width: $laptop) {
       max-width: inherit;

@@ -163,6 +163,7 @@ a {
 .cta-btn {
   position: relative;
   display: table;
+  vertical-align: top;
   p {
     display: none !important;
   }
@@ -229,6 +230,9 @@ a {
   .btn-black + .btn-behind {
     background-color: $white !important;
     border: 3px solid $white !important;
+  }
+  .ajax-loader {
+    display: none !important;
   }
 }
 .container-spacing {
@@ -323,6 +327,7 @@ form {
 }
 main {
   margin: 0;
+  min-height: 700px;
 }
 .w-65 {
   width: 65%;
@@ -486,6 +491,99 @@ article.page.type-page {
     margin-top: -11px;
   }
 }
+.grid-flex {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  max-width: 2020px;
+  margin: auto;
+  @media (max-width: 1575px) {
+    max-width: 1147px;
+  }
+  @media (max-width: 1193px) {
+    max-width: 1056px;
+  }
+  @media (max-width: 1132px) {
+    max-width: 704px;
+  }
+  .grid-item {
+    width: 380px;
+    max-width: 100%;
+    @media (max-width: 1575px) {
+      max-width: 380px;
+    }
+    @media (max-width: 1193px) {
+      max-width: 350px;
+    }
+    @media (max-width: 750px) {
+      max-width: 100%;
+    }
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    margin: 1px;
+    border-radius: 0;
+    border: 0;
+    background-color: transparent;
+    .card-image {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      img {
+        @include transform(scale(1.01));
+        transition: all 1s ease-in-out;
+        @include backface-visibility(hidden);
+      }
+    }
+    &:hover {
+      .card-image img {
+        @include transform(scale(1.03));
+      }
+    }
+    .card-title {
+      padding: 12px 1.25rem;
+      background-color: $red;
+      height: 60px;
+      position: relative;
+      color: $white;
+      h5 {
+        margin: 0;
+        line-height: 1;
+        font-size: 18px;
+        text-align: left;
+        width: 95%;
+        cursor: pointer;
+        text-transform: uppercase;
+        span {
+          font-size: 14px;
+        }
+      }
+      i.fa-angle-down:before {
+        cursor: pointer;
+        font-size: 1.8em;
+        color: $yellow;
+        position: absolute;
+        top: 23px;
+        right: 10px;
+        transition: all 0.5s ease-in-out;
+      }
+      &.collapsed {
+        i.fa-angle-down:before {
+          @include transform(rotate(180deg));
+        }
+      }
+    }
+    .card-body {
+      -ms-flex: none;
+      flex: none;
+      padding: 0 1.25rem 1.25em;
+      background-color: $red;
+      color: $white;
+    }
+  }
+}
 .grid-isotope {
   text-align: center;
   margin: 0 auto;
@@ -639,17 +737,39 @@ article.page.type-page {
   background-color: $black;
   .header-bkg-left {
     background-image: url("/wp-content/themes/twobitcircus/img/header_main.png");
+    &.red-bk {
+      background-image: url("/wp-content/themes/twobitcircus/img/header_main_red.png");
+      h1 {
+        color: $white;
+      }
+    }
+    &.black-bk {
+      background-image: url("/wp-content/themes/twobitcircus/img/header_main_blk.png");
+      h1 {
+        color: $white;
+      }
+    }
+    &.white-bk {
+      background-image: url("/wp-content/themes/twobitcircus/img/header_main_white.png");
+    }
+    &.green-bk {
+      background-image: url("/wp-content/themes/twobitcircus/img/header_main_green.png");
+      h1 {
+        color: $white;
+      }
+    }
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right top;
     max-width: 620px;
     min-height: 224px;
-    min-width: 350px;
+    min-width: 480px;
     padding-right: 4%;
     position: relative;
     @media (max-width: $tablet) {
       max-width: 510px;
       padding-right: 7%;
+      min-width: auto;
     }
     @media (max-width: $mobile) {
       height: 100%;
@@ -718,14 +838,7 @@ article.page.type-page {
     }
   }
 }
-
-#newsletter-block {
-  background-color: $black;
-  h3 {
-    color: $green;
-    font-size: 4em;
-    line-height: 0.9em;
-  }
+.form-red {
   ::placeholder {
     color: rgba(255, 255, 255, 0.5);
     opacity: 1;
@@ -741,13 +854,19 @@ article.page.type-page {
     background-color: $red;
     width: 100%;
     height: auto;
-    margin-top: 5px;
-    font-size: 2em;
-    padding: 5px 15px 6px;
+    font-size: 1.1em;
+    padding: 4px 15px 5px;
     color: $white;
   }
-  span.wpcf7-not-valid-tip,
-  .ajax-loader {
+}
+#newsletter-block {
+  background-color: $black;
+  h3 {
+    color: $green;
+    font-size: 4em;
+    line-height: 0.9em;
+  }
+  span.wpcf7-not-valid-tip {
     display: none !important;
   }
   .btn-behind {
@@ -764,6 +883,11 @@ article.page.type-page {
     margin: 2em 0 1em;
     border: 1px solid $yellow;
     background-color: $yellow;
+  }
+  .form-control {
+    margin-top: 5px;
+    font-size: 2em;
+    padding: 5px 15px 6px;
   }
   .cta-btn {
     .btn {
@@ -824,13 +948,17 @@ article.page.type-page {
     @include transform(matrix(1, 0, 0, 1, -2880, 0));
   }
 }
-@include keyframes(diagonal-right) {
+@include keyframes(bounce) {
   0% {
     opacity: 0;
-    @include transform(translatex(50%) translatey(30%));
+    @include transform(translateY(0));
+  }
+  50% {
+    opacity: 1;
+    @include transform(translateY(30px));
   }
   100% {
-    opacity: 1;
-    @include transform(translatex(0) translatey(0));
+    opacity: 0;
+    @include transform(translateY(0));
   }
 }

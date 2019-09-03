@@ -11,7 +11,7 @@
   <section id="about-header">
     <div class="container text-center caption-top inview animated reverse">
       <h1 class="headline mx-auto inview animated reverse delay-3"><?php echo get_field('header_title');?></h1>
-      <div class="w-75 mx-auto inview animated reverse delay-4"><?php echo get_field('header_description');?></div>
+      <div class="w-50 mx-auto inview animated reverse delay-4"><?php echo get_field('header_description');?></div>
       <div class="arrow-down mx-auto"><img class="img-fluid" src="<?php echo $imgPath;?>down_arrow.png" alt="<?php echo get_field('header_title');?>"/></div>
     </div>
     <div class="bkg-wrapper"></div>
@@ -128,12 +128,12 @@
   </div>
   <section id="level-robo-block">
     <div class="position-relative">
-      <div class="robo-drink inview animated" data-ease="fadeIn">
+      <div class="robo-drink" >
         <?php if(get_field('food_image')) : ?>
         <img class="img-fluid" src="<?php echo $imgPath;?>robo_drink.png" alt="<?php echo get_field('robo_title');?>" />
         <?php endif ?>
       </div>
-      <h2 class="headline text-center yellow inview animated delay-2"><?php echo get_field('robo_title');?></h2>
+      <h2 class="headline text-center yellow inview animated delay" data-ease="fadeIn"><?php echo get_field('robo_title');?></h2>
     </div>
     <div class="slope"></div>
     <div class="arrow"></div>

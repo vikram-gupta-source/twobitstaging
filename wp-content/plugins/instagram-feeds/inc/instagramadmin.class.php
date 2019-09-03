@@ -99,16 +99,26 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
       </div>
       <?php
     }
-    public function delete_cache(){
+    public function delete_cache() {
       global $wpdb;
       if ( current_user_can( 'manage_options' ) ) {
         $table_name = $wpdb->prefix . 'instagram_feeds';
         $querystr = 'TRUNCATE TABLE ' . $table_name;
         $wpdb->query($querystr);
+        self::wipe_directory();
       }
       die();
     }
-
+    private function wipe_directory() {
+      $filepath = ABSPATH . '/wp-content/uploads/instagram/*';
+      $files = glob($filepath);
+      foreach($files as $file) {
+        if(is_file($file)) {
+          unlink($file);
+        }
+      }
+    }
+    
   }
 
 }

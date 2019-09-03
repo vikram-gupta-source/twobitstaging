@@ -15,10 +15,10 @@
     <?php if(!empty(get_field('promotions'))) :?>
     <?php $promotions = filter_locations(get_field('promotions'));?>
     <div class="container-fluid">
-      <div class="grid-isotope">
+      <div class="grid-flex">
         <?php foreach($promotions as $promo) : ?>
         <div class="grid-item card">
-          <a href="#" class="event-link"><img class="img-fluid w-100" src="<?php echo $promo['image']; ?>"/></a>
+          <a href="#" class="event-link card-image"><img class="img-fluid w-100" src="<?php echo $promo['image']; ?>"/></a>
           <div class="card-title mb-0 d-flex justify-content-between align-items-center event-link">
             <h5 class="lubalin"><?php echo $promo['title'];?></h5>
             <i class="fa fa-lg fa-angle-down" aria-hidden="true"></i>
@@ -35,9 +35,9 @@
               <a class="addthis_button_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
               <a class="addthis_button_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
               <a class="addthis_button_pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
-            </div> 
+            </div>
             <div class="link-wrapper my-2">
-              <div class="cta-btn mx-auto"><a class="btn btn-twobit" href="<?php echo $promo['link'];?>"><span><?php _e( 'Book Now', 'twobitcircus' )?></span></a><div class="btn-behind sm">&nbsp;</div></div>
+              <div class="cta-btn mx-auto"><a class="btn btn-twobit" href="<?php echo $promo['link'];?>"><span><?php _e( 'Book Now', 'twobitcircus' )?></span></a><div class="btn-behind">&nbsp;</div></div>
             </div>
           </div>
         </div>
