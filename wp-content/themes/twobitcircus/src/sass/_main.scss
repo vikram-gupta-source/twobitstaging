@@ -38,6 +38,16 @@ h2.headline {
     font-size: 3rem;
   }
 }
+h3.headline {
+  font-size: 3.5rem;
+  line-height: 1em;
+  @media (max-width: $tablet) {
+    font-size: 3rem;
+  }
+  @media (max-width: $mobile) {
+    font-size: 2.5rem;
+  }
+}
 .headline {
   text-transform: uppercase;
   font-family: "Franchise Bold", "Roboto", sans-serif;
@@ -742,19 +752,7 @@ article.page.type-page {
       h1 {
         color: $white;
       }
-    }
-    &.black-bk {
-      background-image: url("/wp-content/themes/twobitcircus/img/header_main_blk.png");
-      h1 {
-        color: $white;
-      }
-    }
-    &.white-bk {
-      background-image: url("/wp-content/themes/twobitcircus/img/header_main_white.png");
-    }
-    &.green-bk {
-      background-image: url("/wp-content/themes/twobitcircus/img/header_main_green.png");
-      h1 {
+      p {
         color: $white;
       }
     }
@@ -763,7 +761,7 @@ article.page.type-page {
     background-position: right top;
     max-width: 620px;
     min-height: 224px;
-    min-width: 480px;
+    min-width: 500px;
     padding-right: 4%;
     position: relative;
     @media (max-width: $tablet) {
@@ -859,6 +857,17 @@ article.page.type-page {
     color: $white;
   }
 }
+div.wpcf7-mail-sent-ok {
+  margin: 2em 0 1em;
+  border: 2px solid $dark-green;
+  background-color: $green;
+}
+div.wpcf7-validation-errors,
+div.wpcf7-acceptance-missing {
+  margin: 2em 0 1em;
+  border: 1px solid $yellow;
+  background-color: $yellow;
+}
 #newsletter-block {
   background-color: $black;
   h3 {
@@ -872,17 +881,6 @@ article.page.type-page {
   .btn-behind {
     background-color: $green !important;
     border: 3px solid $green !important;
-  }
-  div.wpcf7-mail-sent-ok {
-    margin: 2em 0 1em;
-    border: 2px solid $dark-green;
-    background-color: $green;
-  }
-  div.wpcf7-validation-errors,
-  div.wpcf7-acceptance-missing {
-    margin: 2em 0 1em;
-    border: 1px solid $yellow;
-    background-color: $yellow;
   }
   .form-control {
     margin-top: 5px;
@@ -936,6 +934,16 @@ article.page.type-page {
     }
   }
   &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+@include keyframes(fadeinout) {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
     visibility: visible;
     opacity: 1;
   }

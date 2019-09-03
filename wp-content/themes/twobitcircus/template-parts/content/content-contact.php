@@ -11,7 +11,9 @@
 
   <section id="contact-block" class="entry-wrapper-padding bkg-img">
     <div class="container">
-      <?php the_content(); ?>
+      <div class="w-65 mx-auto">
+        <?php the_content(); ?>
+      </div>
     </div>
   </section>
 

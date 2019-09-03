@@ -1,11 +1,6 @@
 // News
 #news {
   background-color: $green;
-  .main-headline {
-    h1.headline {
-      color: $white;
-    }
-  }
   .container-fluid {
     @media (max-width: $laptop) {
       max-width: inherit;

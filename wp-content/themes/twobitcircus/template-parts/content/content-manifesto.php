@@ -4,9 +4,10 @@
  *
  * @package twobitcircus
  */
+ remove_filter ('the_content', 'wpautop');
 ?>
 
-<article id="page" <?php post_class('mb-6'); ?>>
+<article id="manifesto-page" <?php post_class(); ?>>
 
   <?php get_template_part( 'template-parts/partial/partial', 'header-no-desc' ); ?>
 
@@ -14,14 +15,7 @@
     <div class="container">
     <?php
   		the_content();
-
-  		wp_link_pages(
-  			array(
-  				'before' => '<div class="page-links">' . __( 'Pages:', 'twobitcircus' ),
-  				'after'  => '</div>',
-  			)
-  		);
-  		?>
+  	?>
     </div>
 	</section>
 </article>

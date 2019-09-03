@@ -1,11 +1,6 @@
 // Contact
 #contact {
   background-color: $black;
-  .main-headline {
-    h1.headline {
-      color: $white;
-    }
-  }
   .container {
     @media (max-width: $laptop) {
       max-width: inherit;

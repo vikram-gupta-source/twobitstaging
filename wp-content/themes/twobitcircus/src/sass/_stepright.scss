@@ -1,0 +1,11 @@
+// Stepright
+#submit-loading {
+  display: none;
+  padding: 10px;
+  font-size: 40px;
+  color: #333;
+  &.activate {
+    display: block;
+    @include animation(fadeinout 1s infinite);
+  }
+}
