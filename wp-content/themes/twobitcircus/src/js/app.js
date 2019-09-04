@@ -54,7 +54,7 @@ $(function() {
   }
   // Handle resize
   let clearInt = 0;
-  var navBarHt = $("#main-nav").height() + 100;
+  var navBarHt = $("#main-nav").height();
   $("body").css({
     "padding-top": navBarHt + "px"
   });
