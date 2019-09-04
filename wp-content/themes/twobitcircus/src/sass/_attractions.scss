@@ -58,6 +58,7 @@
         @include transform(skewX(-20deg));
       }
     }
+    .desktop-title,
     .mobile-title {
       width: calc(100% - 57px);
     }

@@ -98,10 +98,12 @@
                       <?php endif ?>
                     </div>
                     <div class="show-content-block col-md-6 col-lg-5">
-                      <h2 class="title d-none d-md-block lubalinB text-uppercase mb-0"><?php echo $show->post_title;?></h2>
-                      <?php if(!empty(get_field('sub_title', $show->ID))):?>
-                      <h3 class="subtitle d-none d-md-block mt-2 yellow"><?php echo get_field('sub_title', $show->ID);?></h3>
-                      <?php endif ?>
+                      <div class="desktop-title d-none d-md-block">
+                        <h2 class="title lubalinB text-uppercase mb-0"><?php echo $show->post_title;?></h2>
+                        <?php if(!empty(get_field('sub_title', $show->ID))):?>
+                        <h3 class="subtitle mt-2 yellow"><?php echo get_field('sub_title', $show->ID);?></h3>
+                        <?php endif ?>
+                      </div>
                       <?php if(!empty($info[0]['players']) || !empty($info[0]['show_duration']) || !empty($info[0]['price'])):?>
                       <div class="info-block mt-3 mb-3">
                         <?php if(!empty($info[0]['players'])):?>
