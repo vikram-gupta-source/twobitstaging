@@ -58,6 +58,9 @@
         @include transform(skewX(-20deg));
       }
     }
+    .mobile-title {
+      width: calc(100% - 57px);
+    }
   }
   #filters {
     background-color: $dark-red;
@@ -116,50 +119,6 @@
           }
         }
       }
-      /*
-      .nav-item {
-        .nav-link {
-          position: relative;
-          z-index: 2;
-          padding: 20px;
-          font-size: 1em;
-          color: $white;
-          text-transform: uppercase;
-          transition: all 0.5s ease;
-          &.dropdown-toggle.active + .dropdown-menu {
-            display: block !important;
-          }
-
-          &:hover,
-          &.active {
-            background-color: $yellow;
-            color: $dark-red;
-          }
-          &.always-show {
-            background-color: $yellow;
-            color: $dark-red;
-          }
-          &:after {
-            content: none;
-          }
-        }
-        .dropdown-menu {
-          z-index: 1;
-          margin: 0;
-          padding: 0;
-          width: 100%;
-          border-radius: 0;
-          border: 0;
-          background-color: $black;
-          &.always-show {
-            display: block !important;
-          }
-          .nav-link {
-            padding: 20px;
-          }
-        }
-
-      }  */
     }
   }
   .slick-shows {
@@ -169,7 +128,7 @@
       left: inherit;
       top: 0;
       @media (max-width: $mobile) {
-        top: 45.5%;
+        top: -25px;
       }
       &.slick-next:before {
         left: -10px;
@@ -242,6 +201,17 @@
   }
   .showtimes-cycle {
     padding: 0 25px 0 5px;
+    @media (max-width: $mobile) {
+      padding: 0 17px 0 17px;
+    }
+    @media (max-width: $mobile) {
+      .slick-slider:hover .slick-prev {
+        left: 15px;
+      }
+      .slick-slider:hover .slick-next {
+        right: 15px;
+      }
+    }
   }
   .slick-slide {
     margin: 0 1px;

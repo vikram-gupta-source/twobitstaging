@@ -79,6 +79,7 @@ a {
 .lubalinB {
   font-family: "LubalinGraphStd-Bold", "Roboto", sans-serif;
   letter-spacing: 0.8px;
+  line-height: 1;
 }
 .franchise {
   font-family: "Franchise Bold", "Roboto", sans-serif;
@@ -783,8 +784,8 @@ article.page.type-page {
       max-width: 100%;
       width: 100%;
       min-height: auto;
-      background-position: left;
-      background-size: 120%;
+      background-position: 0;
+      background-size: cover;
       padding: 1.4em 15px !important;
       p {
         margin: 0;

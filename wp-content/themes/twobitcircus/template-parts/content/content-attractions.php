@@ -67,6 +67,12 @@
                 <div id="<?php echo sanitize_title($show->post_title);?>" class="item-shows">
                   <div class="row">
                     <div class="assets-wrapper col-md-6 col-lg-7 mb-4">
+                      <div class="mobile-title d-md-none mb-3">
+                        <h2 class="title lubalinB text-uppercase white"><?php echo $show->post_title;?></h2>
+                        <?php if(!empty(get_field('sub_title', $show->ID))):?>
+                        <h3 class="subtitle mt-2 yellow"><?php echo get_field('sub_title', $show->ID);?></h3>
+                        <?php endif ?>
+                      </div>
                       <?php if(!empty($gallery)) :?>
                       <div class="show-asset-wrapper">
                         <div class="slick-media">
@@ -92,9 +98,9 @@
                       <?php endif ?>
                     </div>
                     <div class="show-content-block col-md-6 col-lg-5">
-                      <h2 class="title lubalinB text-uppercase mb-0"><?php echo $show->post_title;?></h2>
+                      <h2 class="title d-none d-md-block lubalinB text-uppercase mb-0"><?php echo $show->post_title;?></h2>
                       <?php if(!empty(get_field('sub_title', $show->ID))):?>
-                      <h3 class="subtitle mt-2 yellow"><?php echo get_field('sub_title', $show->ID);?></h3>
+                      <h3 class="subtitle d-none d-md-block mt-2 yellow"><?php echo get_field('sub_title', $show->ID);?></h3>
                       <?php endif ?>
                       <?php if(!empty($info[0]['players']) || !empty($info[0]['show_duration']) || !empty($info[0]['price'])):?>
                       <div class="info-block mt-3 mb-3">
