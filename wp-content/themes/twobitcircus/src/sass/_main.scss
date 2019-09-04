@@ -883,6 +883,9 @@ div.wpcf7-acceptance-missing {
     color: $green;
     font-size: 4em;
     line-height: 0.9em;
+    @media (max-width: $mobile) {
+      font-size: 3em;
+    }
   }
   span.wpcf7-not-valid-tip {
     display: none !important;
