@@ -177,6 +177,16 @@
           display: none !important;
         }
       }
+      @media (max-width: $mobile) {
+        &.vector-rooms {
+          display: block !important;
+          width: 40vw !important;
+          top: 2em;
+          left: 0 !important;
+          position: relative;
+          padding-bottom: 2em;
+        }
+      }
       &.vector-icons {
         z-index: 0;
         @media (max-width: $laptop) {

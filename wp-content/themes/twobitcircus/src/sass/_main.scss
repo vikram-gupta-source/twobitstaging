@@ -757,8 +757,14 @@ article.page.type-page {
   background-color: $black;
   .header-bkg-left {
     background-image: url("/wp-content/themes/twobitcircus/img/header_main.png");
+    @media (max-width: $mobile) {
+      background-image: url("/wp-content/themes/twobitcircus/img/home/yellow_pattern.png");
+    }
     &.red-bk {
       background-image: url("/wp-content/themes/twobitcircus/img/header_main_red.png");
+      @media (max-width: $mobile) {
+        background-image: url("/wp-content/themes/twobitcircus/img/home/red_pattern.png");
+      }
       h1 {
         color: $white;
       }
@@ -784,7 +790,7 @@ article.page.type-page {
       max-width: 100%;
       width: 100%;
       min-height: auto;
-      background-position: 0;
+      background-position: center;
       background-size: cover;
       padding: 1.4em 15px !important;
       p {
