@@ -68,9 +68,10 @@ $(function() {
       $(".slick-days .slick-slide.slick-current").trigger("click");
     }, 500);
   });
-  var lastY = 0;
+  var prevScrollpos = window.pageYOffset;
   $(window)
     .scroll(function() {
+      let currentScrollPos = window.pageYOffset;
       if ($("#arrow-cta").length) {
         if ($(this).scrollTop() >= scrollHide) {
           $("#arrow-cta").removeClass("show");
@@ -80,20 +81,17 @@ $(function() {
           }
         }
       }
-      let lt = $(this).scrollTop();
-      if (lt > lastY) {
-        // Down
-        $("#main-nav").css({
-          top: "-" + navBarHt + "px"
-        });
-      } else {
+      if (prevScrollpos > currentScrollPos) {
         $("#main-nav").css({
           top: 0
         });
+      } else {
+        $("#main-nav").css({
+          top: "-" + navBarHt + "px"
+        });
       }
-      lastY = lt;
-    })
-    .trigger("scroll");
+      prevScrollpos = currentScrollPos;
+    });
 
   // Handle Slider Slick
   var slick_calendar_settings = {
