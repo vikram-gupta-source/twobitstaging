@@ -81,7 +81,7 @@ $(function() {
           }
         }
       }
-      if (prevScrollpos > currentScrollPos) {
+      if ((prevScrollpos > currentScrollPos) || (currentScrollPos == 0)) {
         $("#main-nav").css({
           top: 0
         });
