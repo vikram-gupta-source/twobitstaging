@@ -5,7 +5,7 @@
  * @package twobitcircus
  */
 ?>
-<article id="jobs" <?php post_class(); ?>>
+<article id="jobs" <?php post_class('bkg-white'); ?>>
 
   <?php get_template_part( 'template-parts/partial/partial', 'header-no-desc' ); ?>
 

@@ -1,13 +1,12 @@
 // Contact
 #contact {
-  background-color: $black;
   .container {
     @media (max-width: $laptop) {
       max-width: inherit;
     }
   }
   #contact-block {
-    background-image: url("/wp-content/themes/twobitcircus/img/home/contact_white_bkg.jpg");
+    background-image: url("/wp-content/themes/twobitcircus/img/home/white_pattern.png");
   }
   #faq {
     background-color: $green;
