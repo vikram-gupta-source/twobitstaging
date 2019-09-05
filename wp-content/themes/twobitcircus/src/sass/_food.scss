@@ -1,9 +1,9 @@
 // Food
 #food-drink {
   #events-block {
-    background-color: $black;
+    background-color: $offwhite;
     .row {
-      background-color: #000;
+      background-color: #d2d0c9;
       padding: 15px 0;
     }
     .event {
@@ -48,7 +48,11 @@
     }
   }
   #banner-block {
-    background-color: $green;
+    background-image: url("/wp-content/themes/twobitcircus/img/home/green_pattern.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
     .content-block {
       padding: 0 3em;
     }

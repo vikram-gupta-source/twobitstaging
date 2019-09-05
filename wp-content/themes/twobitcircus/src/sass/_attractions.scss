@@ -25,10 +25,10 @@
     overflow-x: hidden;
   }
   #attractions-block {
-    background-image: url("/wp-content/themes/twobitcircus/img/attractions/attraction_bkg.jpg");
+    background-image: url("/wp-content/themes/twobitcircus/img/home/green_pattern.png");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center top;
+    background-position: center;
     position: relative;
     .bkg-red-angle {
       position: absolute;
@@ -60,7 +60,20 @@
     }
     .desktop-title,
     .mobile-title {
+      position: relative;
       width: calc(100% - 57px);
+      .subtitle {
+        font-size: 1.4em;
+      }
+      &:after {
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        content: "";
+        height: 1px;
+        width: 100%;
+        background-color: $yellow;
+      }
     }
   }
   #filters {
@@ -144,6 +157,7 @@
     }
     .show-content-block {
       color: $white;
+      min-height: 480px;
       .title {
         font-size: 3em;
         color: $offwhite;
@@ -166,15 +180,6 @@
         padding: 5px 15px;
         background-color: $green;
         color: $white;
-        &:before {
-          position: absolute;
-          top: -10px;
-          left: 0;
-          content: "";
-          height: 1px;
-          width: 100%;
-          background-color: $yellow;
-        }
       }
       .available-dates {
         padding-bottom: 10px;
@@ -330,13 +335,11 @@
   }
   .show-asset-wrapper {
     position: relative;
-    .slick-prev:before {
-      left: -10px;
-      top: -10%;
-    }
-    .slick-next:before {
-      left: -35px;
-      top: -10%;
+    &:hover {
+      .slick-prev,
+      .slick-next {
+        opacity: 1;
+      }
     }
     .img {
       background-color: $black;
@@ -345,7 +348,7 @@
       opacity: 0;
       background-color: rgba(0, 0, 0, 0.55);
       position: absolute;
-      bottom: 7px;
+      bottom: 0;
       left: 0;
       right: 0;
       margin: auto;

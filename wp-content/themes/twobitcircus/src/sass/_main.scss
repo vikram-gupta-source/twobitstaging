@@ -263,6 +263,7 @@ a {
 .slick-slider {
   .slick-prev,
   .slick-next {
+    z-index: 1;
     opacity: 0.3;
     transition: all 0.8s ease;
     &:before {
@@ -274,14 +275,14 @@ a {
     }
   }
   .slick-prev {
-    left: 5px;
+    left: -8px;
     &:before {
       position: absolute;
+      top: -30px;
+      left: 0;
       content: "";
-      left: -13px;
-      top: 10%;
-      width: 70px;
-      height: 100px;
+      width: 60px;
+      height: 80px;
       background: url(/wp-content/themes/twobitcircus/img/home/arrow_white_btn.png);
       background-repeat: no-repeat;
       background-size: 50%;
@@ -289,36 +290,19 @@ a {
     }
   }
   .slick-next {
-    right: 5px;
+    right: 30px;
     &:before {
       position: absolute;
+      top: -30px;
+      left: 0;
       content: "";
-      left: -30px;
-      top: 10%;
-      width: 70px;
-      height: 100px;
+      width: 60px;
+      height: 80px;
       @include transform(scaleX(-1));
       background: url(/wp-content/themes/twobitcircus/img/home/arrow_white_btn.png);
       background-repeat: no-repeat;
       background-size: 50%;
       background-position: center;
-    }
-  }
-  .slick-arrow {
-    z-index: 1;
-    width: 25px;
-    height: 80px;
-  }
-  &:hover {
-    .slick-prev,
-    .slick-next {
-      opacity: 1;
-    }
-    .slick-next {
-      right: 0;
-    }
-    .slick-prev {
-      left: 0;
     }
   }
   .slick-dots li.slick-active button:before {
@@ -406,6 +390,12 @@ article.page.type-page {
   background-size: cover;
   background-position: center;
 }
+.bkg-white {
+  background-image: url("/wp-content/themes/twobitcircus/img/home/white_pattern.png");
+  background-repeat: repeat;
+  background-size: contain;
+  background-position: center;
+}
 .carousel {
   .carousel-indicators li {
     width: 12px;
@@ -430,7 +420,8 @@ article.page.type-page {
     background-position: center;
   }
   .carousel-item {
-    height: calc(100vh - 99px);
+    height: calc(90vh - 99px);
+    min-height: 780px;
     background-color: #000;
     background-repeat: no-repeat;
     background-size: cover;
@@ -456,23 +447,14 @@ article.page.type-page {
     }
     .carousel-caption {
       &.red-bkg {
-        background-image: url("/wp-content/themes/twobitcircus/img/home/red_pattern.png");
+        background-image: url("/wp-content/themes/twobitcircus/img/home/hero_bar_red.png");
       }
       &.yellow-bkg {
-        background-image: url("/wp-content/themes/twobitcircus/img/home/yellow_pattern.png");
+        background-image: url("/wp-content/themes/twobitcircus/img/home/hero_bar.png");
       }
       background-repeat: no-repeat;
       background-size: cover;
-      background-position: center;
-      &:before {
-        content: "";
-        position: absolute;
-        top: -5px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        border-top: 2px solid $red;
-      }
+      background-position: center top;
       &.top {
         top: 20vh;
         bottom: inherit;
@@ -484,6 +466,9 @@ article.page.type-page {
       left: 0;
       right: 0;
       margin: auto;
+      .headline {
+        margin-top: 35px;
+      }
     }
   }
 }
@@ -850,6 +835,18 @@ article.page.type-page {
       overflow: visible;
       vertical-align: -0.125em;
     }
+  }
+}
+.form-white {
+  .form-control {
+    border: 0;
+    background-color: #fff;
+    width: 100%;
+    height: auto;
+    font-size: 1.1em;
+    padding: 4px 15px 5px;
+    color: $black;
+    text-transform: uppercase;
   }
 }
 .form-red {

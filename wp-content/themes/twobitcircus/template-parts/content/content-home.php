@@ -13,10 +13,10 @@
 ?>
 <article id="home" <?php post_class(); ?>>
 
-  <section id="featured-block" class="entry-wrapper-padding">
+  <section id="featured-block" class="pb-5 inview animated" data-ease="fadeIn">
     <?php if(!empty(get_field('feature'))) :?>
     <?php $featured = filter_locations(get_field('feature'));?>
-    <div class="featured mt-3 slick-center-init inview animated">
+    <div class="featured slick-center-init">
       <?php foreach($featured as $feature) : ?>
       <div class="card">
         <div class="row no-gutters bkg-<?php echo $feature['background_color']; ?>">

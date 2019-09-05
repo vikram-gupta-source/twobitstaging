@@ -46,9 +46,9 @@
       <div class="row h-100">
         <div class="col-md-6 my-auto text-center content-block inview animated delay-1">
           <div class="py-4">
-            <h2 class="headline"><?php echo get_field('banner_title'); ?></h2>
-            <h4><?php echo get_field('banner_sub_title'); ?></h4>
-            <h5><?php echo get_field('banner_description'); ?></h5>
+            <h2 class="headline red"><?php echo get_field('banner_title'); ?></h2>
+            <h4 class="white"><?php echo get_field('banner_sub_title'); ?></h4>
+            <h5 class="white"><?php echo get_field('banner_description'); ?></h5>
           </div>
         </div>
         <div class="col-md-6 banner-image inview animated delay-2" data-ease="fadeIn"><img class="lazy-load img-fluid" data-src="<?php echo get_field('banner_image'); ?>"/></div>

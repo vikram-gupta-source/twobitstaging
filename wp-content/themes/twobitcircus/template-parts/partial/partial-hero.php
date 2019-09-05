@@ -25,12 +25,12 @@
       <?php $darken = ($slide['darken'] != 'none') ? 'darken ' . $slide['darken'] : ''; ?>
       <div class="carousel-item <?php echo $slideActive;?> <?php echo $darken;?>" <?php echo (!empty($slide['image']['url'])) ? 'style="background-image: url(\'' . $slide['image']['url'] . '\');"' : '' ;?>>
         <?php $postion_y = ($slide['position_y'] == 'top') ? 'top' : ((($slide['position_y'] == 'bottom')) ? 'bottom' : 'd-flex h-100 align-items-center justify-content-center') ?>
-        <div class="container-fluid carousel-caption <?php echo $postion_y;?> <?php echo $slide['background_color'];?>-bkg inview animated delay-2">
+        <div class="container-fluid carousel-caption <?php echo $postion_y;?> <?php echo $slide['background_color'];?>-bkg inview animated">
           <?php $postion_x = ($slide['position_text'] == 'right') ? 'col-md-6 offset-md-6' : ((($slide['position_text'] == 'left')) ? 'offset-left-md-6 col-md-6' : 'mx-auto w-50') ?>
           <div class="<?php echo $postion_x;?> inview animated">
           <?php $slideActive = ($sky == 0) ? 'active' : '';?>
           <?php if(!empty($slide['headline'])):?>
-          <h1 class="headline pt-2"><?php echo $slide['headline'];?></h1>
+          <h1 class="headline"><?php echo $slide['headline'];?></h1>
           <?php endif ?>
           <?php if(!empty($slide['description'])):?>
           <?php echo cleanHtmlPara($slide['description']);?>

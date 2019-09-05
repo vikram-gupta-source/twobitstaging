@@ -10,7 +10,7 @@
 
   <?php get_template_part( 'template-parts/partial/partial', 'header-no-desc' ); ?>
 
-  <section class="entry-wrapper-padding inview animated delay-2">
+  <section class="entry-wrapper-padding inview animated delay-2 bkg-white">
     <div class="container">
     <?php
   		the_content();

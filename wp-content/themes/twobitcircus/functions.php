@@ -29,9 +29,11 @@ foreach ( $wp_includes as $file ) {
 
 function composeShows() {
   $shows = [];
+  query_posts('post_type=portfolio');
   $args = array(
     'post_type' => 'shows',
-    'orderby'   => 'menu_order',
+    'posts_per_page' => 9999,
+    'orderby'   => 'menu_order, post_title',
     'order'     => 'ASC'
   );
   $query = new WP_Query( $args );

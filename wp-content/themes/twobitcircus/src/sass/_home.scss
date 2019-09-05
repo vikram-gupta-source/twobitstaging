@@ -1,7 +1,10 @@
 // Home CSS
 #home {
   #featured-block {
-    background-color: $red;
+    background-image: url("/wp-content/themes/twobitcircus/img/home/yellow_pattern.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
     .slick-list {
       padding: 32px 50px !important;
       @media (max-width: $tablet) {

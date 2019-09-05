@@ -6,7 +6,6 @@
  */
  $attractions = composeShows();
  $showCnt = 0;
- $showCntDrop = 0;
 ?>
 <article id="attractions" <?php post_class(); ?>>
 
@@ -19,7 +18,7 @@
         <ul class="navbar-nav mx-auto lubalin text-uppercase text-center">
         <?php foreach($attractions as $cat => $shows) : ?>
         <?php $hasDrop = (count($shows['posts']) > 1) ? true : false; ?>
-        <?php $isFirst = ($showCnt == 0) ? 'active' : ''; ?>
+        <?php $isFirst = ($showCnt == 0) ? 'active' : '';?>
           <?php if($hasDrop) :?>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle <?php echo $isFirst; ?>" href="#" data-toggle="dropdown" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>">
@@ -27,15 +26,13 @@
             </a>
             <div class="dropdown-menu">
               <?php foreach($shows['posts'] as $skey => $show) :?>
-              <?php $isFirstDrop = ($showCntDrop == 0) ? 'active' : ''; ?>
-              <a class="dropdown-item <?php echo $isFirstDrop; ?>" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a>
-              <?php $showCntDrop++;?>
+              <a class="dropdown-item" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a>
               <?php endforeach ?>
             </div>
           </li>
           <?php else: ?>
-          <li class="nav-item <?php echo $isFirst; ?>">
-            <a class="nav-link" href="#" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>"><?php echo $shows['terms']->name;?></a>
+          <li class="nav-item">
+            <a class="nav-link <?php echo $isFirst; ?>" href="#" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>"><?php echo $shows['terms']->name;?></a>
           </li>
           <?php endif ?>
         <?php $showCnt ++; ?>
@@ -63,6 +60,7 @@
                 <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
                 <?php $info = filter_locations(get_field('information', $show->ID));?>
                 <?php $_cat = get_the_category($show->ID);?>
+                <?php $video = get_field('video', $show->ID);?>
                 <?php $gallery = get_field('gallery', $show->ID);?>
                 <div id="<?php echo sanitize_title($show->post_title);?>" class="item-shows">
                   <div class="row">
@@ -70,16 +68,19 @@
                       <div class="mobile-title d-md-none mb-3">
                         <h2 class="title lubalinB text-uppercase white"><?php echo $show->post_title;?></h2>
                         <?php if(!empty(get_field('sub_title', $show->ID))):?>
-                        <h3 class="subtitle mt-2 yellow"><?php echo get_field('sub_title', $show->ID);?></h3>
+                        <h3 class="lubalin subtitle mt-2 yellow"><?php echo get_field('sub_title', $show->ID);?></h3>
                         <?php endif ?>
                       </div>
                       <?php if(!empty($gallery)) :?>
                       <div class="show-asset-wrapper">
                         <div class="slick-media">
                           <?php foreach($gallery as $gal) :?>
-                          <div class="img"><img class="img-fluid w-100" src="<?php echo $gal['url']; ?>" alt="<?php echo $gal['title']; ?>" /></div>
+                          <div class="d-block">
+                            <div class="img d-block"><img class="img-fluid w-100" src="<?php echo $gal['url']; ?>" alt="<?php echo $gal['title']; ?>" /></div>
+                          </div>
                           <?php endforeach ?>
                         </div>
+                        <?php if(count($gallery) > 1):?>
                         <div class="overlay">
                           <div class="slick-media-nav">
                             <?php foreach($gallery as $gal) :?>
@@ -87,10 +88,11 @@
                             <?php endforeach ?>
                           </div>
                         </div>
+                        <?php endif ?>
                       </div>
                       <?php endif ?>
                       <?php if(isset($_cat[0])) :?>
-                      <div class="mt-2 pull-right addthis_toolbox" data-url="<?php echo get_site_url() ?>/attractions/?cat=<?php echo $_cat[0]->slug ?>&id=<?php echo $skey ?>" data-title="<?php echo $show->post_title;?>">
+                      <div class="mt-1 pull-right addthis_toolbox" data-url="<?php echo get_site_url() ?>/attractions/?cat=<?php echo $_cat[0]->slug ?>&id=<?php echo $skey ?>" data-title="<?php echo $show->post_title;?>">
                         <a class="addthis_button_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                         <a class="addthis_button_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                         <a class="addthis_button_pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
@@ -98,10 +100,10 @@
                       <?php endif ?>
                     </div>
                     <div class="show-content-block col-md-6 col-lg-5">
-                      <div class="desktop-title d-none d-md-block">
+                      <div class="desktop-title d-none d-md-block mb-3">
                         <h2 class="title lubalinB text-uppercase mb-0"><?php echo $show->post_title;?></h2>
                         <?php if(!empty(get_field('sub_title', $show->ID))):?>
-                        <h3 class="subtitle mt-2 yellow"><?php echo get_field('sub_title', $show->ID);?></h3>
+                        <h3 class="lubalin subtitle mt-2 yellow"><?php echo get_field('sub_title', $show->ID);?></h3>
                         <?php endif ?>
                       </div>
                       <?php if(!empty($info[0]['players']) || !empty($info[0]['show_duration']) || !empty($info[0]['price'])):?>
@@ -117,7 +119,7 @@
                         <?php endif ?>
                       </div>
                       <?php endif ?>
-                      <p><?php echo apply_filters('the_content', $show->post_content);?></p>
+                      <?php echo apply_filters('the_content', $show->post_content) ?>
                       <?php if(!empty($info[0]['buy_link']) && empty($composedDates)): ?>
                       <div class="buy-link mt-4">
                         <?php echo do_shortcode('[button link="'.$info[0]['buy_link'].'" target="_blank"]Buy Players Card[/button]') ?>
