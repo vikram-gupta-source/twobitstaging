@@ -8,7 +8,9 @@ import "slick-carousel";
 import imagesLoaded from "imagesloaded";
 import parallax from "./jquery.parallax.js";
 import Isotope from "isotope-layout/dist/isotope.pkgd.min";
-import {Calendar} from "@fullcalendar/core";
+import {
+  Calendar
+} from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
@@ -26,9 +28,9 @@ $(function() {
       if ($(".inview").length) {
         $(".inview").each(function() {
           let delay = $(this).data("offset") ? $(this).data("offset") : "90%";
-          let easeType = $(this).data("ease")
-            ? $(this).data("ease")
-            : "fadeInUp";
+          let easeType = $(this).data("ease") ?
+            $(this).data("ease") :
+            "fadeInUp";
           let waypoint = new Waypoint({
             element: this,
             handler: function(direction) {
@@ -102,8 +104,7 @@ $(function() {
     arrows: true,
     slidesToShow: 4,
     slidesToScroll: 4,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           slidesToShow: 3,
@@ -133,20 +134,18 @@ $(function() {
     slidesToShow: 3,
     arrows: false,
     variableWidth: true,
-    responsive: [
-      {
-        breakpoint: 767,
-        settings: {
-          dots: true,
-          arrows: false,
-          centerMode: false,
-          variableWidth: false,
-          adaptiveHeight: true,
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
+    responsive: [{
+      breakpoint: 767,
+      settings: {
+        dots: true,
+        arrows: false,
+        centerMode: false,
+        variableWidth: false,
+        adaptiveHeight: true,
+        slidesToShow: 1,
+        slidesToScroll: 1
       }
-    ]
+    }]
   };
   var slick_event_settings = {
     dots: true,
@@ -156,8 +155,7 @@ $(function() {
     slidesToShow: 4,
     slidesToScroll: 4,
     adaptiveHeight: true,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           slidesToShow: 3,
@@ -188,8 +186,7 @@ $(function() {
     arrows: false,
     slidesToShow: 7,
     slidesToScroll: 1,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           arrows: true,
@@ -244,8 +241,7 @@ $(function() {
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: false,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           dots: true,
@@ -269,8 +265,7 @@ $(function() {
     slidesToScroll: 5,
     arrows: false,
     dots: true,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           slidesToShow: 4,
@@ -325,8 +320,7 @@ $(function() {
     arrows: false,
     asNavFor: ".slick-media",
     focusOnSelect: true,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           slidesToShow: 4
@@ -349,8 +343,7 @@ $(function() {
   };
 
   imagesLoaded(
-    "main",
-    {
+    "main", {
       background: true
     },
     function() {
@@ -378,16 +371,16 @@ $(function() {
                 .find(".embed-data")
                 .append(
                   '<iframe class="embed-responsive-item" src="' +
-                    srcid +
-                    '"></iframe>'
+                  srcid +
+                  '"></iframe>'
                 );
             }
           });
         var firstEmbed = $(".youtube .grid-feed:first .embed-data").data("src");
         $(".youtube .grid-feed:first .embed-data").append(
           '<iframe class="embed-responsive-item" src="' +
-            firstEmbed +
-            '"></iframe>'
+          firstEmbed +
+          '"></iframe>'
         );
       }
 
@@ -401,8 +394,9 @@ $(function() {
         $(".slick-shows")
           .slick(slick_shows_settings)
           .on("afterChange", function(ev, slick, cur) {
-            if ($(slick.$slides.get(cur)).find(".slick-days").length) {
-              $(slick.$slides.get(cur))
+            let $elSlide = $(slick.$slides.get(cur));
+            if ($elSlide.find(".slick-days").length) {
+              $elSlide
                 .find(
                   ".slick-days > .slick-list > .slick-track > .slick-slide:first-child"
                 )
@@ -421,6 +415,7 @@ $(function() {
         $("#filters .dropdown-menu .dropdown-item").on("click", function(e) {
           e.preventDefault(e);
           if (!$(this).hasClass("active")) {
+            $('.dropdown-toggle').dropdown('dispose');
             let slug = $(this).attr("aria-controls");
             if ($("#" + slug).length) {
               let index = $("#" + slug)
@@ -429,6 +424,7 @@ $(function() {
               $("#" + slug)
                 .parents(".slick-shows")
                 .slick("slickGoTo", index);
+
             }
           }
         });
@@ -437,6 +433,7 @@ $(function() {
           e.preventDefault(e);
           $('[data-tool-toggle="tooltip"]').tooltip("hide");
           if (!$(this).hasClass("active")) {
+            $('.dropdown-toggle').dropdown('update');
             $("#filters .nav-link").removeClass("active");
             $(this).addClass("active");
             let slug = $(this).attr("aria-controls");
@@ -533,8 +530,7 @@ $(function() {
       // Handle Arrow Scroll Top
       $("#return-to-top").on("click", function(evt) {
         evt.preventDefault();
-        $("html, body").animate(
-          {
+        $("html, body").animate({
             scrollTop: 0
           },
           "slow"
@@ -580,7 +576,6 @@ $(function() {
             $parent.find(".card-title").removeClass("collapsed");
             $parent.find(".card-body").removeClass("show");
           }
-          $iso.arrange();
         });
         $(".link-wrapper .btn").on("click", function(evt) {
           evt.preventDefault();
@@ -706,15 +701,14 @@ $(function() {
     var _h = $("#about-header").height();
     var controller = new ScrollMagic.Controller();
     var scene = new ScrollMagic.Scene({
-      triggerElement: "#trigger-element",
-      offset: -_h / 2
-    })
+        triggerElement: "#trigger-element",
+        offset: -_h / 2
+      })
       .on("start end", function(e) {
         if (e.scrollDirection == "FORWARD") {
           $("html, body")
             .stop()
-            .animate(
-              {
+            .animate({
                 scrollTop: $("#trigger-element").offset().top
               },
               700
@@ -725,15 +719,14 @@ $(function() {
       .addTo(controller);
 
     var scene2 = new ScrollMagic.Scene({
-      triggerElement: "#trigger-element",
-      offset: _h / 2
-    })
+        triggerElement: "#trigger-element",
+        offset: _h / 2
+      })
       .on("start", function(e) {
         if (e.scrollDirection == "REVERSE") {
           $("html, body")
             .stop()
-            .animate(
-              {
+            .animate({
                 scrollTop: 0
               },
               700
@@ -788,12 +781,14 @@ $(function() {
       } else {
         if (!$slider.hasClass("slick-initialized")) {
           $slider.slick({
-            arrows: false,
-            slidesToShow: 3,
+            arrows: true,
+            slidesToShow: 1,
             slidesToScroll: 1,
-            variableWidth: true,
             centerMode: true,
             focusOnSelect: true
+          }).on("afterChange", function(event, slick, currentSlide) {
+            let $elSlide = $(slick.$slides[currentSlide]);
+            $elSlide.find('.nav-item .nav-link').trigger('click');
           });
         }
       }

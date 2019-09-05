@@ -62,7 +62,7 @@
         ) );
       ?>
 
-      <button class="navbar-toggler collapsed d-lg-none mr-2" type="button" data-toggle="collapse" data-target="#expanded-menu" aria-controls="expanded-menu" aria-expanded="false" aria-label="<?php _e( 'Toggle navigation', 'twobitcircus' ); ?>">
+      <button class="navbar-toggler collapsed d-lg-none mt-1 mr-2" type="button" data-toggle="collapse" data-target="#expanded-menu" aria-controls="expanded-menu" aria-expanded="false" aria-label="<?php _e( 'Toggle navigation', 'twobitcircus' ); ?>">
         <div class="hamburger-wrapper">
           <span></span>
           <span></span>

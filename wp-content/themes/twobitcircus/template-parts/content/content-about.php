@@ -133,7 +133,7 @@
         <img class="img-fluid" src="<?php echo $imgPath;?>robo_drink.png" alt="<?php echo get_field('robo_title');?>" />
         <?php endif ?>
       </div>
-      <h2 class="headline text-center yellow inview animated delay" data-ease="fadeIn"><?php echo get_field('robo_title');?></h2>
+      <h2 class="headline text-center yellow" data-ease="fadeIn"><?php echo get_field('robo_title');?></h2>
     </div>
     <div class="slope"></div>
     <div class="arrow"></div>

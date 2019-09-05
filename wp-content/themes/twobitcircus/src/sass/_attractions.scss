@@ -97,7 +97,18 @@
             margin: 0;
             .dropdown-menu {
               position: absolute !important;
+              width: 100%;
             }
+          }
+          .slick-prev {
+            left: 0;
+          }
+          .slick-next {
+            right: 20px;
+          }
+          .slick-arrow:before,
+          .slick-arrow:after {
+            width: 40px;
           }
         }
       }
@@ -158,6 +169,9 @@
     .show-content-block {
       color: $white;
       min-height: 480px;
+      @media (max-width: $mobile) {
+        min-height: 580px;
+      }
       .title {
         font-size: 3em;
         color: $offwhite;
@@ -335,6 +349,7 @@
   }
   .show-asset-wrapper {
     position: relative;
+    overflow: hidden;
     &:hover {
       .slick-prev,
       .slick-next {

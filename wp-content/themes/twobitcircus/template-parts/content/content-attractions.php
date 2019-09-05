@@ -64,7 +64,7 @@
                 <?php $gallery = get_field('gallery', $show->ID);?>
                 <div id="<?php echo sanitize_title($show->post_title);?>" class="item-shows">
                   <div class="row">
-                    <div class="assets-wrapper col-md-6 col-lg-7 mb-4">
+                    <div class="assets-wrapper col-md-6 col-lg-7 mb-lg-4">
                       <div class="mobile-title d-md-none mb-3">
                         <h2 class="title lubalinB text-uppercase white"><?php echo $show->post_title;?></h2>
                         <?php if(!empty(get_field('sub_title', $show->ID))):?>
@@ -75,7 +75,7 @@
                       <div class="show-asset-wrapper">
                         <div class="slick-media">
                           <?php foreach($gallery as $gal) :?>
-                          <div class="d-block">
+                          <div class="item d-block">
                             <div class="img d-block"><img class="img-fluid w-100" src="<?php echo $gal['url']; ?>" alt="<?php echo $gal['title']; ?>" /></div>
                           </div>
                           <?php endforeach ?>

@@ -278,11 +278,11 @@ a {
     left: -8px;
     &:before {
       position: absolute;
-      top: -30px;
+      top: -32px;
       left: 0;
       content: "";
       width: 60px;
-      height: 80px;
+      height: 83px;
       background: url(/wp-content/themes/twobitcircus/img/home/arrow_white_btn.png);
       background-repeat: no-repeat;
       background-size: 50%;
@@ -293,11 +293,11 @@ a {
     right: 30px;
     &:before {
       position: absolute;
-      top: -30px;
+      top: -32px;
       left: 0;
       content: "";
       width: 60px;
-      height: 80px;
+      height: 83px;
       @include transform(scaleX(-1));
       background: url(/wp-content/themes/twobitcircus/img/home/arrow_white_btn.png);
       background-repeat: no-repeat;
