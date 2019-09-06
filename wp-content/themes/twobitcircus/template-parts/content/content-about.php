@@ -9,10 +9,13 @@
 <article id="about" <?php post_class(); ?>>
 
   <section id="about-header">
-    <div class="container text-center caption-top inview animated reverse">
-      <h1 class="headline mx-auto inview animated reverse delay-3"><?php echo get_field('header_title');?></h1>
-      <div class="w-50 mx-auto inview animated reverse delay-4"><?php echo get_field('header_description');?></div>
-      <div class="arrow-down mx-auto"><img class="img-fluid" src="<?php echo $imgPath;?>down_arrow.png" alt="<?php echo get_field('header_title');?>"/></div>
+    <div class="container text-center caption-top">
+      <div id="about-intro"></div>
+      <div class="caption-content animated">
+        <h1 class="headline mx-auto"><?php echo get_field('header_title');?></h1>
+        <div class="w-50 mx-auto"><?php echo get_field('header_description');?></div>
+        <div class="arrow-down mx-auto"><img class="img-fluid" src="<?php echo $imgPath;?>down_arrow.png" alt="<?php echo get_field('header_title');?>"/></div>
+      </div>
     </div>
     <div class="bkg-wrapper"></div>
   </section>
@@ -36,7 +39,7 @@
           </div>
         </div>
       </div>
-      <div id="dark-red-layer" class="bkg-layer w-100">
+      <div id="escape-layer" class="bkg-layer w-100">
         <svg width="1440px" height="25px" viewBox="0 0 1440 25" preserveAspectRatio="none"><g data-svg-origin="0 0"><path fill="currentColor" d="M 0 12.5 q 360 -25 720 0 t 720 0 t 720 0 t 720 0 t 720 0 t 720 0 V 0 H 0 V 12.5"></path></g></svg>
       </div>
     </section>
@@ -65,7 +68,60 @@
           <?php endif ?>
         </div>
       </div>
-      <div id="red-layer" class="bkg-layer w-100">
+      <div id="gear-layer" class="bkg-layer w-100">
+        <svg width="1440px" height="25px" viewBox="0 0 1440 25" preserveAspectRatio="none"><g data-svg-origin="0 0"><path fill="currentColor" d="M 0 12.5 q 360 -25 720 0 t 720 0 t 720 0 t 720 0 t 720 0 t 720 0 V 0 H 0 V 12.5"></path></g></svg>
+      </div>
+    </section>
+
+    <section id="level-arcade-block" class="about-sections">
+      <div class="row no-gutters inview animated z-2">
+        <div class="col-md-6">
+          <?php if(get_field('arcade_image')) : ?>
+          <div class="inview animated mt-5" data-ease="fadeInLeftBig"><img class="img-fluid" src="<?php echo get_field('arcade_image')['url'];?>" alt="<?php echo get_field('arcade_title');?>" /></div>
+          <?php endif ?>
+        </div>
+        <div class="col-md-6 text-center white">
+          <h3 class="header-line lubalinB mt-5 text-uppercase inview animated yellow"><?php echo get_field('arcade_title');?></h3>
+          <h2 class="headline inview animated delay-1"><?php echo get_field('arcade_subtitle');?></h2>
+          <div class="text w-75 mx-auto inview animated delay-2"><?php echo get_field('arcade_description');?></div>
+          <div class="vector vector-rooms inview animated delay-2" data-ease="fadeInUp">
+            <img class="img-fluid" src="<?php echo $imgPath;?>about_arcade.png" alt="<?php echo get_field('arcade_title');?>" />
+          </div>
+          <div class="vector vector-icons inview animated delay-3" data-ease="fadeInUp">
+            <img class="img-fluid" src="<?php echo $imgPath;?>about_arcade_icons.png" alt="<?php echo get_field('arcade_title');?>" />
+          </div>
+        </div>
+      </div>
+      <div id="arcade-layer" class="bkg-layer w-100">
+        <svg width="1440px" height="25px" viewBox="0 0 1440 25" preserveAspectRatio="none"><g data-svg-origin="0 0"><path fill="currentColor" d="M 0 12.5 q 360 -25 720 0 t 720 0 t 720 0 t 720 0 t 720 0 t 720 0 V 0 H 0 V 12.5"></path></g></svg>
+      </div>
+    </section>
+
+    <section id="level-midway-block" class="about-sections">
+      <div class="row no-gutters inview animated z-2">
+        <div class="col-md-6 overflow-hidden d-md-none">
+          <?php if(get_field('midway_image')) : ?>
+          <div class="inview animated text-right" data-ease="fadeInRightBig"><img class="img-fluid" src="<?php echo get_field('midway_image')['url'];?>" alt="<?php echo get_field('midway_title');?>" /></div>
+          <?php endif ?>
+        </div>
+        <div class="col-md-6 text-center white">
+          <h3 class="header-line lubalinB mt-5 text-uppercase inview animated yellow"><?php echo get_field('gear_title');?></h3>
+          <h2 class="headline inview animated delay-1"><?php echo get_field('midway_subtitle');?></h2>
+          <div class="text w-75 mx-auto inview animated delay-2"><?php echo get_field('midway_description');?></div>
+          <div class="vector vector-rooms inview animated delay-2" data-ease="fadeInUp">
+            <img class="img-fluid" src="<?php echo $imgPath;?>about_midway.png" alt="<?php echo get_field('midway_title');?>" />
+          </div>
+          <div class="vector vector-icons inview animated delay-3" data-ease="fadeInUp">
+            <img class="img-fluid" src="<?php echo $imgPath;?>about_midway_icons.png" alt="<?php echo get_field('midway_title');?>" />
+          </div>
+        </div>
+        <div class="col-md-6 overflow-hidden d-none d-md-block">
+          <?php if(get_field('midway_image')) : ?>
+          <div class="inview animated text-right mt-5" data-ease="fadeInRightBig"><img class="img-fluid" src="<?php echo get_field('midway_image')['url'];?>" alt="<?php echo get_field('midway_title');?>" /></div>
+          <?php endif ?>
+        </div>
+      </div>
+      <div id="midway-layer" class="bkg-layer w-100">
         <svg width="1440px" height="25px" viewBox="0 0 1440 25" preserveAspectRatio="none"><g data-svg-origin="0 0"><path fill="currentColor" d="M 0 12.5 q 360 -25 720 0 t 720 0 t 720 0 t 720 0 t 720 0 t 720 0 V 0 H 0 V 12.5"></path></g></svg>
       </div>
     </section>
@@ -89,7 +145,7 @@
           </div>
         </div>
       </div>
-      <div id="yellow-layer" class="bkg-layer w-100">
+      <div id="club-layer" class="bkg-layer w-100">
         <svg width="1440px" height="25px" viewBox="0 0 1440 25" preserveAspectRatio="none"><g data-svg-origin="0 0"><path fill="currentColor" d="M 0 12.5 q 360 -25 720 0 t 720 0 t 720 0 t 720 0 t 720 0 t 720 0 V 0 H 0 V 12.5"></path></g></svg>
       </div>
     </section>
@@ -121,7 +177,7 @@
           <?php endif ?>
         </div>
       </div>
-      <div id="green-layer" class="bkg-layer w-100">
+      <div id="food-layer" class="bkg-layer w-100">
         <svg width="1440px" height="25px" viewBox="0 0 1440 25" preserveAspectRatio="none"><g data-svg-origin="0 0"><path fill="currentColor" d="M 0 12.5 q 360 -25 720 0 t 720 0 t 720 0 t 720 0 t 720 0 t 720 0 V 0 H 0 V 12.5"></path></g></svg>
       </div>
     </section>
@@ -146,13 +202,15 @@
       <div class="w-50 mx-auto inview animated delay-2"><?php echo get_field('package_description'); ?></div>
     </div>
     <div class="package-wrapper mt-5 inview animated delay-3">
-      <div class="row no-gutters">
+      <div class="slick-package">
       <?php foreach(get_field('packages') as $package) :?>
-        <div class="col-md-4 bkg-img" style="background-image: url('<?php echo $package['background_image'];?>">
-          <div class="package-block">
-            <h2 class="lubalinB box-shadow"><?php echo $package['package_name'];?></h2>
-            <div class="package-description">
-              <?php echo $package['package_description'];?>
+        <div class="item">
+          <div class="bkg-img" style="background-image: url('<?php echo $package['background_image'];?>">
+            <div class="package-block">
+              <h2 class="lubalinB box-shadow"><?php echo $package['package_name'];?></h2>
+              <div class="package-description">
+                <?php echo $package['package_description'];?>
+              </div>
             </div>
           </div>
         </div>

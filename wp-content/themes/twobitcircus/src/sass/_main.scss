@@ -421,7 +421,7 @@ article.page.type-page {
   }
   .carousel-item {
     height: calc(90vh - 99px);
-    min-height: 780px;
+    min-height: 720px;
     background-color: #000;
     background-repeat: no-repeat;
     background-size: cover;
@@ -984,5 +984,14 @@ div.wpcf7-acceptance-missing {
   100% {
     opacity: 0;
     @include transform(translateY(0));
+  }
+}
+// Keyframes CSS
+@include keyframes(logo-sprite-animate) {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: $logo-sprite 0;
   }
 }

@@ -47,12 +47,21 @@
         background: rgba(0, 0, 0, 0.2);
         background: linear-gradient(
           180deg,
-          rgba(0, 0, 0, 0.7) 0%,
-          rgba(0, 0, 0, 0.2) 28%,
+          rgba(0, 0, 0, 0.8) 0%,
+          rgba(0, 0, 0, 0.3) 30%,
           rgba(0, 0, 0, 0.1) 46%,
           rgba(0, 212, 255, 0) 100%
         );
         transition: background 0.6s ease;
+        @media (max-width: $mobile) {
+          background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.8) 0%,
+            rgba(0, 0, 0, 0.5) 30%,
+            rgba(0, 0, 0, 0.1) 60%,
+            rgba(0, 212, 255, 0) 100%
+          );
+        }
       }
     }
     .caption-top {
@@ -61,12 +70,41 @@
       left: 0;
       right: 0;
       margin: auto;
-      top: 4%;
+      top: 0;
       h1 {
         color: $white;
       }
       p {
         color: $white;
+      }
+      .caption-content {
+        opacity: 0;
+      }
+      #about-intro {
+        opacity: 0;
+        width: 420px;
+        height: 106px;
+        margin: auto;
+        background-repeat: no-repeat;
+        background-position: $logo-sprite 0;
+        background-image: url("/wp-content/themes/twobitcircus/img/sprite.png");
+        &.start {
+          opacity: 1;
+          @include animation(logo-sprite-animate 2s steps($logo-steps) 1);
+        }
+        @media (max-width: $phone) {
+          width: 100%;
+          max-width: 420px;
+          height: 80px;
+          margin: auto;
+          background-repeat: no-repeat;
+          background-position: 100% 0;
+          background-size: 6340%;
+          transition: opacity 0.4s 1s ease;
+          &.start {
+            @include animation(none);
+          }
+        }
       }
       .arrow-down {
         max-width: 75px;
@@ -109,10 +147,31 @@
     @media (max-width: $mobile) {
       bottom: -15px;
     }
-    &#dark-red-layer {
-      color: $dark-red;
+    &#arcade-layer {
+      color: $green;
+      svg {
+        g {
+          @include animation-duration(25s);
+        }
+      }
     }
-    &#red-layer {
+    &#midway-layer {
+      color: $dark-red;
+      svg {
+        g {
+          @include animation-duration(30s);
+        }
+      }
+    }
+    &#escape-layer {
+      color: $dark-red;
+      svg {
+        g {
+          @include animation-duration(30s);
+        }
+      }
+    }
+    &#gear-layer {
       color: $red;
       svg {
         g {
@@ -120,7 +179,7 @@
         }
       }
     }
-    &#yellow-layer {
+    &#club-layer {
       color: $yellow;
       svg {
         g {
@@ -128,7 +187,7 @@
         }
       }
     }
-    &#green-layer {
+    &#food-layer {
       color: $green;
       svg {
         g {
@@ -210,11 +269,11 @@
     .vector-icons {
       right: 5vw;
       bottom: -8vh;
-      width: 17vw;
+      width: 23vw;
     }
   }
   #level-gear-block {
-    padding-bottom: 6vh;
+    padding-bottom: 5vh;
     background-color: $red;
     .vector-rooms {
       left: 5vw;
@@ -223,12 +282,40 @@
       width: 23vw;
     }
     .vector-icons {
+      bottom: 2%;
       left: 5vw;
       width: 22vw;
     }
-    .bkg-layer {
-      @media (max-width: $desktop) {
-      }
+  }
+  #level-arcade-block {
+    background-color: $green;
+    padding-bottom: 8vh;
+    .vector-rooms {
+      left: -2vw;
+      right: 0;
+      margin: auto;
+      width: 20vw;
+      bottom: -17%;
+    }
+    .vector-icons {
+      right: 5vw;
+      bottom: -5vh;
+      width: 24vw;
+    }
+  }
+  #level-midway-block {
+    background-color: $dark-red;
+    padding-bottom: 6vh;
+    .vector-rooms {
+      left: -9vw;
+      right: 0;
+      margin: auto;
+      width: 26vw;
+    }
+    .vector-icons {
+      left: 5vw;
+      width: 22vw;
+      bottom: -13%;
     }
   }
   #level-club-block {
@@ -241,9 +328,9 @@
       width: 27vw;
     }
     .vector-icons {
-      right: 5vw;
-      width: 18vw;
-      bottom: -8vh;
+      right: 0;
+      width: 20vw;
+      bottom: -5vh;
     }
     .bkg-layer {
       &.active {
@@ -261,7 +348,7 @@
       width: 23vw;
     }
     .vector-icons.delay-3 {
-      left: 5vw;
+      left: 0;
       width: 22vw;
     }
     .vector-icons.delay-4 {
@@ -329,7 +416,7 @@
         padding: 5px 35px;
         color: $white;
         text-transform: uppercase;
-        font-size: 3em;
+        font-size: 2.8em;
         text-align: center;
         margin: auto;
         background-color: $black;
@@ -337,19 +424,17 @@
         margin-bottom: -17px;
         position: relative;
         z-index: 1;
+        @media (max-width: 1290px) {
+          font-size: 2.3em;
+        }
       }
       .package-description {
         .bkg-block {
           padding: 30px 10px 10px;
           background-color: $yellow;
         }
-        ul {
-          margin-top: 25px;
-          text-transform: uppercase;
-          font-family: "Franchise Bold", "Roboto", sans-serif;
-          li {
-            font-size: 1.6em;
-          }
+        .cta-btn {
+          margin-top: 75%;
         }
       }
     }

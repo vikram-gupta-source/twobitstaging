@@ -9,12 +9,12 @@
 
   <?php if(get_field('events')) :?>
   <?php $events = filter_locations(get_field('events'));?>
-  <section id="events-block" class="entry-wrapper-padding">
+  <section id="events-block" class="entry-wrapper-padding pt-0">
     <div class="container-fluid inview animated">
       <div class="row">
         <?php foreach($events as $event) :?>
-          <div class="col-sm-0 col-lg-2 bkg-img" style="background-image: url('<?php echo $event['event_side_image']; ?>')"></div>
-          <div class="col-sm-12 col-lg-8 event">
+          <div class="col-sm-0 col-lg-1"></div>
+          <div class="col-sm-12 col-lg-10 event">
             <div class="event-header clearfix">
               <div class="top text-center">
               <?php if(!empty($event['events_header'])) :?>
@@ -23,16 +23,16 @@
               </div>
               <div class="bottom text-center">
               <?php if(!empty($event['event_title'])) :?>
-              <h5><?php echo $event['event_title']; ?></h5>
+              <h4><?php echo $event['event_title']; ?></h4>
               <?php endif ?>
               <?php if(!empty($event['event_sub_title'])) :?>
-              <h6><?php echo $event['event_sub_title']; ?></h6>
+              <h5><?php echo $event['event_sub_title']; ?></h5>
               <?php endif ?>
               </div>
             </div>
             <div class="event-image" style="background-image: url('<?php echo $event['event_image']; ?>')"></div>
           </div>
-          <div class="col-sm-0 col-lg-2 bkg-img" style="background-image: url('<?php echo $event['event_side_image_2']; ?>')"></div>
+          <div class="col-sm-0 col-lg-1"></div>
         <?php endforeach ?>
       </div>
     </div>
@@ -62,16 +62,13 @@
   <section id="menu-block">
     <div class="container-fluid">
       <div class="row no-gutters">
-      <?php foreach($menus as $menu) :?>
-        <?php if(!empty($menu['menu_download'])) :?>
-        <div class="col-md-4 inview animated delay-1" data-ease="fadeIn">
-          <img class="img-fuild w-100" src="<?php echo $menu['menu_image'] ?>" />
-          <div class="cta-wrapper">
-            <div class="cta-btn mx-auto"><a class="btn btn-twobit" href="<?php echo $menu['menu_download'] ?>" target="_blank"><span><?php echo $menu['menu_title'];?></span></a><div class="btn-behind">&nbsp;</div></div>
+        <?php if(!empty($menus[0]['menu_download'])) :?>
+        <div class="col-12 bkg-img"  style="background-image: url('<?php echo $menus[0]['menu_image'] ?>');">
+          <div class="cta-wrapper inview animated" data-ease="fadeIn">
+            <div class="cta-btn mx-auto"><a class="btn btn-twobit" href="<?php echo $menus[0]['menu_download'] ?>" target="_blank"><span><?php echo $menus[0]['menu_title'];?></span></a><div class="btn-behind">&nbsp;</div></div>
           </div>
         </div>
         <?php endif ?>
-      <?php endforeach ?>
       </div>
     </div>
   </section>

@@ -1,11 +1,10 @@
 // Food
 #food-drink {
   #events-block {
-    background-color: $offwhite;
-    .row {
-      background-color: #d2d0c9;
-      padding: 15px 0;
-    }
+    background-image: url("/wp-content/themes/twobitcircus/img/home/red_pattern.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right top;
     .event {
       .event-header {
         float: left;
@@ -21,12 +20,15 @@
         .bottom {
           min-height: 110px;
           background-color: $dark-red;
-          padding: 2em 1em;
+          padding: 3em 1em;
           color: $yellow;
         }
         .top {
           color: $white;
           background-color: $green;
+          h2 {
+            font-size: 2.6em;
+          }
         }
       }
       .event-image {
@@ -63,20 +65,15 @@
   #menu-block {
     .no-gutters {
       margin: 0 -15px !important;
-      .inview {
+      .bkg-img {
         position: relative;
+        height: 450px;
         .cta-wrapper {
           position: absolute;
+          bottom: 45px;
           left: 0;
           right: 0;
           margin: auto;
-          bottom: 3em;
-        }
-        &:last-child {
-          border: 0;
-        }
-        @media (max-width: $mobile) {
-          border: 0 !important;
         }
       }
     }

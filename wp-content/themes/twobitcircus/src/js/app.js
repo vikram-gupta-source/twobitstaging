@@ -20,6 +20,7 @@ import addIndicators from "scrollmagic/scrollmagic/minified/plugins/debug.addInd
 $(function() {
   //Wait for Preload Sprite before Starting
   var loadedItems = 0,
+    $aboutElem = $("#about-intro"),
     $headerElem = $("#main-nav"),
     $articleElem = $("article.page.type-page"),
     scrollHeightTop = 800,
@@ -48,6 +49,17 @@ $(function() {
   handleWaypoints();
   $headerElem.addClass("start");
   $articleElem.addClass("start");
+  // Intro for About
+  if ($aboutElem.length) {
+    imagesLoaded("#about-intro", {
+      background: true
+    }, function() {
+      $aboutElem.addClass("start");
+      setTimeout(function() {
+        $('#about-header .caption-top .caption-content').addClass("fadeInUp");
+      }, 2000);
+    });
+  }
   // Scroll Handler
   if ($("#arrow-cta").length && $(window).height() < scrollHeightTop) {
     $("#arrow-cta").addClass("show");
@@ -769,7 +781,30 @@ $(function() {
       return false;
     });
   }
-
+  if ($(".slick-package").length) {
+    $(".slick-package").slick({
+      arrows: false,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      responsive: [{
+          breakpoint: 1160,
+          settings: {
+            arrows: true,
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 680,
+          settings: {
+            arrows: true,
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
+  }
   // Mobile SLick
   $(window).on("load resize orientationchange", function() {
     if ($("#filters").length) {
