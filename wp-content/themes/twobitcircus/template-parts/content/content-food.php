@@ -13,26 +13,26 @@
     <div class="container-fluid inview animated">
       <div class="row">
         <?php foreach($events as $event) :?>
-          <div class="col-sm-0 col-lg-1"></div>
-          <div class="col-sm-12 col-lg-10 event">
-            <div class="event-header clearfix">
-              <div class="top text-center">
+          <div class="col-md-0 col-lg-2"></div>
+          <div class="col-md-12 col-lg-8 event">
+            <div class="event-image" style="background-image: url('<?php echo $event['event_image']; ?>')"></div>
+            <div class="event-header">
+              <div class="top">
               <?php if(!empty($event['events_header'])) :?>
-              <h2 class="lubalinB text-uppercase"><?php echo $event['events_header']; ?></h2>
+              <h4 class="lubalinB text-uppercase"><?php echo $event['events_header']; ?></h4>
               <?php endif ?>
               </div>
-              <div class="bottom text-center">
+              <div class="bottom">
               <?php if(!empty($event['event_title'])) :?>
-              <h4><?php echo $event['event_title']; ?></h4>
+              <h4 class="lubalinB card-title text-uppercase"><?php echo $event['event_title']; ?></h4>
               <?php endif ?>
               <?php if(!empty($event['event_sub_title'])) :?>
               <h5><?php echo $event['event_sub_title']; ?></h5>
               <?php endif ?>
               </div>
             </div>
-            <div class="event-image" style="background-image: url('<?php echo $event['event_image']; ?>')"></div>
           </div>
-          <div class="col-sm-0 col-lg-1"></div>
+          <div class="col-md-0 col-lg-2"></div>
         <?php endforeach ?>
       </div>
     </div>

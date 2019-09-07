@@ -22,8 +22,16 @@
     <div class="carousel-inner">
       <?php foreach($slides as $sky => $slide) : ?>
       <?php $slideActive = ($sky == 0) ? 'active' : '';?>
+      <?php $embed = $slide['video_embed']; ?>
       <?php $darken = ($slide['darken'] != 'none') ? 'darken ' . $slide['darken'] : ''; ?>
+      <?php if(empty($embed)) :?>
       <div class="carousel-item <?php echo $slideActive;?> <?php echo $darken;?>" <?php echo (!empty($slide['image']['url'])) ? 'style="background-image: url(\'' . $slide['image']['url'] . '\');"' : '' ;?>>
+      <?php else :?>
+      <div class="carousel-item video-embed <?php echo $slideActive;?> <?php echo $darken;?>">
+        <div class="video-wrapper">
+          <iframe id="video-<?php echo $embed;?>" src="https://player.vimeo.com/video/<?php echo $embed;?>?api=1&amp;autoplay=1&amp;background=1" width="100%" height="100%" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay" data-ready="true"></iframe>
+        </div>
+      <?php endif ?>
         <?php $postion_y = ($slide['position_y'] == 'top') ? 'top' : ((($slide['position_y'] == 'bottom')) ? 'bottom' : 'd-flex h-100 align-items-center justify-content-center') ?>
         <div class="container-fluid carousel-caption <?php echo $postion_y;?> <?php echo $slide['background_color'];?>-bkg inview animated">
           <?php $postion_x = ($slide['position_text'] == 'right') ? 'col-md-6 offset-md-6' : ((($slide['position_text'] == 'left')) ? 'offset-left-md-6 col-md-6' : 'mx-auto w-50') ?>

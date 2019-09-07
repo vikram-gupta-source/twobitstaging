@@ -10,10 +10,17 @@ body {
     }
   }
   @media (min-width: 768px) and (max-width: $laptop) {
+    font-size: 15px;
     .container {
       max-width: 100%;
     }
   }
+  @media (max-width: $mobile) {
+    font-size: 14px;
+  }
+}
+hr {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 h1.headline {
   font-size: 5rem;
@@ -109,6 +116,24 @@ a {
     z-index: 99;
   }
   .carousel-inner {
+    .video-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      iframe {
+        width: 100vw;
+        height: 56.25vw; /* Given a 16:9 aspect ratio, 9/16*100 = 56.25 */
+        min-height: 100vh;
+        min-width: 177.77vh; /* Given a 16:9 aspect ratio, 16/9*100 = 177.77 */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include transform(translate(-50%, -50%));
+      }
+    }
     @media (max-width: $phone) {
       .btn {
         float: none !important;
@@ -121,6 +146,11 @@ a {
 }
 .mt-5 {
   margin-top: 5em;
+}
+.mt-md-5 {
+  @media (max-width: $mobile) {
+    //margin-top: 5em;
+  }
 }
 .mb-6 {
   margin-bottom: 6em;
@@ -345,6 +375,9 @@ main {
   @media (max-width: $mobile) {
     width: 90% !important;
   }
+  @media (max-width: $phone) {
+    width: 100% !important;
+  }
 }
 article.page.type-page {
   position: relative;
@@ -396,6 +429,18 @@ article.page.type-page {
   background-size: contain;
   background-position: center;
 }
+.bkg-green {
+  background-image: url("/wp-content/themes/twobitcircus/img/home/green_pattern.png");
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+}
+.bkg-red {
+  background-image: url("/wp-content/themes/twobitcircus/img/home/red_pattern.png");
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+}
 .carousel {
   .carousel-indicators li {
     width: 12px;
@@ -426,6 +471,9 @@ article.page.type-page {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    @media (max-width: $phone) {
+      min-height: 610px;
+    }
     &.darken:before {
       content: "";
       position: absolute;
@@ -468,6 +516,9 @@ article.page.type-page {
       margin: auto;
       .headline {
         margin-top: 35px;
+        @media (max-width: $phone) {
+          margin-top: 15px;
+        }
       }
     }
   }
@@ -644,7 +695,7 @@ article.page.type-page {
       color: $white;
     }
   }
-  &:not(.media-grid) {
+  &.media-grid {
     max-width: 1655px;
     @media (max-width: 1574px) {
       max-width: 1146px;

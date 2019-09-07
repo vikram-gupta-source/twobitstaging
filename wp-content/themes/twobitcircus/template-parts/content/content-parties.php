@@ -57,7 +57,7 @@
       </div>
     </div>
   </div>
-
+ 
   <?php if(!empty(get_field('footer_block'))) :?>
   <?php $footer = filter_locations(get_field('footer_block'));?>
   <?php foreach($footer as $banner) : ?>

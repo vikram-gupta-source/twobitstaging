@@ -1,26 +1,30 @@
 // News
 #news {
   background-color: $green;
-  .container-fluid {
-    @media (max-width: $laptop) {
-      max-width: inherit;
-    }
-    .grid-isotope {
-      .grid-item {
-        .card-title {
-          background-color: $yellow;
-          a {
-            color: $black;
-            &:hover {
-              color: $dark-red;
-            }
-          }
-        }
-        .card-body {
-          background-color: $yellow;
-          color: $black;
-        }
+}
+#news-detail {
+  background-color: $dark-green;
+  min-height: 700px;
+  .main-headline {
+    @media (max-width: $mobile) {
+      .d-md-none {
+        display: none !important;
       }
+    }
+  }
+  #news-content {
+    h2 {
+      font-size: 2.5em;
+    }
+    a {
+      color: $yellow;
+    }
+    .attendee {
+      vertical-align: top;
+      display: inline-block;
+      max-width: 64px;
+      margin-right: 10px;
+      margin-bottom: 15px;
     }
   }
 }

@@ -74,6 +74,11 @@
                       <?php if(!empty($gallery)) :?>
                       <div class="show-asset-wrapper">
                         <div class="slick-media">
+                          <?php if(!empty($video)) :?>
+                          <div class="item d-block">
+                            <div class="embed-responsive embed-responsive-16by9"><?php echo $video ?></div>
+                          </div>
+                          <?php endif ?>
                           <?php foreach($gallery as $gal) :?>
                           <div class="item d-block">
                             <div class="img d-block"><img class="img-fluid w-100" src="<?php echo $gal['url']; ?>" alt="<?php echo $gal['title']; ?>" /></div>
@@ -83,6 +88,11 @@
                         <?php if(count($gallery) > 1):?>
                         <div class="overlay">
                           <div class="slick-media-nav">
+                            <?php if(!empty($video)) :?>
+                            <div class="thumb">
+                              <div class="embed-responsive embed-responsive-16by9"><?php echo $video ?></div>
+                            </div>
+                            <?php endif ?>
                             <?php foreach($gallery as $gal) :?>
                             <div class="thumb"><img class="img-fluid w-100" src="<?php echo $gal['sizes']['medium']; ?>" alt="<?php echo $gal['title']; ?>" /></div>
                             <?php endforeach ?>
@@ -122,7 +132,12 @@
                       <?php echo apply_filters('the_content', $show->post_content) ?>
                       <?php if(!empty($info[0]['buy_link']) && empty($composedDates)): ?>
                       <div class="buy-link mt-4">
-                        <?php echo do_shortcode('[button link="'.$info[0]['buy_link'].'" target="_blank"]Buy Players Card[/button]') ?>
+                        <?php echo do_shortcode('[button link="'.$info[0]['buy_link'].'" target="_blank"]Buy Tickets[/button]') ?>
+                      </div>
+                      <?php endif ?>
+                      <?php if(!empty($info[0]['card_link']) && empty($composedDates)): ?>
+                      <div class="buy-link mt-4">
+                        <?php echo do_shortcode('[button link="'.$info[0]['card_link'].'" target="_blank"]Buy Players Card[/button]') ?>
                       </div>
                       <?php endif ?>
                       <?php if(!empty($composedDates)) :?>

@@ -14,9 +14,9 @@
       <div id="grid-filter" class="inview animated mx-auto delay-2 text-center" data-ease="fadeInDown">
         <div class="cta-btn d-inline-block mx-2"><a href="#" data-filter=".image" class="btn btn-twobit"><span><?php _e('Images', 'twobitcircus');?></span></a><div class="btn-behind">&nbsp;</div></div>
         <div class="cta-btn d-inline-block mx-2"><a href="#" data-filter=".video" class="btn btn-twobit"><span><?php _e('Videos', 'twobitcircus');?></span></a><div class="btn-behind">&nbsp;</div></div>
-        <div class="cta-btn d-inline-block mx-2"><a href="#" data-filter=".podcast" class="btn btn-twobit"><span><?php _e('Podcasts', 'twobitcircus');?></span></a><div class="btn-behind">&nbsp;</div></div> 
+        <div class="cta-btn d-inline-block mx-2"><a href="#" data-filter=".podcast" class="btn btn-twobit"><span><?php _e('Podcasts', 'twobitcircus');?></span></a><div class="btn-behind">&nbsp;</div></div>
       </div>
-      <div class="grid-isotope media-grid mt-5">
+      <div class="grid-isotope mt-5">
         <?php if(!empty(get_field('image'))) :?>
         <?php foreach(get_field('image') as $asset) : ?>
         <div class="grid-item image">

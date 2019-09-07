@@ -31,14 +31,17 @@
             <?php if(!empty($promo['description'])) :?>
             <p><?php echo $promo['description'];?></p>
             <?php endif ?>
-            <div class="mb-3 text-center mx-auto addthis_toolbox" data-url="<?php echo $promo['link'];?>" data-title="<?php echo $promo['title'];?>">
+            <?php if(!empty($promo['link'])) :?>
+            <div class="mb-3 text-center mx-auto addthis_toolbox" data-url="<?php echo permalinkUrl($promo['link']);?>" data-title="<?php echo $promo['title'];?>">
               <a class="addthis_button_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
               <a class="addthis_button_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
               <a class="addthis_button_pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
             </div>
             <div class="link-wrapper my-2">
-              <div class="cta-btn mx-auto"><a class="btn btn-twobit" href="<?php echo $promo['link'];?>"><span><?php _e( 'Book Now', 'twobitcircus' )?></span></a><div class="btn-behind">&nbsp;</div></div>
+              <?php $isInternalLink = checkInternalLink($promo['link']);?>
+              <div class="cta-btn mx-auto"><a class="btn btn-twobit" href="<?php echo $promo['link'];?>" <?php echo $isInternalLink;?>><span><?php _e( 'Book Now', 'twobitcircus' )?></span></a><div class="btn-behind">&nbsp;</div></div>
             </div>
+            <?php endif ?>
           </div>
         </div>
         <?php endforeach ?>

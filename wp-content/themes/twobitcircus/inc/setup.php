@@ -295,3 +295,20 @@ function openClosed($days, $timezone) {
 function cleanPhone($phoneNumber) {
   return '+1' . preg_replace('/[^0-9]/','',$phoneNumber);
 }
+// Covert URL to PermaLink url
+function permalinkUrl($url) {
+  $test = checkInternalLink($url);
+  if(!empty($test)) {
+    return $url;
+  } else {
+    return get_site_url() . $url;
+  }
+}
+// Test URL if Full Url
+function checkInternalLink($url) {
+  if(strpos($url, 'http') !== 0) { // Has Http
+    return null;
+  } else {
+    return 'target="_blank" rel="noopener noreferrer"';
+  }
+}

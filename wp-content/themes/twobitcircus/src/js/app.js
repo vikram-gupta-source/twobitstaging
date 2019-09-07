@@ -8,9 +8,7 @@ import "slick-carousel";
 import imagesLoaded from "imagesloaded";
 import parallax from "./jquery.parallax.js";
 import Isotope from "isotope-layout/dist/isotope.pkgd.min";
-import {
-  Calendar
-} from "@fullcalendar/core";
+import {Calendar} from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
@@ -29,16 +27,14 @@ $(function() {
       if ($(".inview").length) {
         $(".inview").each(function() {
           let delay = $(this).data("offset") ? $(this).data("offset") : "90%";
-          let easeType = $(this).data("ease") ?
-            $(this).data("ease") :
-            "fadeInUp";
+          let easeType = $(this).data("ease")
+            ? $(this).data("ease")
+            : "fadeInUp";
           let waypoint = new Waypoint({
             element: this,
             handler: function(direction) {
               if (direction == "down" && !$(this.element).hasClass(easeType)) {
                 $(this.element).addClass(easeType);
-              } else {
-                //$(this.element).removeClass(easeType);
               }
             },
             offset: delay
@@ -51,14 +47,18 @@ $(function() {
   $articleElem.addClass("start");
   // Intro for About
   if ($aboutElem.length) {
-    imagesLoaded("#about-intro", {
-      background: true
-    }, function() {
-      $aboutElem.addClass("start");
-      setTimeout(function() {
-        $('#about-header .caption-top .caption-content').addClass("fadeInUp");
-      }, 2000);
-    });
+    imagesLoaded(
+      "#about-intro",
+      {
+        background: true
+      },
+      function() {
+        $aboutElem.addClass("start");
+        setTimeout(function() {
+          $("#about-header .caption-top .caption-content").addClass("fadeInUp");
+        }, 2000);
+      }
+    );
   }
   // Scroll Handler
   if ($("#arrow-cta").length && $(window).height() < scrollHeightTop) {
@@ -116,7 +116,8 @@ $(function() {
     arrows: true,
     slidesToShow: 4,
     slidesToScroll: 4,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           slidesToShow: 3,
@@ -146,18 +147,20 @@ $(function() {
     slidesToShow: 3,
     arrows: false,
     variableWidth: true,
-    responsive: [{
-      breakpoint: 767,
-      settings: {
-        dots: true,
-        arrows: false,
-        centerMode: false,
-        variableWidth: false,
-        adaptiveHeight: true,
-        slidesToShow: 1,
-        slidesToScroll: 1
+    responsive: [
+      {
+        breakpoint: 767,
+        settings: {
+          dots: true,
+          arrows: false,
+          centerMode: false,
+          variableWidth: false,
+          adaptiveHeight: true,
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
       }
-    }]
+    ]
   };
   var slick_event_settings = {
     dots: true,
@@ -167,7 +170,8 @@ $(function() {
     slidesToShow: 4,
     slidesToScroll: 4,
     adaptiveHeight: true,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           slidesToShow: 3,
@@ -198,7 +202,8 @@ $(function() {
     arrows: false,
     slidesToShow: 7,
     slidesToScroll: 1,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           arrows: true,
@@ -253,7 +258,8 @@ $(function() {
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: false,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           dots: true,
@@ -277,7 +283,8 @@ $(function() {
     slidesToScroll: 5,
     arrows: false,
     dots: true,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           slidesToShow: 4,
@@ -332,7 +339,8 @@ $(function() {
     arrows: false,
     asNavFor: ".slick-media",
     focusOnSelect: true,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           slidesToShow: 4
@@ -351,11 +359,13 @@ $(function() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
+    fade: true,
     asNavFor: ".slick-media-nav"
   };
 
   imagesLoaded(
-    "main", {
+    "main",
+    {
       background: true
     },
     function() {
@@ -383,25 +393,37 @@ $(function() {
                 .find(".embed-data")
                 .append(
                   '<iframe class="embed-responsive-item" src="' +
-                  srcid +
-                  '"></iframe>'
+                    srcid +
+                    '"></iframe>'
                 );
             }
           });
         var firstEmbed = $(".youtube .grid-feed:first .embed-data").data("src");
         $(".youtube .grid-feed:first .embed-data").append(
           '<iframe class="embed-responsive-item" src="' +
-          firstEmbed +
-          '"></iframe>'
+            firstEmbed +
+            '"></iframe>'
         );
       }
-
+      if ($("#news-content").length) {
+        $(".slick-media").slick({
+          infinite: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          adaptiveHeight: true,
+          arrows: true,
+          fade: true
+        });
+      }
       // Handle all Attraction Events
       if ($("#attractions-block").length) {
         var allowStart = false;
+
+        // ToolTips
         $('[data-tool-toggle="tooltip"]').tooltip({
           html: true
         });
+
         $(".attractions-slick").slick(slick_attractions_settings);
         $(".slick-shows")
           .slick(slick_shows_settings)
@@ -423,29 +445,13 @@ $(function() {
           .on("beforeChange", function(ev, slick, cur, next) {
             $(".available-dates .cta-btn").removeClass("show");
           });
-        // Append to Filter show
-        $("#filters .dropdown-menu .dropdown-item").on("click", function(e) {
-          e.preventDefault(e);
-          if (!$(this).hasClass("active")) {
-            $('.dropdown-toggle').dropdown('dispose');
-            let slug = $(this).attr("aria-controls");
-            if ($("#" + slug).length) {
-              let index = $("#" + slug)
-                .parents(".slick-slide")
-                .data("slick-index");
-              $("#" + slug)
-                .parents(".slick-shows")
-                .slick("slickGoTo", index);
 
-            }
-          }
-        });
         // Append to Filter show
         $("#filters .nav-item .nav-link").on("click", function(e) {
           e.preventDefault(e);
           $('[data-tool-toggle="tooltip"]').tooltip("hide");
           if (!$(this).hasClass("active")) {
-            $('.dropdown-toggle').dropdown('update');
+            $(".dropdown-toggle").dropdown("update");
             $("#filters .nav-link").removeClass("active");
             $(this).addClass("active");
             let slug = $(this).attr("aria-controls");
@@ -465,6 +471,25 @@ $(function() {
             }
           }
         });
+
+        // Append to Filter show
+        $("#filters .dropdown-menu .dropdown-item").on("click", function(e) {
+          e.preventDefault(e);
+          if (!$(this).hasClass("active")) {
+            //$(".dropdown-menu").removeClass("show");
+            //$(".dropdown-toggle").dropdown("dispose");
+            let slug = $(this).attr("aria-controls");
+            if ($("#" + slug).length) {
+              let index = $("#" + slug)
+                .parents(".slick-slide")
+                .data("slick-index");
+              $("#" + slug)
+                .parents(".slick-shows")
+                .slick("slickGoTo", index);
+            }
+          }
+        });
+
         //Extend Days slick
         $(".slick-days .slick-slide").on("click", function(evt) {
           var $_this = $(this);
@@ -542,7 +567,8 @@ $(function() {
       // Handle Arrow Scroll Top
       $("#return-to-top").on("click", function(evt) {
         evt.preventDefault();
-        $("html, body").animate({
+        $("html, body").animate(
+          {
             scrollTop: 0
           },
           "slow"
@@ -552,6 +578,17 @@ $(function() {
       if ($(".parallax").length) {
         $(".parallax").parallax();
       }
+      // Go-Back
+      // Handle Back Button
+      var mainUrl = document.location.host;
+      $(".go-back").on("click", function(e) {
+        e.preventDefault();
+        if (document.referrer.match(mainUrl)) {
+          window.location.href = document.referrer;
+        } else {
+          window.location.href = "/shows/";
+        }
+      });
       // Scroll to Top
       $(window).scroll(function() {
         if ($(this).scrollTop() >= 100) {
@@ -564,7 +601,6 @@ $(function() {
         var $iso = new Isotope(".grid-isotope", {
           itemSelector: ".grid-item"
         });
-
         $("#grid-filter a").on("click", function(evt) {
           evt.preventDefault();
           if (!$(this).hasClass("active")) {
@@ -576,6 +612,11 @@ $(function() {
             });
           }
         });
+      }
+      if ($("#contact-block").length) {
+        let $select = $("#contact-block select[name='inquiry']");
+        $('option[value="General Inquiries"]', $select).prop("selected", true);
+        $select.trigger("click");
       }
       if ($("#parties-block").length || $("#promo-block").length) {
         $(".grid-item .event-link").on("click", function(evt) {
@@ -589,7 +630,7 @@ $(function() {
             $parent.find(".card-body").removeClass("show");
           }
         });
-        $(".link-wrapper .btn").on("click", function(evt) {
+        $("#parties-block .link-wrapper .btn").on("click", function(evt) {
           evt.preventDefault();
           let _event = $(this)
             .parents(".grid-item")
@@ -656,7 +697,6 @@ $(function() {
             if (!$("#event-window").is(":visible")) {
               $("#event-window").addClass("show");
             }
-            //console.log(info);
             let $obj = $(info.el);
             let $target = $("#event-window .card");
             let sd = new Date(info.event.start);
@@ -690,12 +730,16 @@ $(function() {
         });
         $(".btn.full-calendar").on("click", function(evt) {
           evt.preventDefault();
-          $(this).toggleClass("show");
+          $(this)
+            .parent()
+            .addClass("show");
           $(".more-calendar-block").toggleClass("show");
           if (!$("#full-calendar.fc").length) calendar.render();
         });
         $(".more-calendar-block .close").on("click", function() {
-          $(".full-calendar").toggleClass("show");
+          $(".full-calendar")
+            .parent()
+            .removeClass("show");
           $(".more-calendar-block").toggleClass("show");
         });
       }
@@ -713,36 +757,22 @@ $(function() {
     var _h = $("#about-header").height();
     var controller = new ScrollMagic.Controller();
     var scene = new ScrollMagic.Scene({
-        triggerElement: "#trigger-element",
-        offset: -_h / 2
-      })
+      triggerElement: "#trigger-element",
+      offset: -_h / 2
+    })
       .on("start end", function(e) {
         if (e.scrollDirection == "FORWARD") {
-          $("html, body")
-            .stop()
-            .animate({
-                scrollTop: $("#trigger-element").offset().top
-              },
-              700
-            );
         }
       })
       .setClassToggle("#about-header", "scrolled")
       .addTo(controller);
 
     var scene2 = new ScrollMagic.Scene({
-        triggerElement: "#trigger-element",
-        offset: _h / 2
-      })
+      triggerElement: "#trigger-element",
+      offset: _h / 2
+    })
       .on("start", function(e) {
         if (e.scrollDirection == "REVERSE") {
-          $("html, body")
-            .stop()
-            .animate({
-                scrollTop: 0
-              },
-              700
-            );
         }
       })
       .setClassToggle("#about-header", "scrolled")
@@ -786,7 +816,8 @@ $(function() {
       arrows: false,
       slidesToShow: 3,
       slidesToScroll: 1,
-      responsive: [{
+      responsive: [
+        {
           breakpoint: 1160,
           settings: {
             arrows: true,
@@ -815,16 +846,26 @@ $(function() {
         }
       } else {
         if (!$slider.hasClass("slick-initialized")) {
-          $slider.slick({
-            arrows: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            centerMode: true,
-            focusOnSelect: true
-          }).on("afterChange", function(event, slick, currentSlide) {
-            let $elSlide = $(slick.$slides[currentSlide]);
-            $elSlide.find('.nav-item .nav-link').trigger('click');
-          });
+          $slider
+            .slick({
+              arrows: true,
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              centerMode: true,
+              focusOnSelect: true
+            })
+            .on("beforeChange", function(
+              event,
+              slick,
+              currentSlide,
+              nextSlide
+            ) {
+              let $elSlide = $(slick.$slides[nextSlide]);
+              $elSlide
+                .addClass("item-mobile")
+                .find(".nav-item .nav-link")
+                .trigger("click");
+            });
         }
       }
     }

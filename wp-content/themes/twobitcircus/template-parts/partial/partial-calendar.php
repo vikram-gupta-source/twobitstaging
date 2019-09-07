@@ -114,7 +114,7 @@ $_closed = $cal->get_closed();
       </div>
     </div>
     <div class="mx-auto mt-6 mb-2 text-center inview animated delay-2 d-none d-lg-block">
-      <?php echo do_shortcode('[button parent="mx-auto" class="fade show full-calendar"]View Full Calendar[/button]') ?>
+      <?php echo do_shortcode('[button parent="mx-auto" class="fade show full-calendar btn-green"]View Full Calendar[/button]') ?>
     </div>
   </div>
 </div>
@@ -140,7 +140,6 @@ var _cal_events = <?php echo json_encode($addEventCal); ?>;
                 <div class="day pull-left"></div>
                 <div class="date pull-right"></div>
               </div>
-              <img class="card-img-top img-fluid w-100" />
               <div class="card-body">
                 <h4 class="card-title"></h4>
                 <div class="card-text">
@@ -148,7 +147,7 @@ var _cal_events = <?php echo json_encode($addEventCal); ?>;
                   <div class="end"></div>
                   <div class="text"></div>
                 </div>
-                <a href="#" class="mt-2 btn btn-twobit link">Buy Now</a>
+                <?php echo do_shortcode('[button parent="mt-2" class="btn-sm link"]Buy Now[/button]');?> 
               </div>
             </div>
           </div>

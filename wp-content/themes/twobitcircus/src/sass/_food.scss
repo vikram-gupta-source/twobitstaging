@@ -7,53 +7,46 @@
     background-position: right top;
     .event {
       .event-header {
+        width: 50%;
         float: left;
-        width: 40%;
-        @media (max-width: $tablet) {
-          width: 50%;
-        }
-        @media (max-width: $phone) {
+        @media (max-width: $mobile) {
           float: none;
           width: 100%;
         }
-        .top,
-        .bottom {
-          min-height: 110px;
-          background-color: $dark-red;
-          padding: 3em 1em;
-          color: $yellow;
-        }
         .top {
-          color: $white;
-          background-color: $green;
-          h2 {
-            font-size: 2.6em;
+          background-color: $dark-red;
+          padding: 4px 1.25rem;
+          h4 {
+            color: $white;
+            margin: 0;
+          }
+        }
+        .bottom {
+          background-color: $yellow;
+          height: 300px;
+          padding: 1em 1.25rem 1.25rem;
+          @media (max-width: $mobile) {
+            height: auto;
           }
         }
       }
       .event-image {
         float: left;
+        width: 50%;
         height: 100%;
-        width: 60%;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-        @media (max-width: $tablet) {
-          width: 50%;
-        }
-        @media (max-width: $phone) {
+        @media (max-width: $mobile) {
           float: none;
           width: 100%;
-          height: 180px;
+          height: 300px;
         }
       }
     }
   }
   #banner-block {
-    background-image: url("/wp-content/themes/twobitcircus/img/home/green_pattern.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-color: $dark-green;
     position: relative;
     .content-block {
       padding: 0 3em;
