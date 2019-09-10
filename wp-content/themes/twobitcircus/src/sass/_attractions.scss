@@ -85,40 +85,40 @@
         max-width: inherit;
       }
     }
-    .navbar {
+    .filter-bar {
       padding: 0;
-      @media (max-width: $mobile) {
-        display: block !important;
-        .navbar-nav {
-          .slick-list {
-            overflow: visible !important;
-          }
-          .slick-slide {
-            margin: 0;
-            .dropdown-menu {
-              position: absolute !important;
-              width: 100%;
-            }
-          }
-          .slick-prev {
-            left: 0;
-          }
-          .slick-next {
-            right: 20px;
-          }
-          .slick-arrow:before,
-          .slick-arrow:after {
-            width: 40px;
+      display: block !important;
+      .navbar-nav {
+        display: none;
+        &.slick-initialized {
+          display: block;
+        }
+        .slick-list {
+          overflow: visible !important;
+        }
+        .slick-slide {
+          margin: 0;
+          .dropdown-menu {
+            position: absolute !important;
+            width: 100%;
           }
         }
+        .slick-prev {
+          left: 0;
+        }
+        .slick-next {
+          right: 20px;
+        }
+        .slick-arrow:before,
+        .slick-arrow:after {
+          width: 40px;
+        }
       }
-
       .nav-item {
         .nav-link {
           padding: 15px 20px;
           font-size: 1em;
           color: $white;
-
           &:hover,
           &.active {
             background-color: $yellow;
@@ -137,6 +137,7 @@
             background-color: transparent;
             color: $white;
             font-size: 0.9em;
+            white-space: normal;
             &.active,
             &:hover {
               color: $yellow;

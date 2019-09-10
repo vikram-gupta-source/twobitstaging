@@ -14,13 +14,13 @@
   <div id="filters" class="mx-auto">
     <div class="wrapper">
 
-      <nav class="navbar navbar-expand-sm">
-        <ul class="navbar-nav mx-auto lubalin text-uppercase text-center">
+      <div class="filter-bar">
+        <div class="navbar-nav mx-auto lubalin text-uppercase text-center">
         <?php foreach($attractions as $cat => $shows) : ?>
         <?php $hasDrop = (count($shows['posts']) > 1) ? true : false; ?>
         <?php $isFirst = ($showCnt == 0) ? 'active' : '';?>
           <?php if($hasDrop) :?>
-          <li class="nav-item dropdown">
+          <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle <?php echo $isFirst; ?>" href="#" data-toggle="dropdown" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>">
               <?php echo $shows['terms']->name;?>
             </a>
@@ -29,16 +29,16 @@
               <a class="dropdown-item" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a>
               <?php endforeach ?>
             </div>
-          </li>
+          </div>
           <?php else: ?>
-          <li class="nav-item">
+          <div class="nav-item">
             <a class="nav-link <?php echo $isFirst; ?>" href="#" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>"><?php echo $shows['terms']->name;?></a>
-          </li>
+          </div>
           <?php endif ?>
         <?php $showCnt ++; ?>
         <?php endforeach ?>
-        </ul>
-      </nav>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -134,7 +134,7 @@
                       <div class="buy-link mt-4">
                         <?php echo do_shortcode('[button link="'.$info[0]['buy_link'].'" target="_blank"]'.$info[0]['cta_title'].'[/button]') ?>
                       </div>
-                      <?php endif ?> 
+                      <?php endif ?>
                       <?php if(!empty($composedDates)) :?>
                       <h3 class="mt-5 text-uppercase franchise clearfix offwhite"><?php _e( 'Showtimes' , 'twobitcircus'); ?>
                         <div class="cta-btn pull-right"><button type="button" class="btn btn-sm btn-twobit open-times-modal" data-toggle="modal" data-target="#modal-showtimes"><span><?php _e( 'All Times' , 'twobitcircus'); ?></span></button><div class="btn-behind sm">&nbsp;</div></div>
