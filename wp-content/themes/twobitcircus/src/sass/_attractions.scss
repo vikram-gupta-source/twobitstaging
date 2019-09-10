@@ -138,6 +138,7 @@
             color: $white;
             font-size: 0.9em;
             white-space: normal;
+            padding: 0.25rem 0;
             &.active,
             &:hover {
               color: $yellow;
@@ -221,18 +222,7 @@
     }
   }
   .showtimes-cycle {
-    padding: 0 25px 0 5px;
-    @media (max-width: $mobile) {
-      padding: 0 17px 0 17px;
-    }
-    @media (max-width: $mobile) {
-      .slick-slider:hover .slick-prev {
-        left: 15px;
-      }
-      .slick-slider:hover .slick-next {
-        right: 15px;
-      }
-    }
+    padding: 0;
   }
   .slick-slide {
     margin: 0 1px;
@@ -244,20 +234,19 @@
     }
     .slick-next {
       &:before {
-        right: -30px;
-        top: -12%;
-        width: 30px;
+        width: 40px;
+        right: -36px;
         left: inherit;
       }
     }
     .slick-prev {
       &:before {
-        left: -30px;
-        top: -12%;
-        width: 30px;
+        width: 40px;
+        left: 3px;
       }
     }
     .item-days {
+      cursor: pointer;
       .day-header {
         font-size: 16px;
         padding: 5px 0;
@@ -351,6 +340,13 @@
   .show-asset-wrapper {
     position: relative;
     overflow: hidden;
+    .slick-media {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      &.slick-initialized {
+        opacity: 1;
+      }
+    }
     &:hover {
       .slick-prev,
       .slick-next {

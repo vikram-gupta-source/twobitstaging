@@ -402,14 +402,10 @@ $(function() {
         slidesToShow: 7,
         slidesToScroll: 1,
         arrows: true,
+        centerMode: true,
         focusOnSelect: true,
         responsive: [{
             breakpoint: 1500,
-            settings: {
-              slidesToShow: 6
-            }
-          }, {
-            breakpoint: 1199,
             settings: {
               slidesToShow: 5
             }
@@ -417,22 +413,29 @@ $(function() {
           {
             breakpoint: 991,
             settings: {
-              slidesToShow: 4
+              slidesToShow: 3
             }
           },
           {
             breakpoint: 767,
             settings: {
-              slidesToShow: 3
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
               slidesToShow: 1
             }
           }
         ]
+      }).on("beforeChange", function(
+        event,
+        slick,
+        currentSlide,
+        nextSlide
+      ) {
+        let $elSlide = $(slick.$slides[nextSlide]);
+        if ($(window).width() < 768) {
+          $elSlide
+            .addClass("item-mobile")
+            .find(".nav-item .nav-link")
+            .trigger("click");
+        }
       });
 
       if ($("#news-content").length) {
@@ -506,8 +509,6 @@ $(function() {
         $("#filters .dropdown-menu .dropdown-item").on("click", function(e) {
           e.preventDefault(e);
           if (!$(this).hasClass("active")) {
-            //$(".dropdown-menu").removeClass("show");
-            //$(".dropdown-toggle").dropdown("dispose");
             let slug = $(this).attr("aria-controls");
             if ($("#" + slug).length) {
               let index = $("#" + slug)
