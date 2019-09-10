@@ -130,16 +130,11 @@
                       </div>
                       <?php endif ?>
                       <?php echo apply_filters('the_content', $show->post_content) ?>
-                      <?php if(!empty($info[0]['buy_link']) && empty($composedDates)): ?>
+                      <?php if(!empty($info[0]['cta_title']) && empty($composedDates)): ?>
                       <div class="buy-link mt-4">
-                        <?php echo do_shortcode('[button link="'.$info[0]['buy_link'].'" target="_blank"]Buy Tickets[/button]') ?>
+                        <?php echo do_shortcode('[button link="'.$info[0]['buy_link'].'" target="_blank"]'.$info[0]['cta_title'].'[/button]') ?>
                       </div>
-                      <?php endif ?>
-                      <?php if(!empty($info[0]['card_link']) && empty($composedDates)): ?>
-                      <div class="buy-link mt-4">
-                        <?php echo do_shortcode('[button link="'.$info[0]['card_link'].'" target="_blank"]Buy Players Card[/button]') ?>
-                      </div>
-                      <?php endif ?>
+                      <?php endif ?> 
                       <?php if(!empty($composedDates)) :?>
                       <h3 class="mt-5 text-uppercase franchise clearfix offwhite"><?php _e( 'Showtimes' , 'twobitcircus'); ?>
                         <div class="cta-btn pull-right"><button type="button" class="btn btn-sm btn-twobit open-times-modal" data-toggle="modal" data-target="#modal-showtimes"><span><?php _e( 'All Times' , 'twobitcircus'); ?></span></button><div class="btn-behind sm">&nbsp;</div></div>

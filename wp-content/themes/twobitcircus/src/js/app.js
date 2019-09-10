@@ -405,6 +405,16 @@ $(function() {
             '"></iframe>'
         );
       }
+
+      let $slider = $("#filters .navbar-nav");
+      $slider.slick({
+        arrows: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        centerMode: true,
+        focusOnSelect: true
+      });
+
       if ($("#news-content").length) {
         $(".slick-media").slick({
           infinite: true,
@@ -705,7 +715,7 @@ $(function() {
               .parent()
               .addClass("show");
             $(".day", $target).text(weekday[sd.getDay()]);
-            $(".date", $target).text(month[sd.getMonth()] + " " + sd.getDay());
+            $(".date", $target).text(month[sd.getMonth()] + " " + sd.getDate());
             $(".card-title", $target).text(info.event.title);
             $(".start", $target).text(
               "Starts: " + formatAMPM(sd.getHours(), sd.getMinutes())
@@ -721,10 +731,13 @@ $(function() {
             $(".text", $target).text(info.event.textColor);
             if (info.event.url) {
               $(".link", $target)
-                .removeClass("d-none")
-                .prop("href", info.event.url);
+                .prop("href", info.event.url)
+                .parent()
+                .removeClass("d-none");
             } else {
-              $(".link", $target).addClass("d-none");
+              $(".link", $target)
+                .parent()
+                .addClass("d-none");
             }
           }
         });
@@ -732,14 +745,14 @@ $(function() {
           evt.preventDefault();
           $(this)
             .parent()
-            .addClass("show");
+            .removeClass("show");
           $(".more-calendar-block").toggleClass("show");
           if (!$("#full-calendar.fc").length) calendar.render();
         });
         $(".more-calendar-block .close").on("click", function() {
-          $(".full-calendar")
+          $(".btn.full-calendar")
             .parent()
-            .removeClass("show");
+            .addClass("show");
           $(".more-calendar-block").toggleClass("show");
         });
       }
@@ -813,7 +826,7 @@ $(function() {
   }
   if ($(".slick-package").length) {
     $(".slick-package").slick({
-      arrows: false,
+      arrows: true,
       slidesToShow: 3,
       slidesToScroll: 1,
       responsive: [
@@ -837,10 +850,11 @@ $(function() {
     });
   }
   // Mobile SLick
+  /*
   $(window).on("load resize orientationchange", function() {
     if ($("#filters").length) {
       let $slider = $("#filters .navbar-nav");
-      if ($(window).width() > 768) {
+      if ($(window).width() > 992) {
         if ($slider.hasClass("slick-initialized")) {
           $slider.slick("unslick");
         }
@@ -849,7 +863,7 @@ $(function() {
           $slider
             .slick({
               arrows: true,
-              slidesToShow: 1,
+              slidesToShow: 3,
               slidesToScroll: 1,
               centerMode: true,
               focusOnSelect: true
@@ -870,4 +884,5 @@ $(function() {
       }
     }
   });
+  */
 });

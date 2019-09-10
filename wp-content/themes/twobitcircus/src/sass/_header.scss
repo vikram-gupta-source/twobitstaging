@@ -171,6 +171,9 @@
   @media (max-width: 1090px) {
     display: none;
   }
+  @media (max-width: $tablet) {
+    display: block;
+  }
   .direction {
     display: inline-block;
     line-height: 20px;
@@ -178,6 +181,9 @@
     margin-right: 10px;
     margin-left: 6px;
     font-size: 12px;
+    @media (max-width: $tablet) {
+      line-height: 17px;
+    }
     .fa-location-arrow {
       position: relative;
       margin-left: 3px;

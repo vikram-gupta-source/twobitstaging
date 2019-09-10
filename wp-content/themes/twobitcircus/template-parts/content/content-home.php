@@ -61,7 +61,6 @@
           <div class="card-body">
             <?php if(!empty($feature['title'])) :?>
             <h5 class="lubalinB card-title text-uppercase"><?php echo $feature['title'];?></h5>
-            <div class="dateline"><?php echo $feature['date'];?></div>
             <div class="time"><?php echo $feature['time'];?></div>
             <?php endif ?>
             <div class="mt-3 mb-2 text-center mx-auto addthis_toolbox" data-url="<?php echo $feature['link'];?>" data-title="<?php echo $feature['title'];?>">
@@ -105,7 +104,7 @@
   <section id="social-block" class="entry-wrapper-padding">
     <div class="container-fluid white">
       <h2 class="headline text-uppercase text-center mb-2 inview animated"><?php echo get_field('social_title'); ?></h2>
-      <h4 class="text-center text-uppercase inview animated" data-ease="fadeInDown">Follow what we're up to</h4>
+      <h4 class="text-center text-uppercase inview animated" data-ease="fadeInDown"><?php echo get_field('social_subtitle'); ?></h4>
       <div class="inview animated mt-3">
       <?php if(!empty($social_feed)):?>
 

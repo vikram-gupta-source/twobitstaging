@@ -32,7 +32,7 @@
             <p><?php echo $shows['event_summary'];?></p>
             <?php endif ?>
             <div class="link-wrapper my-2">
-              <div class="cta-btn mx-auto"><a class="btn btn-twobit" data-toggle="modal" data-target="#event-form" href="#"><span><?php _e( 'Book Now', 'twobitcircus' )?></span></a><div class="btn-behind">&nbsp;</div></div>
+              <div class="cta-btn mx-auto"><a class="btn btn-twobit" data-toggle="modal" data-target="#event-form" href="#"><span><?php echo $shows['event_cta_title'];?></span></a><div class="btn-behind">&nbsp;</div></div>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@
       </div>
     </div>
   </div>
- 
+
   <?php if(!empty(get_field('footer_block'))) :?>
   <?php $footer = filter_locations(get_field('footer_block'));?>
   <?php foreach($footer as $banner) : ?>
