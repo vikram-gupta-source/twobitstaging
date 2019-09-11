@@ -649,6 +649,9 @@ article.page.type-page {
     margin: 1px;
     border-radius: 0;
     border: 0;
+    @media (max-width: $phone) {
+      width: 100%;
+    }
     .card-img-top {
       border: 0;
       border-radius: 0;
