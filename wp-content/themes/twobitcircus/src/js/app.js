@@ -8,9 +8,7 @@ import "slick-carousel";
 import imagesLoaded from "imagesloaded";
 import parallax from "./jquery.parallax.js";
 import Isotope from "isotope-layout/dist/isotope.pkgd.min";
-import {
-  Calendar
-} from "@fullcalendar/core";
+import {Calendar} from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
@@ -29,9 +27,9 @@ $(function() {
       if ($(".inview").length) {
         $(".inview").each(function() {
           let delay = $(this).data("offset") ? $(this).data("offset") : "90%";
-          let easeType = $(this).data("ease") ?
-            $(this).data("ease") :
-            "fadeInUp";
+          let easeType = $(this).data("ease")
+            ? $(this).data("ease")
+            : "fadeInUp";
           let waypoint = new Waypoint({
             element: this,
             handler: function(direction) {
@@ -50,7 +48,8 @@ $(function() {
   // Intro for About
   if ($aboutElem.length) {
     imagesLoaded(
-      "#about-intro", {
+      "#about-intro",
+      {
         background: true
       },
       function() {
@@ -117,7 +116,8 @@ $(function() {
     arrows: true,
     slidesToShow: 4,
     slidesToScroll: 4,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           slidesToShow: 3,
@@ -147,18 +147,20 @@ $(function() {
     slidesToShow: 3,
     arrows: false,
     variableWidth: true,
-    responsive: [{
-      breakpoint: 767,
-      settings: {
-        dots: true,
-        arrows: false,
-        centerMode: false,
-        variableWidth: false,
-        adaptiveHeight: true,
-        slidesToShow: 1,
-        slidesToScroll: 1
+    responsive: [
+      {
+        breakpoint: 767,
+        settings: {
+          dots: true,
+          arrows: false,
+          centerMode: false,
+          variableWidth: false,
+          adaptiveHeight: true,
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
       }
-    }]
+    ]
   };
   var slick_event_settings = {
     dots: true,
@@ -168,7 +170,8 @@ $(function() {
     slidesToShow: 4,
     slidesToScroll: 4,
     adaptiveHeight: true,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           slidesToShow: 3,
@@ -199,7 +202,8 @@ $(function() {
     arrows: false,
     slidesToShow: 7,
     slidesToScroll: 1,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           arrows: true,
@@ -254,7 +258,8 @@ $(function() {
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: false,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           dots: true,
@@ -278,7 +283,8 @@ $(function() {
     slidesToScroll: 5,
     arrows: false,
     dots: true,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           slidesToShow: 4,
@@ -333,7 +339,8 @@ $(function() {
     arrows: false,
     asNavFor: ".slick-media",
     focusOnSelect: true,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           slidesToShow: 4
@@ -357,7 +364,8 @@ $(function() {
   };
 
   imagesLoaded(
-    "main", {
+    "main",
+    {
       background: true
     },
     function() {
@@ -385,58 +393,56 @@ $(function() {
                 .find(".embed-data")
                 .append(
                   '<iframe class="embed-responsive-item" src="' +
-                  srcid +
-                  '"></iframe>'
+                    srcid +
+                    '"></iframe>'
                 );
             }
           });
         var firstEmbed = $(".youtube .grid-feed:first .embed-data").data("src");
         $(".youtube .grid-feed:first .embed-data").append(
           '<iframe class="embed-responsive-item" src="' +
-          firstEmbed +
-          '"></iframe>'
+            firstEmbed +
+            '"></iframe>'
         );
       }
 
-      $("#filters .navbar-nav").slick({
-        slidesToShow: 7,
-        slidesToScroll: 1,
-        arrows: true,
-        centerMode: true,
-        focusOnSelect: true,
-        responsive: [{
-            breakpoint: 1500,
-            settings: {
-              slidesToShow: 5
+      $("#filters .navbar-nav")
+        .slick({
+          slidesToShow: 7,
+          slidesToScroll: 1,
+          arrows: true,
+          centerMode: true,
+          focusOnSelect: true,
+          responsive: [
+            {
+              breakpoint: 1500,
+              settings: {
+                slidesToShow: 5
+              }
+            },
+            {
+              breakpoint: 991,
+              settings: {
+                slidesToShow: 3
+              }
+            },
+            {
+              breakpoint: 767,
+              settings: {
+                slidesToShow: 1
+              }
             }
-          },
-          {
-            breakpoint: 991,
-            settings: {
-              slidesToShow: 3
-            }
-          },
-          {
-            breakpoint: 767,
-            settings: {
-              slidesToShow: 1
-            }
+          ]
+        })
+        .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
+          let $elSlide = $(slick.$slides[nextSlide]);
+          if ($(window).width() < 768) {
+            $elSlide
+              .addClass("item-mobile")
+              .find(".nav-item .nav-link")
+              .trigger("click");
           }
-        ]
-      }).on("beforeChange", function(
-        event,
-        slick,
-        currentSlide,
-        nextSlide
-      ) {
-        let $elSlide = $(slick.$slides[nextSlide]);
-        if ($(window).width() < 768) {
-          $elSlide
-            .addClass("item-mobile")
-            .find(".nav-item .nav-link")
-            .trigger("click");
-        }
-      });
+        });
 
       if ($("#news-content").length) {
         $(".slick-media").slick({
@@ -598,7 +604,8 @@ $(function() {
       // Handle Arrow Scroll Top
       $("#return-to-top").on("click", function(evt) {
         evt.preventDefault();
-        $("html, body").animate({
+        $("html, body").animate(
+          {
             scrollTop: 0
           },
           "slow"
@@ -790,21 +797,23 @@ $(function() {
     var _h = $("#about-header").height();
     var controller = new ScrollMagic.Controller();
     var scene = new ScrollMagic.Scene({
-        triggerElement: "#trigger-element",
-        offset: -_h / 2
-      })
+      triggerElement: "#trigger-element",
+      offset: -_h / 2
+    })
       .on("start end", function(e) {
-        if (e.scrollDirection == "FORWARD") {}
+        if (e.scrollDirection == "FORWARD") {
+        }
       })
       .setClassToggle("#about-header", "scrolled")
       .addTo(controller);
 
     var scene2 = new ScrollMagic.Scene({
-        triggerElement: "#trigger-element",
-        offset: _h / 2
-      })
+      triggerElement: "#trigger-element",
+      offset: _h / 2
+    })
       .on("start", function(e) {
-        if (e.scrollDirection == "REVERSE") {}
+        if (e.scrollDirection == "REVERSE") {
+        }
       })
       .setClassToggle("#about-header", "scrolled")
       .addTo(controller);
@@ -847,7 +856,9 @@ $(function() {
       arrows: true,
       slidesToShow: 3,
       slidesToScroll: 1,
-      responsive: [{
+      adaptiveHeight: true,
+      responsive: [
+        {
           breakpoint: 1160,
           settings: {
             arrows: true,
@@ -866,40 +877,4 @@ $(function() {
       ]
     });
   }
-  // Mobile SLick
-  /*
-  $(window).on("load resize orientationchange", function() {
-    if ($("#filters").length) {
-      let $slider = $("#filters .navbar-nav");
-      if ($(window).width() > 992) {
-        if ($slider.hasClass("slick-initialized")) {
-          $slider.slick("unslick");
-        }
-      } else {
-        if (!$slider.hasClass("slick-initialized")) {
-          $slider
-            .slick({
-              arrows: true,
-              slidesToShow: 3,
-              slidesToScroll: 1,
-              centerMode: true,
-              focusOnSelect: true
-            })
-            .on("beforeChange", function(
-              event,
-              slick,
-              currentSlide,
-              nextSlide
-            ) {
-              let $elSlide = $(slick.$slides[nextSlide]);
-              $elSlide
-                .addClass("item-mobile")
-                .find(".nav-item .nav-link")
-                .trigger("click");
-            });
-        }
-      }
-    }
-  });
-  */
 });
