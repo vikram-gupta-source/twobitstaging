@@ -31,7 +31,7 @@
                 <i class="fa fa-angle-down"></i>
             </h5>
           </div>
-          <div id="collapse-<?php echo $key; ?>" class="collapse" aria-labelledby="heading-<?php echo $key; ?>" data-parent="#faq-block">
+          <div id="collapse-<?php echo $key; ?>" class="collapse" aria-labelledby="heading-<?php echo $key; ?>" data-parent="#faq">
             <div class="card-body">
               <?php echo $faq['answer']; ?>
             </div>
