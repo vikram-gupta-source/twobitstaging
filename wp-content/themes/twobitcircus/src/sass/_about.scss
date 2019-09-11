@@ -7,7 +7,7 @@
     z-index: 0;
     bottom: -50vw;
     left: 0;
-    @media (max-width: $phone) {
+    @media (max-width: 580px) {
       display: none;
     }
   }
