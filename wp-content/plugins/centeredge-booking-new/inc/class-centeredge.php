@@ -66,7 +66,7 @@ if ( ! class_exists( 'CenterEdgeNew' ) ) {
                 $times = $xpath->query(sprintf("//div[contains(@class, '%s')]", 'time-slot-progress'), $row);
                 foreach($times as $ky => $time) {
                     $out = (preg_match('/Out/i', $item->nodeValue)) ? 1 : 0;
-                    $text = trim(str_ireplace('Sold Out', '', $times[$ky]->nodeValue));
+                    $text = trim(str_ireplace('(Sold Out)', '', $times[$ky]->nodeValue));
                     $link = '/areas/areadatetime/'.$code['show_code'].'#/'.urlencode($setDate).'/'.trim($_codes[$ky]->getAttribute('value')).'/';
                     $links[$code['title_of_show']][$setDate][$ky] = array(
                       'href' => $link,

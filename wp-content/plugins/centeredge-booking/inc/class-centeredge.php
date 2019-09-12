@@ -56,7 +56,7 @@ if ( ! class_exists( 'CenterEdge' ) ) {
                   $href =  $item->getAttribute("href");
                   $setTitle = ($count == 0) ? $text : $setTitle; // 2nd Entry has the Title
                   $out = (preg_match('/Out/i', $item->nodeValue)) ? 1 : 0;
-                  $text = trim(str_ireplace('Sold Out', '', $item->nodeValue));
+                  $text = trim(str_ireplace('(Out)', '', $item->nodeValue));
                   if($count > 0) {
                     $links[$setTitle][$setDate][$key] = [
                       'href' => $href,
