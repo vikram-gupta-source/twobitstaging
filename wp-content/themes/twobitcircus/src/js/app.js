@@ -315,7 +315,7 @@ $(function() {
     ]
   };
   var slick_days_settings = {
-    infinite: true,
+    infinite: false,
     slidesToShow: 5,
     slidesToScroll: 1,
     arrows: true,
