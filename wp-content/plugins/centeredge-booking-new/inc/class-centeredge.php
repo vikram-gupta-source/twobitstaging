@@ -65,11 +65,13 @@ if ( ! class_exists( 'CenterEdgeNew' ) ) {
                 $_codes = $xpath->query(sprintf("//input[contains(@class, '%s')]", 'slot-id-option'), $row);
                 $times = $xpath->query(sprintf("//div[contains(@class, '%s')]", 'time-slot-progress'), $row);
                 foreach($times as $ky => $time) {
-                    if(preg_match('/SOLD OUT/i', $time->nodeValue)) continue;
+                    $out = (preg_match('/Out/i', $item->nodeValue)) ? 1 : 0;
+                    $text = trim(str_ireplace('Sold Out', '', $times[$ky]->nodeValue));
                     $link = '/areas/areadatetime/'.$code['show_code'].'#/'.urlencode($setDate).'/'.trim($_codes[$ky]->getAttribute('value')).'/';
                     $links[$code['title_of_show']][$setDate][$ky] = array(
                       'href' => $link,
-                      'text' => trim($times[$ky]->nodeValue),
+                      'text' => $text,
+                      'out'  => $out
                     );
                 }
               }
@@ -102,7 +104,7 @@ if ( ! class_exists( 'CenterEdgeNew' ) ) {
       foreach($links as $title => $event) {
         foreach($event as $date => $items) {
           foreach($items as $entry) {
-            $insert_sql[] ="('complex', '".esc_sql($title)."', '".esc_sql($date)."', '".esc_sql($entry['href'])."', '".esc_sql($entry['text'])."')";
+            $insert_sql[] ="('complex', '".esc_sql($title)."', '".esc_sql($date)."', '".esc_sql($entry['href'])."', '".esc_sql($entry['text'])."', '".esc_sql($entry['out'])."')";
           }
         }
       }
@@ -110,7 +112,7 @@ if ( ! class_exists( 'CenterEdgeNew' ) ) {
       file_put_contents(dirname(__FILE__)."/complex_out.txt", $this->out);
       if(!empty($insert_sql)) {
         $query = join(', ', $insert_sql);
-        $sql ="INSERT INTO ".$table_name." (`type`, `name`, `posted`, `link`, `ticket`) VALUES ". $query;
+        $sql ="INSERT INTO ".$table_name." (`type`, `name`, `posted`, `link`, `ticket`, `out`) VALUES ". $query;
         $wpdb->query($sql);
       }
     }

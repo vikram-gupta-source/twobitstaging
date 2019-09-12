@@ -53,14 +53,15 @@ if ( ! class_exists( 'CenterEdge' ) ) {
                 $count = 0;
                 $arr = $ticket->getElementsByTagName("a");
                 foreach($arr as $key => $item) {
-                  if(preg_match('/Out/i', $item->nodeValue)) continue;
                   $href =  $item->getAttribute("href");
-                  $text = trim(preg_replace("/[\r\n]+/", " ", $item->nodeValue));
                   $setTitle = ($count == 0) ? $text : $setTitle; // 2nd Entry has the Title
+                  $out = (preg_match('/Out/i', $item->nodeValue)) ? 1 : 0;
+                  $text = trim(str_ireplace('Sold Out', '', $item->nodeValue));
                   if($count > 0) {
-                    $links[$setTitle][$setDate][$key]= [
+                    $links[$setTitle][$setDate][$key] = [
                       'href' => $href,
-                      'text' => $text
+                      'text' => $text,
+                      'out'  => $out
                     ];
                   }
                   $count++;
@@ -90,13 +91,13 @@ if ( ! class_exists( 'CenterEdge' ) ) {
       foreach($links as $title => $event) {
         foreach($event as $date => $items) {
           foreach($items as $entry) {
-            $insert_sql[] ="('simple', '".esc_sql($title)."', '".esc_sql($date)."', '".esc_sql($entry['href'])."', '".esc_sql($entry['text'])."')";
+            $insert_sql[] ="('simple', '".esc_sql($title)."', '".esc_sql($date)."', '".esc_sql($entry['href'])."', '".esc_sql($entry['text'])."', '".esc_sql($entry['out'])."')";
           }
         }
       }
       if(!empty($insert_sql)) {
         $query = join(', ', $insert_sql);
-        $sql ="INSERT INTO ".$table_name." (`type`, `name`, `posted`, `link`, `ticket`) VALUES ". $query;
+        $sql ="INSERT INTO ".$table_name." (`type`, `name`, `posted`, `link`, `ticket`, `out`) VALUES ". $query;
         $wpdb->query($sql);
       }
     }

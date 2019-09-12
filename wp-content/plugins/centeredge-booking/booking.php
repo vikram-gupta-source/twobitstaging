@@ -69,8 +69,10 @@ function centeredge_booking_create_db() {
   		`posted` varchar(25) NOT NULL,
       `link` varchar(200) NOT NULL,
       `ticket` varchar(50) NOT NULL,
+      `outstock` tinyint(1) NOT NULL DEFAULT '0',
       PRIMARY KEY (`id`),
-  		INDEX `name_key` (name)
+  		INDEX `name_key` (name),
+      INDEX `out_stock` (outstock)
   	) $charset_collate;";
 
   	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
