@@ -15,10 +15,10 @@
         color: $dark-red;
         display: inline-block;
         width: 40px;
+        border-right: 2px solid $black;
       }
       .text {
         display: inline-block;
-        border-left: 2px solid $black;
         padding-left: 15px;
         color: $black;
         width: calc(100% - 40px);

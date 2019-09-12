@@ -18,7 +18,7 @@
     <?php $featured = filter_locations(get_field('feature'));?>
     <div class="featured slick-center-init">
       <?php foreach($featured as $feature) : ?>
-      <div class="card">
+      <div class="card box-shadow">
         <div class="row no-gutters bkg-<?php echo $feature['background_color']; ?>">
           <div class="col-md-6 bkg-img" style="background-image: url('<?php echo $feature['image']; ?>');"></div>
           <div class="col-md-6">
@@ -110,11 +110,12 @@
 
         <div class="slick slick-social social-item">
               <?php foreach($social_feed as $feed): ?>
+              <?php if($feed->count2 > 50) :?>
               <div class="grid-feed">
                 <div class="overlay-content">
                   <img class="img-fluid w-100" src="<?php echo $feed->image;?>"/>
                   <?php
-                    $likes = $feed->count. ' <i class="fa fa-thumbs-up"></i> <span>Likes</span>  Views <i class="fa fa-heart"></i><span>Favorited</span>';
+                    $likes = '<i class="fa fa-heart"></i> ' . $feed->count2. ' &nbsp;&nbsp;<i class="fa fa-comment"></i> '  . $feed->count;
                   ?>
                   <?php if(!empty($likes)):?>
                   <div class="likes"><?php echo $likes;?></div>
@@ -122,6 +123,7 @@
                 </div>
 
               </div>
+              <?php endif ?>
               <?php endforeach ?>
             </div>
 

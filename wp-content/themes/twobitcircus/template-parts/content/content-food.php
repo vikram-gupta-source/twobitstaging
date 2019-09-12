@@ -61,14 +61,14 @@
   <?php $menus = filter_locations(get_field('menus'));?>
   <section id="menu-block">
     <div class="container-fluid">
-      <div class="row no-gutters">
-        <?php if(!empty($menus[0]['menu_download'])) :?>
+      <div class="row no-gutters"> 
         <div class="col-12 bkg-img"  style="background-image: url('<?php echo $menus[0]['menu_image'] ?>');">
+          <?php if(!empty($menus[0]['menu_download'])) :?>
           <div class="cta-wrapper inview animated" data-ease="fadeIn">
             <div class="cta-btn mx-auto"><a class="btn btn-twobit" href="<?php echo $menus[0]['menu_download'] ?>" target="_blank"><span><?php echo $menus[0]['menu_title'];?></span></a><div class="btn-behind">&nbsp;</div></div>
           </div>
+          <?php endif ?>
         </div>
-        <?php endif ?>
       </div>
     </div>
   </section>

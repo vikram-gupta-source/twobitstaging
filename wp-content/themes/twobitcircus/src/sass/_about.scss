@@ -443,32 +443,42 @@
   }
   #packages-block {
     background-color: $white;
-    .package-block {
-      padding: 35px;
-      h2 {
-        display: table;
-        padding: 5px 35px;
-        color: $white;
-        text-transform: uppercase;
-        font-size: 2.8em;
-        text-align: center;
-        margin: auto;
-        background-color: $black;
-        border: 4px solid #595255;
-        margin-bottom: -17px;
-        position: relative;
-        z-index: 1;
-        @media (max-width: 1290px) {
-          font-size: 2.3em;
-        }
+    .item {
+      position: relative;
+      .bkg-img {
+        height: 590px;
       }
-      .package-description {
-        .bkg-block {
-          padding: 30px 10px 10px;
-          background-color: $yellow;
+      .package-block {
+        padding: 20px;
+        h2 {
+          display: table;
+          padding: 5px 10px;
+          width: 100%;
+          color: $white;
+          text-transform: uppercase;
+          font-size: 2.4em;
+          text-align: center;
+          margin: auto;
+          background-color: $black;
+          border: 4px solid #595255;
+          margin-bottom: -17px;
+          position: relative;
+          z-index: 1;
         }
-        .cta-btn {
-          margin-top: 75%;
+        .package-description {
+          .bkg-block {
+            padding: 30px 10px 10px;
+            width: 95%;
+            margin: auto;
+            background-color: $yellow;
+          }
+          .btn-wrapper {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            bottom: 30px;
+          }
         }
       }
     }

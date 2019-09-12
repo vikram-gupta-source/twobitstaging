@@ -336,7 +336,7 @@ $(function() {
     infinite: true,
     slidesToShow: 5,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
     asNavFor: ".slick-media",
     focusOnSelect: true,
     responsive: [
@@ -349,7 +349,8 @@ $(function() {
       {
         breakpoint: 991,
         settings: {
-          slidesToShow: 3
+          slidesToShow: 3,
+          centerMode: true
         }
       }
     ]
@@ -410,25 +411,24 @@ $(function() {
         .slick({
           slidesToShow: 7,
           slidesToScroll: 1,
-          arrows: true,
-          centerMode: true,
           focusOnSelect: true,
+          variableWidth: true,
           responsive: [
-            {
-              breakpoint: 1500,
-              settings: {
-                slidesToShow: 5
-              }
-            },
             {
               breakpoint: 991,
               settings: {
+                variableWidth: false,
+                arrows: true,
+                centerMode: true,
                 slidesToShow: 3
               }
             },
             {
               breakpoint: 767,
               settings: {
+                variableWidth: false,
+                arrows: true,
+                centerMode: true,
                 slidesToShow: 1
               }
             }
@@ -436,7 +436,7 @@ $(function() {
         })
         .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
           let $elSlide = $(slick.$slides[nextSlide]);
-          if ($(window).width() < 768) {
+          if ($(window).width() < 992) {
             $elSlide
               .addClass("item-mobile")
               .find(".nav-item .nav-link")
@@ -546,18 +546,6 @@ $(function() {
           }, 400);
         });
 
-        // Handle Model all times
-        $(".open-times-modal").on("click", function(evt) {
-          evt.preventDefault();
-          $("#modal-showtimes .modal-body").empty();
-          $(this)
-            .parents(".show-content-block")
-            .find(".showtimes")
-            .find(".accordion")
-            .clone()
-            .appendTo("#modal-showtimes .modal-body");
-        });
-
         // Handlers Show
         $(".show-content-block .btn-group .btn-twobit").on("click", function(
           evt
@@ -660,6 +648,8 @@ $(function() {
           evt.preventDefault();
           let $parent = $(this).parents(".grid-item");
           if (!$parent.find(".card-title").hasClass("collapsed")) {
+            $(".grid-item .card-title").removeClass("collapsed");
+            $(".grid-item .card-body").removeClass("show");
             $parent.find(".card-title").addClass("collapsed");
             $parent.find(".card-body").addClass("show");
           } else {
@@ -854,12 +844,20 @@ $(function() {
   if ($(".slick-package").length) {
     $(".slick-package").slick({
       arrows: true,
-      slidesToShow: 3,
+      slidesToShow: 4,
       slidesToScroll: 1,
       adaptiveHeight: true,
       responsive: [
         {
-          breakpoint: 1160,
+          breakpoint: 1499,
+          settings: {
+            arrows: true,
+            slidesToShow: 3,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 991,
           settings: {
             arrows: true,
             slidesToShow: 2,

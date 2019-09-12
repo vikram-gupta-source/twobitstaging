@@ -34,21 +34,6 @@ global $location;
 
   <?php get_template_part( 'template-parts/partial/partial', 'map' ); ?>
 
-  <?php wp_footer(); ?>
-  <?php if(isset($post->post_name) && $post->post_name == 'attractions'): ?>
-  <div class="modal fade" id="modal-showtimes" tabindex="-1" role="dialog" aria-labelledby="modal-showtimes" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title"><?php _e( 'Showtimes', 'twobitcircus' );?></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body"></div>
-      </div>
-    </div>
-  </div>
-  <?php endif ?>
+  <?php wp_footer(); ?> 
 </body>
 </html>

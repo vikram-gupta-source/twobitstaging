@@ -15,31 +15,32 @@
     <div class="wrapper">
 
       <div class="filter-bar">
-        <div class="navbar-nav mx-auto lubalin text-uppercase text-center">
-        <?php foreach($attractions as $cat => $shows) : ?>
-        <?php $hasDrop = (count($shows['posts']) > 1) ? true : false; ?>
-        <?php $isFirst = ($showCnt == 0) ? 'active' : '';?>
-          <?php if($hasDrop) :?>
-          <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <?php echo $isFirst; ?>" href="#" data-toggle="dropdown" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>">
-              <?php echo $shows['terms']->name;?>
-            </a>
-            <div class="dropdown-menu">
-              <?php foreach($shows['posts'] as $skey => $show) :?>
-              <a class="dropdown-item" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a>
-              <?php endforeach ?>
+        <div class="container">
+          <div class="navbar-nav mx-auto lubalin text-uppercase text-center">
+          <?php foreach($attractions as $cat => $shows) : ?>
+          <?php $hasDrop = (count($shows['posts']) > 1) ? true : false; ?>
+          <?php $isFirst = ($showCnt == 0) ? 'active' : '';?>
+            <?php if($hasDrop) :?>
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle <?php echo $isFirst; ?>" href="#" data-toggle="dropdown" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>">
+                <?php echo $shows['terms']->name;?>
+              </a>
+              <div class="dropdown-menu">
+                <?php foreach($shows['posts'] as $skey => $show) :?>
+                <a class="dropdown-item" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a>
+                <?php endforeach ?>
+              </div>
             </div>
+            <?php else: ?>
+            <div class="nav-item">
+              <a class="nav-link <?php echo $isFirst; ?>" href="#" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>"><?php echo $shows['terms']->name;?></a>
+            </div>
+            <?php endif ?>
+          <?php $showCnt ++; ?>
+          <?php endforeach ?>
           </div>
-          <?php else: ?>
-          <div class="nav-item">
-            <a class="nav-link <?php echo $isFirst; ?>" href="#" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>"><?php echo $shows['terms']->name;?></a>
-          </div>
-          <?php endif ?>
-        <?php $showCnt ++; ?>
-        <?php endforeach ?>
         </div>
-      </div>
-
+      </div> 
     </div>
   </div>
 
@@ -86,15 +87,16 @@
                           <?php endforeach ?>
                         </div>
                         <?php if(count($gallery) > 1):?>
+                        <?php $mediaAssetCnt = count($gallery) + (!empty($video) ? 1 : 0);?>
                         <div class="overlay">
-                          <div class="slick-media-nav">
+                          <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
                             <?php if(!empty($video)) :?>
                             <div class="thumb">
                               <div class="embed-responsive embed-responsive-16by9"><?php echo $video ?></div>
                             </div>
                             <?php endif ?>
                             <?php foreach($gallery as $gal) :?>
-                            <div class="thumb"><img class="img-fluid w-100" src="<?php echo $gal['sizes']['medium']; ?>" alt="<?php echo $gal['title']; ?>" /></div>
+                            <div class="thumb"><img class="img-fluid" src="<?php echo $gal['sizes']['medium']; ?>" alt="<?php echo $gal['title']; ?>" /></div>
                             <?php endforeach ?>
                           </div>
                         </div>
@@ -132,13 +134,15 @@
                       <?php echo apply_filters('the_content', $show->post_content) ?>
                       <?php if(!empty($info[0]['cta_title']) && empty($composedDates)): ?>
                       <div class="buy-link mt-4">
+                        <?php if(!empty($info[0]['buy_link'])) :?>
                         <?php echo do_shortcode('[button link="'.$info[0]['buy_link'].'" target="_blank"]'.$info[0]['cta_title'].'[/button]') ?>
+                        <?php else :?>
+                        <?php echo do_shortcode('[button]'.$info[0]['cta_title'].'[/button]') ?>
+                        <?php endif ?>
                       </div>
                       <?php endif ?>
                       <?php if(!empty($composedDates)) :?>
-                      <h3 class="mt-5 text-uppercase franchise clearfix offwhite"><?php _e( 'Showtimes' , 'twobitcircus'); ?>
-                        <div class="cta-btn pull-right"><button type="button" class="btn btn-sm btn-twobit open-times-modal" data-toggle="modal" data-target="#modal-showtimes"><span><?php _e( 'All Times' , 'twobitcircus'); ?></span></button><div class="btn-behind sm">&nbsp;</div></div>
-                      </h3>
+                      <h3 class="mt-5 text-uppercase franchise offwhite"><?php _e( 'Showtimes' , 'twobitcircus'); ?></h3>
                       <div class="showtimes-cycle">
                         <div id="cycle-<?php echo $show->ID;?>">
                           <div class="slick-days" data-target="<?php echo $cat;?>">
@@ -174,29 +178,6 @@
                       <div class="available-dates text-center">
 
                         <?php echo do_shortcode('[button parent="confirm fade mx-auto" target="_blank"]Go to Purchase[/button]') ?>
-
-                        <div class="showtimes d-none">
-                          <div id="accordion-<?php echo $show->ID;?>" class="accordion">
-                            <?php foreach($composedDates as $date => $tickets) :?>
-                            <div class="card">
-                              <div class="card-header">
-                                <a class="card-link" data-toggle="collapse" href="#collapse-<?php echo $show->ID;?>-<?php echo $date;?>">
-                                  <?php echo date('l, F j', strtotime(str_replace('-', '/', $date)));?>
-                                </a>
-                              </div>
-                              <div id="collapse-<?php echo $show->ID;?>-<?php echo $date;?>" class="collapse" data-parent="#accordion-<?php echo $show->ID;?>">
-                                <div class="card-body">
-                                  <?php foreach($tickets as $timeInfo) : ?>
-                                  <?php if(!preg_match('/(Out)/', $timeInfo->ticket)): ?>
-                                    <div class="cta-btn"><a class="btn btn-twobit btn-green btn-sm" href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" target="_blank" rel="noopener noreferrer"><span><?php echo $timeInfo->ticket;?></span></a><div class="btn-behind sm">&nbsp;</div></div>
-                                  <?php endif ?>
-                                  <?php endforeach ?>
-                                </div>
-                              </div>
-                            </div>
-                            <?php endforeach ?>
-                          </div>
-                        </div>
 
                       </div>
                       <?php endif ?>
