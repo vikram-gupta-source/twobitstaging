@@ -247,7 +247,13 @@ $(function() {
     slidesToShow: 1,
     arrows: true,
     adaptiveHeight: true,
-    fade: true
+    fade: true,
+    responsive: [{
+      breakpoint: 767,
+      settings: {
+        arrows: false
+      }
+    }]
   };
   var slick_feed_settings = {
     infinite: false,
@@ -330,7 +336,7 @@ $(function() {
     infinite: true,
     slidesToShow: 5,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: false,
     asNavFor: ".slick-media",
     focusOnSelect: true,
     responsive: [{
@@ -441,7 +447,7 @@ $(function() {
           slidesToShow: 1,
           slidesToScroll: 1,
           adaptiveHeight: true,
-          arrows: true,
+          arrows: false,
           fade: true
         });
       }
