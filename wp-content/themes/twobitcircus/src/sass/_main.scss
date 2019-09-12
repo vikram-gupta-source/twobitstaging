@@ -556,6 +556,9 @@ article.page.type-page {
   flex-direction: row;
   max-width: 1910px;
   margin: auto;
+  @media (max-width: 1956px) {
+    max-width: 1528px;
+  }
   @media (max-width: 1575px) {
     max-width: 1147px;
   }

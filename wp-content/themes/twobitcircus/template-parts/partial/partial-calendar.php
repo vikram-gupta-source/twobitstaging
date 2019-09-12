@@ -114,7 +114,7 @@ $_closed = $cal->get_closed();
       </div>
     </div>
     <div class="mx-auto mt-6 mb-2 text-center inview animated delay-2 d-none d-lg-block">
-      <?php echo do_shortcode('[button parent="mx-auto fade show" class="full-calendar btn-green"]View Full Calendar[/button]') ?>
+      <?php echo do_shortcode('[button parent="mx-auto" class="full-calendar btn-green"]View Full Calendar[/button]') ?>
     </div>
   </div>
 </div>
@@ -123,12 +123,9 @@ $_closed = $cal->get_closed();
 var _cal_events = <?php echo json_encode($addEventCal); ?>;
 </script>
 <?php endif ?>
-<div class="more-calendar-block collapse fade">
+<div class="more-calendar-block collapse pt-4 fade">
   <div class="d-none d-lg-block">
     <div class="container position-relative">
-      <button type="button" class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
       <div class="row">
         <div class="col-sm-8 mx-auto">
           <div id="full-calendar"></div>

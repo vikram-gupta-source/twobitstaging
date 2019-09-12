@@ -8,32 +8,30 @@
       }
       .map-wrapper {
         position: relative;
-        #main-map {
-          border: 2px solid $yellow;
+        .map-col {
+          #main-map {
+            border: 2px solid $yellow;
+          }
         }
-        .overlay {
-          position: absolute;
-          bottom: 70px;
-          z-index: 1;
-          color: #fff;
-          background-color: rgba(0, 0, 0, 0.7);
-          border: 2px solid $dark-red;
+        .hours-col {
+          background-color: $black;
           h3 {
-            padding: 5px 1em;
+            padding: 10px 1em 9px;
             background-color: $dark-red;
           }
           .hours-wrapper {
-            padding: 1em 1.7em 1.5em;
+            padding: 1em 1.2em 1.5em;
           }
-        }
-        .directions a {
-          color: $green;
-          border: 0 solid $white;
-          background-color: $white;
-          transition: all 0.4s ease;
-          &:hover {
-            background-color: $dark-green;
-            color: $white;
+          .directions a {
+            margin: 5px;
+            color: $dark-red;
+            border: 0 solid $white;
+            background-color: $white;
+            transition: all 0.4s ease;
+            &:hover {
+              background-color: $dark-red;
+              color: $white;
+            }
           }
         }
       }

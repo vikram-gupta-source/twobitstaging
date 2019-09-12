@@ -1,6 +1,26 @@
 // News
 #news {
   background-color: $green;
+  .grid-flex {
+    .grid-item {
+      .card-image {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        height: 214px;
+      }
+      .card-title {
+        h5 {
+          width: auto;
+        }
+      }
+      .card-body {
+        small {
+          line-height: 30px;
+        }
+      }
+    }
+  }
 }
 #news-detail {
   background-color: $dark-green;

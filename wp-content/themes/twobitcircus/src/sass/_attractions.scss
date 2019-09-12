@@ -73,6 +73,15 @@
         background-color: $yellow;
       }
     }
+    .attractions-slick {
+      display: none;
+      > .slick-list {
+        min-height: 600px;
+      }
+      &.slick-initialized {
+        display: block;
+      }
+    }
   }
   #filters {
     background-color: $dark-red;
@@ -94,11 +103,27 @@
         .slick-list {
           overflow: visible !important;
         }
-        .slick-slide {
-          margin: 0;
-          .dropdown-menu {
-            position: absolute !important;
-            width: 100%;
+        .slick-track {
+          @media (min-width: $tablet + 1px) {
+            width: auto !important;
+            @include transform(none !important);
+          }
+          .slick-slide {
+            margin: 0;
+            @media (min-width: $tablet + 1px) {
+              display: inline-block;
+              float: none;
+            }
+            .dropdown-menu {
+              position: absolute !important;
+              width: 100%;
+              @media (min-width: $tablet + 1px) {
+                width: auto;
+                .dropdown-item {
+                  white-space: nowrap;
+                }
+              }
+            }
           }
         }
         .slick-prev {
@@ -147,6 +172,14 @@
     }
   }
   .slick-shows {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    &.slick-initialized {
+      opacity: 1;
+    }
+    > .slick-list {
+      min-height: 600px;
+    }
     > button {
       position: absolute;
       right: 0;
@@ -362,6 +395,7 @@
     overflow: hidden;
     .slick-media {
       opacity: 0;
+      background-color: $black;
       transition: opacity 0.5s ease;
       &.slick-initialized {
         opacity: 1;
