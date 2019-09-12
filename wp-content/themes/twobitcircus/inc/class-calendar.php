@@ -38,7 +38,7 @@ if ( ! class_exists( 'Calendar' ) ) {
     public function init() {
       global $wpdb;
       $table_name = $wpdb->prefix . 'centeredge_booking';
-      $_query = 'SELECT * FROM `'. $table_name .'` WHERE `posted` <= "'. date('m-d-Y', $this->end_date) .'" GROUP BY `name`, `posted` ORDER BY `posted`, `ticket`';
+      $_query = 'SELECT * FROM `'. $table_name .'` WHERE `outstock` != 1 AND `posted` <= "'. date('m-d-Y', $this->end_date) .'" GROUP BY `name`, `posted` ORDER BY `posted`, `ticket`';
       $data = $wpdb->get_results($_query);
       if(!empty($data)) {
         foreach($data as $entry) {
@@ -125,7 +125,7 @@ if ( ! class_exists( 'Calendar' ) ) {
         $this->current_date = strtotime('+1 day', $this->current_date);
       } while ($this->current_date <= $this->end_date);
     }
-    private function getRecurringDays($date, $exc, $day, $end, $collect, $limit=0) { 
+    private function getRecurringDays($date, $exc, $day, $end, $collect, $limit=0) {
       if(empty($date)) return false;
       if($this->limit > 5) return false;
       $checkDate = '';
