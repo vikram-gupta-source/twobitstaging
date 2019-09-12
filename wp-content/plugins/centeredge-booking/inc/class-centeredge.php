@@ -53,10 +53,11 @@ if ( ! class_exists( 'CenterEdge' ) ) {
                 $count = 0;
                 $arr = $ticket->getElementsByTagName("a");
                 foreach($arr as $key => $item) {
+                  $textRaw = trim(preg_replace("/[\r\n]+/", " ", $item->nodeValue));
                   $href =  $item->getAttribute("href");
-                  $setTitle = ($count == 0) ? $text : $setTitle; // 2nd Entry has the Title
+                  $setTitle = ($count == 0) ? $textRaw : $setTitle; // 2nd Entry has the Title
                   $out = (preg_match('/Out/i', $item->nodeValue)) ? 1 : 0;
-                  $text = trim(str_ireplace('(Out)', '', $item->nodeValue));
+                  $text = trim(str_ireplace('(Out)', '', $textRaw));
                   if($count > 0) {
                     $links[$setTitle][$setDate][$key] = [
                       'href' => $href,
