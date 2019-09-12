@@ -573,6 +573,7 @@ $(function() {
         // Confirm Purcahse
         $(".slick-times .btn-twobit").on("click", function(evt) {
           evt.preventDefault();
+          if ($(this).hasClass('btn-disabled')) return false;
           let href = $(this).prop("href");
           $(this)
             .parents(".show-content-block")

@@ -166,7 +166,7 @@
                               <?php if($timeInfo->outstock != 1): ?>
                                 <div class="cta-btn mb-2"><a class="btn btn-twobit btn-white btn-sm" href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" target="_blank" rel="noopener noreferrer"><span><?php echo $timeInfo->ticket;?></span></a><div class="btn-behind sm">&nbsp;</div></div>
                               <?php else :?>
-                                <div class="cta-btn mb-2"><a class="btn btn-twobit btn-white btn-sm btn-disabled"><span><?php echo $timeInfo->ticket;?></span></a><div class="btn-behind sm">&nbsp;</div></div> 
+                                <div class="cta-btn mb-2"><a class="btn btn-twobit btn-sm btn-disabled"><span><?php echo $timeInfo->ticket;?></span></a><div class="btn-behind sm">&nbsp;</div></div> 
                               <?php endif ?>
                               <?php endforeach ?>
                               </div>

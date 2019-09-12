@@ -246,6 +246,15 @@ a {
       border: 3px solid $white;
       color: $black !important;
     }
+    &.btn-disabled {
+      background-color: #adadad;
+      border: 3px solid #adadad;
+      color: #757575 !important;
+      &:focus,
+      &:hover {
+        @include transform(none !important);
+      }
+    }
     &.btn-sm {
       font-size: 22px;
     }
@@ -280,6 +289,10 @@ a {
   .btn-black + .btn-behind {
     background-color: $white !important;
     border: 3px solid $white !important;
+  }
+  .btn-disabled + .btn-behind {
+    background-color: $black !important;
+    border: 3px solid $black !important;
   }
   .ajax-loader {
     display: none !important;
