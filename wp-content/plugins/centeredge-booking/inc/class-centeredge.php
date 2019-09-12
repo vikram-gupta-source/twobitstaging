@@ -97,7 +97,7 @@ if ( ! class_exists( 'CenterEdge' ) ) {
       }
       if(!empty($insert_sql)) {
         $query = join(', ', $insert_sql);
-        $sql ="INSERT INTO ".$table_name." (`type`, `name`, `posted`, `link`, `ticket`, `out`) VALUES ". $query;
+        $sql ="INSERT INTO ".$table_name." (`type`, `name`, `posted`, `link`, `ticket`, `outstock`) VALUES ". $query;
         $wpdb->query($sql);
       }
     }
