@@ -183,6 +183,7 @@
     > button {
       position: absolute;
       right: 0;
+      opacity: 0.9;
       left: inherit;
       top: 0;
       @media (max-width: $mobile) {
