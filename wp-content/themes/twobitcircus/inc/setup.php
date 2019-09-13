@@ -220,8 +220,8 @@ function posts_link_attributes() {
 }
 // Handle Region & filters
 // Collect Region
-$region = (empty($_COOKIE['geo_location'])) ?  $geo->get_location_by_ip() : (json_decode(stripslashes($_COOKIE['geo_location']))); 
-$location = @get_locations(get_field('location_selection', 'option'))[0];
+$region = (empty($_COOKIE['geo_location'])) ?  $geo->get_location_by_ip() : (json_decode(stripslashes($_COOKIE['geo_location'])));
+$location = get_locations(get_field('location_selection', 'option'))[0];
 
 // Clean Location so it find only location that in region
 function filter_location_by_field($field) {
@@ -254,16 +254,19 @@ function filter_locations($array) {
 }
 // Clean Location so it find only location that in region
 function get_locations($array) {
-  global $region;
+  global $region; 
   if(empty($array) || $region->status == 'fail') return $array;
   $_array = [];
   // Test Locations
   foreach($array as $item) {
-    if($item['city'] == $region->city) {
+    if(isset($item['city']) && $item['city'] == $region->city) {
       $_array[] = $item;
-    } elseif($item['region'] == $region->regionName) {
+    } elseif(isset($item['region']) && $item['region'] == $region->regionName) {
       $_array[] = $item;
     }
+  }
+  if(empty($_array)) {
+    $_array[] = $array[0];
   }
   return $_array;
 }
