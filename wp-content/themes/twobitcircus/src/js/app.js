@@ -780,6 +780,9 @@ $(function() {
             $(".full-calendar.btn span").text('View Full Calendar');
           }
         });
+        $('#event-window .close').on('click', function() {
+          $(this).parents('.event-show').toggleClass('show');
+        });
       }
       // Close Main Menu
       $("#close-btn").on("click", function() {
