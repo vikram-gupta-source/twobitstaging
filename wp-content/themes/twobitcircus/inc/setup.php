@@ -221,6 +221,9 @@ function posts_link_attributes() {
 // Handle Region & filters
 // Collect Region
 $region = (empty($_COOKIE['geo_location'])) ?  $geo->get_location_by_ip() : (json_decode(stripslashes($_COOKIE['geo_location'])));
+if (  is_admin() ) {
+  print_r($region);
+}
 $location = @get_locations(get_field('location_selection', 'option'))[0];
 
 // Clean Location so it find only location that in region
@@ -269,6 +272,7 @@ function get_locations($array) {
 }
 // Get Time Close of Open
 function openClosed($days, $timezone) {
+  if(empty($days)) return null;
   date_default_timezone_set($timezone);
   if(empty($days)) return 'closed';
   $dayofweek = date('l');

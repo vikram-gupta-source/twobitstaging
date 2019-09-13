@@ -4,7 +4,7 @@
  *
  * @package twobitcircus
  */
- global $location;
+ global $location; 
  $isOpen = openClosed($location['days'], $location['timezone'])
 ?>
 <!-- ******************* Mobile ******************* -->
