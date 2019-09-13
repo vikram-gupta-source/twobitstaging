@@ -131,7 +131,10 @@ var _cal_events = <?php echo json_encode($addEventCal); ?>;
           <div id="full-calendar"></div>
         </div>
         <div class="event-show col-sm-4 collapse fade">
-          <div id="event-window" class="collapse fade">
+          <div id="event-window">
+            <button type="button" class="close" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
             <div class="card">
               <div class="card-header clearfix">
                 <div class="day pull-left"></div>

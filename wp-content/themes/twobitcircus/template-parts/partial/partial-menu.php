@@ -4,7 +4,7 @@
  *
  * @package twobitcircus
  */
- global $location; 
+ global $location;
  $isOpen = openClosed($location['days'], $location['timezone'])
 ?>
 <!-- ******************* Mobile ******************* -->
@@ -45,9 +45,11 @@
   <nav class="navbar">
     <div class="container position-relative pr-0">
       <?php the_custom_logo(); ?>
+      <?php if(!empty($location['city'])):?>
       <a title="Directions" href="#direction" class="nav-link-direction text-center">
         <span class="direction text-uppercase"><?php echo $location['city'] ?><br/><span class="state <?php echo $isOpen ?>"><?php echo ucwords($isOpen) ?> <i class="fa fa-lg fa-location-arrow" aria-hidden="true"></i></span></span>
       </a>
+      <?php endif ?>
 
       <!-- The WordPress Menu goes here -->
       <?php wp_nav_menu( array(
