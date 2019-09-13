@@ -8,9 +8,7 @@ import "slick-carousel";
 import imagesLoaded from "imagesloaded";
 import parallax from "./jquery.parallax.js";
 import Isotope from "isotope-layout/dist/isotope.pkgd.min";
-import {
-  Calendar
-} from "@fullcalendar/core";
+import {Calendar} from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
@@ -29,9 +27,9 @@ $(function() {
       if ($(".inview").length) {
         $(".inview").each(function() {
           let delay = $(this).data("offset") ? $(this).data("offset") : "90%";
-          let easeType = $(this).data("ease") ?
-            $(this).data("ease") :
-            "fadeInUp";
+          let easeType = $(this).data("ease")
+            ? $(this).data("ease")
+            : "fadeInUp";
           let waypoint = new Waypoint({
             element: this,
             handler: function(direction) {
@@ -50,7 +48,8 @@ $(function() {
   // Intro for About
   if ($aboutElem.length) {
     imagesLoaded(
-      "#about-intro", {
+      "#about-intro",
+      {
         background: true
       },
       function() {
@@ -117,7 +116,8 @@ $(function() {
     arrows: true,
     slidesToShow: 4,
     slidesToScroll: 4,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           slidesToShow: 3,
@@ -147,18 +147,20 @@ $(function() {
     slidesToShow: 3,
     arrows: false,
     variableWidth: true,
-    responsive: [{
-      breakpoint: 767,
-      settings: {
-        dots: true,
-        arrows: false,
-        centerMode: false,
-        variableWidth: false,
-        adaptiveHeight: true,
-        slidesToShow: 1,
-        slidesToScroll: 1
+    responsive: [
+      {
+        breakpoint: 767,
+        settings: {
+          dots: true,
+          arrows: false,
+          centerMode: false,
+          variableWidth: false,
+          adaptiveHeight: true,
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
       }
-    }]
+    ]
   };
   var slick_event_settings = {
     dots: true,
@@ -168,7 +170,8 @@ $(function() {
     slidesToShow: 4,
     slidesToScroll: 4,
     adaptiveHeight: true,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           slidesToShow: 3,
@@ -199,7 +202,8 @@ $(function() {
     arrows: false,
     slidesToShow: 7,
     slidesToScroll: 1,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           arrows: true,
@@ -248,19 +252,22 @@ $(function() {
     arrows: true,
     adaptiveHeight: true,
     fade: true,
-    responsive: [{
-      breakpoint: 767,
-      settings: {
-        arrows: false
+    responsive: [
+      {
+        breakpoint: 767,
+        settings: {
+          arrows: false
+        }
       }
-    }]
+    ]
   };
   var slick_feed_settings = {
     infinite: false,
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: false,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           dots: true,
@@ -284,7 +291,8 @@ $(function() {
     slidesToScroll: 5,
     arrows: false,
     dots: true,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           slidesToShow: 4,
@@ -339,7 +347,8 @@ $(function() {
     arrows: false,
     asNavFor: ".slick-media",
     focusOnSelect: true,
-    responsive: [{
+    responsive: [
+      {
         breakpoint: 1199,
         settings: {
           slidesToShow: 4
@@ -364,7 +373,8 @@ $(function() {
   };
 
   imagesLoaded(
-    "main", {
+    "main",
+    {
       background: true
     },
     function() {
@@ -392,16 +402,16 @@ $(function() {
                 .find(".embed-data")
                 .append(
                   '<iframe class="embed-responsive-item" src="' +
-                  srcid +
-                  '"></iframe>'
+                    srcid +
+                    '"></iframe>'
                 );
             }
           });
         var firstEmbed = $(".youtube .grid-feed:first .embed-data").data("src");
         $(".youtube .grid-feed:first .embed-data").append(
           '<iframe class="embed-responsive-item" src="' +
-          firstEmbed +
-          '"></iframe>'
+            firstEmbed +
+            '"></iframe>'
         );
       }
 
@@ -411,7 +421,8 @@ $(function() {
           slidesToScroll: 1,
           focusOnSelect: true,
           variableWidth: true,
-          responsive: [{
+          responsive: [
+            {
               breakpoint: 991,
               settings: {
                 variableWidth: false,
@@ -455,11 +466,15 @@ $(function() {
       if ($("#attractions-block").length) {
         var allowStart = false;
         var loadImg = function($elm) {
-          if ($elm.find('.pre-load-img').length) {
-            $elm.find('.pre-load-img').each(function() {
-              let url = $(this).data('img');
-              $(this).removeClass('pre-load-img').find('img').removeClass('fade').prop('src', url);
-              $(this).removeAttr('data-img');
+          if ($elm.find(".pre-load-img").length) {
+            $elm.find(".pre-load-img").each(function() {
+              let url = $(this).data("img");
+              $(this)
+                .removeClass("pre-load-img")
+                .find("img")
+                .removeClass("fade")
+                .prop("src", url);
+              $(this).removeAttr("data-img");
             });
           }
         };
@@ -469,9 +484,9 @@ $(function() {
         });
 
         // First Attraction img
-        loadImg($('.attractions-slick .item-attraction:first-child'));
+        loadImg($(".attractions-slick .item-attraction:first-child"));
 
-        $(".attractions-slick").slick(slick_attractions_settings)
+        $(".attractions-slick").slick(slick_attractions_settings);
         $(".slick-shows")
           .slick(slick_shows_settings)
           .on("afterChange", function(ev, slick, cur) {
@@ -510,7 +525,7 @@ $(function() {
               $(".attractions-slick").slick("slickGoTo", index);
               $("#cat-" + slug)
                 .find(".slick-slide:first-child")
-                .addClass(".slick-current .slick-active");
+                .addClass("slick-current slick-active");
               $("#cat-" + slug)
                 .find(
                   ".slick-days > .slick-list > .slick-track > .slick-slide:first-child"
@@ -532,6 +547,9 @@ $(function() {
               $("#" + slug)
                 .parents(".slick-shows")
                 .slick("slickGoTo", index);
+              $("#" + slug)
+                .find(".slick-media-nav .slick-slide[data-slick-index=0]")
+                .addClass("slick-current slick-active");
             }
           }
         });
@@ -573,7 +591,7 @@ $(function() {
         // Confirm Purcahse
         $(".slick-times .btn-twobit").on("click", function(evt) {
           evt.preventDefault();
-          if ($(this).hasClass('btn-disabled')) return false;
+          if ($(this).hasClass("btn-disabled")) return false;
           let href = $(this).prop("href");
           $(this)
             .parents(".show-content-block")
@@ -602,7 +620,8 @@ $(function() {
       // Handle Arrow Scroll Top
       $("#return-to-top").on("click", function(evt) {
         evt.preventDefault();
-        $("html, body").animate({
+        $("html, body").animate(
+          {
             scrollTop: 0
           },
           "slow"
@@ -769,19 +788,21 @@ $(function() {
         });
         $(".btn.full-calendar").on("click", function(evt) {
           evt.preventDefault();
-          if (!$(this).hasClass('active')) {
-            $(this).addClass('active');
+          if (!$(this).hasClass("active")) {
+            $(this).addClass("active");
             $(".more-calendar-block").toggleClass("show");
             if (!$("#full-calendar.fc").length) calendar.render();
-            $(".full-calendar.btn span").text('Close Calendar');
+            $(".full-calendar.btn span").text("Close Calendar");
           } else {
-            $(this).removeClass('active');
+            $(this).removeClass("active");
             $(".more-calendar-block").toggleClass("show");
-            $(".full-calendar.btn span").text('View Full Calendar');
+            $(".full-calendar.btn span").text("View Full Calendar");
           }
         });
-        $('#event-window .close').on('click', function() {
-          $(this).parents('.event-show').toggleClass('show');
+        $("#event-window .close").on("click", function() {
+          $(this)
+            .parents(".event-show")
+            .toggleClass("show");
         });
       }
       // Close Main Menu
@@ -798,21 +819,23 @@ $(function() {
     var _h = $("#about-header").height();
     var controller = new ScrollMagic.Controller();
     var scene = new ScrollMagic.Scene({
-        triggerElement: "#trigger-element",
-        offset: -_h / 2
-      })
+      triggerElement: "#trigger-element",
+      offset: -_h / 2
+    })
       .on("start end", function(e) {
-        if (e.scrollDirection == "FORWARD") {}
+        if (e.scrollDirection == "FORWARD") {
+        }
       })
       .setClassToggle("#about-header", "scrolled")
       .addTo(controller);
 
     var scene2 = new ScrollMagic.Scene({
-        triggerElement: "#trigger-element",
-        offset: _h / 2
-      })
+      triggerElement: "#trigger-element",
+      offset: _h / 2
+    })
       .on("start", function(e) {
-        if (e.scrollDirection == "REVERSE") {}
+        if (e.scrollDirection == "REVERSE") {
+        }
       })
       .setClassToggle("#about-header", "scrolled")
       .addTo(controller);
@@ -856,7 +879,8 @@ $(function() {
       slidesToShow: 4,
       slidesToScroll: 1,
       adaptiveHeight: true,
-      responsive: [{
+      responsive: [
+        {
           breakpoint: 1499,
           settings: {
             arrows: true,

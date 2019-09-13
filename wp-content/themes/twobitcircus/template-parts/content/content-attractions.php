@@ -62,6 +62,7 @@
                 <?php $info = filter_locations(get_field('information', $show->ID));?>
                 <?php $_cat = get_the_category($show->ID);?>
                 <?php $video = get_field('video', $show->ID);?>
+                <?php $videoThumb = videoLink($video, true);?>
                 <?php $gallery = get_field('gallery', $show->ID);?>
                 <div id="<?php echo sanitize_title($show->post_title);?>" class="item-shows">
                   <div class="row">
@@ -90,10 +91,8 @@
                         <?php $mediaAssetCnt = count($gallery) + (!empty($video) ? 1 : 0);?>
                         <div class="overlay">
                           <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
-                            <?php if(!empty($video)) :?>
-                            <div class="thumb">
-                              <div class="embed-responsive embed-responsive-16by9"><?php echo $video ?></div>
-                            </div>
+                            <?php if(!empty($videoThumb)) :?>
+                            <div class="thumb pre-load-img" data-img="https://i.vimeocdn.com/video/776106459_640.webp" ><img class="img-fluid fade" alt="<?php echo $show->post_title;?>"/></div>
                             <?php endif ?>
                             <?php foreach($gallery as $gal) :?>
                             <div class="thumb pre-load-img" data-img="<?php echo $gal['sizes']['medium']; ?>" ><img class="img-fluid fade" alt="<?php echo $gal['title']; ?>"/></div>
@@ -166,7 +165,7 @@
                               <?php if($timeInfo->outstock != 1): ?>
                                 <div class="cta-btn mb-2"><a class="btn btn-twobit btn-white btn-sm" href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" target="_blank" rel="noopener noreferrer"><span><?php echo $timeInfo->ticket;?></span></a><div class="btn-behind sm">&nbsp;</div></div>
                               <?php else :?>
-                                <div class="cta-btn mb-2"><a class="btn btn-twobit btn-sm btn-disabled"><span><?php echo $timeInfo->ticket;?></span></a><div class="btn-behind sm">&nbsp;</div></div> 
+                                <div class="cta-btn mb-2"><a class="btn btn-twobit btn-sm btn-disabled"><span><?php echo $timeInfo->ticket;?></span></a><div class="btn-behind sm">&nbsp;</div></div>
                               <?php endif ?>
                               <?php endforeach ?>
                               </div>

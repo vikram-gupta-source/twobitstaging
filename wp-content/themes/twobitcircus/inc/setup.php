@@ -98,7 +98,34 @@ register_nav_menus(
    'footer' => __( 'Footer Menu', 'twobitcircus' ),
   )
 );
-
+if ( ! function_exists( 'videoLink' ) ) {
+  function videoLink($frame, $code = false) {
+    // use preg_match to find iframe src
+    if(empty($frame)) return null;
+    preg_match('/src="(.+?)"/', $frame, $matches);
+    $src = $matches[1];
+    // add extra params to iframe src
+    $params = array(
+      'rel'    => 0
+    );
+    $new_src = add_query_arg($params, $src);
+    $videoLink = str_replace($src, $new_src, $frame);
+    if($code) {
+      if (preg_match('/[http|https]+:\/\/(?:www\.|)vimeo\.com\/([a-zA-Z0-9_\-]+)(&.+)?/i', $videoLink, $matches) || preg_match('/[http|https]+:\/\/player\.vimeo\.com\/video\/([a-zA-Z0-9_\-]+)(&.+)?/i', $videoLink, $matches)) {
+          if(file_exists(ABSPATH . '/wp-content/uploads/vimeo/'.$matches[1].'.webp'))
+            return '/wp-content/uploads/vimeo/' . $matches[1] .'.webp';
+          if ($xml = simplexml_load_file('http://vimeo.com/api/v2/video/'.$matches[1].'.xml')) {
+    				$image = $xml->video->thumbnail_large ? (string) $xml->video->thumbnail_large: (string) $xml->video->thumbnail_medium;
+            $url =  $matches[1].'.webp';
+            $filepath = ABSPATH . '/wp-content/uploads/vimeo/'.$url;
+            file_put_contents($filepath, file_get_contents($image));
+            return '/wp-content/uploads/vimeo/' . $url;
+    			}
+      }
+    }
+    return $videoLink;
+  }
+}
 if ( ! function_exists( 'twobitcircus_show_post_type' ) ) {
   // Set Show labels for Custom Post Type
   function twobitcircus_shows_post_type() {
@@ -254,7 +281,7 @@ function filter_locations($array) {
 }
 // Clean Location so it find only location that in region
 function get_locations($array) {
-  global $region; 
+  global $region;
   if(empty($array) || $region->status == 'fail') return $array;
   $_array = [];
   // Test Locations
