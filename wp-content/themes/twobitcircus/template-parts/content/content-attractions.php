@@ -92,7 +92,7 @@
                         <div class="overlay">
                           <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
                             <?php if(!empty($videoThumb)) :?>
-                            <div class="thumb pre-load-img" data-img="https://i.vimeocdn.com/video/776106459_640.webp" ><img class="img-fluid fade" alt="<?php echo $show->post_title;?>"/></div>
+                            <div class="thumb pre-load-img" data-img="<?php echo $videoThumb;?>" ><img class="img-fluid fade" alt="<?php echo $show->post_title;?>"/></div>
                             <?php endif ?>
                             <?php foreach($gallery as $gal) :?>
                             <div class="thumb pre-load-img" data-img="<?php echo $gal['sizes']['medium']; ?>" ><img class="img-fluid fade" alt="<?php echo $gal['title']; ?>"/></div>
