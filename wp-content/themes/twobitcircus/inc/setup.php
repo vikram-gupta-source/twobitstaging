@@ -220,10 +220,7 @@ function posts_link_attributes() {
 }
 // Handle Region & filters
 // Collect Region
-$region = (empty($_COOKIE['geo_location'])) ?  $geo->get_location_by_ip() : (json_decode(stripslashes($_COOKIE['geo_location'])));
-if (  is_admin() ) {
-  print_r($region);
-}
+$region = (empty($_COOKIE['geo_location'])) ?  $geo->get_location_by_ip() : (json_decode(stripslashes($_COOKIE['geo_location']))); 
 $location = @get_locations(get_field('location_selection', 'option'))[0];
 
 // Clean Location so it find only location that in region
