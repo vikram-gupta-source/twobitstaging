@@ -602,14 +602,29 @@ $(function() {
         });
 
         // Check Deep link
-        let urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has("cat") && urlParams.has("id")) {
-          let cat = urlParams.get("cat");
-          let focus = urlParams.get("id");
-          $("#" + cat + "-tab").trigger("click");
-          setTimeout(function() {
-            $("#" + cat + " .slick-shows").slick("slickGoTo", focus);
-          }, 1000);
+        let urlParams = window.location.href.split("/");
+        let urlCat = "";
+        let urlShow = "";
+        if (
+          typeof urlParams[3] !== "undefined" &&
+          urlParams[3] == "attractions"
+        ) {
+          if (typeof urlParams[4] !== "undefined") {
+            urlCat = urlParams[4];
+          }
+          if (typeof urlParams[5] !== "undefined") {
+            urlShow = urlParams[5];
+          }
+        }
+        if (urlCat) {
+          $("a.nav-link[aria-controls=" + urlCat + "]").trigger("click");
+          if (urlShow) {
+            setTimeout(function() {
+              $("a.dropdown-item[aria-controls=" + urlShow + "]").trigger(
+                "click"
+              );
+            }, 1000);
+          }
         }
       }
       // Handle CLick for Nav Map

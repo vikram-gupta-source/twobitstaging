@@ -91,3 +91,11 @@ function ajaxAirtable() {
     }
     wp_die();
 }
+
+add_action('init', 'add_attraction_rewrite', 10, 0);
+if ( ! function_exists( 'add_attraction_rewrite' ) ) {
+  function add_attraction_rewrite() {
+      add_rewrite_rule('^attractions/([^/]+)/?$', 'index.php?pagename=attractions&category=$matches[1]','top');
+      add_rewrite_rule('^attractions/([^/]+)/([^/]+)/?$', 'index.php?pagename=attractions&category=$matches[1]&show=$matches[2]','top');
+  }
+}
