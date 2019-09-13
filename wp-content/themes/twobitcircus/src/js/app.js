@@ -854,7 +854,7 @@ $(function() {
       slidesToScroll: 1,
       adaptiveHeight: true,
       responsive: [{
-          breakpoint: 1499,
+          breakpoint: 1023,
           settings: {
             arrows: true,
             slidesToShow: 3,
