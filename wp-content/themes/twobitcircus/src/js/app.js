@@ -854,11 +854,12 @@ $(function() {
       slidesToScroll: 1,
       adaptiveHeight: true,
       responsive: [{
-          breakpoint: 1023,
+          breakpoint: 1499,
           settings: {
             arrows: true,
             slidesToShow: 3,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            centerMode: true
           }
         },
         {
