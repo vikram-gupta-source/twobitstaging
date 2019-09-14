@@ -1,4 +1,13 @@
 // Calendar
+#calendar-block {
+  background-color: $yellow;
+  @media (max-width: $mobile) {
+    h2.headline {
+      max-width: 280px;
+      margin: auto;
+    }
+  }
+}
 .more-calendar-block {
   background-color: $yellow;
   padding-bottom: 3em;

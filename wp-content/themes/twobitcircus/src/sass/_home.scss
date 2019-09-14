@@ -115,15 +115,6 @@
       }
     }
   }
-  #calendar-block {
-    background-color: $yellow;
-    @media (max-width: $mobile) {
-      h2.headline {
-        max-width: 280px;
-        margin: auto;
-      }
-    }
-  }
   #about-block {
     position: relative;
     background-image: url("/wp-content/themes/twobitcircus/img/home/home_about_bkg.jpg");
