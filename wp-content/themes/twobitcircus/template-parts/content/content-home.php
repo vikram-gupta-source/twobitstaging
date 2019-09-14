@@ -66,7 +66,6 @@
             <div class="mt-3 mb-2 text-center mx-auto addthis_toolbox" data-url="<?php echo $feature['link'];?>" data-title="<?php echo $feature['title'];?>">
               <a class="addthis_button_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
               <a class="addthis_button_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-              <a class="addthis_button_pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
             </div>
             <div class="link-wrapper mt-2">
               <?php if(!empty($feature['link_title'])) :?>
@@ -110,7 +109,7 @@
 
         <div class="slick slick-social social-item">
               <?php foreach($social_feed as $feed): ?>
-              <?php if($feed->count2 > 50) :?>
+              <?php if($feed->count2 > 10) :?>
               <div class="grid-feed">
                 <div class="overlay-content">
                   <img class="img-fluid w-100" src="<?php echo $feed->image;?>"/>
