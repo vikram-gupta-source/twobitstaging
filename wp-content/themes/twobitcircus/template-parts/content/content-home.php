@@ -8,6 +8,7 @@
  $calendar = $cal->init();
  $_enddate = $cal->get_endDate();
  $_closed = $cal->get_closed();
+ $insta_api_options = get_option('instagram_insta_api_keys');
  $insta_feed = new InstagramFeed();
  $social_feed = $insta_feed->get_instagram_feeds();
 ?>
@@ -109,7 +110,7 @@
 
         <div class="slick slick-social social-item">
               <?php foreach($social_feed as $feed): ?>
-              <?php if($feed->count2 > 10) :?>
+              <?php if($feed->count2 > $insta_api_options['likes']) :?>
               <div class="grid-feed">
                 <div class="overlay-content">
                   <img class="img-fluid w-100" src="<?php echo $feed->image;?>"/>

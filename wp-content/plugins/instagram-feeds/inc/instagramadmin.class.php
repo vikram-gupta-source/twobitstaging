@@ -80,6 +80,10 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
           <label for="<?php echo $this->prefix; ?>insta_api_keys[limit]">Instagram Limit</label>
           <input name="<?php echo $this->prefix; ?>insta_api_keys[limit]" type="text" value="<?php echo $insta_api_options['limit']; ?>" />
         </div>
+        <div class="form-field">
+          <label for="<?php echo $this->prefix; ?>insta_api_keys[likes]">Instagram Likes Required</label>
+          <input name="<?php echo $this->prefix; ?>insta_api_keys[likes]" type="text" value="<?php echo $insta_api_options['likes']; ?>" />
+        </div>
         <input id="action-instagram" name="action_instagram" type="hidden" value="" />
       </div>
       <?php
@@ -118,7 +122,7 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
         }
       }
     }
-    
+
   }
 
 }

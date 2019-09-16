@@ -47,6 +47,12 @@
       .card-body {
         background-color: $dark-red;
         color: $white;
+        a {
+          color: $white;
+          &:hover {
+            color: $yellow;
+          }
+        }
       }
       .card-header {
         h5 {
