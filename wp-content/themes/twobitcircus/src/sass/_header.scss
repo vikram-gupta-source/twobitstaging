@@ -175,6 +175,9 @@
   @media (max-width: $tablet) {
     display: block;
   }
+  @media (max-width: $iphone5) {
+    display: none;
+  }
   .direction {
     display: inline-block;
     line-height: 20px;
