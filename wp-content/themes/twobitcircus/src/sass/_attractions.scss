@@ -183,19 +183,15 @@
       right: 0;
       opacity: 0.9;
       left: inherit;
-      top: 0;
+      top: 38px;
       @media (max-width: $mobile) {
         top: -25px;
       }
-      &.slick-next:before {
-        left: -10px;
-        top: 45%;
-        width: 40px;
+      &.slick-next {
+        right: 20px;
       }
-      &.slick-prev:before {
-        left: -37px;
-        top: 45%;
-        width: 40px;
+      &.slick-prev {
+        right: 55px;
       }
     }
     .show-content-block {
