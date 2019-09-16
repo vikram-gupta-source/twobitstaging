@@ -4,21 +4,21 @@ body.is_mac {
   }
   .calender-wrapper .calender .grid .grid-time .date,
   .calender-wrapper .calender .grid .grid-time .day {
-    padding: 7px 8px 5px;
+    padding: 7px 8px 5px !important;
   }
   #about #packages-block .item .package-block h2 {
-    padding: 7px 10px 5px;
+    padding: 7px 10px 5px !important;
   }
   #attractions #filters .filter-bar .nav-item .nav-link {
-    padding: 14px 15px 10px;
+    padding: 14px 15px 10px !important;
   }
   #food-drink #events-block .event .event-header .top {
-    padding: 6px 1.25rem 4px;
+    padding: 6px 1.25rem 4px !important;
   }
   #locations #findus-block .container .map-wrapper .hours-col h3 {
-    padding: 11px 1em 9px;
+    padding: 11px 1em 9px !important;
   }
   .card-header {
-    padding: 0.95rem 1.25rem 0.75rem;
+    padding: 0.95rem 1.25rem 0.75rem !important;
   }
 }
