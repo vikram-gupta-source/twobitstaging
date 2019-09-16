@@ -48,7 +48,10 @@
       color: $black;
     }
   }
-
+  .event-show {
+    position: relative;
+    top: 73px;
+  }
   #event-window {
     .card {
       border-radius: 0;
@@ -76,7 +79,7 @@
     font-size: 3em;
     position: absolute;
     right: 15px;
-    top: -1.2em;
+    top: -66px;
   }
 }
 .calender-wrapper {
