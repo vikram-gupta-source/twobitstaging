@@ -127,14 +127,12 @@
           }
         }
         .slick-prev {
-          left: 0;
-        }
-        .slick-next {
-          right: 20px;
+          left: -10px;
         }
         .slick-arrow:before,
         .slick-arrow:after {
           width: 40px;
+          font-size: 3.7rem;
         }
       }
       .nav-item {
@@ -264,18 +262,15 @@
     .slick-slide {
       margin: 0 1px;
     }
-    .slick-next {
+    .slick-next,
+    .slick-prev {
+      margin-top: -25px;
       &:before {
-        width: 40px;
-        right: -36px;
-        left: inherit;
+        font-size: 3rem;
       }
     }
-    .slick-prev {
-      &:before {
-        width: 40px;
-        left: 3px;
-      }
+    .slick-next {
+      right: 20px;
     }
     .item-days {
       cursor: pointer;
@@ -433,7 +428,7 @@
         }
       }
       .slick-slide {
-        padding: 4px 1px 0px;
+        padding: 6px 1px 0px;
       }
       .thumb {
         position: relative;

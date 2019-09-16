@@ -306,46 +306,31 @@ a {
 .slick-slider {
   .slick-prev,
   .slick-next {
+    height: auto;
+    width: auto;
     z-index: 1;
     opacity: 0.3;
     transition: all 0.8s ease;
+    margin-top: -32px;
     &:before {
-      font-size: 3rem;
-      width: 180px;
-      height: 200px;
-      color: $black;
+      font-size: 4rem;
+      color: $white;
       font-family: "FontAwesome";
+      cursor: pointer;
+      position: absolute;
+      transition: all 0.5s ease-in-out;
     }
   }
   .slick-prev {
-    left: -8px;
+    left: 5px;
     &:before {
-      position: absolute;
-      top: -32px;
-      left: 0;
-      content: "";
-      width: 60px;
-      height: 83px;
-      background: url(/wp-content/themes/twobitcircus/img/home/arrow_white_btn.png);
-      background-repeat: no-repeat;
-      background-size: 50%;
-      background-position: center;
+      content: "\F104";
     }
   }
   .slick-next {
-    right: 30px;
+    right: 27px;
     &:before {
-      position: absolute;
-      top: -32px;
-      left: 0;
-      content: "";
-      width: 60px;
-      height: 83px;
-      @include transform(scaleX(-1));
-      background: url(/wp-content/themes/twobitcircus/img/home/arrow_white_btn.png);
-      background-repeat: no-repeat;
-      background-size: 50%;
-      background-position: center;
+      content: "\F105";
     }
   }
   .slick-dots li.slick-active button:before {
