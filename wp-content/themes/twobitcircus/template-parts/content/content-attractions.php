@@ -103,7 +103,7 @@
                       </div>
                       <?php endif ?>
                       <?php if(isset($_cat[0])) :?>
-                      <div class="mt-1 pull-right addthis_toolbox" data-url="<?php echo get_site_url() ?>/attractions/?cat=<?php echo $_cat[0]->slug ?>&id=<?php echo $skey ?>" data-title="<?php echo $show->post_title;?>">
+                      <div class="mt-1 pull-right addthis_toolbox" addthis:url="<?php echo get_site_url() ?>/attractions/<?php echo $cat ?>/<?php echo sanitize_title($show->post_title);?>/" addthis:title="<?php echo $show->post_title;?>" addthis:media="<?php echo $gal['url']; ?>">
                         <a class="addthis_button_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                         <a class="addthis_button_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                       </div>

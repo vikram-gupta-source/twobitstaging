@@ -64,7 +64,7 @@
             <h5 class="lubalinB card-title text-uppercase"><?php echo $feature['title'];?></h5>
             <div class="time"><?php echo $feature['time'];?></div>
             <?php endif ?>
-            <div class="mt-3 mb-2 text-center mx-auto addthis_toolbox" data-url="<?php echo $feature['link'];?>" data-title="<?php echo $feature['title'];?>">
+            <div class="mt-3 mb-2 text-center mx-auto addthis_toolbox" addthis:url="<?php echo $feature['link'];?>" addthis:title="<?php echo $feature['title'];?>" addthis:media="<?php echo $feature['image']; ?>">
               <a class="addthis_button_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
               <a class="addthis_button_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             </div>
