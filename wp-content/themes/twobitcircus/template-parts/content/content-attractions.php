@@ -87,8 +87,8 @@
                           </div>
                           <?php endforeach ?>
                         </div>
-                        <?php if(count($gallery) > 1):?>
                         <?php $mediaAssetCnt = count($gallery) + (!empty($video) ? 1 : 0);?>
+                        <?php if(count($mediaAssetCnt) > 1):?>
                         <div class="overlay">
                           <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
                             <?php if(!empty($videoThumb)) :?>
