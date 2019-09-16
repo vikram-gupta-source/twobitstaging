@@ -77,6 +77,9 @@
       display: none;
       > .slick-list {
         min-height: 600px;
+        @media (max-width: $laptop) {
+          min-height: 660px;
+        }
       }
       &.slick-initialized {
         display: block;
@@ -188,7 +191,7 @@
         top: -25px;
       }
       &.slick-next {
-        right: 20px;
+        right: 22px;
       }
       &.slick-prev {
         right: 55px;

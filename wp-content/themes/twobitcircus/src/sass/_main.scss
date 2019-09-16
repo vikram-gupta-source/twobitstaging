@@ -250,7 +250,6 @@ a {
       background-color: #adadad;
       border: 3px solid #adadad;
       color: #757575 !important;
-      &:focus,
       &:hover {
         @include transform(none !important);
       }
@@ -258,7 +257,6 @@ a {
     &.btn-sm {
       font-size: 22px;
     }
-    &:focus,
     &:hover {
       @include transform(translate(-4px, -4px));
     }
