@@ -14,6 +14,9 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
 import ScrollMagic from "scrollmagic/scrollmagic/minified/ScrollMagic.min.js";
 import addIndicators from "scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js";
+import Player from "@vimeo/player";
+
+var isIOS = navigator.userAgent.match(/ipad|ipod|iphone|macintosh/gi);
 
 $(function() {
   //Wait for Preload Sprite before Starting
@@ -45,6 +48,9 @@ $(function() {
   handleWaypoints();
   $headerElem.addClass("start");
   $articleElem.addClass("start");
+  if (isIOS) {
+    $("body").addClass("is-mac");
+  }
   // Intro for About
   if ($aboutElem.length) {
     imagesLoaded(
@@ -489,6 +495,13 @@ $(function() {
         $(".attractions-slick").slick(slick_attractions_settings);
         $(".slick-shows")
           .slick(slick_shows_settings)
+          .on("beforeChange", function(ev, slick, cur, next) {
+            let iframe = $(slick.$slides.get(cur)).find("iframe");
+            if (iframe.length) {
+              let player = new Player(iframe[0]);
+              player.pause();
+            }
+          })
           .on("afterChange", function(ev, slick, cur) {
             let $elSlide = $(slick.$slides.get(cur));
             if ($elSlide.find(".slick-days").length) {
@@ -499,7 +512,15 @@ $(function() {
                 .trigger("click");
             }
           });
-        $(".slick-media").slick(slick_media_settings);
+        $(".slick-media")
+          .slick(slick_media_settings)
+          .on("beforeChange", function(ev, slick, cur, next) {
+            let iframe = $(slick.$slides.get(cur)).find("iframe");
+            if (iframe.length) {
+              let player = new Player(iframe[0]);
+              player.pause();
+            }
+          });
         $(".slick-media-nav").slick(slick_media_nav_settings);
         $(".slick-days").slick(slick_days_settings);
         $(".slick-times")
@@ -531,6 +552,14 @@ $(function() {
                   ".slick-days > .slick-list > .slick-track > .slick-slide:first-child"
                 )
                 .trigger("click");
+              if ($(".slick-media").find("iframe").length) {
+                $(".slick-media")
+                  .find("iframe")
+                  .each(function(kf, fr) {
+                    let player = new Player($(this)[0]);
+                    player.pause();
+                  });
+              }
             }
           }
         });
