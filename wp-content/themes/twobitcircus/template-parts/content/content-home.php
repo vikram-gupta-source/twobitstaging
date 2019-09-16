@@ -58,7 +58,11 @@
       <div class="featured mt-3 slick-event inview animated">
         <?php foreach($feature_events as $feature) : ?>
         <div class="card">
+          <?php if(!empty($feature['link'])):?>
           <a href="<?php echo $feature['link'];?>"><img class="card-img-top img-fluid" src="<?php echo $feature['image']; ?>"/></a>
+          <?php else :?>
+          <img class="card-img-top img-fluid" src="<?php echo $feature['image']; ?>"/>
+          <?php endif ?>
           <div class="card-body">
             <?php if(!empty($feature['title'])) :?>
             <h5 class="lubalinB card-title text-uppercase"><?php echo $feature['title'];?></h5>
@@ -113,7 +117,7 @@
               <?php if($feed->count2 > $insta_api_options['likes']) :?>
               <div class="grid-feed">
                 <div class="overlay-content">
-                  <img class="img-fluid w-100" src="<?php echo $feed->image;?>"/>
+                  <a href="<?php echo $feed->link;?>" target="_blank" rel="noopener noreferrer"><img class="img-fluid w-100" src="<?php echo $feed->image;?>"/></a>
                   <?php
                     $likes = '<i class="fa fa-heart"></i> ' . $feed->count2. ' &nbsp;&nbsp;<i class="fa fa-comment"></i> '  . $feed->count;
                   ?>
