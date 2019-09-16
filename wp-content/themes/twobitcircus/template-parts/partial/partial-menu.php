@@ -11,7 +11,7 @@
 <div id="expanded-menu">
   <div class="menu-block">
     <div class="expanded-logo">
-      <a href="/"><img src="/wp-content/uploads/2019/07/2BC_Email_Logo.png" class="img-fluid" /></a>
+      <a href="/"><img src="/wp-content/uploads/2019/09/2BC_White_Logo.png" class="img-fluid" /></a>
     </div>
     <!-- The WordPress Menu goes here -->
     <?php wp_nav_menu( array(
