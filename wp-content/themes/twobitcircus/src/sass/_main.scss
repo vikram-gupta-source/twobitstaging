@@ -956,7 +956,7 @@ div.wpcf7-acceptance-missing {
     line-height: 0.9em;
     @media (max-width: $mobile) {
       font-size: 3em;
-      text-align: left;
+      text-align: left !important;
     }
   }
   span.wpcf7-not-valid-tip {
