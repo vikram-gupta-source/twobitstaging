@@ -15,7 +15,9 @@
       <h2 class="headline inview animated text-center mb-5 white"><?php echo get_field('find_us_title'); ?></h2>
       <div class="map-wrapper row no-gutters">
         <div class="map-col col-md-7 col-lg-8 col-xl-9">
-          <div id="main-map" style="height: 500px;"></div>
+          <?php if(!empty($location['google_map_iframe'])) : ?>
+          <div id="main-map" style="height: 500px;"><?php echo $location['google_map_iframe'];?></div>
+          <?php endif ?>
         </div>
         <div class="hours-col col-md-5 col-lg-4 col-xl-3">
           <?php if(get_field('hours')) :?>
@@ -72,21 +74,3 @@
   <?php endif?>
 
 </article>
-<?php if(isset($location)) : ?>
-<script>
-  // Google Map Parkings
-  <?php foreach($location['parking_locations'] as $pkey => $pk) :?>
-  var parking<?php echo $pkey; ?> = {
-    info:
-      '<strong>Parking</strong><br>\
-           <?php echo $pk['address'];?><br>\
-           <a href="<?php echo $pk['link'];?>" target="_blank" rel="noopener"><b><?php _e( 'Get Directions', 'twobitcircus' );?></b></a>',
-    lat: <?php echo $pk['latitude'];?>,
-    long: <?php echo $pk['longitude'];?>,
-    icon: site_path + "/wp-content/uploads/2019/07/parking_logo.png"
-  };
-  locations.push([parking<?php echo $pkey; ?>.info, parking<?php echo $pkey; ?>.lat, parking<?php echo $pkey; ?>.long, <?php echo ($pkey+1); ?>, parking<?php echo $pkey; ?>.icon]);
-<?php endforeach ?>
-</script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuPfCUIN21wT-f6ovkmAiDJgbpudblFF4&callback=initMap"></script>
-<?php endif ?>
