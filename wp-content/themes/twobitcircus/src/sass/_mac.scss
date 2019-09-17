@@ -1,27 +1,27 @@
 body.is-mac {
   #featured-block .slick-list .slick-slide .card .card-heading {
-    padding: 7px 1.25rem 4px;
+    padding: 7px 1.25rem 4px !important;
   }
   .calender-wrapper .calender .grid .grid-time .date,
   .calender-wrapper .calender .grid .grid-time .day {
-    padding: 8px 8px 5px;
+    padding: 8px 8px 5px !important;
   }
   #about #packages-block .item .package-block h2 {
-    padding: 7px 10px 5px;
+    padding: 7px 10px 5px !important;
   }
   #attractions .slick-days .item-days .day-header {
-    padding: 7px 0 5px;
+    padding: 7px 0 5px !important;
   }
   #attractions #filters .filter-bar .nav-item .nav-link {
-    padding: 14px 15px 10px;
+    padding: 14px 15px 10px !important;
   }
   #food-drink #events-block .event .event-header .top {
-    padding: 8px 1.25rem 4px;
+    padding: 8px 1.25rem 4px !important;
   }
   #locations #findus-block .container .map-wrapper .hours-col h3 {
-    padding: 12px 1em 8px;
+    padding: 12px 1em 8px !important;
   }
   .card-header {
-    padding: 1rem 1.25rem 0.75rem;
+    padding: 1rem 1.25rem 0.75rem !important;
   }
 }

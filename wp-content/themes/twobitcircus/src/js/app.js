@@ -522,6 +522,18 @@ $(function() {
                     )
                     .trigger("click");
                 }
+                let slug = $elSlide.parents(".slick-shows").attr("id");
+                let show = $elSlide.find(".item-shows").attr("id");
+                let setSlug =
+                  typeof slug !== "undefined"
+                    ? slug.replace(/cat-/, "") + "/"
+                    : "";
+                let setShow = typeof show !== "undefined" ? show + "/" : "";
+                history.pushState(
+                  null,
+                  null,
+                  "/attractions/" + setSlug + setShow
+                );
               });
             $(".slick-media")
               .slick(slick_media_settings)
@@ -557,6 +569,7 @@ $(function() {
               $(this).addClass("active");
               let slug = $(this).attr("aria-controls");
               if ($("#cat-" + slug).length) {
+                history.pushState(null, null, "/attractions/" + slug + "/");
                 loadImg($("#cat-" + slug));
                 let index = $("#cat-" + slug)
                   .parents(".slick-slide")
@@ -586,15 +599,23 @@ $(function() {
           $("#filters .dropdown-menu .dropdown-item").on("click", function(e) {
             e.preventDefault(e);
             if (!$(this).hasClass("active")) {
-              let slug = $(this).attr("aria-controls");
-              if ($("#" + slug).length) {
-                let index = $("#" + slug)
+              let slug = $(this)
+                .parent()
+                .data("cat");
+              let show = $(this).attr("aria-controls");
+              if ($("#" + show).length) {
+                history.pushState(
+                  null,
+                  null,
+                  "/attractions/" + slug + "/" + show + "/"
+                );
+                let index = $("#" + show)
                   .parents(".slick-slide")
                   .data("slick-index");
-                $("#" + slug)
+                $("#" + show)
                   .parents(".slick-shows")
                   .slick("slickGoTo", index);
-                $("#" + slug)
+                $("#" + show)
                   .find(".slick-media-nav .slick-slide[data-slick-index=0]")
                   .addClass("slick-current slick-active");
               }

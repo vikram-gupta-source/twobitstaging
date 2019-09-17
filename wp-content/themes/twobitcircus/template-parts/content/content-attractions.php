@@ -25,7 +25,7 @@
               <a class="nav-link dropdown-toggle <?php echo $isFirst; ?>" href="#" data-toggle="dropdown" data-tool-toggle="tooltip" data-placement="top" title="<?php echo $shows['terms']->category_description;?>" aria-haspopup="true" aria-controls="<?php echo $shows['terms']->slug;?>">
                 <?php echo $shows['terms']->name;?>
               </a>
-              <div class="dropdown-menu">
+              <div class="dropdown-menu" data-cat="<?php echo $shows['terms']->slug;?>">
                 <?php foreach($shows['posts'] as $skey => $show) :?>
                 <a class="dropdown-item" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a>
                 <?php endforeach ?>
