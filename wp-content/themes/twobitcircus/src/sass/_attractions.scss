@@ -84,6 +84,14 @@
       &.slick-initialized {
         display: block;
       }
+      .slick-slide {
+        -webkit-touch-callout: inherit;
+        -webkit-user-select: inherit;
+        -khtml-user-select: inherit;
+        -moz-user-select: inherit;
+        -ms-user-select: inherit;
+        user-select: inherit;
+      }
     }
   }
   #filters {
@@ -196,14 +204,6 @@
       &.slick-prev {
         right: 55px;
       }
-    }
-    .slick-slide {
-      -webkit-touch-callout: inherit;
-      -webkit-user-select: inherit;
-      -khtml-user-select: inherit;
-      -moz-user-select: inherit;
-      -ms-user-select: inherit;
-      user-select: inherit;
     }
     .show-content-block {
       color: $white;
