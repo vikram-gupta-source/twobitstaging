@@ -24,4 +24,12 @@ body.is-mac {
   .card-header {
     padding: 1rem 1.25rem 0.75rem !important;
   }
+  #about #level-robo-block .arrow {
+    @media (max-width: $tablet) {
+      left: -2px;
+    }
+    @media (max-width: $mobile) {
+      left: -2px;
+    }
+  }
 }
