@@ -153,6 +153,7 @@ $(function() {
     slidesToShow: 3,
     arrows: false,
     variableWidth: true,
+    lazyLoad: "progressive",
     responsive: [
       {
         breakpoint: 767,
@@ -176,6 +177,7 @@ $(function() {
     slidesToShow: 4,
     slidesToScroll: 4,
     adaptiveHeight: true,
+    lazyLoad: "progressive",
     responsive: [
       {
         breakpoint: 1199,
@@ -297,6 +299,7 @@ $(function() {
     slidesToScroll: 5,
     arrows: false,
     dots: true,
+    lazyload: "progressive",
     responsive: [
       {
         breakpoint: 1199,
@@ -378,7 +381,7 @@ $(function() {
   };
 
   imagesLoaded(
-    "#attractions",
+    "main",
     {
       background: true
     },
