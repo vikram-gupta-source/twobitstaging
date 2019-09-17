@@ -59,9 +59,9 @@
         <?php foreach($feature_events as $feature) : ?>
         <div class="card">
           <?php if(!empty($feature['link'])):?>
-          <a href="<?php echo $feature['link'];?>"><img class="card-img-top img-fluid" src="<?php echo $feature['image']; ?>"/></a>
+          <a href="<?php echo $feature['link'];?>"><img class="card-img-top img-fluid lazy-load" data-src="<?php echo $feature['image']; ?>"/></a>
           <?php else :?>
-          <img class="card-img-top img-fluid" src="<?php echo $feature['image']; ?>"/>
+          <img class="card-img-top img-fluid lazy-load" data-src="<?php echo $feature['image']; ?>"/>
           <?php endif ?>
           <div class="card-body">
             <?php if(!empty($feature['title'])) :?>
@@ -117,7 +117,7 @@
               <?php if($feed->count2 > $insta_api_options['likes']) :?>
               <div class="grid-feed">
                 <div class="overlay-content">
-                  <a href="<?php echo $feed->link;?>" target="_blank" rel="noopener noreferrer"><img class="img-fluid w-100" src="<?php echo $feed->image;?>"/></a>
+                  <a href="<?php echo $feed->link;?>" target="_blank" rel="noopener noreferrer"><img class="img-fluid w-100 lazy-load" data-src="<?php echo $feed->image;?>"/></a>
                   <?php
                     $likes = '<i class="fa fa-heart"></i> ' . $feed->count2. ' &nbsp;&nbsp;<i class="fa fa-comment"></i> '  . $feed->count;
                   ?>
