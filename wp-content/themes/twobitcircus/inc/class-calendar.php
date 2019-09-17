@@ -100,13 +100,13 @@ if ( ! class_exists( 'Calendar' ) ) {
             $_dy = date('d', $recr);
             $obj['posted'] = date('m-d-Y', $recr);
             $setTimeTicket = date('H:i A', strtotime($obj['ticket']));
-            if(isset($this->calender[$_dy]) && $this->calender[$_dy][$setTimeTicket]) {
+            if(isset($this->calender[$_dy]) && isset($this->calender[$_dy][$setTimeTicket])) {
               $setTimeTicket = $setTimeTicket.'-2-'.$key;
             }
             $specialEvent[$_dy][$setTimeTicket][] = (object) $obj;
           }
         } else {
-          if($this->calender[$_spday][$setTimeTicket]) {
+          if(isset($this->calender[$_dy][$setTimeTicket]) && !empty($this->calender[$_spday][$setTimeTicket])) {
             $setTimeTicket = $setTimeTicket.'-2';
           }
           $specialEvent[$_spday][$setTimeTicket][] = (object) $obj;
