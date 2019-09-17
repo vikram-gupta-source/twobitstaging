@@ -374,7 +374,6 @@ $(function() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
-    fade: true,
     asNavFor: ".slick-media-nav"
   };
 
@@ -464,8 +463,7 @@ $(function() {
           slidesToShow: 1,
           slidesToScroll: 1,
           adaptiveHeight: true,
-          arrows: false,
-          fade: true
+          arrows: false
         });
       }
       // Handle all Attraction Events
