@@ -17,6 +17,7 @@ import addIndicators from "scrollmagic/scrollmagic/minified/plugins/debug.addInd
 import Player from "@vimeo/player";
 
 var isIOS = navigator.userAgent.match(/ipad|ipod|iphone|macintosh/gi);
+var isIOSPhone = navigator.userAgent.match(/ipad|ipod|iphone/gi);
 
 $(function() {
   //Wait for Preload Sprite before Starting
@@ -50,6 +51,9 @@ $(function() {
   $articleElem.addClass("start");
   if (isIOS) {
     $("body").addClass("is-mac");
+  }
+  if (isIOSPhone) {
+    $("body").addClass("is-mac-phone");
   }
   // Intro for About
   if ($aboutElem.length) {

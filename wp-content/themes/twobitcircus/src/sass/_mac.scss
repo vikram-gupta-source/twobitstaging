@@ -26,10 +26,20 @@ body.is-mac {
   }
   #about #level-robo-block .arrow {
     @media (max-width: $tablet) {
-      left: -2px;
+      left: 10px;
     }
     @media (max-width: $mobile) {
-      left: -2px;
+      left: 10px;
+    }
+  }
+  &.is-mac-phone {
+    #about #level-robo-block .arrow {
+      @media (max-width: $tablet) {
+        left: -2px;
+      }
+      @media (max-width: $mobile) {
+        left: -2px;
+      }
     }
   }
 }
