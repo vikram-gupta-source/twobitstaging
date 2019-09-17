@@ -76,7 +76,7 @@ $_closed = $cal->get_closed();
                       $_link = (isset($time->target) && $time->link) ? $time->link : (($time->link) ? 'https://twobitcircus.centeredgeonline.com'.$time->link : '');
                       $startTime = 0;
                       $endTime = 0;
-                      $arrayStr = ['title' => $time->name, 'url' => $_link, 'textColor' => 'hello', 'id' => 'https://via.placeholder.com/329x289'];
+                      $arrayStr = ['title' => $time->name, 'url' => $_link, 'textColor' => '', 'id' => ''];
                       if(preg_match('/-/', $getTime)) {
                         $parseTime = explode('-', $getTime);
                         $startTime = date('Y-m-d h:i', (strtotime($_timeRaw  .' ' .trim($parseTime[0]))));
