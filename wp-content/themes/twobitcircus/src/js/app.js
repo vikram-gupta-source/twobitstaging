@@ -935,7 +935,9 @@ $(function() {
   if ($("form#secret").length) {
     $("form#secret").on("submit", function(e) {
       e.preventDefault();
-      $("#submit-btn").hide();
+      $("#submit-btn")
+        .parent()
+        .hide();
       $("#submit-loading").addClass("activate");
       jQuery.ajax({
         url: "/wp-admin/admin-ajax.php",
