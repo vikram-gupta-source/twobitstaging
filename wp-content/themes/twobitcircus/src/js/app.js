@@ -153,7 +153,7 @@ $(function() {
     slidesToShow: 3,
     arrows: false,
     variableWidth: true,
-    lazyLoad: "progressive",
+    lazyLoad: "ondemand",
     responsive: [
       {
         breakpoint: 767,
@@ -177,7 +177,7 @@ $(function() {
     slidesToShow: 4,
     slidesToScroll: 4,
     adaptiveHeight: true,
-    lazyLoad: "progressive",
+    lazyLoad: "ondemand",
     responsive: [
       {
         breakpoint: 1199,
@@ -299,7 +299,7 @@ $(function() {
     slidesToScroll: 5,
     arrows: false,
     dots: true,
-    lazyload: "progressive",
+    lazyload: "ondemand",
     responsive: [
       {
         breakpoint: 1199,
