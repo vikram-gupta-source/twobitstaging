@@ -45,7 +45,7 @@
   </div>
 
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d40d77186a2f4a8"></script>
+  <script defer async type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d40d77186a2f4a8"></script>
   <section id="attractions-block">
     <div class="bkg-red-angle"></div>
     <div class="container">

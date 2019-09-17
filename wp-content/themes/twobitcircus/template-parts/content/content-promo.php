@@ -10,7 +10,7 @@
   <?php get_template_part( 'template-parts/partial/partial', 'header' ); ?>
 
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d40d77186a2f4a8"></script>
+  <script defer async type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d40d77186a2f4a8"></script>
   <section id="promo-block" class="entry-wrapper-padding inview animated delay-3">
     <?php if(!empty(get_field('promotions'))) :?>
     <?php $promotions = filter_locations(get_field('promotions'));?>
@@ -32,10 +32,9 @@
             <p><?php echo $promo['description'];?></p>
             <?php endif ?>
             <?php if(!empty($promo['link'])) :?>
-            <div class="mb-3 text-center mx-auto addthis_toolbox" data-url="<?php echo permalinkUrl($promo['link']);?>" data-title="<?php echo $promo['title'];?>">
+            <div class="mb-3 text-center mx-auto addthis_toolbox" addthis:url="<?php echo permalinkUrl($promo['link']);?>" addthis:title="<?php echo $promo['title'];?>" addthis:media="<?php echo $promo['image']; ?>">
               <a class="addthis_button_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
               <a class="addthis_button_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-              <a class="addthis_button_pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
             </div>
             <div class="link-wrapper my-2">
               <?php $isInternalLink = checkInternalLink($promo['link']);?>
