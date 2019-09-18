@@ -479,10 +479,6 @@ $(function() {
               $(this).removeAttr("data-img");
             });
           }
-          if ($elm.find(".embed-lazy").length) {
-            let url = $elm.find(".embed-lazy").data('video');
-            $elm.find(".embed-lazy").removeClass('embed-lazy').html('<iframe src="' + url + '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>');
-          }
         };
         // ToolTips
         $('[data-tool-toggle="tooltip"]').tooltip({
