@@ -465,7 +465,7 @@ $(function() {
         });
 
         // First Attraction img
-        loadImg($(".attractions-slick .item-attraction:first-child"));
+        //loadImg($(".attractions-slick .item-attraction:first-child"));
 
         var initAttraction = function(resize) {
           if (resize === false) {
@@ -529,7 +529,7 @@ $(function() {
               let slug = $(this).attr("aria-controls");
               if ($("#cat-" + slug).length) {
                 history.pushState(null, null, "/attractions/" + slug + "/");
-                loadImg($("#cat-" + slug));
+                //loadImg($("#cat-" + slug));
                 let index = $("#cat-" + slug)
                   .parents(".slick-slide")
                   .data("slick-index");

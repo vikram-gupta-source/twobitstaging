@@ -60,7 +60,7 @@
                 <?php if(!filter_location_by_field(get_field('available_in', $show->ID))) continue; ?>
                 <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
                 <?php $info = filter_locations(get_field('information', $show->ID));?>
-                <?php $_cat = get_the_category($show->ID);?> 
+                <?php $_cat = get_the_category($show->ID);?>
                 <?php $gallery = get_field('gallery', $show->ID);?>
                 <div id="<?php echo sanitize_title($show->post_title);?>" class="item-shows">
                   <div class="row">
@@ -76,7 +76,7 @@
                         <div class="slick-media">
                           <?php foreach($gallery as $gal) :?>
                           <div class="item d-block">
-                            <div class="img d-block pre-load-img" data-img="<?php echo $gal['url']; ?>"><img class="img-fluid w-100 fade" alt="<?php echo $gal['title']; ?>"/></div>
+                            <div class="img d-block"><img class="img-fluid w-100" src="<?php echo $gal['url']; ?>" alt="<?php echo $gal['title']; ?>"/></div>
                           </div>
                           <?php endforeach ?>
                         </div>
@@ -85,7 +85,7 @@
                         <div class="overlay">
                           <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
                             <?php foreach($gallery as $gal) :?>
-                            <div class="thumb pre-load-img" data-img="<?php echo $gal['sizes']['medium']; ?>" ><img class="img-fluid fade" alt="<?php echo $gal['title']; ?>"/></div>
+                            <div class="thumb"><img class="img-fluid" src="<?php echo $gal['sizes']['medium']; ?>" alt="<?php echo $gal['title']; ?>"/></div>
                             <?php endforeach ?>
                           </div>
                         </div>
