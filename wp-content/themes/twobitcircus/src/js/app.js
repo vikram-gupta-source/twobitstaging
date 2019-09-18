@@ -751,7 +751,7 @@ $(function() {
       .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
         let $elSlide = $(slick.$slides[nextSlide]);
         if ($(window).width() < 992) {
-          //$elSlide.addClass("item-mobile").find(".nav-item .nav-link").trigger("click");
+          $elSlide.addClass("item-mobile").find(".nav-item .nav-link").trigger("click");
         }
       });
     // First Attraction img
@@ -763,11 +763,10 @@ $(function() {
           .slick(slick_attractions_settings)
         /*
         .on("afterChange", function(ev, slick, cur) {
-          let $elSlide = $(slick.$slides.get(cur));
-          $elSlide
-            .parent()
-            .find(".slick-media-nav .slick-slide[data-slick-index=0]")
-            .addClass("slick-current slick-active");
+          let $elSlide = $(slick.$slides.get(cur)).parent().find(".slick-media-nav");
+          if($elSlide.length) {
+            $elSlide.find(".slick-slide[data-slick-index=0]").addClass("slick-current slick-active");
+          }
         });
         */
         // Start SHows Slider
