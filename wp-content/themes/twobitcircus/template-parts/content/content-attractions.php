@@ -61,8 +61,8 @@
                 <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
                 <?php $info = filter_locations(get_field('information', $show->ID));?>
                 <?php $_cat = get_the_category($show->ID);?>
-                <?php $video = get_field('video_embed', $show->ID);?>
-                <?php $videoThumb = videoLink($video);?>
+                <?php $_video = get_field('video_embed', $show->ID);?>
+                <?php $videoThumb = videoLink($_video);?>
                 <?php $gallery = get_field('gallery', $show->ID);?>
                 <div id="<?php echo sanitize_title($show->post_title);?>" class="item-shows">
                   <div class="row">
@@ -76,9 +76,9 @@
                       <?php if(!empty($gallery)) :?>
                       <div class="show-asset-wrapper">
                         <div class="slick-media">
-                          <?php if(!empty($video)) :?>
+                          <?php if(!empty($_video)) :?>
                           <div class="item d-block">
-                            <div class="embed-lazy embed-responsive embed-responsive-16by9" data-video="https://player.vimeo.com/video/<?php echo $video;?>"></div>
+                            <div class="embed-lazy embed-responsive embed-responsive-16by9" data-video="https://player.vimeo.com/video/<?php echo $_video;?>"></div>
                           </div>
                           <?php endif ?>
                           <?php foreach($gallery as $gal) :?>
@@ -87,7 +87,7 @@
                           </div>
                           <?php endforeach ?>
                         </div>
-                        <?php $mediaAssetCnt = count($gallery) + (!empty($video) ? 1 : 0);?>
+                        <?php $mediaAssetCnt = count($gallery) + (!empty($_video) ? 1 : 0);?>
                         <?php if($mediaAssetCnt > 1):?>
                         <div class="overlay">
                           <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
