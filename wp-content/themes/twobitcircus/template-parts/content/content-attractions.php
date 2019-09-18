@@ -143,7 +143,7 @@
                       <h3 class="mt-5 text-uppercase franchise offwhite"><?php _e( 'Showtimes' , 'twobitcircus'); ?></h3>
                       <div class="showtimes-cycle">
                         <div id="cycle-<?php echo $show->ID;?>">
-                          <div class="slick-days ready" data-target="<?php echo $cat;?>">
+                          <div class="slick-days-ready" data-target="<?php echo $cat;?>">
                             <?php foreach($composedDates as $date => $tickets) :?>
                             <div class="item-days text-center">
                               <div class="day-header lubalin">
@@ -156,7 +156,7 @@
                             </div>
                             <?php endforeach ?>
                           </div>
-                          <div class="slick-times ready">
+                          <div class="slick-times-ready">
                             <?php foreach($composedDates as $date => $tickets) :?>
                             <div class="item-time">
                               <div class="card-body">
