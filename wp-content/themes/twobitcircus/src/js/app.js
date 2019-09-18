@@ -689,11 +689,17 @@ $(function() {
     touchMove: false,
     slidesToShow: 1,
     arrows: true,
-    //adaptiveHeight: true,
+    adaptiveHeight: true,
     fade: true,
     responsive: [{
+      breakpoint: 1025,
+      settings: {
+        adaptiveHeight: false
+      }
+    }, {
       breakpoint: 767,
       settings: {
+        adaptiveHeight: false,
         arrows: false
       }
     }]
