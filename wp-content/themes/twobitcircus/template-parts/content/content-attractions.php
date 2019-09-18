@@ -75,7 +75,7 @@
                       </div>
                       <?php if(!empty($gallery)) :?>
                       <div class="show-asset-wrapper">
-                        <div class="slick-media">
+                        <div class="slick-media-ready">
                           <?php if(!empty($video)) :?>
                           <div class="item d-block">
                             <div class="embed-lazy embed-responsive embed-responsive-16by9" data-video="https://player.vimeo.com/video/<?php echo $video;?>"></div>
