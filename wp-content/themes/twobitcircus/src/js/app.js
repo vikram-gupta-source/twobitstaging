@@ -735,11 +735,7 @@ $(function() {
       if ($elm.find(".pre-load-img").length) {
         $elm.find(".pre-load-img").each(function() {
           let url = $(this).data("img");
-          $(this)
-            .removeClass("pre-load-img")
-            .find("img")
-            .removeClass("fade")
-            .prop("src", url);
+          $(this).removeClass("pre-load-img").find("img").removeClass("fade").prop("src", url);
           $(this).removeAttr("data-img");
         });
       }
@@ -811,9 +807,11 @@ $(function() {
               let index = $("#cat-" + slug).parents(".slick-slide").data("slick-index");
               $(".attractions-slick").slick("slickGoTo", index);
               $("#cat-" + slug).find(".slick-slide:first-child").addClass("slick-current slick-active");
-              $("#cat-" + slug).find(".slick-days > .slick-list > .slick-track > .slick-slide:first-child").trigger("click");
-              if ($(".slick-media").find("iframe").length) {
-                $(".slick-media").find("iframe").each(function(kf, fr) {
+              if ($("#cat-" + slug).find(".slick-days.slick-initialized").length) {
+                $("#cat-" + slug).find(".slick-days > .slick-list > .slick-track > .slick-slide:first-child").trigger("click");
+              }
+              if ($(".slick-media.slick-initialized").find("iframe").length) {
+                $(".slick-media.slick-initialized").find("iframe").each(function(kf, fr) {
                   let player = new Player($(this)[0]);
                   player.pause();
                 });
@@ -832,8 +830,8 @@ $(function() {
               history.pushState(null, null, "/attractions/" + slug + "/" + show + "/");
               let index = $("#" + show).parents(".slick-slide").data("slick-index");
               $("#" + show).parents(".slick-shows").slick("slickGoTo", index);
-              if ($("#" + show).find(".slick-media-nav")) {
-                $("#" + show).find(".slick-media-nav .slick-slide[data-slick-index=0]").addClass("slick-current slick-active");
+              if ($("#" + show).find(".slick-media-nav.slick-initialized")) {
+                $("#" + show).find(".slick-media-nav.slick-initialized .slick-slide[data-slick-index=0]").addClass("slick-current slick-active");
               }
             }
           }
