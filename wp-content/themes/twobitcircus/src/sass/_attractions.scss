@@ -255,6 +255,15 @@
   }
   .showtimes-cycle {
     padding: 0;
+    @media (max-width: $mobile) {
+      display: none !important;
+    }
+  }
+  .showtimes {
+    display: none;
+    @media (max-width: $mobile) {
+      display: block !important;
+    }
   }
   .slick-days {
     .slick-track {
@@ -433,7 +442,7 @@
           }
         }
       }
-      @media (max-width: 768px) {
+      @media (max-width: $mobile) {
         display: none !important;
       }
       .slick-next {
