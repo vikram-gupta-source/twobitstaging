@@ -79,17 +79,7 @@
                             <div class="img d-block"><img class="img-fluid w-100" src="<?php echo $gal['url']; ?>" alt="<?php echo $gal['title']; ?>"/></div>
                           </div>
                           <?php endforeach ?>
-                        </div>
-                        <?php $mediaAssetCnt = count($gallery);?>
-                        <?php if($mediaAssetCnt > 1):?>
-                        <div class="overlay">
-                          <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
-                            <?php foreach($gallery as $gal) :?>
-                            <div class="thumb"><img class="img-fluid" src="<?php echo $gal['sizes']['medium']; ?>" alt="<?php echo $gal['title']; ?>"/></div>
-                            <?php endforeach ?>
-                          </div>
-                        </div>
-                        <?php endif ?>
+                        </div> 
                       </div>
                       <?php endif ?>
                       <?php if(isset($_cat[0])) :?>

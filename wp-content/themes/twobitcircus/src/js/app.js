@@ -373,8 +373,7 @@ $(function() {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
-    asNavFor: ".slick-media-nav"
+    arrows: true
   };
 
   imagesLoaded(
@@ -471,13 +470,6 @@ $(function() {
           if (resize === false) {
             $(".attractions-slick")
               .slick(slick_attractions_settings)
-              .on("afterChange", function(ev, slick, cur) {
-                let $elSlide = $(slick.$slides.get(cur));
-                $elSlide
-                  .parent()
-                  .find(".slick-media-nav .slick-slide[data-slick-index=0]")
-                  .addClass("slick-current slick-active");
-              });
             $(".slick-shows")
               .slick(slick_shows_settings)
               .on("afterChange", function(ev, slick, cur) {
@@ -503,7 +495,6 @@ $(function() {
                 );
               });
             $(".slick-media").slick(slick_media_settings);
-            $(".slick-media-nav").slick(slick_media_nav_settings);
             $(".slick-days").slick(slick_days_settings);
             $(".slick-times")
               .slick(slick_times_settings)
@@ -514,7 +505,6 @@ $(function() {
             $(".slick-shows").slick("reinit");
             $(".attractions-slick").slick("reinit");
             $(".slick-media").slick("reinit");
-            $(".slick-media-nav").slick("reinit");
             $(".slick-days").slick("reinit");
             $(".slick-times").slick("reinit");
           }
@@ -566,9 +556,6 @@ $(function() {
                 $("#" + show)
                   .parents(".slick-shows")
                   .slick("slickGoTo", index);
-                $("#" + show)
-                  .find(".slick-media-nav .slick-slide[data-slick-index=0]")
-                  .addClass("slick-current slick-active");
               }
             }
           });
