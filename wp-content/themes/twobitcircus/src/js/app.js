@@ -680,7 +680,7 @@ $(function() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    adaptiveHeight: (isIOSPhone) ? true : true,
+    adaptiveHeight: true,
     fade: true
   };
   var slick_shows_settings = {
@@ -689,7 +689,7 @@ $(function() {
     touchMove: false,
     slidesToShow: 1,
     arrows: true,
-    adaptiveHeight: (isIOSPhone) ? true : true,
+    adaptiveHeight: true,
     fade: true,
     responsive: [{
       breakpoint: 767,
@@ -805,6 +805,25 @@ $(function() {
                 $(".available-dates .cta-btn").removeClass("show");
               });
         */
+        /*
+        $(".slick-media")
+          .slick(slick_media_settings)
+          .on("beforeChange", function(ev, slick, cur, next) {
+            let iframe = $(slick.$slides.get(cur)).find("iframe");
+            if (iframe.length) {
+              let player = new Player(iframe[0]);
+              player.pause();
+            }
+          });
+        $(".slick-media-nav").slick(slick_media_nav_settings);
+        */
+        $(".slick-days").slick(slick_days_settings);
+        $(".slick-times")
+          .slick(slick_times_settings)
+          .on("beforeChange", function(ev, slick, cur, next) {
+            $(".available-dates .cta-btn").removeClass("show");
+          });
+
         // Append to Filter show
         $("#filters .nav-item .nav-link").on("click", function(e) {
           e.preventDefault(e);
@@ -883,13 +902,13 @@ $(function() {
         });
 
       } else {
-        /*
         $(".slick-shows").slick("reinit");
         $(".attractions-slick").slick("reinit");
-        $(".slick-media").slick("reinit");
-        $(".slick-media-nav").slick("reinit");
         $(".slick-days").slick("reinit");
         $(".slick-times").slick("reinit");
+        /*
+        $(".slick-media").slick("reinit");
+        $(".slick-media-nav").slick("reinit");
         */
       }
     };
@@ -900,7 +919,7 @@ $(function() {
     $(window).on("resize", function() {
       clearTimeout(resizeAttract);
       resizeAttract = setTimeout(function() {
-        //initAttraction(true);
+        initAttraction(true);
       }, 500);
     });
 
