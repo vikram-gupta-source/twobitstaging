@@ -590,9 +590,7 @@ $(function() {
     focusOnSelect: true,
     responsive: [{
       breakpoint: 768,
-      settings: {
-        settings: "unslick"
-      }
+      settings: "unslick"
     }]
   };
   var slick_times_settings = {
@@ -606,9 +604,7 @@ $(function() {
     fade: true,
     responsive: [{
       breakpoint: 768,
-      settings: {
-        settings: "unslick"
-      }
+      settings: "unslick"
     }]
   };
   var slick_media_nav_settings = {
