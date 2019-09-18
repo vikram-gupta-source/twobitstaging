@@ -394,6 +394,18 @@
     .slick-media {
       background-color: $black;
       transition: opacity 0.5s ease;
+      @media (max-width: 768px) {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        padding-bottom: 1em;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        display: flex;
+        .item {
+          margin: 0 2px;
+          min-width: 280px;
+        }
+      }
     }
     &:hover {
       .slick-prev,
