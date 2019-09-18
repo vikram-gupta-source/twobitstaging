@@ -264,6 +264,45 @@
     @media (max-width: $mobile) {
       display: block !important;
     }
+    .card {
+      border-radius: 0;
+      border-color: $yellow;
+      opacity: 1;
+      visibility: visible;
+      height: auto;
+      .card-body {
+        padding: 17px;
+        background-color: $yellow;
+      }
+      .card-header {
+        border-radius: 0;
+        transition: all 0.4s ease;
+        background-color: $dark-red;
+        a {
+          display: block;
+          font-size: 14px;
+          color: #fff;
+          font-weight: $bold;
+        }
+      }
+      &:hover {
+        .card-header {
+          border-radius: 0;
+        }
+      }
+      .cta-btn {
+        display: inline-block;
+        margin-right: 7px;
+        margin-bottom: 7px;
+        .btn-twobit {
+          padding: 2px 15px;
+          width: 100px;
+        }
+        .sm {
+          padding: 2px 15px;
+        }
+      }
+    }
   }
   .slick-days {
     .slick-track {
@@ -313,47 +352,6 @@
 }
 
 #attractions {
-  .showtimes {
-    .card {
-      border-radius: 0;
-      border-color: $yellow;
-      opacity: 1;
-      visibility: visible;
-      height: auto;
-      .card-body {
-        padding: 17px;
-        background-color: $yellow;
-      }
-      .card-header {
-        border-radius: 0;
-        transition: all 0.4s ease;
-        background-color: $dark-red;
-        a {
-          display: block;
-          font-size: 14px;
-          color: #fff;
-          font-weight: $bold;
-        }
-      }
-      &:hover {
-        .card-header {
-          border-radius: 0;
-        }
-      }
-      .cta-btn {
-        display: inline-block;
-        margin-right: 7px;
-        margin-bottom: 7px;
-        .btn-twobit {
-          padding: 2px 15px;
-          width: 100px;
-        }
-        .sm {
-          padding: 2px 15px;
-        }
-      }
-    }
-  }
   .card {
     border-radius: 0;
     border-color: $dark-red;
