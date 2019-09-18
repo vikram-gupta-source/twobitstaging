@@ -90,7 +90,7 @@
                         <?php $mediaAssetCnt = count($gallery) + (!empty($video) ? 1 : 0);?>
                         <?php if($mediaAssetCnt > 1):?>
                         <div class="overlay">
-                          <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
+                          <div class="slick-media-nav-ready media-<?php echo $mediaAssetCnt;?>">
                             <?php if(!empty($videoThumb)) :?>
                             <div class="thumb pre-load-img" data-img="<?php echo $videoThumb;?>" ><img class="img-fluid fade" alt="<?php echo $show->post_title;?>"/></div>
                             <?php endif ?>
