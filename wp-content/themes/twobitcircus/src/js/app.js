@@ -816,14 +816,14 @@ $(function() {
             }
           });
         $(".slick-media-nav").slick(slick_media_nav_settings);
-        */
+
         $(".slick-days").slick(slick_days_settings);
         $(".slick-times")
           .slick(slick_times_settings)
           .on("beforeChange", function(ev, slick, cur, next) {
             $(".available-dates .cta-btn").removeClass("show");
           });
-
+          */
         // Append to Filter show
         $("#filters .nav-item .nav-link").on("click", function(e) {
           e.preventDefault(e);
@@ -904,8 +904,8 @@ $(function() {
       } else {
         $(".slick-shows").slick("reinit");
         $(".attractions-slick").slick("reinit");
-        $(".slick-days").slick("reinit");
-        $(".slick-times").slick("reinit");
+        //$(".slick-days").slick("reinit");
+        //$(".slick-times").slick("reinit");
         /*
         $(".slick-media").slick("reinit");
         $(".slick-media-nav").slick("reinit");
