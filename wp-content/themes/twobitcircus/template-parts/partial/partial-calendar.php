@@ -79,12 +79,12 @@ $_closed = $cal->get_closed();
                       $arrayStr = ['title' => $time->name, 'url' => $_link, 'textColor' => '', 'id' => ''];
                       if(preg_match('/-/', $getTime)) {
                         $parseTime = explode('-', $getTime);
-                        $startTime = date('Y-m-d h:i', (strtotime($_timeRaw  .' ' .trim($parseTime[0]))));
-                        $endTime = date('Y-m-d h:i', (strtotime($_timeRaw  .' ' .trim($parseTime[1]))));
+                        $startTime = date('Y-m-d H:i', (strtotime($_timeRaw  .' ' .trim($parseTime[0]))));
+                        $endTime = date('Y-m-d H:i', (strtotime($_timeRaw  .' ' .trim($parseTime[1]))));
                         $arrayStr += ['start' => $startTime];
                         $arrayStr += ['end' => $endTime];
                       } else {
-                        $startTime = date('Y-m-d h:i', (strtotime($_timeRaw .' '. $getTime)));
+                        $startTime = date('Y-m-d H:i', (strtotime($_timeRaw .' '. $getTime)));
                         $arrayStr += ['start' => $startTime];
                       }
                       $addEventCal[] = $arrayStr; ?>
@@ -120,7 +120,7 @@ $_closed = $cal->get_closed();
 </div>
 <?php if(!empty($addEventCal)) :?>
 <script>
-var _cal_events = <?php echo json_encode($addEventCal); ?>;
+var _cal_events = <?php echo json_encode($addEventCal); ?>; 
 </script>
 <?php endif ?>
 <div class="more-calendar-block collapse pt-4 fade">

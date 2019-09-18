@@ -845,14 +845,10 @@ $(function() {
         return i;
       },
       formatAMPM = function(hours, minutes) {
-        let hrs = (hours + 24 - 2) % 24;
-        let ampm = hrs >= 12 ? "PM" : "AM";
-        if (hrs == 0) {
-          hrs = 12;
-        } else if (hrs > 12) {
-          hrs = hrs % 12;
-        }
-        return hours + ":" + addZero(minutes) + ampm;
+        hrs = hours ? hours : 12;
+        var hrs = hours > 12 ? hours - 12 : hours;
+        var ampm = hours >= 12 ? "PM" : "AM";
+        return hrs + ":" + addZero(minutes) + ampm;
       };
     var calendar = new Calendar(calendarEl, {
       plugins: [dayGridPlugin, timeGridPlugin, bootstrapPlugin],
