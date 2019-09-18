@@ -820,7 +820,7 @@ $(function() {
             let slug = $(this).attr("aria-controls");
             if ($("#cat-" + slug).length) {
               history.pushState(null, null, "/attractions/" + slug + "/");
-              loadImg($("#cat-" + slug));
+              //loadImg($("#cat-" + slug));
               let index = $("#cat-" + slug).parents(".slick-slide").data("slick-index");
               $(".attractions-slick").slick("slickGoTo", index);
               $("#cat-" + slug).find(".slick-slide:first-child").addClass("slick-current slick-active");
