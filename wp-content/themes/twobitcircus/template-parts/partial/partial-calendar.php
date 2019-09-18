@@ -64,9 +64,10 @@ $_closed = $cal->get_closed();
                         </div>
                         <div class="btn-behind sm">&nbsp;</div>
                       <?php endif ?>
-                        <?php if(!empty($time->link)) :?>
+                      <?php if(!empty($time->link)) :?>
                         </a>
                         <div class="btn-behind sm">&nbsp;</div>
+                      <?php endif ?>
                       <?php endif ?>
                       </div>
                       <?php
