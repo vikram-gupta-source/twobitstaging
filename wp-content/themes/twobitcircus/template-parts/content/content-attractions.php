@@ -78,7 +78,7 @@
                         <div class="slick-media">
                           <?php if(!empty($_video)) :?>
                           <div class="item d-block">
-                            <div class="embed-responsive embed-responsive-16by9" data-video="https://player.vimeo.com/video/<?php echo $_video;?>"></div>
+                            <div class="embed-lazy embed-responsive embed-responsive-16by9" data-video="https://player.vimeo.com/video/<?php echo $_video;?>"></div>
                           </div>
                           <?php endif ?>
                           <?php foreach($gallery as $gal) :?>
