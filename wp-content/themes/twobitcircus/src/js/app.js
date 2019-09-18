@@ -755,41 +755,38 @@ $(function() {
         }
       });
     // First Attraction img
-    loadImg($(".attractions-slick .item-attraction:first-child"));
+    //loadImg($(".attractions-slick .item-attraction:first-child"));
     // Callback Events Handlers
     var initAttraction = function(resize) {
       if (resize === false) {
         $(".attractions-slick")
           .slick(slick_attractions_settings)
-        /*
-        .on("afterChange", function(ev, slick, cur) {
-          let $elSlide = $(slick.$slides.get(cur)).parent().find(".slick-media-nav");
-          if($elSlide.length) {
-            $elSlide.find(".slick-slide[data-slick-index=0]").addClass("slick-current slick-active");
-          }
-        });
-        */
+          .on("afterChange", function(ev, slick, cur) {
+            let $elSlide = $(slick.$slides.get(cur)).parent().find(".slick-media-nav.slick-initialized");
+            if ($elSlide.length) {
+              $elSlide.find(".slick-slide[data-slick-index=0]").addClass("slick-current slick-active");
+            }
+          });
         // Start SHows Slider
         $(".slick-shows")
           .slick(slick_shows_settings)
-        /*
-        .on("beforeChange", function(ev, slick, cur, next) {
-          let $elSlide = $(slick.$slides.get(cur));
-          let $elNxtSlide = $(slick.$slides.get(next));
-          let iframe = $elSlide.find("iframe");
-          if (iframe.length) {
-            let player = new Player(iframe[0]);
-            player.pause();
-          }
-          if ($elNxtSlide.find(".slick-days").length) {
-            $elNxtSlide.find(".slick-days > .slick-list > .slick-track > .slick-slide:first-child").trigger("click");
-          }
-          let slug = $elNxtSlide.parents(".slick-shows").attr("id");
-          let show = $elNxtSlide.find(".item-shows").attr("id");
-          let setSlug = typeof slug !== "undefined" ? slug.replace(/cat-/, "") + "/" : "";
-          let setShow = typeof show !== "undefined" ? show + "/" : "";
-          history.pushState(null, null, "/attractions/" + setSlug + setShow);
-        });*/
+          .on("beforeChange", function(ev, slick, cur, next) {
+            let $elSlide = $(slick.$slides.get(cur));
+            let $elNxtSlide = $(slick.$slides.get(next));
+            let iframe = $elSlide.find("iframe");
+            if (iframe.length) {
+              let player = new Player(iframe[0]);
+              player.pause();
+            }
+            if ($elNxtSlide.find(".slick-days.slick-initialized").length) {
+              $elNxtSlide.find(".slick-days > .slick-list > .slick-track > .slick-slide:first-child").trigger("click");
+            }
+            let slug = $elNxtSlide.parents(".slick-shows").attr("id");
+            let show = $elNxtSlide.find(".item-shows").attr("id");
+            let setSlug = typeof slug !== "undefined" ? slug.replace(/cat-/, "") + "/" : "";
+            let setShow = typeof show !== "undefined" ? show + "/" : "";
+            history.pushState(null, null, "/attractions/" + setSlug + setShow);
+          });
 
         // Append to Filter show
         $("#filters .nav-item .nav-link").on("click", function(e) {
@@ -802,7 +799,7 @@ $(function() {
             let slug = $(this).attr("aria-controls");
             if ($("#cat-" + slug).length) {
               history.pushState(null, null, "/attractions/" + slug + "/");
-              loadImg($("#cat-" + slug));
+              //loadImg($("#cat-" + slug));
               let index = $("#cat-" + slug).parents(".slick-slide").data("slick-index");
               $(".attractions-slick").slick("slickGoTo", index);
               $("#cat-" + slug).find(".slick-slide:first-child").addClass("slick-current slick-active");
