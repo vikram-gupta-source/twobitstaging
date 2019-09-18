@@ -809,38 +809,6 @@ $(function() {
             $(".available-dates .cta-btn").removeClass("show");
           });
 
-        //Extend Days slick
-        $(".slick-days .slick-slide").on("click", function(evt) {
-          var $_this = $(this);
-          var timer = 0;
-          timer = setTimeout(function() {
-            clearTimeout(timer);
-            let ht = $_this.parents(".slick-shows").find("> .slick-list > .slick-track").outerHeight();
-            let newHt = parseInt(ht + 40) + "px";
-            $_this.parents(".slick-shows").find("> .slick-list").height(newHt);
-            $(".attractions-slick > .slick-list").height(newHt);
-          }, 400);
-        });
-
-        // Handlers Show
-        $(".show-content-block .btn-group .btn-twobit").on("click", function(evt) {
-          if ($(this).hasClass("next")) {
-            $(this).parents(".slick-shows").slick("slickNext");
-          } else {
-            $(this).parents(".slick-shows").slick("slickPrev");
-          }
-        });
-
-        // Confirm Purcahse
-        $(".slick-times .btn-twobit").on("click", function(evt) {
-          evt.preventDefault();
-          if ($(this).hasClass("btn-disabled")) return false;
-          let href = $(this).prop("href");
-          $(this).parents(".item-time").find(".btn-twobit").removeClass("btn-green").addClass("btn-white");
-          $(this).removeClass("btn-white").addClass("btn-green");
-          $(this).parents(".show-content-block").find(".available-dates .cta-btn").addClass("show").find(".btn-twobit").prop("href", href);
-        });
-
       } else {
         $(".slick-shows").slick("reinit");
         $(".attractions-slick").slick("reinit");
@@ -849,6 +817,38 @@ $(function() {
         $(".slick-media").slick("reinit");
         $(".slick-media-nav").slick("reinit");
       }
+
+      //Extend Days slick
+      $(".slick-days .slick-slide").on("click", function(evt) {
+        var $_this = $(this);
+        var timer = 0;
+        timer = setTimeout(function() {
+          clearTimeout(timer);
+          let ht = $_this.parents(".slick-shows").find("> .slick-list > .slick-track").outerHeight();
+          let newHt = parseInt(ht + 40) + "px";
+          $_this.parents(".slick-shows").find("> .slick-list").height(newHt);
+          $(".attractions-slick > .slick-list").height(newHt);
+        }, 400);
+      });
+
+      // Handlers Show
+      $(".show-content-block .btn-group .btn-twobit").on("click", function(evt) {
+        if ($(this).hasClass("next")) {
+          $(this).parents(".slick-shows").slick("slickNext");
+        } else {
+          $(this).parents(".slick-shows").slick("slickPrev");
+        }
+      });
+
+      // Confirm Purcahse
+      $(".slick-times .btn-twobit").on("click", function(evt) {
+        evt.preventDefault();
+        if ($(this).hasClass("btn-disabled")) return false;
+        let href = $(this).prop("href");
+        $(this).parents(".item-time").find(".btn-twobit").removeClass("btn-green").addClass("btn-white");
+        $(this).removeClass("btn-white").addClass("btn-green");
+        $(this).parents(".show-content-block").find(".available-dates .cta-btn").addClass("show").find(".btn-twobit").prop("href", href);
+      });
 
       // Append to Filter show
       $("#filters .nav-item .nav-link").on("click", function(e) {
