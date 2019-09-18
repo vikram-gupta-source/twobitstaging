@@ -510,13 +510,6 @@ $(function() {
                     )
                     .trigger("click");
                 }
-                let slug = $elSlide.parents(".slick-shows").attr("id");
-                let show = $elSlide.find(".item-shows").attr("id");
-                let setSlug =
-                  typeof slug !== "undefined" ?
-                  slug.replace(/cat-/, "") + "/" :
-                  "";
-                let setShow = typeof show !== "undefined" ? show + "/" : "";
               });
             $(".slick-media")
               .slick(slick_media_settings);
