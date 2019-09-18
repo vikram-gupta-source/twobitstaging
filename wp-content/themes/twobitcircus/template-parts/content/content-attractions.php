@@ -74,7 +74,7 @@
                         <?php endif ?>
                       </div>
                       <?php if(!empty($gallery)) :?>
-                      <div class="show-asset-wrapper">
+                      <div class="show-asset-wrapper d-none">
                         <div class="slick-media">
                           <?php if(!empty($_video)) :?>
                           <div class="item d-block">
