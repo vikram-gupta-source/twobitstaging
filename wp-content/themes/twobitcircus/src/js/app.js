@@ -204,92 +204,6 @@ $(function() {
       }
     ]
   };
-  var slick_filter_settings = {
-    dots: false,
-    infinite: false,
-    speed: 600,
-    arrows: false,
-    slidesToShow: 7,
-    slidesToScroll: 1,
-    responsive: [{
-        breakpoint: 1199,
-        settings: {
-          arrows: true,
-          slidesToShow: 6
-        }
-      },
-      {
-        breakpoint: 991,
-        settings: {
-          arrows: true,
-          slidesToShow: 4
-        }
-      },
-      {
-        breakpoint: 767,
-        settings: {
-          arrows: true,
-          slidesToShow: 3
-        }
-      },
-      {
-        breakpoint: 500,
-        settings: {
-          arrows: true,
-          slidesToShow: 2
-        }
-      }
-    ]
-  };
-  var slick_attractions_settings = {
-    infinite: false,
-    dots: false,
-    swipe: false,
-    touchMove: false,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    adaptiveHeight: true,
-    fade: true
-  };
-  var slick_shows_settings = {
-    dots: false,
-    swipe: false,
-    touchMove: false,
-    slidesToShow: 1,
-    arrows: true,
-    adaptiveHeight: true,
-    fade: true,
-    responsive: [{
-      breakpoint: 767,
-      settings: {
-        arrows: false
-      }
-    }]
-  };
-  var slick_feed_settings = {
-    infinite: false,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    arrows: false,
-    responsive: [{
-        breakpoint: 1199,
-        settings: {
-          dots: true,
-          slidesToShow: 2,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 530,
-        settings: {
-          dots: true,
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  };
   var slick_social_settings = {
     infinite: true,
     slidesToShow: 5,
@@ -329,58 +243,6 @@ $(function() {
       }
     ]
   };
-  var slick_days_settings = {
-    infinite: false,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    arrows: true,
-    asNavFor: ".slick-times",
-    focusOnSelect: true
-  };
-  var slick_times_settings = {
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    adaptiveHeight: true,
-    arrows: false,
-    swipe: false,
-    touchMove: false,
-    fade: true
-  };
-  var slick_media_nav_settings = {
-    infinite: true,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    arrows: false,
-    asNavFor: ".slick-media",
-    focusOnSelect: true,
-    responsive: [{
-        breakpoint: 1199,
-        settings: {
-          slidesToShow: 4
-        }
-      },
-      {
-        breakpoint: 991,
-        settings: {
-          settings: "unslick"
-        }
-      }
-    ]
-  };
-  var slick_media_settings = {
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    asNavFor: ".slick-media-nav",
-    responsive: [{
-      breakpoint: 991,
-      settings: {
-        asNavFor: null
-      }
-    }]
-  };
 
   imagesLoaded(
     "main", {
@@ -416,50 +278,7 @@ $(function() {
                 );
             }
           });
-        var firstEmbed = $(".youtube .grid-feed:first .embed-data").data("src");
-        $(".youtube .grid-feed:first .embed-data").append(
-          '<iframe class="embed-responsive-item" src="' +
-          firstEmbed +
-          '"></iframe>'
-        );
       }
-
-      $("#filters .navbar-nav")
-        .slick({
-          slidesToShow: 7,
-          slidesToScroll: 1,
-          focusOnSelect: true,
-          variableWidth: true,
-          responsive: [{
-              breakpoint: 991,
-              settings: {
-                variableWidth: false,
-                arrows: true,
-                centerMode: true,
-                slidesToShow: 3
-              }
-            },
-            {
-              breakpoint: 767,
-              settings: {
-                variableWidth: false,
-                arrows: true,
-                centerMode: true,
-                slidesToShow: 1
-              }
-            }
-          ]
-        })
-        .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
-          let $elSlide = $(slick.$slides[nextSlide]);
-          if ($(window).width() < 992) {
-            $elSlide
-              .addClass("item-mobile")
-              .find(".nav-item .nav-link")
-              .trigger("click");
-          }
-        });
-
       if ($("#news-content").length) {
         $(".slick-media").slick({
           infinite: true,
@@ -762,6 +581,148 @@ $(function() {
     });
   }
 
+
+  var slick_days_settings = {
+    infinite: false,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: true,
+    asNavFor: ".slick-times",
+    focusOnSelect: true
+  };
+  var slick_times_settings = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    arrows: false,
+    swipe: false,
+    touchMove: false,
+    fade: true
+  };
+  var slick_media_nav_settings = {
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: false,
+    asNavFor: ".slick-media",
+    focusOnSelect: true,
+    responsive: [{
+        breakpoint: 1199,
+        settings: {
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          settings: "unslick"
+        }
+      }
+    ]
+  };
+  var slick_media_settings = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    asNavFor: ".slick-media-nav",
+    responsive: [{
+      breakpoint: 991,
+      settings: {
+        asNavFor: null
+      }
+    }]
+  };
+
+  var slick_filter_settings = {
+    dots: false,
+    infinite: false,
+    speed: 600,
+    arrows: false,
+    slidesToShow: 7,
+    slidesToScroll: 1,
+    responsive: [{
+        breakpoint: 1199,
+        settings: {
+          arrows: true,
+          slidesToShow: 6
+        }
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          arrows: true,
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          arrows: true,
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          arrows: true,
+          slidesToShow: 2
+        }
+      }
+    ]
+  };
+  var slick_attractions_settings = {
+    infinite: false,
+    dots: false,
+    swipe: false,
+    touchMove: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    adaptiveHeight: true,
+    fade: true
+  };
+  var slick_shows_settings = {
+    dots: false,
+    swipe: false,
+    touchMove: false,
+    slidesToShow: 1,
+    arrows: true,
+    adaptiveHeight: true,
+    fade: true,
+    responsive: [{
+      breakpoint: 767,
+      settings: {
+        arrows: false
+      }
+    }]
+  };
+  var filter_navbar_settings = {
+    slidesToShow: 7,
+    slidesToScroll: 1,
+    focusOnSelect: true,
+    variableWidth: true,
+    responsive: [{
+        breakpoint: 991,
+        settings: {
+          variableWidth: false,
+          arrows: true,
+          centerMode: true,
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          variableWidth: false,
+          arrows: true,
+          centerMode: true,
+          slidesToShow: 1
+        }
+      }
+    ]
+  };
   // Handle all Attraction Events
   if ($("#attractions-blocks").length) {
     var allowStart = false;
@@ -786,6 +747,19 @@ $(function() {
     $('[data-tool-toggle="tooltip"]').tooltip({
       html: true
     });
+
+    $("#filters .navbar-nav")
+      .slick(filter_navbar_settings)
+      .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
+        let $elSlide = $(slick.$slides[nextSlide]);
+        if ($(window).width() < 992) {
+          $elSlide
+            .addClass("item-mobile")
+            .find(".nav-item .nav-link")
+            .trigger("click");
+        }
+      });
+
 
     // First Attraction img
     loadImg($(".attractions-slick .item-attraction:first-child"));
