@@ -20,6 +20,7 @@ import Player from "@vimeo/player";
 
 var isIOS = navigator.userAgent.match(/ipad|ipod|iphone|macintosh/gi);
 var isIOSPhone = navigator.userAgent.match(/ipad|ipod|iphone/gi);
+var isMobile = navigator.userAgent.match(/ipad|ipod|iphone|android/gi);
 
 $(function() {
   //Wait for Preload Sprite before Starting

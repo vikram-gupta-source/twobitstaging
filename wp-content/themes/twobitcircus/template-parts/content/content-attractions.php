@@ -185,9 +185,13 @@
                             <div id="collapse-<?php echo $show->ID;?>-<?php echo $date;?>" class="collapse" data-parent="#accordion-<?php echo $show->ID;?>">
                               <div class="card-body">
                                 <?php foreach($tickets as $timeInfo) : ?>
-                                <?php if(!preg_match('/(Out)/', $timeInfo->ticket)): ?>
+
+                                <?php if($timeInfo->outstock != 1): ?>
                                   <div class="cta-btn"><a class="btn btn-twobit btn-green btn-sm" href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" target="_blank" rel="noopener noreferrer"><span><?php echo $timeInfo->ticket;?></span></a><div class="btn-behind sm">&nbsp;</div></div>
+                                <?php else :?>
+                                  <div class="cta-btn"><a class="btn btn-twobit btn-sm btn-disabled"><span><?php echo $timeInfo->ticket;?></span></a><div class="btn-behind sm">&nbsp;</div></div>
                                 <?php endif ?>
+                                     
                                 <?php endforeach ?>
                               </div>
                             </div>
