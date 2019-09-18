@@ -8,7 +8,9 @@ import "slick-carousel";
 import imagesLoaded from "imagesloaded";
 import parallax from "./jquery.parallax.js";
 import Isotope from "isotope-layout/dist/isotope.pkgd.min";
-import {Calendar} from "@fullcalendar/core";
+import {
+  Calendar
+} from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
@@ -31,9 +33,9 @@ $(function() {
       if ($(".inview").length) {
         $(".inview").each(function() {
           let delay = $(this).data("offset") ? $(this).data("offset") : "90%";
-          let easeType = $(this).data("ease")
-            ? $(this).data("ease")
-            : "fadeInUp";
+          let easeType = $(this).data("ease") ?
+            $(this).data("ease") :
+            "fadeInUp";
           let waypoint = new Waypoint({
             element: this,
             handler: function(direction) {
@@ -58,8 +60,7 @@ $(function() {
   // Intro for About
   if ($aboutElem.length) {
     imagesLoaded(
-      "#about-intro",
-      {
+      "#about-intro", {
         background: true
       },
       function() {
@@ -126,8 +127,7 @@ $(function() {
     arrows: true,
     slidesToShow: 4,
     slidesToScroll: 4,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           slidesToShow: 3,
@@ -158,20 +158,18 @@ $(function() {
     arrows: false,
     variableWidth: true,
     lazyLoad: "ondemand",
-    responsive: [
-      {
-        breakpoint: 767,
-        settings: {
-          dots: true,
-          arrows: false,
-          centerMode: false,
-          variableWidth: false,
-          adaptiveHeight: true,
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
+    responsive: [{
+      breakpoint: 767,
+      settings: {
+        dots: true,
+        arrows: false,
+        centerMode: false,
+        variableWidth: false,
+        adaptiveHeight: true,
+        slidesToShow: 1,
+        slidesToScroll: 1
       }
-    ]
+    }]
   };
   var slick_event_settings = {
     dots: true,
@@ -182,8 +180,7 @@ $(function() {
     slidesToScroll: 4,
     adaptiveHeight: true,
     lazyLoad: "ondemand",
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           slidesToShow: 3,
@@ -214,8 +211,7 @@ $(function() {
     arrows: false,
     slidesToShow: 7,
     slidesToScroll: 1,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           arrows: true,
@@ -264,22 +260,19 @@ $(function() {
     arrows: true,
     adaptiveHeight: true,
     fade: true,
-    responsive: [
-      {
-        breakpoint: 767,
-        settings: {
-          arrows: false
-        }
+    responsive: [{
+      breakpoint: 767,
+      settings: {
+        arrows: false
       }
-    ]
+    }]
   };
   var slick_feed_settings = {
     infinite: false,
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: false,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           dots: true,
@@ -304,8 +297,7 @@ $(function() {
     arrows: false,
     dots: true,
     lazyload: "ondemand",
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           slidesToShow: 4,
@@ -360,8 +352,7 @@ $(function() {
     arrows: false,
     asNavFor: ".slick-media",
     focusOnSelect: true,
-    responsive: [
-      {
+    responsive: [{
         breakpoint: 1199,
         settings: {
           slidesToShow: 4
@@ -385,8 +376,7 @@ $(function() {
   };
 
   imagesLoaded(
-    "main",
-    {
+    "main", {
       background: true
     },
     function() {
@@ -414,16 +404,16 @@ $(function() {
                 .find(".embed-data")
                 .append(
                   '<iframe class="embed-responsive-item" src="' +
-                    srcid +
-                    '"></iframe>'
+                  srcid +
+                  '"></iframe>'
                 );
             }
           });
         var firstEmbed = $(".youtube .grid-feed:first .embed-data").data("src");
         $(".youtube .grid-feed:first .embed-data").append(
           '<iframe class="embed-responsive-item" src="' +
-            firstEmbed +
-            '"></iframe>'
+          firstEmbed +
+          '"></iframe>'
         );
       }
 
@@ -433,8 +423,7 @@ $(function() {
           slidesToScroll: 1,
           focusOnSelect: true,
           variableWidth: true,
-          responsive: [
-            {
+          responsive: [{
               breakpoint: 991,
               settings: {
                 variableWidth: false,
@@ -488,6 +477,10 @@ $(function() {
               $(this).removeAttr("data-img");
             });
           }
+          if ($elm.find(".embed-lazy").length) {
+            let url = $elm.find(".embed-lazy").data('video');
+            $elm.find(".embed-lazy").removeClass('embed-lazy').html('<iframe src="' + url + '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>');
+          }
         };
         // ToolTips
         $('[data-tool-toggle="tooltip"]').tooltip({
@@ -529,9 +522,9 @@ $(function() {
                 let slug = $elSlide.parents(".slick-shows").attr("id");
                 let show = $elSlide.find(".item-shows").attr("id");
                 let setSlug =
-                  typeof slug !== "undefined"
-                    ? slug.replace(/cat-/, "") + "/"
-                    : "";
+                  typeof slug !== "undefined" ?
+                  slug.replace(/cat-/, "") + "/" :
+                  "";
                 let setShow = typeof show !== "undefined" ? show + "/" : "";
                 history.pushState(
                   null,
@@ -732,8 +725,7 @@ $(function() {
   // Handle Arrow Scroll Top
   $("#return-to-top").on("click", function(evt) {
     evt.preventDefault();
-    $("html, body").animate(
-      {
+    $("html, body").animate({
         scrollTop: 0
       },
       "slow"
@@ -926,23 +918,21 @@ $(function() {
     var _h = $("#about-header").height();
     var controller = new ScrollMagic.Controller();
     var scene = new ScrollMagic.Scene({
-      triggerElement: "#trigger-element",
-      offset: -_h / 2
-    })
+        triggerElement: "#trigger-element",
+        offset: -_h / 2
+      })
       .on("start end", function(e) {
-        if (e.scrollDirection == "FORWARD") {
-        }
+        if (e.scrollDirection == "FORWARD") {}
       })
       .setClassToggle("#about-header", "scrolled")
       .addTo(controller);
 
     var scene2 = new ScrollMagic.Scene({
-      triggerElement: "#trigger-element",
-      offset: _h / 2
-    })
+        triggerElement: "#trigger-element",
+        offset: _h / 2
+      })
       .on("start", function(e) {
-        if (e.scrollDirection == "REVERSE") {
-        }
+        if (e.scrollDirection == "REVERSE") {}
       })
       .setClassToggle("#about-header", "scrolled")
       .addTo(controller);
@@ -988,8 +978,7 @@ $(function() {
       slidesToShow: 4,
       slidesToScroll: 1,
       adaptiveHeight: true,
-      responsive: [
-        {
+      responsive: [{
           breakpoint: 1499,
           settings: {
             arrows: true,
