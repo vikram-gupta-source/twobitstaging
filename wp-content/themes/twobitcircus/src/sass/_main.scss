@@ -300,7 +300,18 @@ a {
   padding-top: 4em;
   padding-bottom: 4em;
 }
-
+.slick-track,
+.slick-slide,
+.slick-slide img {
+  transform: translate3d(0, 0, 0);
+}
+.slick-slider .slick-list {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
 .slick-slider {
   .slick-prev,
   .slick-next {

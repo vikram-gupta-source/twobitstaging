@@ -61,6 +61,8 @@
                 <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
                 <?php $info = filter_locations(get_field('information', $show->ID));?>
                 <?php $_cat = get_the_category($show->ID);?>
+                <?php $video = get_field('video_embed', $show->ID);?>
+                <?php $videoThumb = videoLink($video);?>
                 <?php $gallery = get_field('gallery', $show->ID);?>
                 <div id="<?php echo sanitize_title($show->post_title);?>" class="item-shows">
                   <div class="row">
@@ -74,12 +76,30 @@
                       <?php if(!empty($gallery)) :?>
                       <div class="show-asset-wrapper">
                         <div class="slick-media">
+                          <?php if(!empty($video)) :?>
+                          <div class="item d-block">
+                            <div class="embed-lazy embed-responsive embed-responsive-16by9" data-video="https://player.vimeo.com/video/<?php echo $video;?>"></div>
+                          </div>
+                          <?php endif ?>
                           <?php foreach($gallery as $gal) :?>
                           <div class="item d-block">
-                            <div class="img d-block"><img class="img-fluid w-100" src="<?php echo $gal['url']; ?>" alt="<?php echo $gal['title']; ?>"/></div>
+                            <div class="img d-block pre-load-img" data-img="<?php echo $gal['url']; ?>"><img class="img-fluid w-100 fade" alt="<?php echo $gal['title']; ?>"/></div>
                           </div>
                           <?php endforeach ?>
-                        </div> 
+                        </div>
+                        <?php $mediaAssetCnt = count($gallery) + (!empty($video) ? 1 : 0);?>
+                        <?php if($mediaAssetCnt > 1):?>
+                        <div class="overlay">
+                          <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
+                            <?php if(!empty($videoThumb)) :?>
+                            <div class="thumb pre-load-img" data-img="<?php echo $videoThumb;?>" ><img class="img-fluid fade" alt="<?php echo $show->post_title;?>"/></div>
+                            <?php endif ?>
+                            <?php foreach($gallery as $gal) :?>
+                            <div class="thumb pre-load-img" data-img="<?php echo $gal['sizes']['medium']; ?>" ><img class="img-fluid fade" alt="<?php echo $gal['title']; ?>"/></div>
+                            <?php endforeach ?>
+                          </div>
+                        </div>
+                        <?php endif ?>
                       </div>
                       <?php endif ?>
                       <?php if(isset($_cat[0])) :?>

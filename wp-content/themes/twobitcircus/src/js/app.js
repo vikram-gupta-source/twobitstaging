@@ -16,7 +16,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
 import ScrollMagic from "scrollmagic/scrollmagic/minified/ScrollMagic.min.js";
 import addIndicators from "scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js";
-//import Player from "@vimeo/player";
+import Player from "@vimeo/player";
 
 var isIOS = navigator.userAgent.match(/ipad|ipod|iphone|macintosh/gi);
 var isIOSPhone = navigator.userAgent.match(/ipad|ipod|iphone/gi);
@@ -373,7 +373,8 @@ $(function() {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true
+    arrows: true,
+    asNavFor: ".slick-media-nav"
   };
 
   imagesLoaded(
@@ -394,7 +395,28 @@ $(function() {
         $(".slick-calendar").slick(slick_calendar_settings);
       }
       if ($(".slick-social").length) {
-        $(".slick-social").slick(slick_social_settings);
+        $(".slick-social")
+          .slick(slick_social_settings)
+          .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
+            var srcid = $(slick.$slides.get(nextSlide))
+              .find(".embed-data")
+              .data("src");
+            if (srcid) {
+              $(slick.$slides.get(nextSlide))
+                .find(".embed-data")
+                .append(
+                  '<iframe class="embed-responsive-item" src="' +
+                  srcid +
+                  '"></iframe>'
+                );
+            }
+          });
+        var firstEmbed = $(".youtube .grid-feed:first .embed-data").data("src");
+        $(".youtube .grid-feed:first .embed-data").append(
+          '<iframe class="embed-responsive-item" src="' +
+          firstEmbed +
+          '"></iframe>'
+        );
       }
 
       $("#filters .navbar-nav")
@@ -457,6 +479,10 @@ $(function() {
               $(this).removeAttr("data-img");
             });
           }
+          if ($elm.find(".embed-lazy").length) {
+            let url = $elm.find(".embed-lazy").data('video');
+            $elm.find(".embed-lazy").removeClass('embed-lazy').html('<iframe src="' + url + '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>');
+          }
         };
         // ToolTips
         $('[data-tool-toggle="tooltip"]').tooltip({
@@ -464,14 +490,28 @@ $(function() {
         });
 
         // First Attraction img
-        //loadImg($(".attractions-slick .item-attraction:first-child"));
+        loadImg($(".attractions-slick .item-attraction:first-child"));
 
         var initAttraction = function(resize) {
           if (resize === false) {
             $(".attractions-slick")
               .slick(slick_attractions_settings)
+              .on("afterChange", function(ev, slick, cur) {
+                let $elSlide = $(slick.$slides.get(cur));
+                $elSlide
+                  .parent()
+                  .find(".slick-media-nav .slick-slide[data-slick-index=0]")
+                  .addClass("slick-current slick-active");
+              });
             $(".slick-shows")
               .slick(slick_shows_settings)
+              .on("beforeChange", function(ev, slick, cur, next) {
+                let iframe = $(slick.$slides.get(cur)).find("iframe");
+                if (iframe.length) {
+                  let player = new Player(iframe[0]);
+                  player.pause();
+                }
+              })
               .on("afterChange", function(ev, slick, cur) {
                 let $elSlide = $(slick.$slides.get(cur));
                 if ($elSlide.find(".slick-days").length) {
@@ -494,7 +534,16 @@ $(function() {
                   "/attractions/" + setSlug + setShow
                 );
               });
-            $(".slick-media").slick(slick_media_settings);
+            $(".slick-media")
+              .slick(slick_media_settings)
+              .on("beforeChange", function(ev, slick, cur, next) {
+                let iframe = $(slick.$slides.get(cur)).find("iframe");
+                if (iframe.length) {
+                  let player = new Player(iframe[0]);
+                  player.pause();
+                }
+              });
+            $(".slick-media-nav").slick(slick_media_nav_settings);
             $(".slick-days").slick(slick_days_settings);
             $(".slick-times")
               .slick(slick_times_settings)
@@ -505,6 +554,7 @@ $(function() {
             $(".slick-shows").slick("reinit");
             $(".attractions-slick").slick("reinit");
             $(".slick-media").slick("reinit");
+            $(".slick-media-nav").slick("reinit");
             $(".slick-days").slick("reinit");
             $(".slick-times").slick("reinit");
           }
@@ -519,7 +569,7 @@ $(function() {
               let slug = $(this).attr("aria-controls");
               if ($("#cat-" + slug).length) {
                 history.pushState(null, null, "/attractions/" + slug + "/");
-                //loadImg($("#cat-" + slug));
+                loadImg($("#cat-" + slug));
                 let index = $("#cat-" + slug)
                   .parents(".slick-slide")
                   .data("slick-index");
@@ -532,6 +582,14 @@ $(function() {
                     ".slick-days > .slick-list > .slick-track > .slick-slide:first-child"
                   )
                   .trigger("click");
+                if ($(".slick-media").find("iframe").length) {
+                  $(".slick-media")
+                    .find("iframe")
+                    .each(function(kf, fr) {
+                      let player = new Player($(this)[0]);
+                      player.pause();
+                    });
+                }
               }
             }
           });
@@ -556,6 +614,9 @@ $(function() {
                 $("#" + show)
                   .parents(".slick-shows")
                   .slick("slickGoTo", index);
+                $("#" + show)
+                  .find(".slick-media-nav .slick-slide[data-slick-index=0]")
+                  .addClass("slick-current slick-active");
               }
             }
           });
@@ -622,7 +683,7 @@ $(function() {
         $(window).on("resize", function() {
           clearTimeout(resizeAttract);
           resizeAttract = setTimeout(function() {
-            //initAttraction(true);
+            initAttraction(true);
           }, 500);
         });
 
