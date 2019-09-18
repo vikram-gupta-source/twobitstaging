@@ -723,9 +723,14 @@ $(function() {
       }
     ]
   };
+
   // Handle all Attraction Events
-  if ($("#attractions-blocks").length) {
-    var allowStart = false;
+  if ($("#attractions-block").length) {
+    // ToolTips
+    $('[data-tool-toggle="tooltip"]').tooltip({
+      html: true
+    });
+    // Preload All Images and Set Video
     var loadImg = function($elm) {
       if ($elm.find(".pre-load-img").length) {
         $elm.find(".pre-load-img").each(function() {
@@ -743,11 +748,8 @@ $(function() {
         $elm.find(".embed-lazy").removeClass('embed-lazy').html('<iframe src="' + url + '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>');
       }
     };
-    // ToolTips
-    $('[data-tool-toggle="tooltip"]').tooltip({
-      html: true
-    });
 
+    // Hnadle Top NAV BAR
     $("#filters .navbar-nav")
       .slick(filter_navbar_settings)
       .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
@@ -759,10 +761,21 @@ $(function() {
             .trigger("click");
         }
       });
-
-
     // First Attraction img
     loadImg($(".attractions-slick .item-attraction:first-child"));
+
+  }
+
+
+  // Handle all Attraction Events
+  if ($("#attractions-blocks").length) {
+
+
+
+
+
+
+
 
     var initAttraction = function(resize) {
       if (resize === false) {
