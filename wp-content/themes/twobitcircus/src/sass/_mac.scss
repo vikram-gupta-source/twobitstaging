@@ -50,5 +50,31 @@ body.is-mac {
     #attractions .showtimes {
       display: block !important;
     }
+
+    .show-asset-wrapper {
+      .slick-media {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        display: flex;
+        .item {
+          margin: 0 1px;
+          min-width: 85vw;
+          max-width: 730px;
+        }
+        &::-webkit-scrollbar {
+          background: transparent;
+          width: 6px;
+          height: 6px;
+          opacity: 0.7;
+        }
+        &::-webkit-scrollbar-thumb {
+          box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.15);
+          background: #d1d5db;
+          border-radius: 10px;
+        }
+      }
+    }
   }
 }
