@@ -181,11 +181,6 @@
     }
   }
   .slick-shows {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    &.slick-initialized {
-      opacity: 1;
-    }
     > .slick-list {
       min-height: 600px;
     }

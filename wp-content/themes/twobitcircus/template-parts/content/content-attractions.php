@@ -74,7 +74,7 @@
                         <?php endif ?>
                       </div>
                       <?php if(!empty($gallery)) :?>
-                      <div class="show-asset-wrapper d-none">
+                      <div class="show-asset-wrapper">
                         <div class="slick-media">
                           <?php if(!empty($_video)) :?>
                           <div class="item d-block">
@@ -89,7 +89,7 @@
                         </div>
                         <?php $mediaAssetCnt = count($gallery) + (!empty($_video) ? 1 : 0);?>
                         <?php if($mediaAssetCnt > 1):?>
-                        <div class="overlay">
+                        <div class="overlay d-none d-lg-none">
                           <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
                             <?php if(!empty($videoThumb)) :?>
                             <div class="thumb"><img class="img-fluid" src="<?php echo $videoThumb;?>" alt="<?php echo $show->post_title;?>"/></div>
