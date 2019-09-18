@@ -83,19 +83,19 @@
                           <?php endif ?>
                           <?php foreach($gallery as $gal) :?>
                           <div class="item d-block">
-                            <div class="img d-block"><img src="<?php echo $gal['url']; ?>" class="img-fluid w-100" alt="<?php echo $gal['title']; ?>"/></div>
+                            <div class="img d-block pre-load-img" data-img="<?php echo $gal['url']; ?>"><img class="img-fluid w-100" alt="<?php echo $gal['title']; ?>"/></div>
                           </div>
                           <?php endforeach ?>
                         </div>
                         <?php $mediaAssetCnt = count($gallery) + (!empty($_video) ? 1 : 0);?>
                         <?php if($mediaAssetCnt > 1):?>
-                        <div class="overlay d-none d-lg-block">
+                        <div class="overlay">
                           <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
                             <?php if(!empty($videoThumb)) :?>
-                            <div class="thumb"><img class="img-fluid" src="<?php echo $videoThumb;?>" alt="<?php echo $show->post_title;?>"/></div>
+                            <div class="thumb pre-load-img" data-img="<?php echo $videoThumb; ?>"><img class="img-fluid" alt="<?php echo $show->post_title;?>"/></div>
                             <?php endif ?>
                             <?php foreach($gallery as $gal) :?>
-                            <div class="thumb"><img class="img-fluid" src="<?php echo $gal['sizes']['medium']; ?>" alt="<?php echo $gal['title']; ?>"/></div>
+                            <div class="thumb pre-load-img" data-img="<?php echo $gal['sizes']['medium']; ?>"><img class="img-fluid" alt="<?php echo $gal['title']; ?>"/></div>
                             <?php endforeach ?>
                           </div>
                         </div>

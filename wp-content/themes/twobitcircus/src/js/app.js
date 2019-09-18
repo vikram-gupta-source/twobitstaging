@@ -758,7 +758,7 @@ $(function() {
         }
       });
     // First Attraction img
-    //loadImg($(".attractions-slick .item-attraction:first-child"));
+    loadImg($(".attractions-slick .item-attraction:first-child"));
     // Callback Events Handlers
     var initAttraction = function(resize) {
       if (resize === false) {
