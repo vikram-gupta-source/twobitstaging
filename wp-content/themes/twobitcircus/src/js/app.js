@@ -763,7 +763,23 @@ $(function() {
       });
     // First Attraction img
     loadImg($(".attractions-slick .item-attraction:first-child"));
-
+    // Callback Events Handlers
+    var initAttraction = function(resize) {
+      if (resize === false) {
+        $(".attractions-slick")
+          .slick(slick_attractions_settings)
+        /*
+        .on("afterChange", function(ev, slick, cur) {
+          let $elSlide = $(slick.$slides.get(cur));
+          $elSlide
+            .parent()
+            .find(".slick-media-nav .slick-slide[data-slick-index=0]")
+            .addClass("slick-current slick-active");
+        });
+        */
+      }
+    };
+    initAttraction(false);
   }
 
 
