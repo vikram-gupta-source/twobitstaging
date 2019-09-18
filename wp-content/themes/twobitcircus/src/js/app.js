@@ -810,12 +810,24 @@ $(function() {
           });
 
       } else {
-        $(".slick-shows").slick("reinit");
-        $(".attractions-slick").slick("reinit");
-        $(".slick-days").slick("reinit");
-        $(".slick-times").slick("reinit");
-        $(".slick-media").slick("reinit");
-        $(".slick-media-nav").slick("reinit");
+        if (!$(".attractions-slick").hasClass('slick-initialized')) {
+          $(".attractions-slick").slick(slick_attractions_settings);
+        }
+        if (!$(".slick-shows").hasClass('slick-initialized')) {
+          $(".slick-shows").slick(slick_shows_settings);
+        }
+        if (!$(".slick-media").hasClass('slick-initialized')) {
+          $(".slick-media").slick(slick_media_settings);
+        }
+        if (!$(".slick-media-nav").hasClass('slick-initialized')) {
+          $(".slick-media-nav").slick(slick_media_nav_settings);
+        }
+        if (!$(".slick-days").hasClass('slick-initialized')) {
+          $(".slick-days").slick(slick_days_settings);
+        }
+        if (!$(".slick-times").hasClass('slick-initialized')) {
+          $(".slick-times").slick(slick_times_settings);
+        }
       }
 
       //Extend Days slick
