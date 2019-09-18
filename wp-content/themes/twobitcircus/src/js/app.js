@@ -581,14 +581,19 @@ $(function() {
     });
   }
 
-
   var slick_days_settings = {
     infinite: false,
     slidesToShow: 5,
     slidesToScroll: 1,
     arrows: true,
     asNavFor: ".slick-times",
-    focusOnSelect: true
+    focusOnSelect: true,
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        settings: "unslick"
+      }
+    }]
   };
   var slick_times_settings = {
     infinite: true,
@@ -598,7 +603,13 @@ $(function() {
     arrows: false,
     swipe: false,
     touchMove: false,
-    fade: true
+    fade: true,
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        settings: "unslick"
+      }
+    }]
   };
   var slick_media_nav_settings = {
     infinite: true,
@@ -614,7 +625,7 @@ $(function() {
         }
       },
       {
-        breakpoint: 991,
+        breakpoint: 768,
         settings: {
           settings: "unslick"
         }
@@ -628,9 +639,9 @@ $(function() {
     arrows: true,
     asNavFor: ".slick-media-nav",
     responsive: [{
-      breakpoint: 991,
+      breakpoint: 768,
       settings: {
-        asNavFor: null
+        settings: "unslick"
       }
     }]
   };
@@ -787,25 +798,7 @@ $(function() {
             let setShow = typeof show !== "undefined" ? show + "/" : "";
             history.pushState(null, null, "/attractions/" + setSlug + setShow);
           });
-        /*
-            $(".slick-media")
-              .slick(slick_media_settings)
-              .on("beforeChange", function(ev, slick, cur, next) {
-                let iframe = $(slick.$slides.get(cur)).find("iframe");
-                if (iframe.length) {
-                  let player = new Player(iframe[0]);
-                  player.pause();
-                }
-              });
-            $(".slick-media-nav").slick(slick_media_nav_settings);
-            $(".slick-days").slick(slick_days_settings);
-            $(".slick-times")
-              .slick(slick_times_settings)
-              .on("beforeChange", function(ev, slick, cur, next) {
-                $(".available-dates .cta-btn").removeClass("show");
-              });
-        */
-        /*
+
         $(".slick-media")
           .slick(slick_media_settings)
           .on("beforeChange", function(ev, slick, cur, next) {
@@ -823,7 +816,7 @@ $(function() {
           .on("beforeChange", function(ev, slick, cur, next) {
             $(".available-dates .cta-btn").removeClass("show");
           });
-          */
+
         // Append to Filter show
         $("#filters .nav-item .nav-link").on("click", function(e) {
           e.preventDefault(e);
@@ -904,12 +897,10 @@ $(function() {
       } else {
         $(".slick-shows").slick("reinit");
         $(".attractions-slick").slick("reinit");
-        //$(".slick-days").slick("reinit");
-        //$(".slick-times").slick("reinit");
-        /*
+        $(".slick-days").slick("reinit");
+        $(".slick-times").slick("reinit");
         $(".slick-media").slick("reinit");
         $(".slick-media-nav").slick("reinit");
-        */
       }
     };
 
