@@ -321,8 +321,10 @@ $(function() {
       {
         breakpoint: 580,
         settings: {
+          dots: false,
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          centerMode: true
         }
       }
     ]
