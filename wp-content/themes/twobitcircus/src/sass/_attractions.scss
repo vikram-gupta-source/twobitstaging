@@ -80,6 +80,9 @@
         @media (max-width: $laptop) {
           min-height: 660px;
         }
+        @media (max-width: $mobile) {
+          height: auto !important;
+        }
       }
       &.slick-initialized {
         display: block;
@@ -183,6 +186,9 @@
   .slick-shows {
     > .slick-list {
       min-height: 600px;
+      @media (max-width: $mobile) {
+        height: auto !important;
+      }
     }
     > button {
       position: absolute;
