@@ -479,10 +479,6 @@ $(function() {
               $(this).removeAttr("data-img");
             });
           }
-          if ($elm.find(".embed-lazy").length) {
-            let url = $elm.find(".embed-lazy").data('video');
-            $elm.find(".embed-lazy").removeClass('embed-lazy').html('<iframe src="' + url + '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>');
-          }
         };
         // ToolTips
         $('[data-tool-toggle="tooltip"]').tooltip({
@@ -490,7 +486,7 @@ $(function() {
         });
 
         // First Attraction img
-        loadImg($(".attractions-slick .item-attraction:first-child"));
+        //loadImg($(".attractions-slick .item-attraction:first-child"));
 
         var initAttraction = function(resize) {
           if (resize === false) {
@@ -569,7 +565,7 @@ $(function() {
               let slug = $(this).attr("aria-controls");
               if ($("#cat-" + slug).length) {
                 history.pushState(null, null, "/attractions/" + slug + "/");
-                loadImg($("#cat-" + slug));
+                //loadImg($("#cat-" + slug));
                 let index = $("#cat-" + slug)
                   .parents(".slick-slide")
                   .data("slick-index");
