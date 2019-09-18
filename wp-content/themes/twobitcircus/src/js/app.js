@@ -755,10 +755,7 @@ $(function() {
       .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
         let $elSlide = $(slick.$slides[nextSlide]);
         if ($(window).width() < 992) {
-          $elSlide
-            .addClass("item-mobile")
-            .find(".nav-item .nav-link")
-            .trigger("click");
+          $elSlide.addClass("item-mobile").find(".nav-item .nav-link").trigger("click");
         }
       });
     // First Attraction img
@@ -777,6 +774,26 @@ $(function() {
             .addClass("slick-current slick-active");
         });
         */
+        // Start SHows Slider
+        $(".slick-shows")
+          .slick(slick_shows_settings)
+          .on("beforeChange", function(ev, slick, cur, next) {
+            let $elSlide = $(slick.$slides.get(cur));
+            let $elNxtSlide = $(slick.$slides.get(next));
+            let iframe = $elSlide.find("iframe");
+            if (iframe.length) {
+              let player = new Player(iframe[0]);
+              player.pause();
+            }
+            if ($elNxtSlide.find(".slick-days").length) {
+              $elNxtSlide.find(".slick-days > .slick-list > .slick-track > .slick-slide:first-child").trigger("click");
+            }
+            let slug = $elNxtSlide.parents(".slick-shows").attr("id");
+            let show = $elNxtSlide.find(".item-shows").attr("id");
+            let setSlug = typeof slug !== "undefined" ? slug.replace(/cat-/, "") + "/" : "";
+            let setShow = typeof show !== "undefined" ? show + "/" : "";
+            history.pushState(null, null, "/attractions/" + setSlug + setShow);
+          });
 
         // Append to Filter show
         $("#filters .nav-item .nav-link").on("click", function(e) {
