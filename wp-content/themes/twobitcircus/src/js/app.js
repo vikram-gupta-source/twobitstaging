@@ -680,7 +680,7 @@ $(function() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    adaptiveHeight: (isIOSPhone) ? false : true,
+    adaptiveHeight: (isIOSPhone) ? true : true,
     fade: true
   };
   var slick_shows_settings = {
@@ -689,7 +689,7 @@ $(function() {
     touchMove: false,
     slidesToShow: 1,
     arrows: true,
-    adaptiveHeight: (isIOSPhone) ? false : true,
+    adaptiveHeight: (isIOSPhone) ? true : true,
     fade: true,
     responsive: [{
       breakpoint: 767,
