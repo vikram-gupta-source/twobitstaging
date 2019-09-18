@@ -751,8 +751,8 @@ $(function() {
     // Hnadle Top NAV BAR
     $("#filters .navbar-nav")
       .slick(filter_navbar_settings)
-      .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
-        let $elSlide = $(slick.$slides[nextSlide]);
+      .on("afterChange", function(event, slick, currentSlide) {
+        let $elSlide = $(slick.$slides[currentSlide]);
         if ($(window).width() < 992) {
           $elSlide.addClass("item-mobile").find(".nav-item .nav-link").trigger("click");
         }
