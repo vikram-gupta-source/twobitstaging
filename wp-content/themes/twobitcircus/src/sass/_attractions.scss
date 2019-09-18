@@ -409,6 +409,7 @@
           background: transparent;
           width: 6px;
           height: 6px;
+          opacity: 0.75;
         }
         &::-webkit-scrollbar-thumb {
           box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.15);
@@ -422,9 +423,6 @@
       .slick-next {
         opacity: 1;
       }
-    }
-    .img {
-      background-color: $black;
     }
     .overlay {
       position: relative;
