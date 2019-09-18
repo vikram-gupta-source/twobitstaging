@@ -311,69 +311,49 @@
     }
   }
 }
-#modal-showtimes {
-  .modal-content {
-    background-color: $black;
-    .modal-header {
-      border: 0px solid #000;
-    }
 
-    .modal-title {
-      color: $yellow;
-      font-family: "Franchise Bold", "Roboto", sans-serif;
-      line-height: 1em;
-      text-transform: uppercase;
-      font-size: 3em;
-    }
-    .close {
-      font-size: 4em;
-      color: white;
-      font-weight: $bold;
-      text-shadow: none;
-      margin: -37px -20px;
-    }
-  }
-  .card {
-    border-radius: 0;
-    border-color: $yellow;
-    opacity: 1;
-    visibility: visible;
-    height: auto;
-    .card-body {
-      padding: 17px;
-      background-color: $yellow;
-    }
-    .card-header {
+#attractions {
+  .showtimes {
+    .card {
       border-radius: 0;
-      transition: all 0.4s ease;
-      background-color: $dark-red;
-      a {
-        display: block;
-        font-size: 14px;
-        color: #fff;
-        font-weight: $bold;
+      border-color: $yellow;
+      opacity: 1;
+      visibility: visible;
+      height: auto;
+      .card-body {
+        padding: 17px;
+        background-color: $yellow;
       }
-    }
-    &:hover {
       .card-header {
         border-radius: 0;
+        transition: all 0.4s ease;
+        background-color: $dark-red;
+        a {
+          display: block;
+          font-size: 14px;
+          color: #fff;
+          font-weight: $bold;
+        }
       }
-    }
-    .cta-btn {
-      display: inline-block;
-      margin-right: 7px;
-      margin-bottom: 7px;
-      .btn-twobit {
-        padding: 2px 15px;
-        width: 100px;
+      &:hover {
+        .card-header {
+          border-radius: 0;
+        }
       }
-      .sm {
-        padding: 2px 15px;
+      .cta-btn {
+        display: inline-block;
+        margin-right: 7px;
+        margin-bottom: 7px;
+        .btn-twobit {
+          padding: 2px 15px;
+          width: 100px;
+        }
+        .sm {
+          padding: 2px 15px;
+        }
       }
     }
   }
-}
-#attractions {
   .card {
     border-radius: 0;
     border-color: $dark-red;
