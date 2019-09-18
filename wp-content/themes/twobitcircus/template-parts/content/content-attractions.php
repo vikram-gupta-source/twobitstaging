@@ -178,7 +178,7 @@
                           <?php foreach($composedDates as $date => $tickets) :?>
                           <div class="card">
                             <div class="card-header">
-                              <a class="card-link" data-toggle="collapse" href="#collapse-<?php echo $show->ID;?>-<?php echo $date;?>">
+                              <a class="card-link text-uppercase" data-toggle="collapse" href="#collapse-<?php echo $show->ID;?>-<?php echo $date;?>">
                                 <?php echo date('l, F j', strtotime(str_replace('-', '/', $date)));?>
                               </a>
                             </div>
@@ -186,7 +186,7 @@
                               <div class="card-body">
                                 <?php foreach($tickets as $timeInfo) : ?>
                                 <?php if(!preg_match('/(Out)/', $timeInfo->ticket)): ?>
-                                  <div class="cta-btn"><a class="btn btn-twobit btn-sm" href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" target="_blank" rel="noopener noreferrer"><span><?php echo $timeInfo->ticket;?></span></a><div class="btn-behind sm">&nbsp;</div></div>
+                                  <div class="cta-btn"><a class="btn btn-twobit btn-green btn-sm" href="https://twobitcircus.centeredgeonline.com<?php echo $timeInfo->link;?>" target="_blank" rel="noopener noreferrer"><span><?php echo $timeInfo->ticket;?></span></a><div class="btn-behind sm">&nbsp;</div></div>
                                 <?php endif ?>
                                 <?php endforeach ?>
                               </div>
