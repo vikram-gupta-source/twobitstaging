@@ -83,7 +83,7 @@
                           <?php endif ?>
                           <?php foreach($gallery as $gal) :?>
                           <div class="item d-block">
-                            <div class="img d-block pre-load-img" data-img="<?php echo $gal['url']; ?>"><img class="img-fluid w-100 fade" alt="<?php echo $gal['title']; ?>"/></div>
+                            <div class="img d-block" data-img="<?php echo $gal['url']; ?>"><img class="img-fluid w-100" alt="<?php echo $gal['title']; ?>"/></div>
                           </div>
                           <?php endforeach ?>
                         </div>
@@ -95,7 +95,7 @@
                             <div class="thumb pre-load-img" data-img="<?php echo $videoThumb;?>" ><img class="img-fluid fade" alt="<?php echo $show->post_title;?>"/></div>
                             <?php endif ?>
                             <?php foreach($gallery as $gal) :?>
-                            <div class="thumb pre-load-img" data-img="<?php echo $gal['sizes']['medium']; ?>" ><img class="img-fluid fade" alt="<?php echo $gal['title']; ?>"/></div>
+                            <div class="thumb" data-img="<?php echo $gal['sizes']['medium']; ?>" ><img class="img-fluid" alt="<?php echo $gal['title']; ?>"/></div>
                             <?php endforeach ?>
                           </div>
                         </div>

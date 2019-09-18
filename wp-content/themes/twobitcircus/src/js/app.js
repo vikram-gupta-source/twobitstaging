@@ -501,13 +501,6 @@ $(function() {
               });
             $(".slick-shows")
               .slick(slick_shows_settings)
-              .on("beforeChange", function(ev, slick, cur, next) {
-                let iframe = $(slick.$slides.get(cur)).find("iframe");
-                if (iframe.length) {
-                  let player = new Player(iframe[0]);
-                  player.pause();
-                }
-              })
               .on("afterChange", function(ev, slick, cur) {
                 let $elSlide = $(slick.$slides.get(cur));
                 if ($elSlide.find(".slick-days").length) {
@@ -524,21 +517,9 @@ $(function() {
                   slug.replace(/cat-/, "") + "/" :
                   "";
                 let setShow = typeof show !== "undefined" ? show + "/" : "";
-                history.pushState(
-                  null,
-                  null,
-                  "/attractions/" + setSlug + setShow
-                );
               });
             $(".slick-media")
-              .slick(slick_media_settings)
-              .on("beforeChange", function(ev, slick, cur, next) {
-                let iframe = $(slick.$slides.get(cur)).find("iframe");
-                if (iframe.length) {
-                  let player = new Player(iframe[0]);
-                  player.pause();
-                }
-              });
+              .slick(slick_media_settings);
             $(".slick-media-nav").slick(slick_media_nav_settings);
             $(".slick-days").slick(slick_days_settings);
             $(".slick-times")
@@ -564,7 +545,6 @@ $(function() {
               $(this).addClass("active");
               let slug = $(this).attr("aria-controls");
               if ($("#cat-" + slug).length) {
-                history.pushState(null, null, "/attractions/" + slug + "/");
                 //loadImg($("#cat-" + slug));
                 let index = $("#cat-" + slug)
                   .parents(".slick-slide")
@@ -599,11 +579,6 @@ $(function() {
                 .data("cat");
               let show = $(this).attr("aria-controls");
               if ($("#" + show).length) {
-                history.pushState(
-                  null,
-                  null,
-                  "/attractions/" + slug + "/" + show + "/"
-                );
                 let index = $("#" + show)
                   .parents(".slick-slide")
                   .data("slick-index");
