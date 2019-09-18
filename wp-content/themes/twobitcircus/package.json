@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Custom WP Theme",
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/preset-env": "^7.4.2",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
     "animate-sass": "^0.8.2",
     "autoprefixer": "^7.2.5",
     "babel-loader": "^8.0.5",
@@ -18,8 +18,8 @@
     "sass-loader": "^6.0.6",
     "url-loader": "^1.1.2",
     "waypoints": "^4.0.1",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
   },
   "scripts": {
     "dev": "webpack --mode development --watch",
@@ -30,6 +30,7 @@
     "@fullcalendar/core": "^4.2.0",
     "@fullcalendar/daygrid": "^4.2.0",
     "@fullcalendar/timegrid": "^4.2.0",
+    "@vimeo/player": "^2.10.0",
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "imagesloaded": "^4.1.4",

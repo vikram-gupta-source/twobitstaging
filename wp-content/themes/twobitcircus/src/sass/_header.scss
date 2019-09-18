@@ -268,17 +268,16 @@
       }
       &.highlight {
         background-color: $dark-red;
-        width: 200px;
         transition: all 0.5s ease;
         position: relative;
         .nav-link {
           font-family: "LubalinGraphStd-Bold", sans-serif;
           letter-spacing: 0.8px;
           color: #fff;
-          font-size: 15px;
+          font-size: 14.5px;
           text-align: center;
           line-height: 44px;
-          padding: 14px 10px;
+          padding: 14px 15px;
         }
         &:after {
           content: "";
