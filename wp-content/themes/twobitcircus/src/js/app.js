@@ -809,51 +809,6 @@ $(function() {
             $(".available-dates .cta-btn").removeClass("show");
           });
 
-        // Append to Filter show
-        $("#filters .nav-item .nav-link").on("click", function(e) {
-          e.preventDefault(e);
-          $('[data-tool-toggle="tooltip"]').tooltip("hide");
-          if (!$(this).hasClass("active")) {
-            $(".dropdown-toggle").dropdown("update");
-            $("#filters .nav-link").removeClass("active");
-            $(this).addClass("active");
-            let slug = $(this).attr("aria-controls");
-            if ($("#cat-" + slug).length) {
-              history.pushState(null, null, "/attractions/" + slug + "/");
-              //loadImg($("#cat-" + slug));
-              let index = $("#cat-" + slug).parents(".slick-slide").data("slick-index");
-              $(".attractions-slick").slick("slickGoTo", index);
-              $("#cat-" + slug).find(".slick-slide:first-child").addClass("slick-current slick-active");
-              if ($("#cat-" + slug).find(".slick-days").length) {
-                $("#cat-" + slug).find(".slick-days > .slick-list > .slick-track > .slick-slide:first-child").trigger("click");
-              }
-              if ($(".slick-media").find("iframe").length) {
-                $(".slick-media").find("iframe").each(function(kf, fr) {
-                  let player = new Player($(this)[0]);
-                  player.pause();
-                });
-              }
-            }
-          }
-        });
-
-        // Append to Filter show
-        $("#filters .dropdown-menu .dropdown-item").on("click", function(e) {
-          e.preventDefault(e);
-          if (!$(this).hasClass("active")) {
-            let slug = $(this).parent().data("cat");
-            let show = $(this).attr("aria-controls");
-            if ($("#" + show).length) {
-              history.pushState(null, null, "/attractions/" + slug + "/" + show + "/");
-              let index = $("#" + show).parents(".slick-slide").data("slick-index");
-              $("#" + show).parents(".slick-shows").slick("slickGoTo", index);
-              if ($("#" + show).find(".slick-media-nav")) {
-                $("#" + show).find(".slick-media-nav .slick-slide[data-slick-index=0]").addClass("slick-current slick-active");
-              }
-            }
-          }
-        });
-
         //Extend Days slick
         $(".slick-days .slick-slide").on("click", function(evt) {
           var $_this = $(this);
@@ -894,6 +849,52 @@ $(function() {
         $(".slick-media").slick("reinit");
         $(".slick-media-nav").slick("reinit");
       }
+
+      // Append to Filter show
+      $("#filters .nav-item .nav-link").on("click", function(e) {
+        e.preventDefault(e);
+        $('[data-tool-toggle="tooltip"]').tooltip("hide");
+        if (!$(this).hasClass("active")) {
+          $(".dropdown-toggle").dropdown("update");
+          $("#filters .nav-link").removeClass("active");
+          $(this).addClass("active");
+          let slug = $(this).attr("aria-controls");
+          if ($("#cat-" + slug).length) {
+            history.pushState(null, null, "/attractions/" + slug + "/");
+            //loadImg($("#cat-" + slug));
+            let index = $("#cat-" + slug).parents(".slick-slide").data("slick-index");
+            $(".attractions-slick").slick("slickGoTo", index);
+            $("#cat-" + slug).find(".slick-slide:first-child").addClass("slick-current slick-active");
+            if ($("#cat-" + slug).find(".slick-days").length) {
+              $("#cat-" + slug).find(".slick-days > .slick-list > .slick-track > .slick-slide:first-child").trigger("click");
+            }
+            if ($(".slick-media").find("iframe").length) {
+              $(".slick-media").find("iframe").each(function(kf, fr) {
+                let player = new Player($(this)[0]);
+                player.pause();
+              });
+            }
+          }
+        }
+      });
+
+      // Append to Filter show
+      $("#filters .dropdown-menu .dropdown-item").on("click", function(e) {
+        e.preventDefault(e);
+        if (!$(this).hasClass("active")) {
+          let slug = $(this).parent().data("cat");
+          let show = $(this).attr("aria-controls");
+          if ($("#" + show).length) {
+            history.pushState(null, null, "/attractions/" + slug + "/" + show + "/");
+            let index = $("#" + show).parents(".slick-slide").data("slick-index");
+            $("#" + show).parents(".slick-shows").slick("slickGoTo", index);
+            if ($("#" + show).find(".slick-media-nav")) {
+              $("#" + show).find(".slick-media-nav .slick-slide[data-slick-index=0]").addClass("slick-current slick-active");
+            }
+          }
+        }
+      });
+
     };
 
     initAttraction(false);
