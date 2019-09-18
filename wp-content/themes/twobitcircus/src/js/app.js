@@ -683,7 +683,7 @@ $(function() {
         $(window).on("resize", function() {
           clearTimeout(resizeAttract);
           resizeAttract = setTimeout(function() {
-            initAttraction(true);
+            //initAttraction(true);
           }, 500);
         });
 
