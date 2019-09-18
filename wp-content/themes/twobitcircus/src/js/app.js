@@ -765,7 +765,7 @@ $(function() {
         $(".attractions-slick")
           .slick(slick_attractions_settings)
           .on("afterChange", function(ev, slick, cur) {
-            let $elSlide = $(slick.$slides.get(cur)).parent().find(".slick-media-nav.slick-initialized");
+            let $elSlide = $(slick.$slides.get(cur)).parent().find(".slick-media-nav");
             if ($elSlide.length) {
               $elSlide.find(".slick-slide[data-slick-index=0]").addClass("slick-current slick-active");
             }
@@ -781,7 +781,7 @@ $(function() {
               let player = new Player(iframe[0]);
               player.pause();
             }
-            if ($elNxtSlide.find(".slick-days.slick-initialized").length) {
+            if ($elNxtSlide.find(".slick-days").length) {
               $elNxtSlide.find(".slick-days > .slick-list > .slick-track > .slick-slide:first-child").trigger("click");
             }
             let slug = $elNxtSlide.parents(".slick-shows").attr("id");
@@ -820,15 +820,15 @@ $(function() {
             let slug = $(this).attr("aria-controls");
             if ($("#cat-" + slug).length) {
               history.pushState(null, null, "/attractions/" + slug + "/");
-              //loadImg($("#cat-" + slug));
+              loadImg($("#cat-" + slug));
               let index = $("#cat-" + slug).parents(".slick-slide").data("slick-index");
               $(".attractions-slick").slick("slickGoTo", index);
               $("#cat-" + slug).find(".slick-slide:first-child").addClass("slick-current slick-active");
-              if ($("#cat-" + slug).find(".slick-days.slick-initialized").length) {
+              if ($("#cat-" + slug).find(".slick-days").length) {
                 $("#cat-" + slug).find(".slick-days > .slick-list > .slick-track > .slick-slide:first-child").trigger("click");
               }
-              if ($(".slick-media.slick-initialized").find("iframe").length) {
-                $(".slick-media.slick-initialized").find("iframe").each(function(kf, fr) {
+              if ($(".slick-media").find("iframe").length) {
+                $(".slick-media").find("iframe").each(function(kf, fr) {
                   let player = new Player($(this)[0]);
                   player.pause();
                 });
@@ -847,8 +847,8 @@ $(function() {
               history.pushState(null, null, "/attractions/" + slug + "/" + show + "/");
               let index = $("#" + show).parents(".slick-slide").data("slick-index");
               $("#" + show).parents(".slick-shows").slick("slickGoTo", index);
-              if ($("#" + show).find(".slick-media-nav.slick-initialized")) {
-                $("#" + show).find(".slick-media-nav.slick-initialized .slick-slide[data-slick-index=0]").addClass("slick-current slick-active");
+              if ($("#" + show).find(".slick-media-nav")) {
+                $("#" + show).find(".slick-media-nav .slick-slide[data-slick-index=0]").addClass("slick-current slick-active");
               }
             }
           }
