@@ -61,8 +61,8 @@
                 <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
                 <?php $info = filter_locations(get_field('information', $show->ID));?>
                 <?php $_cat = get_the_category($show->ID);?>
-                <?php $video = get_field('video_embed', $show->ID);?>
-                <?php $videoThumb = videoLink($video);?>
+                <?php $video = get_field('video', $show->ID);?>
+                <?php $videoThumb = videoLink($video, true);?>
                 <?php $gallery = get_field('gallery', $show->ID);?>
                 <div id="<?php echo sanitize_title($show->post_title);?>" class="item-shows">
                   <div class="row">
@@ -75,10 +75,10 @@
                       </div>
                       <?php if(!empty($gallery)) :?>
                       <div class="show-asset-wrapper">
-                        <div class="slick-media-ready">
+                        <div class="slick-media">
                           <?php if(!empty($video)) :?>
                           <div class="item d-block">
-                            <div class="embed-lazy embed-responsive embed-responsive-16by9" data-video="https://player.vimeo.com/video/<?php echo $video;?>"></div>
+                            <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/<?php echo $video;?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe></div>
                           </div>
                           <?php endif ?>
                           <?php foreach($gallery as $gal) :?>
@@ -89,8 +89,8 @@
                         </div>
                         <?php $mediaAssetCnt = count($gallery) + (!empty($video) ? 1 : 0);?>
                         <?php if($mediaAssetCnt > 1):?>
-                        <div class="overlay">
-                          <div class="slick-media-nav-ready media-<?php echo $mediaAssetCnt;?>">
+                        <div class="overlay d-none d-lg-block">
+                          <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
                             <?php if(!empty($videoThumb)) :?>
                             <div class="thumb pre-load-img" data-img="<?php echo $videoThumb;?>" ><img class="img-fluid fade" alt="<?php echo $show->post_title;?>"/></div>
                             <?php endif ?>
@@ -143,7 +143,7 @@
                       <h3 class="mt-5 text-uppercase franchise offwhite"><?php _e( 'Showtimes' , 'twobitcircus'); ?></h3>
                       <div class="showtimes-cycle">
                         <div id="cycle-<?php echo $show->ID;?>">
-                          <div class="slick-days-ready" data-target="<?php echo $cat;?>">
+                          <div class="slick-days" data-target="<?php echo $cat;?>">
                             <?php foreach($composedDates as $date => $tickets) :?>
                             <div class="item-days text-center">
                               <div class="day-header lubalin">
@@ -156,7 +156,7 @@
                             </div>
                             <?php endforeach ?>
                           </div>
-                          <div class="slick-times-ready">
+                          <div class="slick-times">
                             <?php foreach($composedDates as $date => $tickets) :?>
                             <div class="item-time">
                               <div class="card-body">

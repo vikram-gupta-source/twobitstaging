@@ -363,8 +363,7 @@ $(function() {
       {
         breakpoint: 991,
         settings: {
-          slidesToShow: 3,
-          centerMode: true
+          settings: "unslick"
         }
       }
     ]
@@ -374,7 +373,13 @@ $(function() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
-    asNavFor: ".slick-media-nav"
+    asNavFor: ".slick-media-nav",
+    responsive: [{
+      breakpoint: 991,
+      settings: {
+        asNavFor: null
+      }
+    }]
   };
 
   imagesLoaded(
