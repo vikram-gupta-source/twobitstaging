@@ -787,7 +787,24 @@ $(function() {
             let setShow = typeof show !== "undefined" ? show + "/" : "";
             history.pushState(null, null, "/attractions/" + setSlug + setShow);
           });
-
+        /*
+            $(".slick-media")
+              .slick(slick_media_settings)
+              .on("beforeChange", function(ev, slick, cur, next) {
+                let iframe = $(slick.$slides.get(cur)).find("iframe");
+                if (iframe.length) {
+                  let player = new Player(iframe[0]);
+                  player.pause();
+                }
+              });
+            $(".slick-media-nav").slick(slick_media_nav_settings);
+            $(".slick-days").slick(slick_days_settings);
+            $(".slick-times")
+              .slick(slick_times_settings)
+              .on("beforeChange", function(ev, slick, cur, next) {
+                $(".available-dates .cta-btn").removeClass("show");
+              });
+        */
         // Append to Filter show
         $("#filters .nav-item .nav-link").on("click", function(e) {
           e.preventDefault(e);
@@ -832,146 +849,51 @@ $(function() {
             }
           }
         });
-      }
-    };
-    initAttraction(false);
-  }
 
+        //Extend Days slick
+        $(".slick-days .slick-slide").on("click", function(evt) {
+          var $_this = $(this);
+          var timer = 0;
+          timer = setTimeout(function() {
+            clearTimeout(timer);
+            let ht = $_this.parents(".slick-shows").find("> .slick-list > .slick-track").outerHeight();
+            let newHt = parseInt(ht + 40) + "px";
+            $_this.parents(".slick-shows").find("> .slick-list").height(newHt);
+            $(".attractions-slick > .slick-list").height(newHt);
+          }, 400);
+        });
 
-  // Handle all Attraction Events
-  if ($("#attractions-blocks").length) {
+        // Handlers Show
+        $(".show-content-block .btn-group .btn-twobit").on("click", function(evt) {
+          if ($(this).hasClass("next")) {
+            $(this).parents(".slick-shows").slick("slickNext");
+          } else {
+            $(this).parents(".slick-shows").slick("slickPrev");
+          }
+        });
 
+        // Confirm Purcahse
+        $(".slick-times .btn-twobit").on("click", function(evt) {
+          evt.preventDefault();
+          if ($(this).hasClass("btn-disabled")) return false;
+          let href = $(this).prop("href");
+          $(this).parents(".item-time").find(".btn-twobit").removeClass("btn-green").addClass("btn-white");
+          $(this).removeClass("btn-white").addClass("btn-green");
+          $(this).parents(".show-content-block").find(".available-dates .cta-btn").addClass("show").find(".btn-twobit").prop("href", href);
+        });
 
-
-
-
-
-
-
-    var initAttraction = function(resize) {
-      if (resize === false) {
-        $(".attractions-slick")
-          .slick(slick_attractions_settings)
-          .on("afterChange", function(ev, slick, cur) {
-            let $elSlide = $(slick.$slides.get(cur));
-            $elSlide
-              .parent()
-              .find(".slick-media-nav .slick-slide[data-slick-index=0]")
-              .addClass("slick-current slick-active");
-          });
-        $(".slick-shows")
-          .slick(slick_shows_settings)
-          .on("beforeChange", function(ev, slick, cur, next) {
-            let iframe = $(slick.$slides.get(cur)).find("iframe");
-            if (iframe.length) {
-              let player = new Player(iframe[0]);
-              player.pause();
-            }
-          })
-          .on("afterChange", function(ev, slick, cur) {
-            let $elSlide = $(slick.$slides.get(cur));
-            if ($elSlide.find(".slick-days").length) {
-              $elSlide
-                .find(
-                  ".slick-days > .slick-list > .slick-track > .slick-slide:first-child"
-                )
-                .trigger("click");
-            }
-            let slug = $elSlide.parents(".slick-shows").attr("id");
-            let show = $elSlide.find(".item-shows").attr("id");
-            let setSlug =
-              typeof slug !== "undefined" ?
-              slug.replace(/cat-/, "") + "/" :
-              "";
-            let setShow = typeof show !== "undefined" ? show + "/" : "";
-            history.pushState(
-              null,
-              null,
-              "/attractions/" + setSlug + setShow
-            );
-          });
-        $(".slick-media")
-          .slick(slick_media_settings)
-          .on("beforeChange", function(ev, slick, cur, next) {
-            let iframe = $(slick.$slides.get(cur)).find("iframe");
-            if (iframe.length) {
-              let player = new Player(iframe[0]);
-              player.pause();
-            }
-          });
-        $(".slick-media-nav").slick(slick_media_nav_settings);
-        $(".slick-days").slick(slick_days_settings);
-        $(".slick-times")
-          .slick(slick_times_settings)
-          .on("beforeChange", function(ev, slick, cur, next) {
-            $(".available-dates .cta-btn").removeClass("show");
-          });
       } else {
+        /*
         $(".slick-shows").slick("reinit");
         $(".attractions-slick").slick("reinit");
         $(".slick-media").slick("reinit");
         $(".slick-media-nav").slick("reinit");
         $(".slick-days").slick("reinit");
         $(".slick-times").slick("reinit");
+        */
       }
-
-
-      //Extend Days slick
-      $(".slick-days .slick-slide").on("click", function(evt) {
-        var $_this = $(this);
-        var timer = 0;
-        timer = setTimeout(function() {
-          clearTimeout(timer);
-          let ht = $_this
-            .parents(".slick-shows")
-            .find("> .slick-list > .slick-track")
-            .outerHeight();
-          let newHt = parseInt(ht + 40) + "px";
-          $_this
-            .parents(".slick-shows")
-            .find("> .slick-list")
-            .height(newHt);
-          $(".attractions-slick > .slick-list").height(newHt);
-        }, 400);
-      });
-
-      // Handlers Show
-      $(".show-content-block .btn-group .btn-twobit").on("click", function(
-        evt
-      ) {
-        if ($(this).hasClass("next")) {
-          $(this)
-            .parents(".slick-shows")
-            .slick("slickNext");
-        } else {
-          $(this)
-            .parents(".slick-shows")
-            .slick("slickPrev");
-        }
-      });
-
-      // Confirm Purcahse
-      $(".slick-times .btn-twobit").on("click", function(evt) {
-        evt.preventDefault();
-        if ($(this).hasClass("btn-disabled")) return false;
-        let href = $(this).prop("href");
-        $(this)
-          .parents(".item-time")
-          .find(".btn-twobit")
-          .removeClass("btn-green")
-          .addClass("btn-white");
-        $(this)
-          .removeClass("btn-white")
-          .addClass("btn-green");
-        $(this)
-          .parents(".show-content-block")
-          .find(".available-dates .cta-btn")
-          .addClass("show")
-          .find(".btn-twobit")
-          .prop("href", href);
-      });
     };
-    // Init Attraction Events
+
     initAttraction(false);
 
     var resizeAttract = 0;
@@ -1000,16 +922,10 @@ $(function() {
     if (urlCat) {
       $("a.nav-link[aria-controls=" + urlCat + "]").trigger("click");
       if (urlShow) {
-        $("a.dropdown-item[aria-controls=" + urlShow + "]").trigger(
-          "click"
-        );
+        $("a.dropdown-item[aria-controls=" + urlShow + "]").trigger("click");
       } else {
-        $("a.nav-link[aria-controls=" + urlCat + "]")
-          .parent()
-          .find(".dropdown-menu")
-          .removeClass("show");
+        $("a.nav-link[aria-controls=" + urlCat + "]").parent().find(".dropdown-menu").removeClass("show");
       }
     }
   }
-
 });
