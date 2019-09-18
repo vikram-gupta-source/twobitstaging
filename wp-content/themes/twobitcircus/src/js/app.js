@@ -689,7 +689,7 @@ $(function() {
     touchMove: false,
     slidesToShow: 1,
     arrows: true,
-    adaptiveHeight: true,
+    //adaptiveHeight: true,
     fade: true,
     responsive: [{
       breakpoint: 767,
@@ -771,7 +771,7 @@ $(function() {
         });
         */
         // Start SHows Slider
-        $(".slick-showss")
+        $(".slick-shows")
           .slick(slick_shows_settings)
         /*
         .on("beforeChange", function(ev, slick, cur, next) {
