@@ -61,7 +61,7 @@
                 <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
                 <?php $info = filter_locations(get_field('information', $show->ID));?>
                 <?php $_cat = get_the_category($show->ID);?>
-                <?php $_video = get_field('video', $show->ID);?>
+                <?php $_video = get_field('video_embed', $show->ID);?>
                 <?php $videoThumb = videoLink($_video, true);?>
                 <?php $gallery = get_field('gallery', $show->ID);?>
                 <div id="<?php echo sanitize_title($show->post_title);?>" class="item-shows">
