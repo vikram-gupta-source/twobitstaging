@@ -622,9 +622,7 @@ $(function() {
       },
       {
         breakpoint: 768,
-        settings: {
-          settings: "unslick"
-        }
+        settings: "unslick"
       }
     ]
   };
@@ -636,9 +634,7 @@ $(function() {
     asNavFor: ".slick-media-nav",
     responsive: [{
       breakpoint: 768,
-      settings: {
-        settings: "unslick"
-      }
+      settings: "unslick"
     }]
   };
 
