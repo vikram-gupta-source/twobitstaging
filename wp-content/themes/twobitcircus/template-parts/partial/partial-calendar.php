@@ -54,22 +54,24 @@ $_closed = $cal->get_closed();
                     <?php foreach($times as $time) :?>
                     <div class="cell-box">
                       <h5 class="text-uppercase franchise"><?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?></h5>
-                      <div class="cta-btn mx-auto">
+
                       <?php if(!empty($time->link)) :?>
-                        <a href="<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>" class="time btn btn-twobit btn-white btn-sm" target="<?php echo (isset($time->target) && $time->target == '_self') ? '_self' : '_blank';?>" rel="noopener" onclick="gtag('event', '<?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?>', {'event_category': 'Calendar Link', 'event_label': '<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>'});">
-                      <?php else:  ?>
-                      <?php if(!empty($time->ticket_alt) || !empty($time->ticket)) :?>
-                        <div class="time btn btn-twobit btn-white  btn-sm">
+                        <div class="cta-btn mx-auto">
+                          <a href="<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>" class="time btn btn-twobit btn-white btn-sm" target="<?php echo (isset($time->target) && $time->target == '_self') ? '_self' : '_blank';?>" rel="noopener" onclick="gtag('event', '<?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?>', {'event_category': 'Calendar Link', 'event_label': '<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>'});">
                           <span><?php echo (!empty($time->ticket_alt)) ? $time->ticket_alt : ltrim($time->ticket, '0');?></span>
+                          </a>
+                          <div class="btn-behind sm">&nbsp;</div>
                         </div>
-                        <div class="btn-behind sm">&nbsp;</div>
+                      <?php else:  ?>
+                        <?php if(!empty($time->ticket_alt) || !empty($time->ticket)) :?>
+                        <div class="cta-btn mx-auto">
+                          <div class="time btn btn-twobit btn-white  btn-sm">
+                            <span><?php echo (!empty($time->ticket_alt)) ? $time->ticket_alt : ltrim($time->ticket, '0');?></span>
+                          </div>
+                          <div class="btn-behind sm">&nbsp;</div>
+                        </div>
+                        <?php endif ?>
                       <?php endif ?>
-                      <?php if(!empty($time->link)) :?>
-                        </a>
-                        <div class="btn-behind sm">&nbsp;</div>
-                      <?php endif ?>
-                      <?php endif ?>
-                      </div>
                       <?php
                       $_timeRaw = str_replace('-','/', $time->posted);
                       $getTime = (!empty($time->ticket_alt)) ? trim($time->ticket_alt) : trim($time->ticket);
