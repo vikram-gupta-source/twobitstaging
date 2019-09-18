@@ -751,7 +751,7 @@ $(function() {
       .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
         let $elSlide = $(slick.$slides[nextSlide]);
         if ($(window).width() < 992) {
-          $elSlide.addClass("item-mobile").find(".nav-item .nav-link").trigger("click");
+          //$elSlide.addClass("item-mobile").find(".nav-item .nav-link").trigger("click");
         }
       });
     // First Attraction img
