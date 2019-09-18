@@ -791,23 +791,25 @@ $(function() {
             history.pushState(null, null, "/attractions/" + setSlug + setShow);
           });
 
-        $(".slick-media")
-          .slick(slick_media_settings)
-          .on("beforeChange", function(ev, slick, cur, next) {
-            let iframe = $(slick.$slides.get(cur)).find("iframe");
-            if (iframe.length) {
-              let player = new Player(iframe[0]);
-              player.pause();
-            }
-          });
-        $(".slick-media-nav").slick(slick_media_nav_settings);
+        if (!isIOSPhone) {
+          $(".slick-media")
+            .slick(slick_media_settings)
+            .on("beforeChange", function(ev, slick, cur, next) {
+              let iframe = $(slick.$slides.get(cur)).find("iframe");
+              if (iframe.length) {
+                let player = new Player(iframe[0]);
+                player.pause();
+              }
+            });
+          $(".slick-media-nav").slick(slick_media_nav_settings);
 
-        $(".slick-days").slick(slick_days_settings);
-        $(".slick-times")
-          .slick(slick_times_settings)
-          .on("beforeChange", function(ev, slick, cur, next) {
-            $(".available-dates .cta-btn").removeClass("show");
-          });
+          $(".slick-days").slick(slick_days_settings);
+          $(".slick-times")
+            .slick(slick_times_settings)
+            .on("beforeChange", function(ev, slick, cur, next) {
+              $(".available-dates .cta-btn").removeClass("show");
+            });
+        }
 
       } else {
         if (!$(".attractions-slick").hasClass('slick-initialized')) {
@@ -816,17 +818,19 @@ $(function() {
         if (!$(".slick-shows").hasClass('slick-initialized')) {
           $(".slick-shows").slick(slick_shows_settings);
         }
-        if (!$(".slick-media").hasClass('slick-initialized')) {
-          $(".slick-media").slick(slick_media_settings);
-        }
-        if (!$(".slick-media-nav").hasClass('slick-initialized')) {
-          $(".slick-media-nav").slick(slick_media_nav_settings);
-        }
-        if (!$(".slick-days").hasClass('slick-initialized')) {
-          $(".slick-days").slick(slick_days_settings);
-        }
-        if (!$(".slick-times").hasClass('slick-initialized')) {
-          $(".slick-times").slick(slick_times_settings);
+        if (!isIOSPhone) {
+          if (!$(".slick-media").hasClass('slick-initialized')) {
+            $(".slick-media").slick(slick_media_settings);
+          }
+          if (!$(".slick-media-nav").hasClass('slick-initialized')) {
+            $(".slick-media-nav").slick(slick_media_nav_settings);
+          }
+          if (!$(".slick-days").hasClass('slick-initialized')) {
+            $(".slick-days").slick(slick_days_settings);
+          }
+          if (!$(".slick-times").hasClass('slick-initialized')) {
+            $(".slick-times").slick(slick_times_settings);
+          }
         }
       }
 
