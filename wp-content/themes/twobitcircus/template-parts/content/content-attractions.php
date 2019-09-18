@@ -76,14 +76,6 @@
                       <?php if(!empty($gallery)) :?>
                       <div class="show-asset-wrapper">
                         <div class="slick-media">
-                          <?php if(!empty($video)) :?>
-                          <div class="item d-block">
-                            <div class="embed-lazy embed-responsive embed-responsive-16by9" data-video="https://player.vimeo.com/video/<?php echo $video;?>">
-                              <iframe  width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true">
-                              </iframe>
-                            </div>
-                          </div>
-                          <?php endif ?>
                           <?php foreach($gallery as $gal) :?>
                           <div class="item d-block">
                             <div class="img d-block pre-load-img" data-img="<?php echo $gal['url']; ?>"><img class="img-fluid w-100 fade" alt="<?php echo $gal['title']; ?>"/></div>
