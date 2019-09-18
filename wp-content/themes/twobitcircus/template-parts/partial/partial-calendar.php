@@ -57,17 +57,15 @@ $_closed = $cal->get_closed();
                       <div class="cta-btn mx-auto">
                       <?php if(!empty($time->link)) :?>
                         <a href="<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>" class="time btn btn-twobit btn-white" target="<?php echo (isset($time->target) && $time->target == '_self') ? '_self' : '_blank';?>" rel="noopener" onclick="gtag('event', '<?php echo preg_replace('/Club\s01\s|Club01\s/', '', $time->name);?>', {'event_category': 'Calendar Link', 'event_label': '<?php echo (isset($time->target)) ? $time->link : 'https://twobitcircus.centeredgeonline.com'.$time->link;?>'});">
-                        <?php else :?>
+                      <?php endif ?>
+                      <?php if(!empty($time->ticket_alt) || !empty($time->ticket)) :?>
                         <div class="time btn btn-twobit btn-white">
-                        <?php endif ?>
-                          <?php if(!empty($time->ticket_alt) || !empty($time->ticket)) :?>
                           <span><?php echo (!empty($time->ticket_alt)) ? $time->ticket_alt : ltrim($time->ticket, '0');?></span>
-                          <?php endif ?>
+                        </div>
+                      <?php endif ?>
                         <?php if(!empty($time->link)) :?>
                         </a>
-                        <?php else :?>
-                        </div>
-                        <?php endif ?>
+                      <?php endif ?>
                         <div class="btn-behind">&nbsp;</div>
                       </div>
                       <?php
@@ -120,7 +118,7 @@ $_closed = $cal->get_closed();
 </div>
 <?php if(!empty($addEventCal)) :?>
 <script>
-var _cal_events = <?php echo json_encode($addEventCal); ?>; 
+var _cal_events = <?php echo json_encode($addEventCal); ?>;
 </script>
 <?php endif ?>
 <div class="more-calendar-block collapse pt-4 fade">
