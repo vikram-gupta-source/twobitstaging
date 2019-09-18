@@ -62,6 +62,12 @@ body.is-mac {
           margin: 0 1px;
           min-width: 85vw;
           max-width: 730px;
+          @media (max-width: $laptop) {
+            min-width: 50vw;
+          }
+          @media (max-width: $tablet) {
+            min-width: 40vw;
+          }
         }
         &::-webkit-scrollbar {
           background: transparent;

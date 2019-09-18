@@ -76,7 +76,7 @@
     .attractions-slick {
       display: none;
       > .slick-list {
-        min-height: 600px;
+        height: auto !important;
         @media (max-width: $laptop) {
           min-height: 660px;
         }
@@ -185,7 +185,7 @@
   }
   .slick-shows {
     > .slick-list {
-      min-height: 600px;
+      height: auto !important;
       @media (max-width: $mobile) {
         height: auto !important;
       }
@@ -386,7 +386,7 @@
     overflow: hidden;
     .slick-media {
       transition: opacity 0.5s ease;
-      @media (max-width: 768px) {
+      @media (max-width: $mobile) {
         overflow-x: scroll;
         overflow-y: hidden;
         -ms-flex-wrap: nowrap;
