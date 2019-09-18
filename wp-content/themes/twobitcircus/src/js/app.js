@@ -771,7 +771,7 @@ $(function() {
         });
         */
         // Start SHows Slider
-        $(".slick-shows")
+        $(".slick-showss")
           .slick(slick_shows_settings)
         /*
         .on("beforeChange", function(ev, slick, cur, next) {
