@@ -49,7 +49,7 @@ if ( ! class_exists( 'Calendar' ) ) {
         }
       }
       //print_r($this->calender);
-      $this->specials();
+      $this->specials(); ;
       return $this->calender;
     }
     public function get_closed() {
@@ -80,44 +80,44 @@ if ( ! class_exists( 'Calendar' ) ) {
           }
 
           if($nextRecurring > $this->end_date) continue;
-          $_spday = date('d', $nextRecurring);
-          $this->limit = 0;
-          $recurring = $this->getRecurringDays($nextRecurring, $excludeEvent, $spvent['recurring_day']['value'], $this->end_date, $collect);
-        } else {
-          $_spday = explode('-',$spvent['show_date'])[1];
-        }
-        $obj = [];
-        $obj['name'] = $spvent['show_title'];
-        $obj['posted'] = $spvent['show_date'];
-        $obj['link'] = $spvent['show_link'];
-        $obj['ticket'] = $spvent['show_time'];
-        $obj['ticket_alt'] = $spvent['show_time_alt'];
-        $obj['target'] = $spvent['target'];
-        $setTimeTicket = date('H:i A', strtotime($obj['ticket']));
-        if(!empty($recurring)) {
-          //print_r($recurring);
-          foreach($recurring as $key => $recr) {
-            $_dy = date('d', $recr);
-            $obj['posted'] = date('m-d-Y', $recr);
-            $setTimeTicket = date('H:i A', strtotime($obj['ticket']));
-            if(isset($this->calender[$_dy]) && isset($this->calender[$_dy][$setTimeTicket])) {
-              $setTimeTicket = $setTimeTicket.'-2-'.$key;
+            $_spday = date('d', $nextRecurring);
+            $this->limit = 0;
+            $recurring = $this->getRecurringDays($nextRecurring, $excludeEvent, $spvent['recurring_day']['value'], $this->end_date, $collect);
+          } else {
+            $_spday = explode('-',$spvent['show_date'])[1];
+          }
+          $obj = [];
+          $obj['name'] = $spvent['show_title'];
+          $obj['posted'] = $spvent['show_date'];
+          $obj['link'] = $spvent['show_link'];
+          $obj['ticket'] = $spvent['show_time'];
+          $obj['ticket_alt'] = $spvent['show_time_alt'];
+          $obj['target'] = $spvent['target'];
+          $setTimeTicket = date('H:i A', strtotime($obj['ticket']));
+          if(!empty($recurring)) {
+            //print_r($recurring);
+            foreach($recurring as $key => $recr) {
+              $_dy = date('d', $recr);
+              $obj['posted'] = date('m-d-Y', $recr);
+              $setTimeTicket = date('H:i A', strtotime($obj['ticket']));
+              if(isset($this->calender[$_dy]) && isset($this->calender[$_dy][$setTimeTicket])) {
+                $setTimeTicket = $setTimeTicket.'-2-'.$key;
+              }
+              $specialEvent[$_dy][$setTimeTicket][] = (object) $obj;
             }
-            $specialEvent[$_dy][$setTimeTicket][] = (object) $obj;
+          } else {
+            if(isset($this->calender[$_spday][$setTimeTicket]) && !empty($this->calender[$_spday][$setTimeTicket])) {
+              $setTimeTicket = $setTimeTicket.'-2';
+            }
+            $specialEvent[$_spday][$setTimeTicket][] = (object) $obj;
           }
-        } else {
-          if(isset($this->calender[$_dy][$setTimeTicket]) && !empty($this->calender[$_spday][$setTimeTicket])) {
-            $setTimeTicket = $setTimeTicket.'-2';
-          }
-          $specialEvent[$_spday][$setTimeTicket][] = (object) $obj;
-        }
       }
-      //print_r($specialEvent);
+      //print_r($this->calender);
       do {
         $day = date('d', $this->current_date);
         if(isset($specialEvent[$day]) && !empty($specialEvent[$day])) {
           if(isset($this->calender[$day])) {
-            $calender[$day] = array_merge($specialEvent[$day], $this->calender[$day]);
+            $this->calender[$day] = array_merge($specialEvent[$day], $this->calender[$day]);
           } else {
             $this->calender[$day] = $specialEvent[$day];
           }
