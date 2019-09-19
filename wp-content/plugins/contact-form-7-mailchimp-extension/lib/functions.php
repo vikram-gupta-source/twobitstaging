@@ -41,8 +41,37 @@ function wpcf7_mch_add_mailchimp($args) {
   $url = $_SERVER['REQUEST_URI'];
   $urlactual = $url;
 
-  //var_dump($cf7_mch['logfileEnabled']);
+  //var_dump($cf7_mch['logfileEnabled']); 
+  
+  $mce_txcomodin = $args->id() ;
+  $listatags = wpcf7_mce_form_tags();
 
+  if ( ( ! isset( $cf7_mch['listatags'] ) ) or is_null( $cf7_mch['listatags'] ) ) {
+      unset( $cf7_mch['listatags'] );
+      $cf7_mch = $cf7_mch + array( 'listatags' => $listatags,'logfileEnabled' => 1 ) ;
+      update_option( 'cf7_mch_'.$args->id(), $cf7_mch );
+  }
+  
+  $logfileEnabled = $cf7_mch['logfileEnabled'];
+	$logfileEnabled = ( is_null( $logfileEnabled ) ) ? false : $logfileEnabled; 
+
+  $mceapi = ( isset( $cf7_mch['api'] )   ) ? $cf7_mch['api'] : null ;
+  
+  $tmp = wpcf7_mce_validate_api_key( $mceapi,$logfileEnabled,'cf7_mch_'.$mce_txcomodin );
+	$apivalid = $tmp['api-validation'];
+
+
+	$tmp = wpcf7_mce_listasasociadas( $mceapi,$logfileEnabled,'cf7_mch_'.$mce_txcomodin );
+	$listdata = $tmp['lisdata'];
+
+  
+  
+  /*$apivalid = ( isset( $cf7_mch['api-validation'] )   ) ? $cf7_mch['api-validation'] : '0' ;
+  $listdata = ( isset( $cf7_mch['lisdata'] )   ) ? $cf7_mch['lisdata'] : null ; */
+  
+  $chm_valid = '<span class="chmm valid"><span class="dashicons dashicons-yes"></span>API Key</span>';
+  $chm_invalid = '<span class="chmm invalid"><span class="dashicons dashicons-no"></span>Error: API Key</span>';
+  
   include SPARTAN_MCE_PLUGIN_DIR . '/lib/view.php';
 
 }
@@ -164,8 +193,17 @@ function wpcf7_mch_subscribe_remote($obj) {
     $email = cf7_mch_tag_replace( $regex, $cf7_mch['email'], $submission->get_posted_data() );
     $name = cf7_mch_tag_replace( $regex, $cf7_mch['name'], $submission->get_posted_data() );
 
+    /*
+    var_dump ( '$email' ) ; var_dump ($email) ;
+    var_dump ( '$name' ) ; var_dump ($name) ; */
+    
     $lists = cf7_mch_tag_replace( $regex, $cf7_mch['list'], $submission->get_posted_data() );
     $listarr = explode(',',$lists);
+    /*
+    echo ( '<pre>' ) ;
+         var_dump ($listarr) ;
+    echo ( '</pre>') ; */
+   
 
     $merge_vars=array('FNAME'=>$name);// *x1
 
@@ -183,22 +221,7 @@ function wpcf7_mch_subscribe_remote($obj) {
 
         }
 
-
-    if( isset($cf7_mch['accept']) && strlen($cf7_mch['accept']) != 0 ) {
-
-      $accept = cf7_mch_tag_replace( $regex, $cf7_mch['accept'], $submission->get_posted_data() );
-
-      if($accept != $cf7_mch['accept']) {
-        if(strlen($accept) > 0)
-          $subscribe = true;
-      }
-
-    } else {
-
-      $subscribe = true;
-
-    }
-
+   
     for($i=1;$i<=20;$i++){
 
       if( isset($cf7_mch['CustomKey'.$i]) && isset($cf7_mch['CustomValue'.$i]) && strlen(trim($cf7_mch['CustomValue'.$i])) != 0 ) {
@@ -212,18 +235,41 @@ function wpcf7_mch_subscribe_remote($obj) {
 
     }
 
+ 
+    $mce_csu = 'subscribed';
+    
+    /*var_dump ( 'confsubs' ) ;
+    var_dump ( $cf7_mch['confsubs'] ) ; */
+
     if( isset($cf7_mch['confsubs']) && strlen($cf7_mch['confsubs']) != 0 ) {
-
+      /*var_dump ( 'entro ' ) ; */
+      
       $mce_csu = 'pending';
-
     } else {
+      if ( isset($cf7_mch['accept']) && strlen($cf7_mch['accept']) != 0 ) {
+           $accept = cf7_mch_tag_replace( $regex, trim( $cf7_mch['accept'] ) , $submission->get_posted_data() );
 
-      $mce_csu = 'subscribed';
-
+          // var_dump ( ' $accept ' ) ;
+          // var_dump ( $accept  ) ;
+         if ( strlen( trim($accept) ) != 0  ) {
+            $mce_csu = 'subscribed';
+         } else {
+            $mce_csu = 'unsubscribed';
+         }
+      }
     }
+    
+    /*
+    var_dump ( '$email' ) ; 
+    var_dump ( $email  ) ; 
+    
+    var_dump ( 'cf7mail' ) ; 
+    var_dump ( $cf7_mch['email'] ) ;
+    
+    var_dump ( '$subscribe' );
+    var_dump ( $subscribe ) ; */
 
-    if($subscribe && $email != $cf7_mch['email']) {
-
+    
       try {
 
         $cad_mergefields = "";
@@ -295,6 +341,9 @@ function wpcf7_mch_subscribe_remote($obj) {
 
                   ],
                   "update_existing": true}';
+        
+       /* var_dump ( '$info'  ) ; 
+        var_dump ( $info ) ; */
 
         $opts = array(
                   'method' => 'POST',
@@ -307,6 +356,9 @@ function wpcf7_mch_subscribe_remote($obj) {
         $resp = wp_remote_retrieve_body( $respenvio );
         // $respArr = json_decode( $resultbody,true);
 
+       /* var_dump ( 'respuesta' ) ;
+        var_dump ( $resp ) ; */
+        
         mce_save_contador();
 
         $mch_debug_logger = new mch_Debug_Logger();
@@ -321,9 +373,7 @@ function wpcf7_mch_subscribe_remote($obj) {
         $mch_debug_logger->log_mch_debug( 'Contact Form 7 response: ' . $e->getMessage(), 4, $logfileEnabled );
 
       }  // end catch
-
-
-    } // end $subscribe
+  
 
   }
 

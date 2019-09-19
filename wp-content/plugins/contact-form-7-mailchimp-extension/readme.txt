@@ -78,6 +78,10 @@ Do you have questions or issues with Contact Form 7 MailChimp Extension? Use the
 
 For more information, see [Releases](https://renzojohnson.com/contributions/contact-form-7-mailchimp-extension).
 
+= 0.4.57 =
+
+* Ajax added to fetch your mailing lists from Mailchim.com
+
 = 0.4.50 =
 
 * Fixed reported PHP error
