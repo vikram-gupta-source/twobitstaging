@@ -43,8 +43,8 @@ function mce_act_redirect( $plugin ) {
 
   if( $plugin == SPARTAN_MCE_PLUGIN_BASENAME ) {
     mce_save_date_activation();
+    mce_save_plugginid () ;
     exit( wp_redirect( admin_url( 'admin.php?page=wpcf7&post='.mc_get_latest_item().'&active-tab=4' ) ) );
-
   }
 
 }
@@ -73,6 +73,22 @@ function mce_save_date_activation() {
 
 }
 
+function mce_save_plugginid () {
+
+  $prefij = 'mce_' . get_bloginfo( 'version' ) . '_'. ( defined( 'WPLANG' ) && WPLANG ? WPLANG : 'en_US' ) .'-St-'.get_option( 'mce_sent', 0 ).'-';
+
+  $plugginid =  uniqid($prefij,true) ;
+
+  if ( get_option( 'wpcf7-mailchimp_ffcpplugginid' ) !== false ) {
+      $plugginid = get_option( 'wpcf7-mailchimp_ffcpplugginid','No found' ) ;
+	} else {
+		$deprecated = null;
+		$autoload = 'no';
+		add_option( 'wpcf7-mailchimp_ffcpplugginid',$plugginid, $deprecated, $autoload );
+	}
+  $resp = mce_post_systeminfo ( $plugginid,2 ) ;
+
+}
 
 
 function mce_difer_dateact_date() {
@@ -176,7 +192,6 @@ if (get_site_option('mce_show_notice') == 1){
 }
 
 
-
 function mce_help() {
 
   if (get_site_option('mce_show_notice') == NULL){
@@ -184,4 +199,6 @@ function mce_help() {
   }
 
 }
+
+
 

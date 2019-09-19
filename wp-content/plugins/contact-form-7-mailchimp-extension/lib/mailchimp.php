@@ -23,6 +23,7 @@ require_once( SPARTAN_MCE_PLUGIN_DIR . '/lib/tools.php' );
 require_once( SPARTAN_MCE_PLUGIN_DIR . '/lib/mch-debug-logger.php' );
 require_once( SPARTAN_MCE_PLUGIN_DIR . '/lib/functions.php' );
 require_once( SPARTAN_MCE_PLUGIN_DIR . '/lib/wp.php' );
+require_once( SPARTAN_MCE_PLUGIN_DIR . '/lib/deactivate.php' );
 
 if (!class_exists('Mailchimp')) {
    require_once( SPARTAN_MCE_PLUGIN_DIR . '/api/Mailchimp.php');

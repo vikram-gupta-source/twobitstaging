@@ -131,3 +131,141 @@
   background-color: #4cc255;
   color:#fff;
 }
+
+
+/* chimpmail */
+.mcee-container {
+  display: block;
+
+}
+
+.mcee-container select {
+  margin-left: 0;
+}
+
+.mce-custom-fields {
+  background-color: rgba(255,255,255,.95);
+  /* border: 1px solid rgba(0,0,0,.05); */
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  padding: 9px 20px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.04);
+  margin-bottom: 10px;
+}
+
+
+.test-hide {
+  /* display: none !important; */
+}
+
+.spt-hidden {
+  font: 0;
+  /* opacity: 0; */
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* display: none; */
+  background-color: rgba(0,255,0,.05) !important;
+  border: 1px dashed green !important;
+}
+
+.mce-type {
+  color: #999 !important;
+}
+
+
+/* // *======================================================================================================================================================= */
+/* //             Bootstrap 3 Media Queries */
+/* // ======================================================================================================================================================== */
+
+/* // ==========  Mobile First Method  ========== */
+/* // ======================================================================================================================================================== */
+
+/* // Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+
+}
+
+/* // Extra Small Devices, Phones  ========================= */
+@media only screen and (min-width : 480px) {
+
+}
+
+/* // Small Devices, Tablets   ============================= */
+@media only screen and (min-width : 768px) {
+
+  /* chimpmail */
+  .mcee-container {
+    display: inline-block;
+    width: 49.5%;
+    box-sizing: border-box;
+
+  }
+
+  .mcee-container select {
+    margin-top: 3px;
+    margin-bottom: 10px;
+  }
+
+
+}
+
+/* // Medium Devices, Desktops  ============================ */
+@media only screen and (min-width : 992px) {
+
+  /* chimpmail */
+  .mcee-container {
+    padding-right: 3.85rem;
+  }
+
+}
+
+/* // Large Devices, Wide Screens  ========================= */
+@media only screen and (min-width : 1200px) {
+
+}
+
+
+
+/* // ==========  Non-Mobile First Method  ========== */
+/* // ======================================================================================================================================================== */
+
+/* // Large Devices, Wide Screens  ========================= */
+@media only screen and (max-width : 1200px) {
+
+}
+
+/* // Medium Devices, Desktops  ============================ */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* // Medium Devices, Desktops  ============================ */
+@media only screen and (max-width : 991px) {
+
+}
+
+/* // Small Devices, Tablets  ============================== */
+@media only screen and (max-width : 768px) {
+
+}
+
+/* // Small Devices, Tablets  ============================== */
+@media only screen and (max-width : 767px) {
+
+}
+
+/* // Extra Small Devices, Phones  ========================= */
+@media only screen and (max-width : 480px) {
+
+}
+
+/* // Custom, iPhone Retina  =============================== */
+@media only screen and (max-width : 350px) {
+
+}
+
+/* // Custom, iPhone Retina  =============================== */
+@media only screen and (max-width : 320px) {
+
+}
