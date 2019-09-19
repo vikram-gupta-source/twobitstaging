@@ -73,7 +73,7 @@
                         <h3 class="lubalin subtitle mt-2 yellow"><?php echo get_field('sub_title', $show->ID);?></h3>
                         <?php endif ?>
                       </div>
-                      <?php if(!empty($gallery)) :?>
+                      <?php if(!empty($gallery) || !empty($_video)) :?>
                       <div class="show-asset-wrapper">
                         <div class="slick-media">
                           <?php if(!empty($_video)) :?>
@@ -191,7 +191,7 @@
                                 <?php else :?>
                                   <div class="cta-btn"><a class="btn btn-twobit btn-sm btn-disabled"><span><?php echo $timeInfo->ticket;?></span></a><div class="btn-behind sm">&nbsp;</div></div>
                                 <?php endif ?>
-                                     
+
                                 <?php endforeach ?>
                               </div>
                             </div>
