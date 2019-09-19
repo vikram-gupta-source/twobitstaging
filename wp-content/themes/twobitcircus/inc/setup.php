@@ -285,12 +285,38 @@ function get_locations($array) {
   return $_array;
 }
 // Get Time Close of Open
-function openClosed($days, $timezone) {
-  if(empty($days)) return null;
+function openClosed($days, $timezone, $closedDates) {
   date_default_timezone_set($timezone);
-  if(empty($days)) return 'closed';
-  $dayofweek = date('l');
+  if(empty($days)) return 'closed'; 
   $timestamp = time();
+  $closedData = [];
+  if(!empty($closedDates)) {
+    $closedData = explode(PHP_EOL, trim($closedDates));
+    if(!empty($closedData)) {
+      foreach($closedData as $part) {
+        $closedParts = explode(' ', trim($part));
+        $dayofweek = $closedParts[0];
+        if(isset($closedParts[1])) {
+          $timesParts = explode('-', trim($closedParts[1]));
+          if(count($timesParts) > 1) {
+            $startTime = strtotime($timesParts[0]);
+            $endTime = strtotime($timesParts[1]);
+            if($dayofweek == date('n/j/Y')) {
+              if(!empty($startTime) && ($startTime >= $endTime)) {
+                $endTime = strtotime('+1 day' . $timesParts[1]);
+              } else {
+                $endTime = $endTime;
+              }
+              if ($startTime <= $timestamp && $timestamp <= $endTime ) {
+                  return 'closed';
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  $dayofweek = date('l');
   foreach($days as $day) {
     if($dayofweek == $day['day']) {
       $startTime = strtotime($day['open']);
