@@ -744,8 +744,10 @@ $(function() {
         });
       }
       if ($elm.find(".embed-lazy").length) {
-        let url = $elm.find(".embed-lazy").data('video');
-        $elm.find(".embed-lazy").removeClass('embed-lazy').html('<iframe src="' + url + '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>');
+        $elm.find(".embed-lazy").each(function() {
+          let url = $(this).data('video');
+          $(this).removeClass('embed-lazy').html('<iframe src="' + url + '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>');
+        });
       }
     };
 
