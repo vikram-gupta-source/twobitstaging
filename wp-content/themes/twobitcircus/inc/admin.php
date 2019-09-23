@@ -65,6 +65,9 @@ function custom_acf_flexible_content_layout_title( $title, $field, $layout, $i )
   if( !empty(get_sub_field('title'))) {
     return get_sub_field('title');
   }
+  if( !empty(get_sub_field('show_title'))) {
+    return get_sub_field('show_title') . ' - ' . sget_sub_field('how_date');
+  }
 	// return
 	return $title;
 }
