@@ -4,6 +4,7 @@
  *
  * @package twobitcircus
  */
+ remove_filter ('the_content', 'wpautop');
 ?>
 <article id="parties" <?php post_class(); ?>>
 

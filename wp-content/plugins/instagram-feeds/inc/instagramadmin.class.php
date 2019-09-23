@@ -101,8 +101,21 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
         </form>
         <hr>
       </div>
+
+      <hr>
+      <?php
+      $listTable = new Instagram_List_Table();
+      $_count = $listTable->prepare_items();
+      ?>
+     <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+      <div class="wrap">
+        <form id="page-filter" method="post">
+          <?php $listTable->display(); ?>
+        </form>
+      </div>
       <?php
     }
+    // Hadnel Delete Table
     public function delete_cache() {
       global $wpdb;
       if ( current_user_can( 'manage_options' ) ) {
@@ -113,6 +126,7 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
       }
       die();
     }
+    // Hadnel Delete Directoy
     private function wipe_directory() {
       $filepath = ABSPATH . '/wp-content/uploads/instagram/*';
       $files = glob($filepath);
@@ -122,7 +136,139 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
         }
       }
     }
-
   }
 
+  if(!class_exists('WP_List_Table')){
+      require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+  }
+
+  class Instagram_List_Table extends WP_List_Table {
+
+    public $prefix;
+    public $table;
+
+    public function __construct(){
+        global $wpdb, $status, $page;
+        $this->table = $wpdb->prefix . 'instagram_feeds';
+  			//Set parent defaults
+  			parent::__construct( array(
+  					'singular'  => 'instagram',     //singular name of the listed records
+  					'plural'    => 'instagrams',    //plural name of the listed records
+  					'ajax'      => false        //does this table support ajax?
+  			) );
+  	}
+    function process_bulk_action() {
+      global $wpdb;
+      $action = $this->current_action();
+      if( 'disable' == $action && !empty($_REQUEST['cb_action'])) {
+        foreach ( $_REQUEST['cb_action'] as $post_id ) {
+          $result = $wpdb->query('UPDATE '.$this->table.' SET `status` = 1 WHERE `id`='.$post_id);
+        }
+      }
+      elseif( 'enable' == $action && !empty($_REQUEST['cb_action'])) {
+        foreach ( $_REQUEST['cb_action'] as $post_id ) {
+          $result = $wpdb->query('UPDATE '.$this->table.' SET `status` = 0 WHERE `id`='.$post_id);
+        }
+      }
+      elseif( 'delete' == $action && !empty($_REQUEST['cb_action'])) {
+        foreach ( $_REQUEST['cb_action'] as $post_id ) {
+          $result = $wpdb->query('DELETE FROM '.$this->table.' WHERE `id`='.$post_id);
+        }
+      }
+      return false;
+    }
+  	public function column_default($item, $column_name){
+  			switch($column_name) {
+  				case 'pubdate':
+  				 	return date_i18n( get_option( 'date_format' ), strtotime($item->{$column_name}));
+          case 'caption':
+    				return wp_trim_words($item->{$column_name}, 25);
+          case 'image':
+            return '<img style="width: 150px; height: auto;" src="'.$item->{$column_name}.'"/>';
+          case 'link':
+            return '<a href="'.$item->{$column_name}.'" target="_blank">'.$item->{$column_name}.'</a>';
+          case 'status':
+            return ($item->{$column_name} == 1) ? '<span style="color: red;">Disabled</span>'  : '<span style="color: green;">Enabled</span>';
+  				default:
+  				 	return $item->{$column_name};
+  			}
+  	}
+    function get_bulk_actions() {
+      $actions = array(
+        'disable'  => __('Disable'),
+        'enable'    => __('Enable'),
+        'delete'    => __('Delete')
+      );
+      return $actions;
+    }
+    function column_cb($item) {
+        return sprintf(
+            '<input type="checkbox" name="cb_action[]" value="%s" />', $item->id
+        );
+    }
+  	public function get_columns(){
+			$columns = array(
+        'cb' => '<input type="checkbox" />',
+        'image' => 'Image',
+				'pubdate'     => 'Date',
+				'instagram_id'    => 'Instagram ID',
+				'link'  => 'link',
+				'count' => 'Comments',
+				'count2' => 'Likes',
+        'caption'  => 'Caption',
+				'status'  => 'Status'
+			);
+  		return $columns;
+  	}
+  	public function get_sortable_columns() {
+  			$sortable_columns = array(
+  				  'pubdate'      => array('pubdate',false), 
+  					'status'  => array('status',false)
+  			);
+  			return $sortable_columns;
+  	}
+  	public function prepare_items() {
+  			global $wpdb;
+  			$per_page = 30;
+  			$columns = $this->get_columns();
+  			$hidden = $dataQry = array();
+  			$query = '';
+        $this->process_bulk_action();
+  			$sortable = $this->get_sortable_columns();
+  			$this->_column_headers = array($columns, $hidden, $sortable);
+  			$searchcol= array(
+  		    'instagram_id'
+  		    );
+  			if(!empty($_POST["s"])) {
+  				foreach( $searchcol as $col) {
+  					$dataQry[] = $col.' LIKE "%'.trim($_POST["s"]).'%"';
+  				}
+  				$query = ' WHERE (' . implode(' OR ', $dataQry) . ')';
+  			}
+  			$request = "SELECT * FROM " . $this->table . $query;
+  			$data = $wpdb->get_results($request);
+        usort($data, 'insta_usort_reorder');
+        if(!empty($data)) {
+    			$current_page = $this->get_pagenum();
+    			$total_items = count($data);
+    			$data = array_slice($data,(($current_page-1)*$per_page),$per_page);
+    			$this->items = $data;
+    			$this->set_pagination_args( array(
+    					'total_items' => $total_items,                  //WE have to calculate the total number of items
+    					'per_page'    => $per_page,                     //WE have to determine how many items to show on a page
+    					'total_pages' => ceil($total_items/$per_page)   //WE have to calculate the total number of pages
+    			) );
+          return $total_items;
+        }
+  			return null;
+  	}
+  }
+
+}
+
+function insta_usort_reorder($a,$b){
+		$orderby = (!empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'pubdate'; //If no sort, default to title
+		$order = (!empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'desc'; //If no order, default to asc
+		$result = strcmp($a->{$orderby}, $b->{$orderby}); //Determine sort order
+		return ($order==='asc') ? $result : -$result; //Send final sort direction to usort
 }

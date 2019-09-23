@@ -70,7 +70,7 @@ function custom_acf_flexible_content_layout_title( $title, $field, $layout, $i )
 }
 // name
 add_filter('acf/fields/flexible_content/layout_title', 'custom_acf_flexible_content_layout_title', 10, 4);
-  
+
 // Save custom meta
 function twobit_taxonomy_save_taxonomy_meta( $term_id, $tag_id ) {
     if ( isset( $_POST[ 'category_icon' ] ) ) {

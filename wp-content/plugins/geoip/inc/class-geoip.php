@@ -83,6 +83,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
     public function geo_api_settings_callback() {
       $api_options = get_option($this->prefix . 'api_keys');
       ?>
+      <p>GEO IP is from IP-API <a href="http://ip-api.com/">http://ip-api.com/</a></p>
       <label for="<?php echo $this->prefix; ?>api_keys[api]">API Key</label>
       <input name="<?php echo $this->prefix; ?>api_keys[api]" type="text" value="<?php echo $api_options['api']; ?>" />
       <br>

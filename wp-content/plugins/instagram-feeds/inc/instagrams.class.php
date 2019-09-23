@@ -58,8 +58,10 @@ if ( ! class_exists( 'Instagrams' ) ) {
       $parts = explode('?', $img);
       $pathinfo = pathinfo($parts[0]);
       $url =  $id.'.'.$pathinfo['extension'];
-      $filepath = ABSPATH . '/wp-content/uploads/instagram/'.$url;
-      file_put_contents($filepath, file_get_contents($img));
+      $filepath = ABSPATH . '/wp-content/uploads/instagram/'.$url; 
+      $image = imagecreatefromjpeg($img);
+      imagejpeg($image, $filepath, 75);
+      imagedestroy($image);
       return '/wp-content/uploads/instagram/' . $url;
     }
     private function insta_write($data=null) {

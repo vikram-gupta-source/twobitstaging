@@ -95,15 +95,16 @@ if ( ! class_exists( 'Calendar' ) ) {
           $obj['target'] = $spvent['target'];
           $setTimeTicket = date('H:i A', strtotime($obj['ticket']));
           if(!empty($recurring)) {
-            //print_r($recurring);
             foreach($recurring as $key => $recr) {
-              $_dy = date('d', $recr);
-              $obj['posted'] = date('m-d-Y', $recr);
-              $setTimeTicket = date('H:i A', strtotime($obj['ticket']));
-              if(isset($this->calender[$_dy]) && isset($this->calender[$_dy][$setTimeTicket])) {
-                $setTimeTicket = $setTimeTicket.'-2-'.$key;
+              if(!empty($recr)) {
+                $_dy = date('d', $recr);
+                $obj['posted'] = date('m-d-Y', $recr);
+                $setTimeTicket = date('H:i A', strtotime($obj['ticket']));
+                if(isset($this->calender[$_dy]) && isset($this->calender[$_dy][$setTimeTicket])) {
+                  $setTimeTicket = $setTimeTicket.'-2-'.$key;
+                }
+                $specialEvent[$_dy][$setTimeTicket][] = (object) $obj;
               }
-              $specialEvent[$_dy][$setTimeTicket][] = (object) $obj;
             }
           } else {
             if(isset($this->calender[$_spday][$setTimeTicket]) && !empty($this->calender[$_spday][$setTimeTicket])) {

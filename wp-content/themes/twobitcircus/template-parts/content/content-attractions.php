@@ -174,12 +174,13 @@
                         </div>
                       </div>
                       <div class="showtimes">
-                        <div id="accordion-<?php echo $show->ID;?>" class="accordion">
+                        <div id="accordion-<?php echo $show->ID;?>" class="accordion accordion-wrapper">
                           <?php foreach($composedDates as $date => $tickets) :?>
                           <div class="card">
                             <div class="card-header">
-                              <a class="card-link text-uppercase" data-toggle="collapse" href="#collapse-<?php echo $show->ID;?>-<?php echo $date;?>">
+                              <a class="card-link text-uppercase collapsed" data-toggle="collapse" href="#collapse-<?php echo $show->ID;?>-<?php echo $date;?>">
                                 <?php echo date('l, F j', strtotime(str_replace('-', '/', $date)));?>
+                                <i class="fa fa-angle-down"></i>
                               </a>
                             </div>
                             <div id="collapse-<?php echo $show->ID;?>-<?php echo $date;?>" class="collapse" data-parent="#accordion-<?php echo $show->ID;?>">

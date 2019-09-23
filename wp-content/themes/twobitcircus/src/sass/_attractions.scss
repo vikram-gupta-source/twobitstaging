@@ -278,6 +278,13 @@
     @media (max-width: $mobile) {
       display: block !important;
     }
+    .accordion-wrapper {
+      .card-link:not(.collapsed) {
+        i.fa-angle-down:before {
+          @include transform(rotate(180deg));
+        }
+      }
+    }
     .card {
       border-radius: 0;
       border-color: $yellow;
