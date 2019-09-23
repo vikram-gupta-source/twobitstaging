@@ -40,9 +40,7 @@ function wpcf7_mch_add_mailchimp($args) {
   $host = esc_url_raw( $_SERVER['HTTP_HOST'] );
   $url = $_SERVER['REQUEST_URI'];
   $urlactual = $url;
-
-  //var_dump($cf7_mch['logfileEnabled']); 
-  
+ 
   $mce_txcomodin = $args->id() ;
   $listatags = wpcf7_mce_form_tags();
 
@@ -63,19 +61,13 @@ function wpcf7_mch_add_mailchimp($args) {
 
 	$tmp = wpcf7_mce_listasasociadas( $mceapi,$logfileEnabled,'cf7_mch_'.$mce_txcomodin );
 	$listdata = $tmp['lisdata'];
-
-  
-  
-  /*$apivalid = ( isset( $cf7_mch['api-validation'] )   ) ? $cf7_mch['api-validation'] : '0' ;
-  $listdata = ( isset( $cf7_mch['lisdata'] )   ) ? $cf7_mch['lisdata'] : null ; */
-  
+    
   $chm_valid = '<span class="chmm valid"><span class="dashicons dashicons-yes"></span>API Key</span>';
   $chm_invalid = '<span class="chmm invalid"><span class="dashicons dashicons-no"></span>Error: API Key</span>';
   
   include SPARTAN_MCE_PLUGIN_DIR . '/lib/view.php';
 
 }
-
 
 
 function resetlogfile_mce() {
@@ -92,7 +84,6 @@ function resetlogfile_mce() {
 }
 
 
-
 function wpcf7_mch_save_mailchimp($args) {
 
   if (!empty($_POST)){
@@ -101,8 +92,6 @@ function wpcf7_mch_save_mailchimp($args) {
   }
 
 }
-
-
 
 function show_mch_metabox ( $panels ) {
 
@@ -142,7 +131,6 @@ function spartan_mce_author_wpcf7( $mce_supps, $class, $content, $args ) {
 }
 
 
-
 function cf7_mch_tag_replace( $pattern, $subject, $posted_data, $html = false ) {
 
   if( preg_match($pattern,$subject,$matches) > 0) {
@@ -175,7 +163,6 @@ function cf7_mch_tag_replace( $pattern, $subject, $posted_data, $html = false ) 
 }
 
 
-
 function wpcf7_mch_subscribe_remote($obj) {
   $cf7_mch = get_option( 'cf7_mch_'.$obj->id() );
 
@@ -192,19 +179,10 @@ function wpcf7_mch_subscribe_remote($obj) {
 
     $email = cf7_mch_tag_replace( $regex, $cf7_mch['email'], $submission->get_posted_data() );
     $name = cf7_mch_tag_replace( $regex, $cf7_mch['name'], $submission->get_posted_data() );
-
-    /*
-    var_dump ( '$email' ) ; var_dump ($email) ;
-    var_dump ( '$name' ) ; var_dump ($name) ; */
-    
+     
     $lists = cf7_mch_tag_replace( $regex, $cf7_mch['list'], $submission->get_posted_data() );
     $listarr = explode(',',$lists);
-    /*
-    echo ( '<pre>' ) ;
-         var_dump ($listarr) ;
-    echo ( '</pre>') ; */
-   
-
+  
     $merge_vars=array('FNAME'=>$name);// *x1
 
         // *x2
@@ -236,21 +214,18 @@ function wpcf7_mch_subscribe_remote($obj) {
     }
 
  
-    $mce_csu = 'subscribed';
-    
-    /*var_dump ( 'confsubs' ) ;
-    var_dump ( $cf7_mch['confsubs'] ) ; */
-
+    $mce_csu = 'subscribed';    
+   
     if( isset($cf7_mch['confsubs']) && strlen($cf7_mch['confsubs']) != 0 ) {
-      /*var_dump ( 'entro ' ) ; */
-      
+         
       $mce_csu = 'pending';
     } else {
       if ( isset($cf7_mch['accept']) && strlen($cf7_mch['accept']) != 0 ) {
            $accept = cf7_mch_tag_replace( $regex, trim( $cf7_mch['accept'] ) , $submission->get_posted_data() );
-
-          // var_dump ( ' $accept ' ) ;
-          // var_dump ( $accept  ) ;
+          
+          // var_dump ( '$accept' ) ;
+          // var_dump ( $accept ) ;
+      
          if ( strlen( trim($accept) ) != 0  ) {
             $mce_csu = 'subscribed';
          } else {
@@ -258,18 +233,7 @@ function wpcf7_mch_subscribe_remote($obj) {
          }
       }
     }
-    
-    /*
-    var_dump ( '$email' ) ; 
-    var_dump ( $email  ) ; 
-    
-    var_dump ( 'cf7mail' ) ; 
-    var_dump ( $cf7_mch['email'] ) ;
-    
-    var_dump ( '$subscribe' );
-    var_dump ( $subscribe ) ; */
-
-    
+        
       try {
 
         $cad_mergefields = "";
@@ -340,11 +304,8 @@ function wpcf7_mch_subscribe_remote($obj) {
                     }
 
                   ],
-                  "update_existing": true}';
-        
-       /* var_dump ( '$info'  ) ; 
-        var_dump ( $info ) ; */
-
+                  "update_existing": true}';         
+   
         $opts = array(
                   'method' => 'POST',
                   'headers' => $vc_headers,
@@ -354,11 +315,7 @@ function wpcf7_mch_subscribe_remote($obj) {
 
         $respenvio = wp_remote_post( $url_put, $opts );
         $resp = wp_remote_retrieve_body( $respenvio );
-        // $respArr = json_decode( $resultbody,true);
-
-       /* var_dump ( 'respuesta' ) ;
-        var_dump ( $resp ) ; */
-        
+            
         mce_save_contador();
 
         $mch_debug_logger = new mch_Debug_Logger();

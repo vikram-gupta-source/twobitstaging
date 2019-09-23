@@ -11,13 +11,7 @@ function wpcf7_mce_loadlistas() {
 	$mce_idformxx = 'cf7_mch_'. wp_unslash( $_POST['mce_idformxx'] );
 	$mceapi = isset( $_POST['mceapi'] ) ? $_POST['mceapi'] : 0 ;
 
-  //var_dump('entro a: wpcf7_chm_loadlistas');
-  //var_dump ( $mce_idformxx ) ;
-
 	$cf7_mch = get_option( $mce_idformxx, $cf7_mch_defaults );
-  /*echo ('<pre>');
-      var_dump ( $cf7_mch ) ;
-  echo ('</pre>');*/
 
 	$tmppost = $cf7_mch ;
 
@@ -28,9 +22,7 @@ function wpcf7_mce_loadlistas() {
 
 	$tmp = wpcf7_mce_validate_api_key( $mceapi,$logfileEnabled,$mce_idformxx );
 	$apivalid = $tmp['api-validation'];
-
-  //var_dump('api-validation: '.$apivalid);
-
+ 
 	$tmppost = $tmppost + $tmp ;
 
 	$tmp = wpcf7_mce_listasasociadas( $mceapi,$logfileEnabled,$mce_idformxx );
@@ -44,8 +36,6 @@ function wpcf7_mce_loadlistas() {
 	update_option( $mce_idformxx,$tmppost );
 
   mce_html_panel_listmail( $apivalid,$listdata,$cf7_mch );
-// var_dump ('llega aqui') ;
- //mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags);
 
 	wp_die();
 }
@@ -54,8 +44,9 @@ function wpcf7_mce_loadlistas() {
 
 function mce_html_panel_listmail( $apivalid, $listdata, $cf7_mch ) {
 
-  $vlist = ( isset( $cf7_mch['list'] )   ) ? $cf7_mch['list'] : ' ' ;
-
+  $vlist = ( isset( $cf7_mch['list'] )   ) ? $cf7_mch['list'] : ' ' ; 
+  $i = 0 ;
+  $count = count ( $listdata['lists'] ) ;
 
   ?>
     <small><input type="hidden" id="mce_txcomodin2" name="wpcf7-mailchimp[mce_txtcomodin2]" value="<?php echo( isset( $apivalid ) ) ? esc_textarea( $apivalid ) : ''; ?>" style="width:0%;" /></small>
@@ -63,14 +54,15 @@ function mce_html_panel_listmail( $apivalid, $listdata, $cf7_mch ) {
 
     if ( isset( $apivalid ) && '1' == $apivalid ) {
     ?>
-      <label for="wpcf7-mailchimp-list"><?php echo esc_html( __( 'These are ALL your mailchimp.com lists:', 'wpcf7' ) ); ?></label><br />
+      <label for="wpcf7-mailchimp-list"><?php echo esc_html( __( 'These are  ALL ' . $count .' your mailchimp.com lists: '  , 'wpcf7' ) ); ?></label><br />
       <select id="wpcf7-mailchimp-list" name="wpcf7-mailchimp[list]" style="width:45%;">
       <?php
       foreach ( $listdata['lists'] as $list ) {
+        $i = $i + 1 ;
         ?>
         <option value="<?php echo $list['id'] ?>"
           <?php if ( $vlist == $list['id'] ) { echo 'selected="selected"'; } ?>>
-          <?php echo $list['name'].' - Unique id: '.$list['id'].'' ?></option>
+          <?php echo $i .' - '.  $list['name'].' - Unique id: '.$list['id'].'' ?></option>
         <?php
       }
       ?>
@@ -81,9 +73,6 @@ function mce_html_panel_listmail( $apivalid, $listdata, $cf7_mch ) {
 
 function mce_html_selected_tag ($nomfield,$listatags,$cf7_mch,$filtro) {
 
-//$filtro = 'email';
-//filtrando
-//var_dump ( $filtro )  ;
 if ( $nomfield != 'email' )  {
     $r = array_filter( $listatags, function( $e ) use ($filtro) {
           return $e['basetype'] == $filtro or $e['basetype'] == 'textarea'  ;
@@ -101,8 +90,7 @@ $listatags =   $r ;
   
     
   $ggCustomValue = ( ( $nomfield =='email' && $ggCustomValue == ' ' )  ? '[your-email]':$ggCustomValue   );
-  //var_dump ('$ggCustomValue') ; var_dump ( $ggCustomValue ) ;
-
+ 
      ?>
       <select class="chm-select" id="wpcf7-mailchimp-<?php echo $nomfield; ?>"
                 name="wpcf7-mailchimp[<?php echo $nomfield; ?>]" style="width:95%">
@@ -156,7 +144,7 @@ function wpcf7_mce_validate_api_key( $input, $logfileEnabled, $idform = '' ) {
     if ( is_wp_error ( $resp ) ) {
 
         $tmp = array( 'api-validation' => 0 );
-        $mch_debug_logger->log_mch_debug( 'API Key Response - Result: - IdForm:'.$idform.' - Ivalida Api Key ',4,$logfileEnabled );
+        $mch_debug_logger->log_mch_debug( 'API Key Response - Result: - IdForm:'.$idform.' - Invalid Api Key ',4,$logfileEnabled );
         return $tmp;
     }
 
@@ -186,10 +174,6 @@ function wpcf7_mce_validate_api_key( $input, $logfileEnabled, $idform = '' ) {
 function wpcf7_mce_listasasociadas( $apikey, $logfileEnabled, $idform = '' ) {
 	try {
 
-   /*var_dump ( 'entra' ) ;
-   var_dump ('api key') ;
-   var_dump ( $apikey ) ;*/
-
    if ( !isset( $apikey ) or trim ( $apikey  ) ==""   ) {
 
       $list_data 	= array(
@@ -204,7 +188,7 @@ function wpcf7_mce_listasasociadas( $apikey, $logfileEnabled, $idform = '' ) {
 
     $api   = $apikey;
     $dc    = explode("-",$api);
-    $url   = "https://anystring:$dc[0]@$dc[1].api.mailchimp.com/3.0/lists";
+    $url   = "https://anystring:$dc[0]@$dc[1].api.mailchimp.com/3.0/lists?count=9999";
 
     $vc_date = date( 'Md.H:i' );
     $vc_user_agent = '.' . SPARTAN_MCE_VERSION . '.' . strtolower( $vc_date );
@@ -216,14 +200,13 @@ function wpcf7_mce_listasasociadas( $apikey, $logfileEnabled, $idform = '' ) {
                   );
 
     $resp = wp_remote_get( $url, $opts );
-    $resultbody = wp_remote_retrieve_body( $resp );
+    
+    $resultbody = wp_remote_retrieve_body( $resp );    
+   
+    
     $list_datanew = json_decode( $resultbody, True );
-
-    /*var_dump('* Array del 3.0 con wp_remote');
-    echo('<pre>');
-       var_dump($list_datanew);
-    echo('</pre>');*/
-
+      
+ 
     $tmp = array( 'lisdata' => $list_datanew );
 
 	  $mch_debug_logger = new mch_Debug_Logger() ;

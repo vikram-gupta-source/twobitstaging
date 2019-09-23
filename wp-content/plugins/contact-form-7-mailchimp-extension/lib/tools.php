@@ -116,7 +116,7 @@ function mc_get_latest_item(){
             'fields'            => 'ids',
         );
     // Get Highest Value from CF7Forms
-    $form = max(get_posts($args));
+    $form = ( class_exists( 'WPCF7') ? max(get_posts($args)) : 0 ) ;
     $out = '';
     if (!empty($form)) {
         $out .= $form;

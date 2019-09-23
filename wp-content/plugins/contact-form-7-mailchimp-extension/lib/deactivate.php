@@ -55,9 +55,7 @@ function mce_post_systeminfo ($title,$category) {
       // developer.wordpress.org/rest-api/reference/posts/#create-a-post
         )
       ) );
-
-  $respgg =  vc_utm_gth ( ( ( $category == 2 ) ? 'Activated' : ( ( $category == 3 ) ?  'Update' :  'Deactivated'   ) ) ) ; 
-  
+    
   return $api_response ;
 
 }
@@ -202,23 +200,6 @@ function mce_set_systeminfo_conten () {
 
 }
 
-function vc_utm_gth($category) {
-
-  global $wpdb;
-  //var_dump ( ' entro ') ;
-  $ruthhtp = 'https://renzojohnson.com/contributions/contact-form-7-mailchimp-extension/mailchimp-api-key';    
-
-  $utms  = '?utm_source=MailChimp';
-  $utms .= '&utm_campaign=w' . get_bloginfo( 'version' ) . '-' . mce_difer_dateact_date() . 'c' . WPCF7_VERSION . ( defined( 'WPLANG' ) && WPLANG ? WPLANG : 'en_US' ) . '';
-  $utms .= '&utm_medium=cme-' . SPARTAN_MCE_VERSION . '';
-  $utms .= '&utm_term=F' . ini_get( 'allow_url_fopen' ) . 'C' . ( function_exists( 'curl_init' ) ? '1' : '0' ) . 'P' . PHP_VERSION . 'S' . $wpdb->db_version() . '_' . $category ;
-  // $utms .= '&utm_content=';
-
-  $resp = wp_remote_post ($ruthhtp.$utms) ;
-  return $resp;
-
-}
-
 add_action( 'upgrader_process_complete', 'mce_upgradeplug_function',10, 2);
 
 function mce_upgradeplug_function( $upgrader_object, $options ) {
@@ -235,9 +216,7 @@ function mce_upgradeplug_function( $upgrader_object, $options ) {
     }
 }
 
-function mce_update_plugginid () {
-  
-  //$plugginid = openssl_random_pseudo_bytes(32,true) ;
+function mce_update_plugginid () {   
   
   $prefij = 'mce_' . get_bloginfo( 'version' ) . '_'. ( defined( 'WPLANG' ) && WPLANG ? WPLANG : 'en_US' ) .'-St-'.get_option( 'mce_sent', 0 ).'-';
   

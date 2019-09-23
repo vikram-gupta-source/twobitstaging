@@ -28,10 +28,10 @@ function vc_utm() {
   return $utms;
 }
 
-function mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags) {
+function mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags,$mce_txcomodin) {
   ?>
    <div >
-
+      <small><input type="hidden" id="mce_txtcomodin" name="wpcf7-mailchimp[mce_txtcomodin]" value="<?php echo( isset( $mce_txcomodin ) ) ? esc_textarea( $mce_txcomodin ) : ''; ?>" style="width:0%;" /></small>
     <div class="mce-custom-fields">
       <div class="mail-field">
         <div id="mce_panel_listamail" >
@@ -85,7 +85,7 @@ function mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags) {
   </div>
 
     <div id="mce_panel_ajagen">
-        <?php  mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags) ;    ?>
+        <?php  mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags,$mce_txcomodin) ;    ?>
     </div>
 
     <div class="cme-container mce-support" style="display:none">

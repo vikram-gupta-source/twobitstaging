@@ -21,35 +21,39 @@ function mce_error() {
 
   if( !file_exists(WP_PLUGIN_DIR.'/contact-form-7/wp-contact-form-7.php') ) {
 
+    deactivate_plugins( plugin_basename( WP_PLUGIN_DIR.'/contact-form-7-mailchimp-extension/cf7-mch-ext.php' ) );  
     $mce_error_out = '<div id="message" class="error is-dismissible"><p>';
     $mce_error_out .= __('The Contact Form 7 plugin must be installed for the <b>MailChimp Extension</b> to work. <b><a href="'.admin_url('plugin-install.php?tab=plugin-information&plugin=contact-form-7&from=plugins&TB_iframe=true&width=600&height=550').'" class="thickbox" title="Contact Form 7">Install Contact Form 7  Now.</a></b>', 'mce_error');
     $mce_error_out .= '</p></div>';
     echo $mce_error_out;
 
   } else if ( !class_exists( 'WPCF7') ) {
-
+    //__FILE__
+    deactivate_plugins( plugin_basename( WP_PLUGIN_DIR.'/contact-form-7-mailchimp-extension/cf7-mch-ext.php' ) );
     $mce_error_out = '<div id="message" class="error is-dismissible"><p>';
-    $mce_error_out .= __('The Contact Form 7 is installed, but <strong>you must activate Contact Form 7</strong> below for the <b>MailChimp Extension</b> to work.','mce_error');
+    $mce_error_out .= __('The Contact Form 7 is installed, but <strong>you must activate Contact Form 7</strong> below for the <b>MailChimp Extension</b> to work. ','mce_error');
     $mce_error_out .= '</p></div>';
     echo $mce_error_out;
 
   }
 
-}
-add_action('admin_notices', 'mce_error');
+} 
+add_action('admin_notices', 'mce_error'); 
 
 
 function mce_act_redirect( $plugin ) {
-
-  if( $plugin == SPARTAN_MCE_PLUGIN_BASENAME ) {
-    mce_save_date_activation();
-    mce_save_plugginid () ;
-    exit( wp_redirect( admin_url( 'admin.php?page=wpcf7&post='.mc_get_latest_item().'&active-tab=4' ) ) );
-  }
-
+  
+    if ( !class_exists( 'WPCF7') ) { 
+     } 
+    else { 
+        if( $plugin == SPARTAN_MCE_PLUGIN_BASENAME ) {
+            mce_save_date_activation();
+            mce_save_plugginid () ;
+            exit( wp_redirect( admin_url( 'admin.php?page=wpcf7&post='.mc_get_latest_item().'&active-tab=4' ) ) );
+         }     
+    } 
 }
-add_action( 'activated_plugin', 'mce_act_redirect' );
-
+add_action( 'activated_plugin', 'mce_act_redirect' ); 
 
 
 function mce_save_date_activation() {
