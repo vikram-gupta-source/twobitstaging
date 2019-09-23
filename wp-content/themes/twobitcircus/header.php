@@ -84,4 +84,4 @@
   	<!-- End Google Tag Manager (noscript) -->
   <?php get_template_part( 'template-parts/partial/partial', 'menu' ); ?>
 
-  <main role="main">
+  <main id="main" role="main">

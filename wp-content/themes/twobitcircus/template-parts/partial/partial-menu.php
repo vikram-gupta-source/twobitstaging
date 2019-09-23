@@ -4,7 +4,7 @@
  *
  * @package twobitcircus
  */
- global $location; 
+ global $location;
  $isOpen = openClosed($location['days'], $location['timezone'], $location['close_dates']);
 ?>
 <!-- ******************* Mobile ******************* -->
@@ -34,7 +34,7 @@
 </div>
 <!-- ******************* Navbar ******************* -->
 <header id="main-nav" class="fixed-top" itemscope itemtype="http://schema.org/WebSite">
-  <a class="skip-link sr-only sr-only-focusable" href="#content"><?php _e( 'Skip to content', 'twobitcircus' ); ?></a>
+  <a class="skip-link sr-only sr-only-focusable" href="#main"><?php _e( 'Skip to content', 'twobitcircus' ); ?></a>
   <?php if(!empty(get_field('notification', 'options'))) :?>
   <div id="notification-bar">
     <div class="container text-center">
@@ -46,7 +46,7 @@
     <div class="container position-relative pr-0">
       <?php the_custom_logo(); ?>
       <?php if(!empty($location['city'])):?>
-      <a title="Directions" href="#direction" class="nav-link-direction text-center">
+      <a title="Directions" href="#map-modal" class="nav-link-direction text-center">
         <span class="direction text-uppercase"><?php echo $location['city'] ?><br/><span class="state <?php echo $isOpen ?>"><?php echo ucwords($isOpen) ?> <i class="fa fa-lg fa-location-arrow" aria-hidden="true"></i></span></span>
       </a>
       <?php endif ?>
