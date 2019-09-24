@@ -135,7 +135,7 @@
                         <div class="power text-uppercase">
                           <b>Powered By </b>
                           <?php foreach(get_field('powered_by', $show->ID) as $pb) :?>
-                          <a href="<?php echo $pb['powered_link'] ;?>" target="_blank"><img src="<?php echo $pb['powered_image'] ;?>" alt="<?php echo $pb['title'] ;?>" width="185" height="50" /></a>
+                          <a href="<?php echo $pb['powered_link'] ;?>" target="_blank"><img class="img-fluid" src="<?php echo $pb['powered_image'] ;?>" alt="<?php echo $pb['title'] ;?>"/></a>
                           <?php endforeach ?>
                         </div>
                       </div>
