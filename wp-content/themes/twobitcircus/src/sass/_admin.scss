@@ -306,6 +306,11 @@ $adminLogo: "/wp-content/uploads/2019/05/animated-logo.gif";
   .acf-field.acf-accordion .acf-accordion-title {
     background-color: $headbar2;
   }
+  .acf-input {
+    textarea {
+      height: 85px;
+    }
+  }
   .acf-input-prepend,
   .acf-input-append,
   .acf-input-wrap {

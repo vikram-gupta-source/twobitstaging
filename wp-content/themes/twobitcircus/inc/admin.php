@@ -87,3 +87,18 @@ function twobit_taxonomy_save_taxonomy_meta( $term_id, $tag_id ) {
 }
 add_action( 'created_category', 'twobit_taxonomy_save_taxonomy_meta', 10, 2 );
 add_action( 'edited_category', 'twobit_taxonomy_save_taxonomy_meta', 10, 2 );
+
+// Collapse All Default
+function twobit_acf_admin_head() {
+    ?>
+    <script type="text/javascript">
+        (function($){
+            $(document).ready(function(){
+                $('.layout').addClass('-collapsed');
+                $('.acf-postbox').addClass('closed');
+            });
+        })(jQuery);
+    </script>
+    <?php
+}
+add_action('acf/input/admin_head', 'twobit_acf_admin_head');
