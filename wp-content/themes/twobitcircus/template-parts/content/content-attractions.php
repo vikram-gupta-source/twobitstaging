@@ -130,6 +130,16 @@
                       </div>
                       <?php endif ?>
                       <?php echo apply_filters('the_content', $show->post_content) ?>
+                      <?php if(!empty(get_field('powered_by', $show->ID))):?>
+                      <div class="my-3">
+                        <div class="power text-uppercase">
+                          <b>Powered By </b>
+                          <?php foreach(get_field('powered_by', $show->ID) as $pb) :?>
+                          <a href="<?php echo $pb['powered_link'] ;?>" target="_blank"><img src="<?php echo $pb['powered_image'] ;?>" alt="<?php echo $pb['title'] ;?>" width="185" height="50" /></a>
+                          <?php endforeach ?>
+                        </div>
+                      </div>
+                      <?php endif ?>
                       <?php if(!empty($info[0]['cta_title']) && empty($composedDates)): ?>
                       <div class="buy-link mt-4">
                         <?php if(!empty($info[0]['buy_link'])) :?>

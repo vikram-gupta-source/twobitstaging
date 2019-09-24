@@ -56,6 +56,15 @@
         @include transform(skewX(-20deg));
       }
     }
+    .power {
+      margin: 5px;
+      display: inline-block;
+      a {
+        margin: 0 5px;
+        max-width: 55px;
+        display: inline-block;
+      }
+    }
     .desktop-title,
     .mobile-title {
       position: relative;
