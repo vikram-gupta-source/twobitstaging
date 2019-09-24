@@ -22,6 +22,15 @@
 }
 #attractions {
   overflow-x: hidden;
+  .power {
+    margin: 5px;
+    display: inline-block;
+    a {
+      margin: 0 5px;
+      max-width: 55px;
+      display: inline-block;
+    }
+  }
   #attractions-block {
     background-image: url("/wp-content/themes/twobitcircus/img/home/green_pattern.png");
     background-repeat: no-repeat;
@@ -54,15 +63,6 @@
         border-left: 4px solid $yellow;
         transform-origin: top left;
         @include transform(skewX(-20deg));
-      }
-    }
-    .power {
-      margin: 5px;
-      display: inline-block;
-      a {
-        margin: 0 5px;
-        max-width: 55px;
-        display: inline-block;
       }
     }
     .desktop-title,
