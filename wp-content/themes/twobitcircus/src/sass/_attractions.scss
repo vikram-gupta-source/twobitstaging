@@ -223,10 +223,19 @@
       .powered {
         margin: 5px;
         display: inline-block;
+        span {
+          vertical-align: top;
+          display: inline-block;
+          padding-top: 19px;
+        }
         a {
           margin: 0 5px;
-          max-width: 55px;
+          max-width: 50px;
           display: inline-block;
+          img {
+            vertical-align: middle;
+            line-height: normal;
+          }
         }
       }
       .title {
