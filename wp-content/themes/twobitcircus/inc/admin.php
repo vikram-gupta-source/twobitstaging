@@ -60,13 +60,16 @@ function custom_acf_flexible_content_layout_title( $title, $field, $layout, $i )
 	}
   if( !empty(get_sub_field('locations'))) {
     $filter = (preg_match('/all|all/', get_sub_field('locations'))) ? 'All Locations' : str_replace('|', ', ', get_sub_field('locations'));
-    return $filter . ( !empty(get_sub_field('title')) ? ' - ' . get_sub_field('title') : '');
+    if(!empty(get_sub_field('title'))) {
+      return $filter . ' - ' . get_sub_field('title');
+    }
+    if(!empty(get_sub_field('show_title'))) {
+      return $filter . ' - ' . get_sub_field('show_title') . ' - ' . get_sub_field('show_date');
+    }
+    return $filter;
   }
   if( !empty(get_sub_field('title'))) {
     return get_sub_field('title');
-  }
-  if( !empty(get_sub_field('show_title'))) {
-    return get_sub_field('show_title') . ' - ' . sget_sub_field('how_date');
   }
 	// return
 	return $title;
