@@ -26,6 +26,7 @@ add_action('admin_footer_text','__return_false');
 // Remove elements from menu
 function remove_menus() {
 	remove_menu_page( 'edit-comments.php' );
+  remove_menu_page( 'edit.php' );
 }
 add_action( 'admin_menu', 'remove_menus' );
 
@@ -34,12 +35,12 @@ add_filter('show_admin_bar', '__return_false');
 
 // Enable Option Seetting ACF
 if( function_exists('acf_add_options_page') ) {
-	acf_add_options_page();
+	acf_add_options_page(array(
+    'menu_title'	=>  __('Two Bit Settings'),
+    'menu_slug' 	=> 'acf-options',
+    'position'    => 51
+  ));
 }
-if( function_exists('acf_set_options_page_title') ) {
-    acf_set_options_page_title( __('Two Bit Settings') );
-}
-
 // Enable Option Calender ACF
 if( function_exists('acf_add_options_page') ) {
 	acf_add_options_page(array(
@@ -49,7 +50,7 @@ if( function_exists('acf_add_options_page') ) {
 		'capability'	=> 'edit_posts',
 		'redirect'		=> false,
     'icon_url'    => 'dashicons-calendar-alt',
-    'position'    => 30
+    'position'    => 49
 	));
 }
 
