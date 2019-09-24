@@ -22,15 +22,6 @@
 }
 #attractions {
   overflow-x: hidden;
-  .power {
-    margin: 5px;
-    display: inline-block;
-    a {
-      margin: 0 5px;
-      max-width: 55px;
-      display: inline-block;
-    }
-  }
   #attractions-block {
     background-image: url("/wp-content/themes/twobitcircus/img/home/green_pattern.png");
     background-repeat: no-repeat;
@@ -228,6 +219,15 @@
       min-height: 480px;
       @media (max-width: $mobile) {
         min-height: 580px;
+      }
+      .powered {
+        margin: 5px;
+        display: inline-block;
+        a {
+          margin: 0 5px;
+          max-width: 55px;
+          display: inline-block;
+        }
       }
       .title {
         font-size: 3em;

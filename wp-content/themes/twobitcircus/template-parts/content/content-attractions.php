@@ -132,7 +132,7 @@
                       <?php echo apply_filters('the_content', $show->post_content) ?>
                       <?php if(!empty(get_field('powered_by', $show->ID))):?>
                       <div class="my-3">
-                        <div class="power text-uppercase">
+                        <div class="powered text-uppercase">
                           <b>Powered By </b>
                           <?php foreach(get_field('powered_by', $show->ID) as $pb) :?>
                           <a href="<?php echo $pb['powered_link'] ;?>" target="_blank"><img class="img-fluid" src="<?php echo $pb['powered_image'] ;?>" alt="<?php echo $pb['title'] ;?>"/></a>
