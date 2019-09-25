@@ -25,7 +25,7 @@ class Expoert_CSV{
     }
     public function get_email_listing() {
       $data = [];
-      $rows = $this->cfdb->get_results("SELECT form_value FROM $this->table_name WHERE form_post_id = '$this->fid' AND DATE_FORMAT(form_date, '%Y-%m-%d') = (CURDATE() - INTERVAL 1 DAY) ORDER BY form_id DESC", OBJECT);
+      $rows = $this->cfdb->get_results("SELECT form_value FROM $this->table_name WHERE form_post_id = '$this->fid' AND DATE_FORMAT(form_date, '%Y-%m-%d') = CURDATE() ORDER BY form_id DESC", OBJECT);
       foreach($rows as $row) {
         $rowRaw = unserialize( $row->form_value );
         $data[$rowRaw['inquiry']][] = $this->clean_value($rowRaw);
@@ -54,7 +54,6 @@ class Expoert_CSV{
       $setDate = date("m/d/Y");
       $subject = 'Daily Inquiries for ' . $setDate;
       $multipartSep = '-----'.md5(time()).'-----';
-      file_put_contents(dirname(__FILE__)."/complex_start.txt", time());
       foreach($emailRows as $to => $data) {
         $attachment = chunk_split(base64_encode($this->create_csv_string($data, $heading_key)));
         $headers = array(
@@ -76,11 +75,9 @@ class Expoert_CSV{
               . "--$multipartSep--";
 
          // Send the email, return the result
-        @mail('alex@petrolad.com', $subject, $body, implode("\r\n", $headers));
-        file_put_contents(dirname(__FILE__)."/complex_".$to.".txt", time());
+        @mail($to, $subject, $body, implode("\r\n", $headers));
         sleep(1);
       }
-      file_put_contents(dirname(__FILE__)."/complex_end.txt", time());
       die();
     }
 }
