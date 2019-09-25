@@ -28,8 +28,7 @@ foreach ( $wp_includes as $file ) {
 }
 
 function composeShows() {
-  $shows = [];
-  query_posts('post_type=portfolio');
+  $shows = $data = [];
   $args = array(
     'post_type' => 'shows',
     'posts_per_page' => 9999,
@@ -38,6 +37,7 @@ function composeShows() {
   );
   $query = new WP_Query( $args );
   $posts = $query->posts;
+  //print_r($posts);
   if(!empty($posts)) {
     foreach($posts as $post) {
       $term = get_the_category($post->ID);
@@ -45,8 +45,15 @@ function composeShows() {
       $shows[$term[0]->slug]['posts'][] = $post;
       $shows[$term[0]->slug]['terms'] = $terms;
     }
+    $categories = get_categories();
+    $filter = custom_term_sort($categories);
+    foreach($filter as $term) {
+      if(empty($term->description)) continue;
+      $data[$term->slug]['posts'] = $shows[$term->slug]['posts'];
+      $data[$term->slug]['terms'] = $term;
+    }
   }
-  return $shows;
+  return $data;
 }
 function composeTickets($name) {
   global $wpdb;

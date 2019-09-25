@@ -21,15 +21,16 @@
   <section id="news-content" class="entry-wrapper-padding inview animated delay-1">
     <div class="container white">
       <div class="row">
-        <?php $video = get_field('video');?>
+        <?php $_video = get_field('video_embed', $post->ID);?>
         <?php $gallery = get_field('gallery');?>
         <div class="col-md-6 mb-3">
-          <?php if(!empty($gallery) || (!empty($video))) :?>
+          <?php if(!empty($gallery) || (!empty($_video))) :?>
           <div class="show-asset-wrapper">
             <div class="slick-media">
-              <?php if(!empty($video)) :?>
+              <?php if(!empty($_video)) :?>
               <div class="item d-block">
-                <div class="embed-responsive embed-responsive-16by9"><?php echo $video ?></div>
+                <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/<?php echo $_video;?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>
+                </div>
               </div>
               <?php endif ?>
               <?php if(!empty($gallery)) :?>
@@ -37,7 +38,7 @@
               <div class="item d-block">
                 <div class="img d-block"><img class="img-fluid w-100" src="<?php echo $gal['url']; ?>" alt="<?php echo $gal['title']; ?>" /></div>
               </div>
-              <?php endforeach ?> 
+              <?php endforeach ?>
               <?php endif ?>
             </div>
           </div>

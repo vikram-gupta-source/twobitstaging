@@ -78,17 +78,6 @@ function custom_acf_flexible_content_layout_title( $title, $field, $layout, $i )
 // name
 add_filter('acf/fields/flexible_content/layout_title', 'custom_acf_flexible_content_layout_title', 10, 4);
 
-// Save custom meta
-function twobit_taxonomy_save_taxonomy_meta( $term_id, $tag_id ) {
-    if ( isset( $_POST[ 'category_icon' ] ) ) {
-        update_term_meta( $term_id, 'category_icon', $_POST[ 'category_icon' ] );
-    } else {
-        update_term_meta( $term_id, 'category_icon', '' );
-    }
-}
-add_action( 'created_category', 'twobit_taxonomy_save_taxonomy_meta', 10, 2 );
-add_action( 'edited_category', 'twobit_taxonomy_save_taxonomy_meta', 10, 2 );
-
 // Collapse All Default
 function twobit_acf_admin_head() {
     ?>
@@ -97,9 +86,83 @@ function twobit_acf_admin_head() {
             $(document).ready(function(){
                 $('.layout').addClass('-collapsed');
                 $('.acf-postbox').addClass('closed');
+                $('#wpseo_meta.postbox').addClass('closed');
             });
         })(jQuery);
     </script>
     <?php
 }
 add_action('acf/input/admin_head', 'twobit_acf_admin_head');
+
+add_filter('manage_edit-category_columns', 'twobit_cat_order', 10, 2);
+add_action( "manage_category_custom_column", 'twobit_cat_order_column_content', 10, 3);
+function twobit_cat_order($cat_columns) {
+    $cat_columns['category_order'] = 'Order';
+    return $cat_columns;
+}
+function twobit_cat_order_column_content( $value, $column_name, $tax_id ){
+   $cat_meta = get_term_meta($tax_id, 'category_order', true);
+   return (!empty($cat_meta)) ? $cat_meta : 0;
+}
+
+//add extra fields to category edit form hook
+add_action( 'created_category', 'twobit_taxonomy_save_taxonomy_meta', 10, 2 );
+add_action( 'edited_category', 'twobit_taxonomy_save_taxonomy_meta', 10, 2 );
+add_action ( 'edit_category_form_fields', 'twobit_taxonomy_edit_category_fields');
+add_action ( 'category_add_form_fields', 'twobit_taxonomy_add_category_fields');
+
+//add extra fields to category edit form callback function
+function twobit_taxonomy_add_category_fields() {
+?>
+<div class="form-field form-required term-name-wrap">
+	<label for="category_order">Order</label>
+	<input name="category_order" id="category_order" type="text" value="0" size="10">
+</div>
+<?php
+}
+//add extra fields to category edit form callback function
+function twobit_taxonomy_edit_category_fields( $tag ) {
+    $t_id = $tag->term_id;
+    $cat_meta = get_term_meta($t_id, 'category_order', true);
+?>
+<tr class="form-field form-required term-name-wrap">
+  <th scope="row"><label for="name">Order</label></th>
+  <td><input name="category_order" id="category_order" type="text" value="<?php echo (!empty($cat_meta)) ? $cat_meta : 0; ?>" size="40" aria-required="true"></td>
+</tr>
+<?php
+}
+// Save custom meta
+function twobit_taxonomy_save_taxonomy_meta( $term_id, $tag_id ) {
+    if ( isset( $_POST[ 'category_order' ] ) ) {
+        update_term_meta( $term_id, 'category_order', $_POST[ 'category_order' ] );
+    } else {
+        update_term_meta( $term_id, 'category_order', '' );
+    }
+}
+function custom_term_sort($terms) {
+	$ordered_terms = array();
+	foreach($terms as $term) {
+		if(is_object($term)) {
+			$taxonomy_sort = get_term_meta($term->term_id, 'category_order', true);
+			$term->category_order = (!empty($taxonomy_sort)) ? (int) $taxonomy_sort : 0;
+			$ordered_terms[] = $term;
+		}
+  }
+  if(empty($ordered_terms)) return $terms;
+  $ordered_terms = custom_term_sort_format($ordered_terms);
+  //print_r($ordered_terms);
+	return $ordered_terms;
+}
+function custom_term_sort_format($ordered_terms) {
+  $sorted = array();
+  if(empty($ordered_terms)) return $ordered_terms;
+  foreach($ordered_terms as $key => $item) {
+    if(!array_key_exists($item->category_order, $sorted)) {
+      $sorted[$item->category_order] = $item;
+    } else {
+      $sorted[$key] = $item;
+    }
+  }
+  krsort($sorted);
+  return $sorted;
+}

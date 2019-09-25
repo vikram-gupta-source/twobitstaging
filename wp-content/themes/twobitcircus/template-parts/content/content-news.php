@@ -19,12 +19,13 @@
         );
         $query = new WP_Query( $args );
         if($query->have_posts() ) : while ($query->have_posts() ) : $query->the_post(); ?>
-        <?php $video = get_field('video', $post->ID);?>
+        <?php $_video = get_field('video_embed', $post->ID);?>
         <?php $gallery = get_field('gallery', $post->ID);?>
 
         <div class="grid-item card">
-          <?php if(!empty($video)) :?>
-          <div class="embed-responsive embed-responsive-16by9"><?php echo $video ?></div>
+          <?php if(!empty($_video)) :?>
+          <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/<?php echo $_video;?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>
+          </div>
           <?php else: ?>
           <?php if(!empty($gallery[0]['url'])) :?>
           <a href="<?php the_permalink(); ?>" class="card-image bkg-img" style="background-image: url('<?php echo $gallery[0]['url']; ?>');background-position: center top;"></a>
