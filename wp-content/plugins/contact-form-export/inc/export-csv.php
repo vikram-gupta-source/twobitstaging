@@ -46,32 +46,38 @@ class Expoert_CSV{
       $emailRows = $this->get_email_listing();
       $setDate = date("m/d/Y");
       $subject = 'Daily Inquiries for ' . $setDate;
-      $message = 'Attached is the Daily Inquiries for ' . $setDate;
+      $multipartSep = '-----'.md5(time()).'-----';
       foreach($emailRows as $to => $data) {
-        $headers = 'From: Two Bit Circus <'.$to.'>' . "\r\n";
-        $attachments = chunk_split(base64_encode($this->create_csv_string($data, $heading_key)));
-        try {
-          $sent = wp_mail( 'alex@petrolad.com', $subject, $message, $headers, $attachments);
-          if ( $sent ) {
-            // The message was sent.
-            echo 'The test message was sent. Check your email inbox.';
-          } else {
-            // The message was not sent.
-            echo 'The message was not sent!';
-          }
-        } catch( Exception $e ) {
-          echo 'Caught exception: ',  $e->getMessage(), "\n";
+        $attachment = chunk_split(base64_encode($this->create_csv_string($data, $heading_key)));
+        $headers = array(
+           'From: Two Bit Circus <'.$to.'>' ,
+           "Content-Type: multipart/mixed; boundary=\"$multipartSep\""
+         );
+        // Make the body of the message
+        $body = "--$multipartSep\r\n"
+              . "Content-Type: text/plain; charset=ISO-8859-1; format=flowed\r\n"
+              . "Content-Transfer-Encoding: 7bit\r\n"
+              . "\r\n"
+              . "\r\n"
+              . "--$multipartSep\r\n"
+              . "Content-Type: text/csv\r\n"
+              . "Content-Transfer-Encoding: base64\r\n"
+              . "Content-Disposition: attachment; filename=\"Daily_Inquiries_".date("m_d_Y").".csv\"\r\n"
+              . "\r\n"
+              . "$attachment\r\n"
+              . "--$multipartSep--";
+
+         // Send the email, return the result
+        $sent = mail('alex@petrolad.com', $subject, $body, implode("\r\n", $headers));
+        if ( $sent ) {
+          // The message was sent.
+          echo 'The test message was sent. Check your email inbox.';
+        } else {
+          // The message was not sent.
+          echo 'The message was not sent!';
         }
         sleep(1);
       }
       die();
     }
 }
-
-function action_wp_mail_failed($wp_error)
-{
-    return error_log(print_r($wp_error, true));
-}
-
-// add the action
-add_action('wp_mail_failed', 'action_wp_mail_failed', 10, 1);
