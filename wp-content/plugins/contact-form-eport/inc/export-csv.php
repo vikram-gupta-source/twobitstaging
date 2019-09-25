@@ -48,17 +48,29 @@ class Expoert_CSV{
       $message = '';
       foreach($emailRows as $to => $data) {
         $headers = 'From: Two Bit Circus <'.$to.'>' . "\r\n";
-        $attachments = chunk_split(base64_encode($this->create_csv_string($data, $heading_key)));
-        $sent = wp_mail( 'alex@petrolad.com', $subject, $message, $headers );
-        if ( $sent ) {
-          // The message was sent.
-          echo 'The test message was sent. Check your email inbox.';
-        } else {
-          // The message was not sent.
-          echo 'The message was not sent!';
+        //$attachments = chunk_split(base64_encode($this->create_csv_string($data, $heading_key)));
+        try {
+          $sent = wp_mail( 'alex@petrolad.com', $subject, $message, $headers );
+          if ( $sent ) {
+            // The message was sent.
+            echo 'The test message was sent. Check your email inbox.';
+          } else {
+            // The message was not sent.
+            echo 'The message was not sent!';
+          }
+        } catch( Exception $e ) {
+          echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         sleep(1);
       }
       die();
     }
 }
+
+function action_wp_mail_failed($wp_error)
+{
+    return error_log(print_r($wp_error, true));
+}
+
+// add the action
+add_action('wp_mail_failed', 'action_wp_mail_failed', 10, 1);
