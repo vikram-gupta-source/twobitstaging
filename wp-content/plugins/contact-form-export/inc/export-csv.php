@@ -45,7 +45,7 @@ class Expoert_CSV{
       $heading_key = $this->get_csv_heading();
       $emailRows = $this->get_email_listing();
       $subject = 'Daily Inquiries';
-      $message = '';
+      $message = 'Attached is the Daily Inquiries';
       foreach($emailRows as $to => $data) {
         $headers = 'From: Two Bit Circus <'.$to.'>' . "\r\n";
         //$attachments = chunk_split(base64_encode($this->create_csv_string($data, $heading_key)));

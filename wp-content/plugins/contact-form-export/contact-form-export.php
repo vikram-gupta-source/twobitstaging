@@ -34,7 +34,7 @@ function contact_form_export_deactivation() {
 
 //if ( !function_exists( "contact_form_export" ) ) {
 //  function contact_form_export() {
-
+error_log('testing if error log is working');
 define('WP_USE_THEMES', false);
 require('../../../wp-load.php');
 //print_r(is_admin());
