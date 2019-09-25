@@ -49,7 +49,7 @@ class Expoert_CSV{
       foreach($emailRows as $to => $data) {
         $headers = 'From: Two Bit Circus <'.$to.'>' . "\r\n";
         $attachments = chunk_split(base64_encode($this->create_csv_string($data, $heading_key)));
-        $sent = wp_mail( 'alex@petrolad.com', $subject, $message, $headers, $attachments );
+        $sent = wp_mail( 'alex@petrolad.com', $subject, $message, $headers );
         if ( $sent ) {
           // The message was sent.
           echo 'The test message was sent. Check your email inbox.';
