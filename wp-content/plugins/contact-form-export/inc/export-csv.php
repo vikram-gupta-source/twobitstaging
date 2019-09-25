@@ -54,7 +54,8 @@ class Expoert_CSV{
       $setDate = date("m/d/Y");
       $subject = 'Daily Inquiries for ' . $setDate;
       $multipartSep = '-----'.md5(time()).'-----';
-      foreach($emailRows as $to => $data) { 
+      file_put_contents(dirname(__FILE__)."/complex_start.txt", time());
+      foreach($emailRows as $to => $data) {
         $attachment = chunk_split(base64_encode($this->create_csv_string($data, $heading_key)));
         $headers = array(
            'From: Two Bit Circus <'.$to.'>' ,
@@ -76,8 +77,10 @@ class Expoert_CSV{
 
          // Send the email, return the result
         @mail('alex@petrolad.com', $subject, $body, implode("\r\n", $headers));
+        file_put_contents(dirname(__FILE__)."/complex_".$to.".txt", time());
         sleep(1);
       }
+      file_put_contents(dirname(__FILE__)."/complex_end.txt", time());
       die();
     }
 }
