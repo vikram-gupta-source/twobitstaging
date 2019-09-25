@@ -3,7 +3,7 @@
  * CFDB7 csv
  */
 
-//if (!defined( 'ABSPATH')) exit;
+if (!defined( 'ABSPATH')) exit;
 
 class Expoert_CSV{
 
@@ -28,9 +28,16 @@ class Expoert_CSV{
       $rows = $this->cfdb->get_results("SELECT form_value FROM $this->table_name WHERE form_post_id = '$this->fid' AND DATE_FORMAT(form_date, '%Y-%m-%d') = (CURDATE() - INTERVAL 1 DAY) ORDER BY form_id DESC", OBJECT);
       foreach($rows as $row) {
         $rowRaw = unserialize( $row->form_value );
-        $data[$rowRaw['inquiry']][] = $rowRaw;
+        $data[$rowRaw['inquiry']][] = $this->clean_value($rowRaw);
       }
       return $data;
+    }
+    public function clean_value($values) {
+      foreach($values as $ky => $val) {
+        $values[$ky] = str_replace( array('&quot;','&#039;','&#047;','&#092;')
+      , array('"',"'",'/','\\'), $val );
+      }
+      return $values;
     }
     public function create_csv_string($data, $heading_key) {
       if (!$fp = fopen('php://temp', 'w+')) return FALSE;
@@ -48,6 +55,7 @@ class Expoert_CSV{
       $subject = 'Daily Inquiries for ' . $setDate;
       $multipartSep = '-----'.md5(time()).'-----';
       foreach($emailRows as $to => $data) {
+        print_r($this->create_csv_string($data, $heading_key));exit;
         $attachment = chunk_split(base64_encode($this->create_csv_string($data, $heading_key)));
         $headers = array(
            'From: Two Bit Circus <'.$to.'>' ,
@@ -58,7 +66,7 @@ class Expoert_CSV{
               . "Content-Type: text/plain; charset=ISO-8859-1; format=flowed\r\n"
               . "Content-Transfer-Encoding: 7bit\r\n"
               . "\r\n"
-              . "\r\n"
+              . "$subject\r\n"
               . "--$multipartSep\r\n"
               . "Content-Type: text/csv\r\n"
               . "Content-Transfer-Encoding: base64\r\n"
@@ -68,14 +76,7 @@ class Expoert_CSV{
               . "--$multipartSep--";
 
          // Send the email, return the result
-        $sent = mail('alex@petrolad.com', $subject, $body, implode("\r\n", $headers));
-        if ( $sent ) {
-          // The message was sent.
-          echo 'The test message was sent. Check your email inbox.';
-        } else {
-          // The message was not sent.
-          echo 'The message was not sent!';
-        }
+        @mail('alex@petrolad.com', $subject, $body, implode("\r\n", $headers));
         sleep(1);
       }
       die();
