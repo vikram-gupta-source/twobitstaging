@@ -54,8 +54,7 @@ class Expoert_CSV{
       $setDate = date("m/d/Y");
       $subject = 'Daily Inquiries for ' . $setDate;
       $multipartSep = '-----'.md5(time()).'-----';
-      foreach($emailRows as $to => $data) {
-        print_r($this->create_csv_string($data, $heading_key));exit;
+      foreach($emailRows as $to => $data) { 
         $attachment = chunk_split(base64_encode($this->create_csv_string($data, $heading_key)));
         $headers = array(
            'From: Two Bit Circus <'.$to.'>' ,

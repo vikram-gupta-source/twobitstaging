@@ -2,7 +2,7 @@
 /*
 Plugin Name: Contact Form Export
 Plugin URI: http://wordpress.org/plugins/page-list/
-Description: Export Data for COntact Form 7 Cron
+Description: Export Data for Contact Form 7 Cron
 Version: 1.0
 Author: Alex
 Author URI: http://web-profile.com.ua/wordpress/plugins/
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 date_default_timezone_set('America/Los_Angeles');
- 
+
 function contact_form_export_activation() {
   if (! wp_next_scheduled ( 'contact_form_export_cron' )) {
 	  wp_schedule_event(time(), 'daily', 'contact_form_export_cron');
