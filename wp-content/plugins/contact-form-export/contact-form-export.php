@@ -33,12 +33,8 @@ add_action( 'contact_form_export_cron', 'contact_form_export' );
 
 if ( !function_exists( "contact_form_export" ) ) {
   function contact_form_export() {
-    file_put_contents(dirname(__FILE__)."/complex_load.txt", time());
-    if( is_admin() ){
-      file_put_contents(dirname(__FILE__)."/complex_admin.txt", time());
-        require_once 'inc/export-csv.php';
-        $csv = new Expoert_CSV();
-        $csv->send_csv_email();
-    }
+    require_once 'inc/export-csv.php';
+    $csv = new Expoert_CSV();
+    $csv->send_csv_email(); 
   }
 }
