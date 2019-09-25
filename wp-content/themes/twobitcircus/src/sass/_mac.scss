@@ -34,6 +34,9 @@ body.is-mac {
   }
   &.is-mac-phone {
     #about #level-robo-block .arrow {
+      @media (min-width: $tablet + 1) {
+        left: -4px;
+      }
       @media (max-width: $tablet) {
         left: -2px;
       }
