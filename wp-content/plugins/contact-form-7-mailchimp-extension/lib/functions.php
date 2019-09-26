@@ -1,5 +1,5 @@
 <?php
-/*  Copyright 2013-2017 Renzo Johnson (email: renzojohnson at gmail.com)
+/*  Copyright 2013-2019 Renzo Johnson (email: renzojohnson at gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,13 +34,14 @@ resetlogfile_mce(); //para resetear
 
 
 function wpcf7_mch_add_mailchimp($args) {
-  $cf7_mch_defaults = array();
-  $cf7_mch = get_option( 'cf7_mch_'.$args->id(), $cf7_mch_defaults );
 
   $host = esc_url_raw( $_SERVER['HTTP_HOST'] );
   $url = $_SERVER['REQUEST_URI'];
   $urlactual = $url;
- 
+
+  $cf7_mch_defaults = array();
+  $cf7_mch = get_option( 'cf7_mch_'.$args->id(), $cf7_mch_defaults );
+
   $mce_txcomodin = $args->id() ;
   $listatags = wpcf7_mce_form_tags();
 
@@ -49,26 +50,25 @@ function wpcf7_mch_add_mailchimp($args) {
       $cf7_mch = $cf7_mch + array( 'listatags' => $listatags,'logfileEnabled' => 1 ) ;
       update_option( 'cf7_mch_'.$args->id(), $cf7_mch );
   }
-  
+
   $logfileEnabled = $cf7_mch['logfileEnabled'];
-	$logfileEnabled = ( is_null( $logfileEnabled ) ) ? false : $logfileEnabled; 
+	$logfileEnabled = ( is_null( $logfileEnabled ) ) ? false : $logfileEnabled;
 
   $mceapi = ( isset( $cf7_mch['api'] )   ) ? $cf7_mch['api'] : null ;
-  
+
   $tmp = wpcf7_mce_validate_api_key( $mceapi,$logfileEnabled,'cf7_mch_'.$mce_txcomodin );
 	$apivalid = $tmp['api-validation'];
 
 
-	$tmp = wpcf7_mce_listasasociadas( $mceapi,$logfileEnabled,'cf7_mch_'.$mce_txcomodin );
+	$tmp = wpcf7_mce_listasasociadas( $mceapi,$logfileEnabled,'cf7_mch_'.$mce_txcomodin,$apivalid );
 	$listdata = $tmp['lisdata'];
-    
+
   $chm_valid = '<span class="chmm valid"><span class="dashicons dashicons-yes"></span>API Key</span>';
   $chm_invalid = '<span class="chmm invalid"><span class="dashicons dashicons-no"></span>Error: API Key</span>';
-  
+
   include SPARTAN_MCE_PLUGIN_DIR . '/lib/view.php';
 
 }
-
 
 function resetlogfile_mce() {
 
@@ -78,7 +78,7 @@ function resetlogfile_mce() {
 
     $mch_debug_logger->reset_mch_log_file( 'log.txt' );
     $mch_debug_logger->reset_mch_log_file( 'log-cron-job.txt' );
-    echo '<div id="message" class="updated is-dismissible"><p>Debug log files have been reset!</p></div>';
+    //echo '<div id="message" class="updated is-dismissible"><p>Debug log files have been reset!</p></div>';
   }
 
 }
@@ -148,12 +148,12 @@ function cf7_mch_tag_replace( $pattern, $subject, $posted_data, $html = false ) 
         $replaced = wptexturize( $replaced );
       }
 
-      $replaced = apply_filters( 'wpcf7_mail_tag_replaced', $replaced, $submitted );
+      $replaced = apply_filters( 'wpcf7_mail_tag_replaced', $replaced, $submitted,'','' );
 
       return stripslashes( $replaced );
     }
 
-    if ( $special = apply_filters( 'wpcf7_special_mail_tags', '', $matches[1] ) )
+    if ( $special = apply_filters( 'wpcf7_special_mail_tags', '', $matches[1] ))
       return $special;
 
     return $matches[0];
@@ -164,6 +164,9 @@ function cf7_mch_tag_replace( $pattern, $subject, $posted_data, $html = false ) 
 
 
 function wpcf7_mch_subscribe_remote($obj) {
+  if ( function_exists ( "wpcf7_chimp_subscribe" ) )
+      return ;
+
   $cf7_mch = get_option( 'cf7_mch_'.$obj->id() );
 
   $submission = WPCF7_Submission::get_instance();
@@ -179,10 +182,10 @@ function wpcf7_mch_subscribe_remote($obj) {
 
     $email = cf7_mch_tag_replace( $regex, $cf7_mch['email'], $submission->get_posted_data() );
     $name = cf7_mch_tag_replace( $regex, $cf7_mch['name'], $submission->get_posted_data() );
-     
+
     $lists = cf7_mch_tag_replace( $regex, $cf7_mch['list'], $submission->get_posted_data() );
     $listarr = explode(',',$lists);
-  
+
     $merge_vars=array('FNAME'=>$name);// *x1
 
         // *x2
@@ -199,7 +202,7 @@ function wpcf7_mch_subscribe_remote($obj) {
 
         }
 
-   
+
     for($i=1;$i<=20;$i++){
 
       if( isset($cf7_mch['CustomKey'.$i]) && isset($cf7_mch['CustomValue'.$i]) && strlen(trim($cf7_mch['CustomValue'.$i])) != 0 ) {
@@ -213,19 +216,16 @@ function wpcf7_mch_subscribe_remote($obj) {
 
     }
 
- 
-    $mce_csu = 'subscribed';    
-   
+    $mce_csu = 'subscribed';
+
     if( isset($cf7_mch['confsubs']) && strlen($cf7_mch['confsubs']) != 0 ) {
-         
+
       $mce_csu = 'pending';
     } else {
       if ( isset($cf7_mch['accept']) && strlen($cf7_mch['accept']) != 0 ) {
            $accept = cf7_mch_tag_replace( $regex, trim( $cf7_mch['accept'] ) , $submission->get_posted_data() );
-          
-          // var_dump ( '$accept' ) ;
-          // var_dump ( $accept ) ;
-      
+
+
          if ( strlen( trim($accept) ) != 0  ) {
             $mce_csu = 'subscribed';
          } else {
@@ -233,7 +233,7 @@ function wpcf7_mch_subscribe_remote($obj) {
          }
       }
     }
-        
+
       try {
 
         $cad_mergefields = "";
@@ -304,8 +304,8 @@ function wpcf7_mch_subscribe_remote($obj) {
                     }
 
                   ],
-                  "update_existing": true}';         
-   
+                  "update_existing": true}';
+
         $opts = array(
                   'method' => 'POST',
                   'headers' => $vc_headers,
@@ -315,7 +315,7 @@ function wpcf7_mch_subscribe_remote($obj) {
 
         $respenvio = wp_remote_post( $url_put, $opts );
         $resp = wp_remote_retrieve_body( $respenvio );
-            
+
         mce_save_contador();
 
         $mch_debug_logger = new mch_Debug_Logger();
@@ -330,13 +330,8 @@ function wpcf7_mch_subscribe_remote($obj) {
         $mch_debug_logger->log_mch_debug( 'Contact Form 7 response: ' . $e->getMessage(), 4, $logfileEnabled );
 
       }  // end catch
-  
-
   }
-
 }
-
-
 
 function mce_save_contador() {
   $option_name = 'mce_sent' ;
@@ -357,8 +352,6 @@ function mce_save_contador() {
 
 }
 
-
-
 function mce_get_contador() {
   $option_name = 'mce_sent' ;
   $new_value = 1 ;
@@ -370,127 +363,11 @@ function mce_get_contador() {
     echo 'Contador: '.$valorvar;
 
   } else {
-
     echo 'Contador: 0' ;
-
   }
-
 }
-
-
-
-function vc_post( $url, $info, $method = 'POST', $adminEmail = false ){// primary function
-
-  if(ini_get('allow_url_fopen')){// test for allow_url_fopen
-
-    return cf7mce_use_fopen( $url, $info, $method );
-
-  } elseif (in_array('curl',get_loaded_extensions())){// test for cURL
-
-    return cf7mce_use_curl( $url, $info, $method );
-
-  } else { // neither method is available, send mail
-
-    if( !$adminEmail ){ $adminEmail = get_bloginfo( 'admin_email' ); }
-    return cf7mce_use_wpmail($url,$info,$method,$adminEmail);
-
-  }
-
-}
-
-
-
-function cf7mce_use_fopen( $url, $info, $method ){
-
-  $vc_date = date('M.d.H.i');
-  $data = array(
-    'http' => array(
-
-      'method'  => $method,
-      'content' => $info,
-      'header'  => array( 'content-type: application/x-www-form-urlencoded', 'user-agent: mce.P.'. SPARTAN_MCE_VERSION . $vc_date . '_' )
-
-    )
-  );
-  return stream_get_contents(fopen($url,'rb',0,stream_context_create($data)));
-
-}
-
-
-
-function cf7mce_use_curl($url,$info,$method){
-
-  $vc_date = date('M.d.H.i');
-  $useragent = 'mce.C.'. SPARTAN_MCE_VERSION . $vc_date . '_';
-
-  $apikey = explode(':',$url);
-  $apikey1 = explode('@',$apikey[2]);
-  $apikey = $apikey1[0];// api key only - no dash or dc
-
-  $dc = $apikey1[1];
-  $dc1 = explode('.',$dc);
-  $dc = $dc1[0];
-
-  $shortURL = array_shift($dc1);
-  $shortURL = implode('.',$dc1);
-  $shortURL = 'https://'.$shortURL;
-
-  $originalAPIkey = $apikey .'-'. $dc;
-  $apikey = $originalAPIkey;
-  $auth = base64_encode( 'anystring:'. $apikey );
-  $shortURL =$url;
-  //return "###--apikey=$apikey|--shortUrl=$shortURL|--URL=$url###";
-  if($method == 'POST'){
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $shortURL);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: Basic '.$auth));
-    curl_setopt($ch, CURLOPT_USERAGENT, '' . $useragent . '');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $info);
-    return curl_exec($ch);
-
-  } elseif($method == 'GET'){
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $shortURL);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: Basic '. $auth));
-    curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $info);
-
-
-    return curl_exec($ch);
-
-  } else {
-
-    return 'Be sure to use only POST or GET as 3rd parameter';
-
-  }
-
-}
-
-
-
-function cf7mce_use_wpmail($url,$info,$method,$adminEmail){
-  $msg = "Attempted to send ".$info." to ".$url." but server doesnt support allow_url_fopen OR cURL";
-  $wp_mail_resp = wp_mail( $adminEmail,'CF7 Mailchimp Extension Problem',$msg);
-    if($wp_mail_resp){
-      return 'allow_url_fopen & cURL not available, sent details to ' . $adminEmail;
-    }else{
-      return 'ERROR: Problem with allow_url_fopen/cURL/wp_mail';
-    }
-}
-
-
 
 function spartan_mce_class_attr( $class ) {
-
   $class .= ' mailchimp-ext-' . SPARTAN_MCE_VERSION;
   return $class;
 

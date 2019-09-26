@@ -1,5 +1,5 @@
 <?php
-/*  Copyright 2013-2017 Renzo Johnson (email: renzojohnson at gmail.com)
+/*  Copyright 2013-2019 Renzo Johnson (email: renzojohnson at gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ function mce_error() {
 
   if( !file_exists(WP_PLUGIN_DIR.'/contact-form-7/wp-contact-form-7.php') ) {
 
-    deactivate_plugins( plugin_basename( WP_PLUGIN_DIR.'/contact-form-7-mailchimp-extension/cf7-mch-ext.php' ) );  
+    deactivate_plugins( plugin_basename( WP_PLUGIN_DIR.'/contact-form-7-mailchimp-extension/cf7-mch-ext.php' ) );
     $mce_error_out = '<div id="message" class="error is-dismissible"><p>';
     $mce_error_out .= __('The Contact Form 7 plugin must be installed for the <b>MailChimp Extension</b> to work. <b><a href="'.admin_url('plugin-install.php?tab=plugin-information&plugin=contact-form-7&from=plugins&TB_iframe=true&width=600&height=550').'" class="thickbox" title="Contact Form 7">Install Contact Form 7  Now.</a></b>', 'mce_error');
     $mce_error_out .= '</p></div>';
@@ -37,23 +37,23 @@ function mce_error() {
 
   }
 
-} 
-add_action('admin_notices', 'mce_error'); 
+}
+add_action('admin_notices', 'mce_error');
 
 
 function mce_act_redirect( $plugin ) {
-  
-    if ( !class_exists( 'WPCF7') ) { 
-     } 
-    else { 
+
+    if ( !class_exists( 'WPCF7') ) {
+     }
+    else {
         if( $plugin == SPARTAN_MCE_PLUGIN_BASENAME ) {
             mce_save_date_activation();
             mce_save_plugginid () ;
             exit( wp_redirect( admin_url( 'admin.php?page=wpcf7&post='.mc_get_latest_item().'&active-tab=4' ) ) );
-         }     
-    } 
+         }
+    }
 }
-add_action( 'activated_plugin', 'mce_act_redirect' ); 
+add_action( 'activated_plugin', 'mce_act_redirect' );
 
 
 function mce_save_date_activation() {
@@ -133,58 +133,57 @@ function mce_difer_dateact_date() {
 
 if (get_site_option('mce_show_notice') == 1){
 
-  function mce_show_update_notice() {
+    function mce_show_update_notice() {
 
-    if(!current_user_can( 'manage_options')) return;
+      if(!current_user_can( 'manage_options')) return;
 
-    $class = 'notice is-dismissible vc-notice welcome-panel';
+      $class = 'notice is-dismissible vc-notice welcome-panel';
 
-    $message = '<h2>'.esc_html__('MailChimp Extension has been improved!', 'mail-chimp-extension').'</h2>';
-    $message .= '<p class="about-description">'.esc_html__('We worked hard to make it more reliable, faster, and now with a better Debugger, and more help documents.', 'mail-chimp-extension').'</p>';
+      $message = '<h2>'.esc_html__('MailChimp Extension has been improved!', 'mail-chimp-extension').'</h2>';
+      $message .= '<p class="about-description">'.esc_html__('We worked hard to make it more reliable, faster, and now with a   better Debugger, and more help documents.', 'mail-chimp-extension').'</p>';
+
+      $message .= sprintf(__('<div class="welcome-panel-column-container"><div class="welcome-panel-column"><h3>Get Started</h3><p>Make sure it works as you expect <br><a class="button button-primary button-hero load-customize" href="%s">Review your settings <span alt="f111" class="dashicons dashicons-admin-generic" style="font-size: 17px;vertical-align: middle;"> </span> </a>', 'mail-chimp-extension'), MCE_SETT ).'</p></div>';
+
+      $message .= '<div class="welcome-panel-column"><h3>Next Steps</h3><p>'.__('Help me develop the plugin and provide support by <br><a class="donate button button-primary button-hero load-customize" href="' . MCE_DON . '" target="_blank">Donating even a small sum <span alt="f524" class="dashicons dashicons-tickets-alt"> </span></a>', 'mail-chimp-extension').'</p></div></div>';
+
+      global $wp_version;
+
+      if( version_compare($wp_version, '4.2') < 0 ){
+
+        $message .= ' | <a id="mce-dismiss-notice" href="javascript:mce_dismiss_notice();">'.__('Dismiss this notice.').'</a>';
+
+      }
+      echo '<div id="mce-notice" class="'.$class.'"><div class="welcome-panel-content">'.$message. '</div></div>';
+      echo "<script>
+          function mce_dismiss_notice(){
+            var data = {
+            'action': 'mce_dismiss_notice',
+            };
 
 
-    $message .= sprintf(__('<div class="welcome-panel-column-container"><div class="welcome-panel-column"><h3>Get Started</h3><p>Make sure it works as you expect <br><a class="button button-primary button-hero load-customize" href="%s">Review your settings <span alt="f111" class="dashicons dashicons-admin-generic" style="font-size: 17px;vertical-align: middle;"> </span> </a>', 'mail-chimp-extension'), MCE_SETT ).'</p></div>';
+            jQuery.post(ajaxurl, data, function(response) {
+              jQuery('#mce-notice').hide();
+            });
+          }
 
+          jQuery(document).ready(function(){
+            jQuery('body').on('click', '.notice-dismiss', function(){
+              mce_dismiss_notice();
+            });
+          });
+          </script>";
+    }
 
-    $message .= '<div class="welcome-panel-column"><h3>Next Steps</h3><p>'.__('Help me develop the plugin and provide support by <br><a class="donate button button-primary button-hero load-customize" href="' . MCE_DON . '" target="_blank">Donating even a small sum <span alt="f524" class="dashicons dashicons-tickets-alt"> </span></a>', 'mail-chimp-extension').'</p></div></div>';
+    if(is_multisite()){
 
-    global $wp_version;
+      add_action( 'network_admin_notices', 'mce_show_update_notice' );
 
-    if( version_compare($wp_version, '4.2') < 0 ){
+    } else {
 
-      $message .= ' | <a id="mce-dismiss-notice" href="javascript:mce_dismiss_notice();">'.__('Dismiss this notice.').'</a>';
+      add_action( 'admin_notices', 'mce_show_update_notice' );
 
     }
-    echo '<div id="mce-notice" class="'.$class.'"><div class="welcome-panel-content">'.$message. '</div></div>';
-    echo "<script>
-        function mce_dismiss_notice(){
-          var data = {
-          'action': 'mce_dismiss_notice',
-          };
-
-          jQuery.post(ajaxurl, data, function(response) {
-            jQuery('#mce-notice').hide();
-          });
-        }
-
-        jQuery(document).ready(function(){
-          jQuery('body').on('click', '.notice-dismiss', function(){
-            mce_dismiss_notice();
-          });
-        });
-        </script>";
-  }
-
-  if(is_multisite()){
-
-    add_action( 'network_admin_notices', 'mce_show_update_notice' );
-
-  } else {
-
-    add_action( 'admin_notices', 'mce_show_update_notice' );
-
-  }
-  add_action( 'wp_ajax_mce_dismiss_notice', 'mce_dismiss_notice' );
+    add_action( 'wp_ajax_mce_dismiss_notice', 'mce_dismiss_notice' );
 
   function mce_dismiss_notice() {
 
@@ -192,7 +191,6 @@ if (get_site_option('mce_show_notice') == 1){
     return $result;
     wp_die();
   }
-
 }
 
 
@@ -204,5 +202,140 @@ function mce_help() {
 
 }
 
+
+
+function mce_news_notices () {
+    $class = 'notice is-dismissible vc-notice welcome-panel';
+    $check = 0 ;
+    $tittle = '' ;
+    $message = mce_get_postnotice ($check,$tittle ) ;
+    $tittle2 = '<h2>'.$tittle.'</h2>';
+    $message2 = $tittle2.$message ;
+
+    if ( $check = 0 ) return ;
+    //if ($check = 1) update_site_option('mce_show_update_news', 1);
+   // $message .= ' | <a id="mce_dismiss_update_news" href="javascript:mce_dismiss_update_news();">'.__('Dismiss this notice.').'</a>';
+
+    echo '<div id="mce-notice" class="'.$class.'"><div class="welcome-panel-content">'.$message2.'</div></div>';
+    echo "<script>
+          function mce_dismiss_update_news(){
+            var data = {
+            'action': 'mce_dismiss_update_news',
+            };
+
+            jQuery.post(ajaxurl, data, function(response) {
+              jQuery('#mce-notice').hide();
+            });
+          }
+
+          jQuery(document).ready(function(){
+            jQuery('body').on('click', '.notice-dismiss', function(){
+
+              mce_dismiss_update_news();
+            });
+          });
+          </script>";
+}
+
+ add_action( 'wp_ajax_mce_dismiss_update_news', 'mce_dismiss_update_news' );
+ function mce_dismiss_update_news() {
+
+              $result = update_site_option('mce_show_update_news', 0);
+              //var_dump ( 'entro aqui' ) ;
+              wp_die();
+ }
+
+
+if (get_site_option('mce_show_update_news') == NULL or get_site_option('mce_show_update_news') == 1 ){
+    if ( get_site_option('mce_show_update_news') == NULL  ) add_site_option( 'mce_show_update_news', 1 ) ;
+    if(is_multisite()){
+          add_action( 'network_admin_notices', 'mce_news_notices' );
+        } else {
+          add_action( 'admin_notices', 'mce_news_notices' );
+        }
+}
+
+/*if(is_multisite()){
+          add_action( 'network_admin_notices', 'mce_news_notices' );
+        } else {
+          add_action( 'admin_notices', 'mce_news_notices' );
+        }*/
+
+
+function mce_get_postnotice (&$check,&$tittle) {
+    $check = 0 ;
+    $response = wp_remote_get( 'https://chimpmatic.com/wp-json/wp/v2/posts?categories=1&orderby=modified&order=desc' );
+    //posts?filter[orderby]=date&order=desc
+
+    if ( is_wp_error( $response ) ) {
+      return;
+    }
+
+    $posts = json_decode( wp_remote_retrieve_body( $response ) );
+
+    /*echo ('<pre>');
+      var_dump ( $posts ) ;
+    echo ('</pre>') ;*/
+
+    if ( empty( $posts ) ) {
+		    return;
+	  }
+
+	if ( ! empty( $posts ) ) {
+		  foreach ( $posts as $post ) {
+			    $fordate =  $post->modified  ;
+         /* var_dump ( '$fordate' ) ;
+          var_dump ( $fordate ) ; */
+          $post_id = get_option( 'wpcf7-mce-post-id',0 )   ;
+          $post_update =  get_option( 'wpcf7-mce-post-update',0 ) ;
+
+          if ( get_option( 'wpcf7-mce-post-id' ) == false ) {
+            $deprecated = null;
+            $autoload = 'no';
+            add_option( 'wpcf7-mce-post-id',$post->id, $deprecated, $autoload );
+          } else update_option( 'wpcf7-mce-post-id', $post->id );
+
+          if ( get_option( 'wpcf7-mce-post-update' ) !== false ) {
+	             update_option( 'wpcf7-mce-post-update', $fordate );
+
+          } else {
+            $deprecated = null;
+            $autoload = 'no';
+            add_option( 'wpcf7-mce-post-update',$fordate , $deprecated, $autoload );
+          }
+
+        /*  var_dump ('$post_id guardado  : ' . $post_id  ) ;
+          var_dump ( 'Fecha guradado : ' . $post_update ) ;
+
+          var_dump ('$post_id : ' . $post->id  ) ;
+          var_dump ('fecha : ' . $fordate  ) ; */
+
+
+          if ( $post_id == 0 )  {
+              $check = 1 ;
+
+             }
+          else {
+              if ( $post->id == $post_id  ) {
+                    if ( $fordate !== $post_update )  {
+                        $check = 1 ;
+
+                     }
+                    else {
+                         $check = 0 ;
+
+                    }
+              } else {
+                 $check = 1 ;
+
+              }
+          }
+       /* var_dump ( ' $check : ' . $check  ) ;*/
+        $tittle = $post->title->rendered ;
+        return $post->content->rendered ;
+
+		  }
+	}
+}
 
 

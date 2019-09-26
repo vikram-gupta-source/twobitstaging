@@ -65,6 +65,13 @@
   z-index: 2;
 }
 
+.welcome-panel-column-container:before,
+.welcome-panel-column-container:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
 .vc-notice:after {
   content: "\f488";
   color: #ddd;

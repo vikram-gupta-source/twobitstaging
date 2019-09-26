@@ -1,3 +1,5 @@
+
+
 jQuery(document).on('click', '#mce_activalist', function(event){ // use jQuery no conflict methods replace $ with "jQuery"
       event.preventDefault(); // stop post action
       jQuery.ajax({

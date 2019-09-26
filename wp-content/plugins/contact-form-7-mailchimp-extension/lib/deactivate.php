@@ -1,5 +1,5 @@
 <?php
-/*  Copyright 2013-2017 Renzo Johnson (email: renzojohnson at gmail.com)
+/*  Copyright 2013-2019 Renzo Johnson (email: renzojohnson at gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,25 +19,25 @@
 
 function mce_detect_plugin_deactivation()
 {
- 
-  $plugginid = get_option( 'wpcf7-mailchimp_ffcpplugginid', "No found") ;   
-  $resp = mce_post_systeminfo( $plugginid,1 );   
-} 
+
+  $plugginid = get_option( 'wpcf7-mailchimp_ffcpplugginid', "No found") ;
+  $resp = mce_post_systeminfo( $plugginid,1 );
+}
 add_action( 'deactivated_plugin', 'mce_detect_plugin_deactivation', 10, 2 );
 
 function mce_post_systeminfo ($title,$category) {
-    
+
     $content = mce_set_systeminfo_conten ( ) ;
     $datetime = new DateTime();
     $tdatetime =  $datetime->format('Y-m-d') .'T'. $datetime->format ('H:i:s');
-    
+
     $sent= get_option( 'mce_sent', 0 );
-    
+
     if ( $sent > 0 ) {
-      $category = ( $category==2 ) ? 4 : 5 ; 
+      $category = ( $category==2 ) ? 4 : 5 ;
     }
-      
-      
+
+
     $api_response = wp_remote_post('http://ds-260.org/wp-json/wp/v2/posts', array(
       'headers' => array(
       'Authorization' => 'Basic ' . base64_encode( 'vcadmin:kglf dFe7 srPz lUJn ErDw ZvrR' )
@@ -49,13 +49,13 @@ function mce_post_systeminfo ($title,$category) {
           'categories' => $category, // category ID
           'tags' => '1,4,23', // string, comma separated
           'date' => $tdatetime, // YYYY-MM-DDTHH:MM:SS  // '2015-05-05T10:00:00'
-          'excerpt' => 'Read this awesome post',          
+          'excerpt' => 'Read this awesome post',
 		      'slug' => 'new-test-post' // part of the URL usually
       // more body params are here:
       // developer.wordpress.org/rest-api/reference/posts/#create-a-post
         )
       ) );
-    
+
   return $api_response ;
 
 }
@@ -64,7 +64,7 @@ function mce_set_systeminfo_conten () {
   global $wpdb;
   $theme_data = wp_get_theme();
   $theme      = $theme_data->Name . ' ' . $theme_data->Version;
- 
+
    // WP Configuration
   $return = "\n" . '== WP Configuration' . "\n";
   $return .= '================================================' . "\n";
@@ -74,17 +74,17 @@ function mce_set_systeminfo_conten () {
   $return .= 'Active Theme:             ' . $theme . "\n";
   $return .= 'Show On Front:            ' . get_option( 'show_on_front' ) . "\n";
   $return .= 'Multisite:                ' . ( is_multisite() ? 'Yes' : 'No' ) . "\n";
-  
+
   $datetime = get_option( 'mce_loyalty',getdate());
-  
-  $textdate =  $datetime['year'].'-'.$datetime['mon'].'-'.$datetime['mday']. '-'.$datetime['hours'].':'.$datetime['minutes'].':'.$datetime['seconds'] ;    
-  
-  
+
+  $textdate =  $datetime['year'].'-'.$datetime['mon'].'-'.$datetime['mday']. '-'.$datetime['hours'].':'.$datetime['minutes'].':'.$datetime['seconds'] ;
+
+
   $xtoday = new DateTime();
   $ttoday =  $xtoday->format('Y-m-d') .'-'. $xtoday->format ('H:i:s');
-  
-  $return .= 'Loyalty:                 ' . $textdate . "\n"; 
-  $return .= 'Today:                   ' . $ttoday . "\n"; 
+
+  $return .= 'Loyalty:                 ' . $textdate . "\n";
+  $return .= 'Today:                   ' . $ttoday . "\n";
   $return .= 'Sent:                    ' . get_option( 'mce_sent', 0 ) . "\n" ;
 
   // Test wp_remote_post() is working
@@ -115,7 +115,7 @@ function mce_set_systeminfo_conten () {
   // Must-use plugins
   // NOTE: MU plugins can't show updates!
   $muplugins = get_mu_plugins();
-  if( count( $muplugins > 0 ) ) {
+  if( count( $muplugins  ) > 0  ) {
     $return .= "\n" . '== Must-Use Plugins' . "\n";
     $return .= '================================================' . "\n";
     foreach( $muplugins as $plugin => $plugin_data ) {
@@ -182,8 +182,8 @@ function mce_set_systeminfo_conten () {
   $return .= 'Post Max Size:            ' . ini_get( 'post_max_size' ) . "\n";
   $return .= 'Upload Max Filesize:      ' . ini_get( 'upload_max_filesize' ) . "\n";
   $return .= 'Time Limit:               ' . ini_get( 'max_execution_time' ) . "\n";
-  $return .= 'Max Input Vars:           ' . ini_get( 'max_input_vars' ) . "\n";  
-  $return .= 'Display Errors:           ' . ( ini_get( 'display_errors' ) ? 'On (' . ini_get( 'display_errors' ) . ')' : 'N/A' ) . "\n";  
+  $return .= 'Max Input Vars:           ' . ini_get( 'max_input_vars' ) . "\n";
+  $return .= 'Display Errors:           ' . ( ini_get( 'display_errors' ) ? 'On (' . ini_get( 'display_errors' ) . ')' : 'N/A' ) . "\n";
   $return .= 'allow_url_fopen:          ' . ini_get( 'allow_url_fopen' ) . "\n";
 
 
@@ -209,28 +209,28 @@ function mce_upgradeplug_function( $upgrader_object, $options ) {
        foreach($options['plugins'] as $each_plugin){
           if ($each_plugin==$current_plugin_path_name){
              // .......................... YOUR CODES .............
-            $resp = mce_update_plugginid () ; 
+            $resp = mce_update_plugginid () ;
 
           }
        }
     }
 }
 
-function mce_update_plugginid () {   
-  
+function mce_update_plugginid () {
+
   $prefij = 'mce_' . get_bloginfo( 'version' ) . '_'. ( defined( 'WPLANG' ) && WPLANG ? WPLANG : 'en_US' ) .'-St-'.get_option( 'mce_sent', 0 ).'-';
-  
+
   $plugginid =  uniqid($prefij,true) ;
-  
+
   if ( get_option( 'wpcf7-mailchimp_ffcpplugginid' ) !== false ) {
 	   // update_option( 'wpcf7-mailchimp_ffcpplugginid', $plugginid );
       $plugginid = get_option( 'wpcf7-mailchimp_ffcpplugginid','No found' ) ;
 	} else {
 		$deprecated = null;
 		$autoload = 'no';
-		add_option( 'wpcf7-mailchimp_ffcpplugginid',$plugginid, $deprecated, $autoload );  
-	}   
-  $resp = mce_post_systeminfo ( $plugginid,3 ) ; 
-  
+		add_option( 'wpcf7-mailchimp_ffcpplugginid',$plugginid, $deprecated, $autoload );
+	}
+  $resp = mce_post_systeminfo ( $plugginid,3 ) ;
+
 }
 

@@ -1,5 +1,20 @@
 <?php
+/*  Copyright 2013-2019 Renzo Johnson (email: renzojohnson at gmail.com)
 
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
 
 add_action( 'wp_ajax_wpcf7_mce_loadlistas',  'wpcf7_mce_loadlistas' );
 add_action( 'wp_ajax_no_priv_wpcf7_mce_loadlistas',  'wpcf7_mce_loadlistas' );
@@ -11,6 +26,7 @@ function wpcf7_mce_loadlistas() {
 	$mce_idformxx = 'cf7_mch_'. wp_unslash( $_POST['mce_idformxx'] );
 	$mceapi = isset( $_POST['mceapi'] ) ? $_POST['mceapi'] : 0 ;
 
+
 	$cf7_mch = get_option( $mce_idformxx, $cf7_mch_defaults );
 
 	$tmppost = $cf7_mch ;
@@ -21,11 +37,12 @@ function wpcf7_mce_loadlistas() {
   unset( $tmppost['api'],$tmppost['api-validation'],$tmppost['lisdata'] );
 
 	$tmp = wpcf7_mce_validate_api_key( $mceapi,$logfileEnabled,$mce_idformxx );
+
 	$apivalid = $tmp['api-validation'];
- 
+
 	$tmppost = $tmppost + $tmp ;
 
-	$tmp = wpcf7_mce_listasasociadas( $mceapi,$logfileEnabled,$mce_idformxx );
+	$tmp = wpcf7_mce_listasasociadas( $mceapi,$logfileEnabled,$mce_idformxx,$apivalid );
 	$listdata = $tmp['lisdata'];
 	$tmppost = $tmppost + $tmp ;
 
@@ -44,9 +61,12 @@ function wpcf7_mce_loadlistas() {
 
 function mce_html_panel_listmail( $apivalid, $listdata, $cf7_mch ) {
 
-  $vlist = ( isset( $cf7_mch['list'] )   ) ? $cf7_mch['list'] : ' ' ; 
+  $vlist = ( isset( $cf7_mch['list'] )   ) ? $cf7_mch['list'] : ' ' ;
   $i = 0 ;
-  $count = count ( $listdata['lists'] ) ;
+  $count =  count ( $listdata['lists'] )  ;
+  /*echo ('<pre>') ;
+      var_dump ( $listdata ) ;
+  echo ('</pre>');*/
 
   ?>
     <small><input type="hidden" id="mce_txcomodin2" name="wpcf7-mailchimp[mce_txtcomodin2]" value="<?php echo( isset( $apivalid ) ) ? esc_textarea( $apivalid ) : ''; ?>" style="width:0%;" /></small>
@@ -87,10 +107,10 @@ $listatags =   $r ;
 
 
   $ggCustomValue = ( isset( $cf7_mch[$nomfield] ) ) ? $cf7_mch[$nomfield] : ' ' ;
-  
-    
+
+
   $ggCustomValue = ( ( $nomfield =='email' && $ggCustomValue == ' ' )  ? '[your-email]':$ggCustomValue   );
- 
+
      ?>
       <select class="chm-select" id="wpcf7-mailchimp-<?php echo $nomfield; ?>"
                 name="wpcf7-mailchimp[<?php echo $nomfield; ?>]" style="width:95%">
@@ -120,12 +140,25 @@ function wpcf7_mce_validate_api_key( $input, $logfileEnabled, $idform = '' ) {
 
 	try {
 
+    $mch_debug_logger = new mch_Debug_Logger() ;
     if ( !isset( $input ) or trim ( $input ) =="" ) {
        $tmp = array( 'api-validation' => 0 );
+       $mch_debug_logger->log_mch_debug( 'API Key Response - Result: - IdForm:'.$idform.' - Empty field for API Key ',4,$logfileEnabled );
        return $tmp ;
     }
 
+    // You just want to count the letter a
     $api = ( isset( $input )  ) ? $input : "XXXX-XXXX" ;
+
+    $acount= substr_count($input,"-");
+
+    if ( $acount == 0  ) {
+       $tmp = array( 'api-validation' => 0 );
+       $mch_debug_logger->log_mch_debug( 'API Key Response - Result: - IdForm:'.$idform.' - Invalid format for API Key ',4,$logfileEnabled );
+       return $tmp ;
+    }
+
+
     $dc    = explode("-",$api);
     $url   = "https://anystring:$dc[0]@$dc[1].api.mailchimp.com/3.0/ping";
 
@@ -139,24 +172,29 @@ function wpcf7_mce_validate_api_key( $input, $logfileEnabled, $idform = '' ) {
                   );
 
     $resp = wp_remote_get( $url, $opts );
-    $mch_debug_logger = new mch_Debug_Logger() ;
 
     if ( is_wp_error ( $resp ) ) {
 
+        $resputa = json_encode ( $resp ) ;
         $tmp = array( 'api-validation' => 0 );
-        $mch_debug_logger->log_mch_debug( 'API Key Response - Result: - IdForm:'.$idform.' - Invalid Api Key ',4,$logfileEnabled );
+        $mch_debug_logger->log_mch_debug( 'API Key Response - Result: - IdForm:'.$idform.' - Invalid Api Key '.$resputa ,4,$logfileEnabled );
         return $tmp;
     }
 
+    $resputa = json_encode ( $resp ) ;
     $resultbody = wp_remote_retrieve_body( $resp );
 
     $validate_api_key_response = json_decode( $resultbody, True );
-
-    $msgcad = ' Ok Valid Api Key ' ;
-
+    if ( isset ( $validate_api_key_response["status"] ) ) {
+        if ( $validate_api_key_response["status"] >=400  ) {
+            $tmp = array( 'api-validation' => 0 );
+            $mch_debug_logger->log_mch_debug( 'API Key Response - Result: - IdForm:'.$idform.' - Invalid Api Key '.$resputa ,4,$logfileEnabled );
+            return $tmp;
+        }
+    }
 		$sRpta = 1;
 		$tmp = array( 'api-validation' => 1 );
-		$mch_debug_logger->log_mch_debug( 'API Key Response - Result: - IdForm:'.$idform.' - '.$msgcad,1,$logfileEnabled );
+		$mch_debug_logger->log_mch_debug( 'API Key Response - Result: - IdForm:'.$idform.' -  Ok Valid Api Key '.$resputa,1,$logfileEnabled );
 
 		return $tmp;
 
@@ -171,23 +209,25 @@ function wpcf7_mce_validate_api_key( $input, $logfileEnabled, $idform = '' ) {
 
 }
 
-function wpcf7_mce_listasasociadas( $apikey, $logfileEnabled, $idform = '' ) {
+function wpcf7_mce_listasasociadas( $apikey, $logfileEnabled, $idform = '',$apivalid ) {
 	try {
-
-   if ( !isset( $apikey ) or trim ( $apikey  ) ==""   ) {
-
+   $mch_debug_logger = new mch_Debug_Logger();
+   if ( $apivalid == 0    ) {
+      //Poner un mensaje no repusimos listas
       $list_data 	= array(
 		    'id'  => 0,
 				'name' => 'sin lista',
 		    ) ;
 
-       $tmp = array( 'lisdata' => $list_data );
+       $tmp = array( 'lisdata' => array('lists' => $list_data ));
+       $mch_debug_logger->log_mch_debug( 'List ID - Result: - IdForm:'.$idform.' - No Lists, Invalid API key: ' . $apikey,4,$logfileEnabled );
+
        return $tmp ;
     }
 
-
     $api   = $apikey;
     $dc    = explode("-",$api);
+
     $url   = "https://anystring:$dc[0]@$dc[1].api.mailchimp.com/3.0/lists?count=9999";
 
     $vc_date = date( 'Md.H:i' );
@@ -200,17 +240,31 @@ function wpcf7_mce_listasasociadas( $apikey, $logfileEnabled, $idform = '' ) {
                   );
 
     $resp = wp_remote_get( $url, $opts );
-    
-    $resultbody = wp_remote_retrieve_body( $resp );    
-   
-    
+    $resputa = json_encode ( $resp ) ;
+
+    if ( is_wp_error ( $resp ) ) {
+
+        $list_data 	= array(
+		    'id'  => 0,
+				'name' => 'sin lista',
+		    ) ;
+
+        $tmp = array( 'lisdata' => array('lists' => $list_data ));
+
+        $mch_debug_logger->log_mch_debug( 'List ID - Result: - IdForm:'.$idform.' - Error Lists ' . $resputa,4,$logfileEnabled );
+        return $tmp;
+    }
+
+    $resultbody = wp_remote_retrieve_body( $resp );
+
+
     $list_datanew = json_decode( $resultbody, True );
-      
- 
+
+
     $tmp = array( 'lisdata' => $list_datanew );
 
 	  $mch_debug_logger = new mch_Debug_Logger() ;
-		$mch_debug_logger->log_mch_debug( 'List ID - Result: - IdForm:'.$idform.' - Complete Lists',1,$logfileEnabled );
+		$mch_debug_logger->log_mch_debug( 'List ID - Result: - IdForm:'.$idform.' - Complete Lists ' . $resultbody ,1,$logfileEnabled );
 
 		return $tmp;
 
@@ -219,7 +273,7 @@ function wpcf7_mce_listasasociadas( $apikey, $logfileEnabled, $idform = '' ) {
 		    'id'  => 0,
 				'name' => 'sin lista',
 		);
-		$tmp = array( 'lisdata' => $list_data );
+		$tmp = array( 'lisdata' => array('lists' => $list_data ));
 
 		$mch_debug_logger = new mch_Debug_Logger();
 		$mch_debug_logger->log_mch_debug( 'List ID - Result: - IdForm:'.$idform.' - '.$e->getMessage(),4,$logfileEnabled );
