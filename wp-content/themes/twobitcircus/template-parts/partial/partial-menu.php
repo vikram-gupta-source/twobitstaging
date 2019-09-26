@@ -5,7 +5,6 @@
  * @package twobitcircus
  */
  global $location;
- $isOpen = openClosed($location['days'], $location['timezone'], $location['close_dates']);
 ?>
 <!-- ******************* Mobile ******************* -->
 <div id="expanded-menu">
@@ -47,7 +46,7 @@
       <?php the_custom_logo(); ?>
       <?php if(!empty($location['city'])):?>
       <a title="Directions" href="#map-modal" class="nav-link-direction text-center">
-        <span class="direction text-uppercase"><?php echo $location['city'] ?><br/><span class="state <?php echo $isOpen ?>"><?php echo ucwords($isOpen) ?> <i class="fa fa-lg fa-location-arrow" aria-hidden="true"></i></span></span>
+        <span class="direction text-uppercase"><?php echo $location['city'] ?><br/><span class="state"></span></span>
       </a>
       <?php endif ?>
 

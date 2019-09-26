@@ -16,12 +16,12 @@ $cache_time_interval = 600;
 if ( ! defined('WPCACHEHOME') )
 	define( 'WPCACHEHOME', WP_CONTENT_DIR . "/plugins/wp-super-cache/" );
 
-$cache_compression = 0; // Super cache compression
-$cache_enabled = false;
+$cache_compression = 1;
+$cache_enabled = true;
 $super_cache_enabled = true;
 $cache_max_time = 1800;
 //$use_flock = true; // Set it true or false if you know what to use
-$cache_path = WP_CONTENT_DIR . '/cache/';
+$cache_path = 'D:\Work\TwoBitCircus\twobitdev\wp-content/cache/';
 $file_prefix = 'wp-cache-';
 $ossdlcdn = 0;
 
@@ -90,7 +90,7 @@ $wp_cache_mfunc_enabled = 0;
 $wp_cache_make_known_anon = 0;
 $wp_cache_refresh_single_only = 0;
 $wp_cache_mod_rewrite = 0;
-$wp_supercache_304 = 0;
+$wp_supercache_304 = 1;
 $wp_cache_front_page_checks = 0;
 $wp_cache_disable_utf8 = 0;
 $wp_cache_no_cache_for_get = 0;
@@ -103,7 +103,7 @@ $wp_cache_preload_taxonomies = 0;
 $wp_cache_preload_email_me = 0;
 $wp_cache_preload_email_volume = 'none';
 $wp_cache_mobile_prefixes = '';
-$cached_direct_pages = array();
+$cached_direct_pages = array(  );
 $wpsc_served_header = false;
 $cache_gc_email_me = 0;
 $wpsc_save_headers = 0;

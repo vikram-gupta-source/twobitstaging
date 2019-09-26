@@ -106,3 +106,13 @@ if ( ! function_exists( 'add_attraction_rewrite' ) ) {
       add_rewrite_rule('^attractions/([^/]+)/([^/]+)/?$', 'index.php?pagename=attractions&category=$matches[1]&show=$matches[2]','top');
   }
 }
+
+// Load in Locations
+add_action("wp_ajax_twobit_location_ajax", "twobit_location_ajax");
+if ( ! function_exists( 'twobit_location_ajax' ) ) {
+  function twobit_location_ajax() {
+    global $location; 
+    echo openClosed($location['days'], $location['timezone'], $location['close_dates']);
+    exit;
+  }
+}

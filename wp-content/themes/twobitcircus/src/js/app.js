@@ -1023,4 +1023,20 @@ $(function() {
       }
     }
   }
+  // Get Location on Load
+  if ($(".nav-link-direction").length) {
+    $.ajax({
+      url: "/wp-admin/admin-ajax.php",
+      type: "post",
+      data: {
+        action: "twobit_location_ajax"
+      },
+      success: function(response) {
+        let isOpCl = response.toUpperCase() +
+          ' <i class="fa fa-lg fa-location-arrow" aria-hidden="true"></i>';
+        $(".nav-link-direction .state").addClass(response).html(isOpCl);
+      }
+    });
+    return false;
+  }
 });
