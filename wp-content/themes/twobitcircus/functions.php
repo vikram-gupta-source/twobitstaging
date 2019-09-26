@@ -108,6 +108,7 @@ if ( ! function_exists( 'add_attraction_rewrite' ) ) {
 }
 
 // Load in Locations
+add_action('wp_ajax_nopriv_twobit_location_ajax', 'twobit_location_ajax');
 add_action("wp_ajax_twobit_location_ajax", "twobit_location_ajax");
 if ( ! function_exists( 'twobit_location_ajax' ) ) {
   function twobit_location_ajax() {
