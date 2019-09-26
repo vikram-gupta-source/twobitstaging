@@ -37,8 +37,10 @@
               <a class="addthis_button_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             </div>
             <div class="link-wrapper my-2">
+              <?php if(!empty($promo['link'])):?>
               <?php $isInternalLink = checkInternalLink($promo['link']);?>
-              <div class="cta-btn mx-auto"><a class="btn btn-twobit" href="<?php echo $promo['link'];?>" <?php echo $isInternalLink;?>><span><?php _e( 'Book Now', 'twobitcircus' )?></span></a><div class="btn-behind">&nbsp;</div></div>
+              <div class="cta-btn mx-auto"><a class="btn btn-twobit" href="<?php echo $promo['link'];?>" <?php echo $isInternalLink;?>><span><?php echo (!empty($promo['link_title'])) ? $promo['link_title'] :'Book Now'; ?></span></a><div class="btn-behind">&nbsp;</div></div>
+              <?php endif ?>
             </div>
             <?php endif ?>
           </div>
