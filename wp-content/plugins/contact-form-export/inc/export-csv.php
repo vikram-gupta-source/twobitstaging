@@ -54,7 +54,7 @@ class Expoert_CSV{
         $heading_key = $this->get_csv_heading();
         $emailRows = $this->get_email_listing();
         $setDate = date("m/d/Y");
-        $subject = 'Daily Inquiries for ' . $setDate;
+        $subject = 'Daily Inquiries for ' . $setDate . ' for ';
         $multipartSep = '-----'.md5(time()).'-----';
         foreach($emailRows as $to => $data) {
           $attachment = chunk_split(base64_encode($this->create_csv_string($data, $heading_key)));
@@ -77,7 +77,7 @@ class Expoert_CSV{
                 . "--$multipartSep--";
 
            // Send the email, return the result
-          @mail($sendto, $subject, $body, implode("\r\n", $headers));
+          @mail($sendto, $subject . $to, $body, implode("\r\n", $headers));
           sleep(1);
         }
       }
