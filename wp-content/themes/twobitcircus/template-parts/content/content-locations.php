@@ -73,4 +73,16 @@
   </section>
   <?php endif?>
 
+  <?php if(!empty(get_field('footer_block'))) :?>
+  <?php $footer = filter_locations(get_field('footer_block'));?>
+  <?php foreach($footer as $banner) : ?>
+  <section id="footer-event-block" class="entry-wrapper-padding inview animated delay bkg-img" style="background-image: url('<?php echo $banner['image'];?>');">
+    <div class="container text-center">
+      <h2 class="headline text-uppercase"><?php echo $banner['title'];?></h2>
+      <?php echo apply_filters('the_content', $banner['description']);?>
+    </div>
+  </section>
+  <?php endforeach ?>
+  <?php endif ?>
+
 </article>
