@@ -31,21 +31,13 @@ $_closed = $cal->get_closed();
             $dayname = date('D', $current_date);
           ?>
           <?php if(in_array($dayname, $_closed)) $isClosed = true; ?>
-            <div class="grid <?php echo ($isClosed) ? 'closed' : '';?> <?php echo ($day_count==0)?'active':'';?>">
+            <div class="grid <?php echo ($isClosed && empty($calendar[$day])) ? 'closed' : '';?> <?php echo ($day_count==0)?'active':'';?>">
               <div class="grid-time text-center">
                 <div class="header clearfix lubalinB">
                   <div class="day text-uppercase"><?php echo $dayname;?></div>
                   <div class="date text-uppercase"><?php echo date('M d', $current_date);?></div>
                 </div>
-                <?php if($isClosed) : ?>
-                <div class="entry text-uppercase">
-                  <div class="cell">
-                    <div class="cell-box">
-                      <h5 class="time"><?php echo get_field('calendar_closed_text', 'option');?></h5>
-                    </div>
-                  </div>
-                </div>
-              <?php elseif(!empty($calendar[$day])) :?>
+                <?php if(!empty($calendar[$day])) :?>
                 <div class="entry">
                   <div class="cell">
 
@@ -94,6 +86,14 @@ $_closed = $cal->get_closed();
                     <?php endforeach ?>
                     <?php endforeach ?>
 
+                  </div>
+                </div>
+                <?php elseif($isClosed) : ?>
+                <div class="entry text-uppercase">
+                  <div class="cell">
+                    <div class="cell-box">
+                      <h5 class="time"><?php echo get_field('calendar_closed_text', 'option');?></h5>
+                    </div>
                   </div>
                 </div>
                 <?php else :?>

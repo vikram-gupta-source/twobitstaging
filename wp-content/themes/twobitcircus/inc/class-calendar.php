@@ -49,7 +49,7 @@ if ( ! class_exists( 'Calendar' ) ) {
         }
       }
       //print_r($this->calender);
-      $this->specials(); ;
+      $this->specials();
       return $this->calender;
     }
     public function get_closed() {
@@ -113,7 +113,7 @@ if ( ! class_exists( 'Calendar' ) ) {
             $specialEvent[$_spday][$setTimeTicket][] = (object) $obj;
           }
       }
-      //print_r($this->calender);
+      //print_r($specialEvent);
       do {
         $day = date('d', $this->current_date);
         if(isset($specialEvent[$day]) && !empty($specialEvent[$day])) {
@@ -125,6 +125,8 @@ if ( ! class_exists( 'Calendar' ) ) {
         }
         $this->current_date = strtotime('+1 day', $this->current_date);
       } while ($this->current_date <= $this->end_date);
+
+      //print_r($this->calender);
     }
     private function getRecurringDays($date, $exc, $day, $end, $collect, $limit=0) {
       if(empty($date)) return false;
