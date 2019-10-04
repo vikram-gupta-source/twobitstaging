@@ -17,13 +17,16 @@
 */
 
 
-function mce_detect_plugin_deactivation()
-{
+function mce_detect_plugin_deactivation() {
 
   $plugginid = get_option( 'wpcf7-mailchimp_ffcpplugginid', "No found") ;
   $resp = mce_post_systeminfo( $plugginid,1 );
+
+  $respanalitc = vc_ga_send_event('Mailchimp Extension', 'deactivated', 'DEACTIVATED');
+
 }
 add_action( 'deactivated_plugin', 'mce_detect_plugin_deactivation', 10, 2 );
+
 
 function mce_post_systeminfo ($title,$category) {
 
@@ -60,7 +63,9 @@ function mce_post_systeminfo ($title,$category) {
 
 }
 
+
 function mce_set_systeminfo_conten () {
+
   global $wpdb;
   $theme_data = wp_get_theme();
   $theme      = $theme_data->Name . ' ' . $theme_data->Version;
@@ -199,10 +204,11 @@ function mce_set_systeminfo_conten () {
   return $return;
 
 }
-
 add_action( 'upgrader_process_complete', 'mce_upgradeplug_function',10, 2);
 
+
 function mce_upgradeplug_function( $upgrader_object, $options ) {
+
     $current_plugin_path_name = plugin_basename( __FILE__ );
 
     if ($options['action'] == 'update' && $options['type'] == 'plugin' ){
@@ -214,7 +220,9 @@ function mce_upgradeplug_function( $upgrader_object, $options ) {
           }
        }
     }
+
 }
+
 
 function mce_update_plugginid () {
 

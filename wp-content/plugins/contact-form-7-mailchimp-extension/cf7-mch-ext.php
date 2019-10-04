@@ -7,7 +7,7 @@ Author: Renzo Johnson
 Author URI: http://renzojohnson.com
 Text Domain: contact-form-7
 Domain Path: /languages/
-Version: 0.4.61
+Version: 0.5.01
 */
 
 /*  Copyright 2013-2019 Renzo Johnson (email: renzojohnson at gmail.com)
@@ -27,7 +27,7 @@ Version: 0.4.61
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define( 'SPARTAN_MCE_VERSION', '0.4.61' );
+define( 'SPARTAN_MCE_VERSION', '0.5.01' );
 define( 'SPARTAN_MCE_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( 'SPARTAN_MCE_PLUGIN_NAME', trim( dirname( SPARTAN_MCE_PLUGIN_BASENAME ), '/' ) );
 define( 'SPARTAN_MCE_PLUGIN_DIR', untrailingslashit( dirname( __FILE__ ) ) );
@@ -61,7 +61,8 @@ function mc_after_setup_theme() {
 }
 add_action ('after_setup_theme', 'mc_after_setup_theme');
 
-register_activation_hook(__FILE__,'mce_help');
+
+// register_activation_hook(__FILE__,'mce_help');
 
 
 add_filter( 'cron_schedules', 'mce_cron_schedules');
@@ -78,7 +79,7 @@ function mce_cron_schedules( $schedules ) {
      );
 
     $schedules['12hours'] = array(
-        'interval' => 43200, // segundos en 12 horas
+        'interval' => 43200, // segundos en 12 horas --43200
         'display' => __( '12hours', 'mce-textdomain' ) // nombre del intervalo
      );
 
@@ -94,30 +95,70 @@ register_activation_hook( __FILE__, 'mce_plugin_scrool' );
 
 function mce_plugin_scrool() {
 
-    /*if( ! wp_next_scheduled( 'mce_5min_cron_job' ) ) {
-        wp_schedule_event( current_time( 'timestamp' ), '5min', 'mce_5min_cron_job' );
-    }*/
-
     if( ! wp_next_scheduled( 'mce_12hours_cron_job' ) ) {
         wp_schedule_event( current_time( 'timestamp' ), '12hours', 'mce_12hours_cron_job' );
     }
+
 }
 add_action( 'mce_12hours_cron_job', 'mce_do_this_job_12hours' );
 
 function mce_do_this_job_12hours() {
-	  if ( get_site_option('mce_show_update_news') == NULL  )
+	  if ( get_site_option('mce_show_update_news') == null  )
         add_site_option( 'mce_show_update_news', 1 ) ;
     else  {
        $check = 0 ;
        $tittle = '' ;
        $message = mce_get_postnotice ($check,$tittle) ;
        if ( $check == 1 )  update_site_option('mce_show_update_news', 1);
-       //var_dump (' $check ' . $check ) ;
+
+       if ( get_site_option('mce_conten_panel_welcome') != null ) {
+
+          $check = 0 ;
+          $tittle = '' ;
+          $banner = mce_get_bannerladilla ($check,$tittle) ;
+          update_site_option('mce_conten_panel_welcome', $banner) ;
+         
+          $check = 0 ;
+          $tittle = '' ;
+          $bannerlat = mce_get_bannerlateral ($check,$tittle) ;
+          update_site_option('mce_conten_panel_lateralbanner', $banner) ;          
+
+       }
+
     }
 }
 
 register_deactivation_hook( __FILE__, 'mce_plugin_deactivation' );
 function mce_plugin_deactivation() {
-     wp_clear_scheduled_hook( 'mce_12hours_cron_job' );
-    // wp_clear_scheduled_hook( 'cyb_monthly_cron_job' );
+
+    wp_clear_scheduled_hook( 'mce_12hours_cron_job' );
+    wp_clear_scheduled_hook( 'mce_5min_cron_job' );
+    delete_site_option( 'mce_show_update_news' );
+}
+
+
+function prueba ( $CAD ) { if ( $CAD['indice'] == 2   ) return 1 ; }
+
+$errores = error_get_last() ;
+$erroresjson = json_encode ( error_get_last() ) ;
+
+$cuenta = is_array ( $errores ) ? count ($errores) : 0 ;
+
+ if ( $cuenta !== 0 ) {
+    $mch_debug_logger = new mch_Debug_Logger();
+    $mch_debug_logger->log_mch_debug( 'PHP Error - :'. $cuenta . ' Message :'.  $erroresjson   , 4 , 1 );
+ }
+
+if (!function_exists('write_log')) {
+
+    function write_log($log) {
+        if (true === WP_DEBUG) {
+            if (is_array($log) || is_object($log)) {
+                error_log(print_r($log, true));
+            } else {
+                error_log($log);
+            }
+        }
+    }
+
 }

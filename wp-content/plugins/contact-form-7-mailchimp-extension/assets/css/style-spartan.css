@@ -192,12 +192,17 @@ div#MailChimp-Extension {
 span.chmm {
   font-size: 14px;
   line-height: 1.2em;
-  padding: 2px 10px 2px 5px;
-  margin-left: 2em;
+  padding: 2px 18px 3px 10px;
+  margin-left: 1em;
+  border-radius: 3px;
 }
 
 span.chmm .dashicons {
-  line-height: 1.4em;
+  line-height: 1.33em;
+}
+
+span.chmm .dashicons-no {
+  line-height: 1.37em;
 }
 
 span.valid {
@@ -242,7 +247,7 @@ span.invalid {
     height: 9px;
     content: '';
     top: 0;
-    z-index: 9999999;
+    z-index: 2;
 }
 
 

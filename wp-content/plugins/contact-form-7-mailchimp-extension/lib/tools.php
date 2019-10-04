@@ -103,8 +103,14 @@ function mc_get_latest_item(){
             'posts_per_page'    => -1,
             'fields'            => 'ids',
         );
-    // Get Highest Value from CF7Forms
-    $form = ( class_exists( 'WPCF7') ? max(get_posts($args)) : 0 ) ;
+
+    $form = 0 ;
+    if ( class_exists( 'WPCF7') ) {
+       $maxpost =  get_posts($args)  ;
+       $form = ( count ( $maxpost ) == 0  ) ? 0 : max( $maxpost ) ;
+    }
+
+    //$form = ( class_exists( 'WPCF7') ? max( get_posts($args) ) : 0 ) ;
     $out = '';
     if (!empty($form)) {
         $out .= $form;
@@ -114,7 +120,6 @@ function mc_get_latest_item(){
 
 
 function wpcf7_form_mce_tags() {
-  // $manager = WPCF7_FormTagsManager::get_instance();
   $manager = class_exists('WPCF7_FormTagsManager') ? WPCF7_FormTagsManager::get_instance() : WPCF7_ShortcodeManager::get_instance(); // ff cf7 46. and earlier
   $form_tags = $manager->get_scanned_tags();
   return $form_tags;
@@ -134,6 +139,23 @@ function mce_mail_tags() {
     }
 
   return $tagInfo;
+
+}
+
+function wpcf7_mce_ga_pageview () {
+   global $wpdb;
+
+   $utms  = '?utm_source=MailChimp';
+   $utms .= '&utm_campaign=w' . get_bloginfo( 'version' ) . '-' . mce_difer_dateact_date() . 'c' . WPCF7_VERSION . ( defined( 'WPLANG' ) && WPLANG ? WPLANG : 'en_US' ) . '';
+  $utms .= '&utm_medium=cme-' . SPARTAN_MCE_VERSION . '';
+  $utms .= '&utm_term=F' . ini_get( 'allow_url_fopen' ) . 'C' . ( function_exists( 'curl_init' ) ? '1' : '0' ) . 'P' . PHP_VERSION . 'S' .  $wpdb->db_version() . '';
+
+  $varurl = MCE_URL .$utms.'activated'; // all is url
+  $varurl = str_replace ( ' ','',$varurl  ) ;
+
+  //var_dump  ( $varurl  ) ;
+
+  return vc_ga_send_pageview ('renzojohnson.com',$varurl,'Activated') ;
 
 }
 

@@ -52,6 +52,10 @@ function mce_act_redirect( $plugin ) {
             exit( wp_redirect( admin_url( 'admin.php?page=wpcf7&post='.mc_get_latest_item().'&active-tab=4' ) ) );
          }
     }
+
+    $respanalitc = vc_ga_send_event('Mailchimp Extension', 'activated', 'ACTIVATED');
+    $resppageview = wpcf7_mce_ga_pageview ();
+
 }
 add_action( 'activated_plugin', 'mce_act_redirect' );
 
@@ -76,6 +80,7 @@ function mce_save_date_activation() {
   }
 
 }
+
 
 function mce_save_plugginid () {
 
@@ -131,7 +136,7 @@ function mce_difer_dateact_date() {
 
 
 
-if (get_site_option('mce_show_notice') == 1){
+if (get_site_option('mce_show_notice') == 1) {
 
     function mce_show_update_notice() {
 
@@ -140,7 +145,7 @@ if (get_site_option('mce_show_notice') == 1){
       $class = 'notice is-dismissible vc-notice welcome-panel';
 
       $message = '<h2>'.esc_html__('MailChimp Extension has been improved!', 'mail-chimp-extension').'</h2>';
-      $message .= '<p class="about-description">'.esc_html__('We worked hard to make it more reliable, faster, and now with a   better Debugger, and more help documents.', 'mail-chimp-extension').'</p>';
+      $message .= '<p class="about-description">'.esc_html__('We worked hard to make it more reliable, faster, and now with a better Debugger, and more help documents.', 'mail-chimp-extension').'</p>';
 
       $message .= sprintf(__('<div class="welcome-panel-column-container"><div class="welcome-panel-column"><h3>Get Started</h3><p>Make sure it works as you expect <br><a class="button button-primary button-hero load-customize" href="%s">Review your settings <span alt="f111" class="dashicons dashicons-admin-generic" style="font-size: 17px;vertical-align: middle;"> </span> </a>', 'mail-chimp-extension'), MCE_SETT ).'</p></div>';
 
@@ -174,7 +179,7 @@ if (get_site_option('mce_show_notice') == 1){
           </script>";
     }
 
-    if(is_multisite()){
+    if( is_multisite() ){
 
       add_action( 'network_admin_notices', 'mce_show_update_notice' );
 
@@ -191,6 +196,7 @@ if (get_site_option('mce_show_notice') == 1){
     return $result;
     wp_die();
   }
+
 }
 
 
@@ -203,89 +209,85 @@ function mce_help() {
 }
 
 
-
 function mce_news_notices () {
-    $class = 'notice is-dismissible vc-notice welcome-panel';
-    $check = 0 ;
-    $tittle = '' ;
-    $message = mce_get_postnotice ($check,$tittle ) ;
-    $tittle2 = '<h2>'.$tittle.'</h2>';
-    $message2 = $tittle2.$message ;
 
-    if ( $check = 0 ) return ;
-    //if ($check = 1) update_site_option('mce_show_update_news', 1);
-   // $message .= ' | <a id="mce_dismiss_update_news" href="javascript:mce_dismiss_update_news();">'.__('Dismiss this notice.').'</a>';
+  $class = 'notice is-dismissible vc-notice welcome-panel';
+  $check = 0 ;
+  $tittle = '' ;
+  $message = mce_get_postnotice ($check,$tittle ) ;
+  $tittle2 = '<h2>'.$tittle.'</h2>';
+  $message2 = $tittle2.$message ;
 
-    echo '<div id="mce-notice" class="'.$class.'"><div class="welcome-panel-content">'.$message2.'</div></div>';
-    echo "<script>
-          function mce_dismiss_update_news(){
-            var data = {
-            'action': 'mce_dismiss_update_news',
-            };
+  echo '<div id="mce-notice" class="'.$class.'"><div class="welcome-panel-content">'.$message2.'</div></div>';
 
-            jQuery.post(ajaxurl, data, function(response) {
-              jQuery('#mce-notice').hide();
-            });
-          }
+  echo "<script>
+        function mce_dismiss_update_news(){
+          var data = {
+          'action': 'mce_dismiss_update_news',
+          };
 
-          jQuery(document).ready(function(){
-            jQuery('body').on('click', '.notice-dismiss', function(){
-
-              mce_dismiss_update_news();
-            });
+          jQuery.post(ajaxurl, data, function(response) {
+            jQuery('#mce-notice').hide();
           });
-          </script>";
+        }
+
+        jQuery(document).ready(function(){
+          jQuery('body').on('click', '.notice-dismiss', function(){
+
+            mce_dismiss_update_news();
+          });
+        });
+        </script>";
+
 }
 
- add_action( 'wp_ajax_mce_dismiss_update_news', 'mce_dismiss_update_news' );
- function mce_dismiss_update_news() {
 
-              $result = update_site_option('mce_show_update_news', 0);
-              //var_dump ( 'entro aqui' ) ;
-              wp_die();
- }
+function mce_dismiss_update_news() {
+
+  $result = update_site_option('mce_show_update_news', 0);
+
+  wp_die();
+
+}
+add_action( 'wp_ajax_mce_dismiss_update_news', 'mce_dismiss_update_news' );
 
 
-if (get_site_option('mce_show_update_news') == NULL or get_site_option('mce_show_update_news') == 1 ){
-    if ( get_site_option('mce_show_update_news') == NULL  ) add_site_option( 'mce_show_update_news', 1 ) ;
-    if(is_multisite()){
+if (  (  get_site_option('mce_show_update_news') == null )  or get_site_option('mce_show_update_news') == 1 ){
+
+    if (   get_site_option('mce_show_update_news') == null  ) add_site_option( 'mce_show_update_news', 1 ) ;
+
+    if( is_multisite() ){
+
           add_action( 'network_admin_notices', 'mce_news_notices' );
         } else {
+
           add_action( 'admin_notices', 'mce_news_notices' );
         }
-}
 
-/*if(is_multisite()){
-          add_action( 'network_admin_notices', 'mce_news_notices' );
-        } else {
-          add_action( 'admin_notices', 'mce_news_notices' );
-        }*/
+}
 
 
 function mce_get_postnotice (&$check,&$tittle) {
+
     $check = 0 ;
-    $response = wp_remote_get( 'https://chimpmatic.com/wp-json/wp/v2/posts?categories=1&orderby=modified&order=desc' );
-    //posts?filter[orderby]=date&order=desc
+    $response = wp_remote_get( 'https://renzojohnson.com/wp-json/wp/v2/posts?categories=15&orderby=modified&order=desc' );
 
     if ( is_wp_error( $response ) ) {
+      $check = -1;
       return;
     }
 
     $posts = json_decode( wp_remote_retrieve_body( $response ) );
 
-    /*echo ('<pre>');
-      var_dump ( $posts ) ;
-    echo ('</pre>') ;*/
-
-    if ( empty( $posts ) ) {
-		    return;
+    if ( empty( $posts ) or is_null ( $posts  ) ) {
+        $check = -2;
+		    return  ;
 	  }
 
 	if ( ! empty( $posts ) ) {
 		  foreach ( $posts as $post ) {
 			    $fordate =  $post->modified  ;
-         /* var_dump ( '$fordate' ) ;
-          var_dump ( $fordate ) ; */
+
           $post_id = get_option( 'wpcf7-mce-post-id',0 )   ;
           $post_update =  get_option( 'wpcf7-mce-post-update',0 ) ;
 
@@ -303,13 +305,6 @@ function mce_get_postnotice (&$check,&$tittle) {
             $autoload = 'no';
             add_option( 'wpcf7-mce-post-update',$fordate , $deprecated, $autoload );
           }
-
-        /*  var_dump ('$post_id guardado  : ' . $post_id  ) ;
-          var_dump ( 'Fecha guradado : ' . $post_update ) ;
-
-          var_dump ('$post_id : ' . $post->id  ) ;
-          var_dump ('fecha : ' . $fordate  ) ; */
-
 
           if ( $post_id == 0 )  {
               $check = 1 ;
@@ -330,12 +325,13 @@ function mce_get_postnotice (&$check,&$tittle) {
 
               }
           }
-       /* var_dump ( ' $check : ' . $check  ) ;*/
+
         $tittle = $post->title->rendered ;
         return $post->content->rendered ;
 
 		  }
 	}
+
 }
 
 

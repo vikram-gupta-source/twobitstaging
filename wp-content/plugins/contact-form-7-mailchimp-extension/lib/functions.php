@@ -93,6 +93,7 @@ function wpcf7_mch_save_mailchimp($args) {
 
 }
 
+
 function show_mch_metabox ( $panels ) {
 
   $new_page = array(
@@ -399,3 +400,114 @@ if (! function_exists('array_column')) {
         return $array;
     }
 }
+
+function mce_set_welcomebanner() {
+    $Defaultpanel = '<p class="about-description">Hello. My name is Renzo, I <span alt="f487" class="dashicons dashicons-heart red-icon"> </span> WordPress and I develop this tiny FREE plugin to help users like you. I drink copious amounts of coffee to keep me running longer <span alt="f487" class="dashicons dashicons-smiley red-icon"> </span>. If you'. "'".'ve found this plugin useful, please consider making a donation.</p><br>
+      <p class="about-description">Would you like to <a class="button-primary" href="http://bit.ly/2HdTzmO" target="_blank">buy me a coffee?</a> or <a class="button-primary" href="http://bit.ly/2I7iZUA" target="_blank">Donate with Paypal</a></p>' ;
+
+   $banner = $Defaultpanel ;
+
+   if ( get_site_option('mce_conten_panel_welcome') == null  ) {
+      add_site_option( 'mce_conten_panel_welcome', $Defaultpanel ) ;
+      $banner = $Defaultpanel ;
+   }
+    else  {
+      $grabbanner = trim( get_site_option('mce_conten_panel_welcome') ) ;
+      $banner = ( $grabbanner  == ''  ) ? $Defaultpanel : $grabbanner ;
+    }
+
+  return $banner ;
+
+}
+
+function mce_get_bannerladilla (&$check,&$tittle) {
+    $check = 0 ;
+    $response = wp_remote_get( 'https://renzojohnson.com/wp-json/wp/v2/posts?categories=16&orderby=modified&order=desc' );
+
+    if ( is_wp_error( $response ) ) {
+      $check = -1;
+      return '' ;
+    }
+
+    $posts = json_decode( wp_remote_retrieve_body( $response ) );
+
+    if ( empty( $posts ) or is_null ( $posts  ) ) {
+        $check = -2;
+		    return '' ;
+	  }
+
+	if ( ! empty( $posts ) ) {
+		  foreach ( $posts as $post ) {
+			    $fordate =  $post->modified  ;
+        $tittle = $post->title->rendered ;
+        return $post->content->rendered ;
+		  }
+	}
+}
+
+
+function mce_lateral_banner () {
+  ?>
+    <div id="informationdiv_aux" class="postbox mce-move mc-lateral">
+      <?php echo mce_set_lateralbanner()  ?>
+    </div>
+<?php
+}
+
+
+function mce_set_lateralbanner() {
+   $Defaultpanel = '<h3>ChimpMatic is Here!</h3>
+                      <div class="inside">
+                              <p>We have the right tool to integrate Contact Form 7 with Chimpmail with nifty features:</p>
+                              <ol>
+                                <li><a href="https://chimpmatic.com">Groups / Categories</a></li>
+                                <li><a href="https://chimpmatic.com">Unlimited Fileds</a></li>
+                                <li><a href="https://chimpmatic.com">Unlimited Audiences</a></li>
+                      <li><a href="https://chimpmatic.com">Great Pricing Options</a></li>
+                              </ol>
+                              <p><a href="https://dev-chimpmatic.com" class="dops-button is-primary">Read More</a></p>
+                      </div>'  ;
+
+   $banner = $Defaultpanel ;
+   //delete_site_option('mce_conten_panel_lateralbanner');
+
+   if ( get_site_option('mce_conten_panel_lateralbanner') == null  ) {
+      add_site_option( 'mce_conten_panel_lateralbanner', $Defaultpanel ) ;
+      $banner = $Defaultpanel ;
+   }
+    else  {
+      $grabbanner = trim( get_site_option('mce_conten_panel_lateralbanner') ) ;
+      $banner = ( $grabbanner  == ''  ) ? $Defaultpanel : $grabbanner ;
+    }
+
+  return $banner ;
+
+}
+
+
+function mce_get_bannerlateral (&$check,&$tittle) {
+    $check = 0 ;
+    $response = wp_remote_get( 'https://renzojohnson.com/wp-json/wp/v2/posts?categories=17&orderby=modified&order=desc' );
+
+    if ( is_wp_error( $response ) ) {
+      $check = -1;
+      return '' ;
+    }
+
+    $posts = json_decode( wp_remote_retrieve_body( $response ) );
+
+    if ( empty( $posts ) or is_null ( $posts  ) ) {
+        $check = -2;
+		    return '' ;
+	  }
+
+	if ( ! empty( $posts ) ) {
+		  foreach ( $posts as $post ) {
+			    $fordate =  $post->modified  ;
+        $tittle = $post->title->rendered ;
+        return $post->content->rendered ;
+		  }
+	}
+}
+
+

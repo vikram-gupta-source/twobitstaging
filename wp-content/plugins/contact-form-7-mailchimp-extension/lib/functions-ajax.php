@@ -19,13 +19,14 @@
 add_action( 'wp_ajax_wpcf7_mce_loadlistas',  'wpcf7_mce_loadlistas' );
 add_action( 'wp_ajax_no_priv_wpcf7_mce_loadlistas',  'wpcf7_mce_loadlistas' );
 
+
 function wpcf7_mce_loadlistas() {
 	global $wpdb;
 
+   
 	$cf7_mch_defaults = array();
 	$mce_idformxx = 'cf7_mch_'. wp_unslash( $_POST['mce_idformxx'] );
 	$mceapi = isset( $_POST['mceapi'] ) ? $_POST['mceapi'] : 0 ;
-
 
 	$cf7_mch = get_option( $mce_idformxx, $cf7_mch_defaults );
 
@@ -63,10 +64,12 @@ function mce_html_panel_listmail( $apivalid, $listdata, $cf7_mch ) {
 
   $vlist = ( isset( $cf7_mch['list'] )   ) ? $cf7_mch['list'] : ' ' ;
   $i = 0 ;
-  $count =  count ( $listdata['lists'] )  ;
-  /*echo ('<pre>') ;
-      var_dump ( $listdata ) ;
-  echo ('</pre>');*/
+  if ( !isset ( $listdata['lists'] ) ) return ;
+
+  $count = is_array ( $listdata['lists']  ) ? count ( $listdata['lists'] ) : 0 ;
+
+  if ( $count == 0 ) return ;
+
 
   ?>
     <small><input type="hidden" id="mce_txcomodin2" name="wpcf7-mailchimp[mce_txtcomodin2]" value="<?php echo( isset( $apivalid ) ) ? esc_textarea( $apivalid ) : ''; ?>" style="width:0%;" /></small>
@@ -74,7 +77,7 @@ function mce_html_panel_listmail( $apivalid, $listdata, $cf7_mch ) {
 
     if ( isset( $apivalid ) && '1' == $apivalid ) {
     ?>
-      <label for="wpcf7-mailchimp-list"><?php echo esc_html( __( 'These are  ALL ' . $count .' your mailchimp.com lists: '  , 'wpcf7' ) ); ?></label><br />
+      <label for="wpcf7-mailchimp-list"><?php echo esc_html( __( 'These are ALL your ' . $count .' mailchimp.com lists: '  , 'wpcf7' ) ); ?></label><br />
       <select id="wpcf7-mailchimp-list" name="wpcf7-mailchimp[list]" style="width:45%;">
       <?php
       foreach ( $listdata['lists'] as $list ) {
@@ -185,6 +188,7 @@ function wpcf7_mce_validate_api_key( $input, $logfileEnabled, $idform = '' ) {
     $resultbody = wp_remote_retrieve_body( $resp );
 
     $validate_api_key_response = json_decode( $resultbody, True );
+
     if ( isset ( $validate_api_key_response["status"] ) ) {
         if ( $validate_api_key_response["status"] >=400  ) {
             $tmp = array( 'api-validation' => 0 );

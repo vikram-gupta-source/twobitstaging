@@ -20,8 +20,23 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+.mc-lateral {
+  box-shadow: 0 0 0 1px rgba(200,215,225,.5), 0 1px 2px #e9eff3;
+}
 
+.metabox-holder .mc-lateral h3 {
+  font-size: 19px;
+      padding: 15px 15px 13px !important;
+      background-color: #00aadc;
+      text-align: center;
+      color: #ffffff;
+      text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+}
 
+.metabox-holder .mc-lateral .inside {
+      padding: 0 15px 25px !important;
+      margin-top: 0;
+}
 
 .donate {
   border: 1px solid #46b450 !important;
@@ -37,6 +52,57 @@
 
 
 }
+
+
+.dops-button.is-primary {
+    background: #00aadc;
+    border-color: #0087be;
+    color: #fff;
+}
+
+.dops-button {
+    background: #fff;
+    border: solid #d5d5d5;
+    border-width: 1px 1px 2px;
+    color: #414141;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0;
+    outline: 0;
+    overflow: hidden;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    vertical-align: top;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 21px;
+    border-radius: 4px;
+    padding: 7px 14px 9px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.dops-button.is-primary {
+    background: #00be28;
+    border-color: #00a523;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    flex-shrink: 0;
+}
+
+.dops-button.is-primary:hover {
+      background: #00a523;
+    border-color: #008b1d;
+}
+
+.mce-custom-fields .spinner {
+  float: none;
+  margin-top: 0;
+}
+
+
 
 .vc-notice {
   position: relative;
@@ -70,6 +136,11 @@
   content: '';
   display: table;
   clear: both;
+}
+
+.mce-required {
+  color: #dd3d36;
+  font-weight: 900;
 }
 
 .vc-notice:after {
@@ -152,10 +223,9 @@
 
 .mce-custom-fields {
   background-color: rgba(255,255,255,.95);
-  /* border: 1px solid rgba(0,0,0,.05); */
   border: 1px solid #e5e5e5;
   border-radius: 3px;
-  padding: 9px 20px;
+  padding: 12px 15px 15px;
   box-shadow: 0 1px 1px rgba(0,0,0,.04);
   margin-bottom: 10px;
 }
@@ -212,6 +282,13 @@
   .mcee-container select {
     margin-top: 3px;
     margin-bottom: 10px;
+  }
+
+
+  .mce-custom-fields .md-half {
+    display: inline-block;
+    width: 49%;
+    vertical-align:top;
   }
 
 

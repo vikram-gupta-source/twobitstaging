@@ -24,3 +24,4 @@ require_once( SPARTAN_MCE_PLUGIN_DIR . '/lib/functions.php' );
 require_once( SPARTAN_MCE_PLUGIN_DIR . '/lib/wp.php' );
 require_once( SPARTAN_MCE_PLUGIN_DIR . '/lib/deactivate.php' );
 require_once( SPARTAN_MCE_PLUGIN_DIR . '/lib/functions-ajax.php' );
+require_once( SPARTAN_MCE_PLUGIN_DIR . '/lib/events.php' );
