@@ -22,6 +22,10 @@ var isIOS = navigator.userAgent.match(/ipad|ipod|iphone|macintosh/gi);
 var isIOSPhone = navigator.userAgent.match(/ipad|ipod|iphone/gi);
 var isMobile = navigator.userAgent.match(/ipad|ipod|iphone|android/gi);
 
+import jQueryBridget from "jquery-bridget";
+import Flickity from "flickity/dist/flickity.pkgd";
+jQueryBridget("flickity", Flickity, $);
+
 $(function () {
   //Wait for Preload Sprite before Starting
   var loadedItems = 0,
@@ -608,27 +612,6 @@ $(function () {
       settings: "unslick"
     }]
   };
-  var slick_media_nav_settings = {
-    infinite: true,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    arrows: false,
-    asNavFor: ".slick-media",
-    focusOnSelect: true,
-    responsive: [{
-      breakpoint: 1199,
-      settings: {
-        slidesToShow: 4
-      }
-    }]
-  };
-  var slick_media_settings = {
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    asNavFor: ".slick-media-nav"
-  };
 
   var slick_filter_settings = {
     dots: false,
@@ -802,16 +785,20 @@ $(function () {
             let setShow = typeof show !== "undefined" ? show + "/" : "";
             history.pushState(null, null, "/attractions/" + setSlug + setShow);
           });
-        $(".slick-media")
-          .slick(slick_media_settings)
-          .on("beforeChange", function (ev, slick, cur, next) {
-            let iframe = $(slick.$slides.get(cur)).find("iframe");
-            if(iframe.length) {
-              let player = new Player(iframe[0]);
-              player.pause();
-            }
-          });
-        $(".slick-media-nav").slick(slick_media_nav_settings);
+
+        var $mediaSlider = $(".slick-media").flickity({
+          "lazyLoad": true,
+          "pageDots": false,
+          "watchCSS": true
+        });
+        var $mediaNavSlider = $(".slick-media-nav").flickity({
+          "lazyLoad": true,
+          "pageDots": false,
+          "watchCSS": true,
+          "lazyLoad": 5,
+          "prevNextButtons": false,
+          "contain": true
+        });
 
         $(".slick-days").slick(slick_days_settings);
         $(".slick-times")
@@ -819,18 +806,13 @@ $(function () {
           .on("beforeChange", function (ev, slick, cur, next) {
             $(".available-dates .cta-btn").removeClass("show");
           });
+
       } else {
         if(!$(".attractions-slick").hasClass("slick-initialized")) {
           $(".attractions-slick").slick(slick_attractions_settings);
         }
         if(!$(".slick-shows").hasClass("slick-initialized")) {
           $(".slick-shows").slick(slick_shows_settings);
-        }
-        if(!$(".slick-media").hasClass("slick-initialized")) {
-          $(".slick-media").slick(slick_media_settings);
-        }
-        if(!$(".slick-media-nav").hasClass("slick-initialized")) {
-          $(".slick-media-nav").slick(slick_media_nav_settings);
         }
         if(!$(".slick-days").hasClass("slick-initialized")) {
           $(".slick-days").slick(slick_days_settings);
@@ -839,6 +821,17 @@ $(function () {
           $(".slick-times").slick(slick_times_settings);
         }
       }
+
+      var stopVideos = function () {
+        if($(".slick-media").find("iframe").length) {
+          $(".slick-media")
+            .find("iframe")
+            .each(function (kf, fr) {
+              let player = new Player($(this)[0]);
+              player.pause();
+            });
+        }
+      };
 
       //Extend Days slick
       $(".slick-days .slick-slide").on("click", function (evt) {
@@ -922,14 +915,7 @@ $(function () {
                 )
                 .trigger("click");
             }
-            if($(".slick-media").find("iframe").length) {
-              $(".slick-media")
-                .find("iframe")
-                .each(function (kf, fr) {
-                  let player = new Player($(this)[0]);
-                  player.pause();
-                });
-            }
+            stopVideos();
           }
         }
       });
@@ -955,11 +941,6 @@ $(function () {
             $("#" + show)
               .parents(".slick-shows")
               .slick("slickGoTo", index);
-            if($("#" + show).find(".slick-media-nav")) {
-              $("#" + show)
-                .find(".slick-media-nav .slick-slide[data-slick-index=0]")
-                .addClass("slick-current slick-active");
-            }
           }
         }
       });
