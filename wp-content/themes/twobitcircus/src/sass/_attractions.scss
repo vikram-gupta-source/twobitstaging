@@ -203,9 +203,9 @@
       right: 0;
       opacity: 0.9;
       left: inherit;
-      top: 38px;
-      @media (max-width: $mobile) {
-        top: -25px;
+      top: 21px;
+      @media (max-width: $tablet) {
+        top: -17px;
       }
       &.slick-next {
         right: 22px;
@@ -425,6 +425,12 @@
         .flickity-button-icon {
           transform: scale(1.3);
         }
+        &.next {
+          right: 0;
+        }
+        &.previous {
+          left: 0;
+        }
       }
       > .flickity-viewport > .flickity-slider {
         transform: none !important;
@@ -456,24 +462,23 @@
         }
         .thumb {
           margin: 0 1px 0 0;
+          height: 80px;
           width: calc((100% - 1px) / 5);
-          img {
-            min-height: 80px;
+          @media (max-width: 1299px) {
+            height: 70px;
+          }
+          @media (max-width: 1199px) {
+            height: 60px;
           }
           @media (max-width: $tablet) {
             width: calc((100% - 1px) / 4);
           }
           @media (max-width: $mobile) {
             width: calc((100% - 1px) / 4);
-            img {
-              min-height: 60px;
-            }
+            height: 60px;
           }
           @media (max-width: $phone) {
             width: calc((100% - 1px) / 3);
-            img {
-              min-height: 50px;
-            }
           }
           &:before {
             content: "";

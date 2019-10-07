@@ -44,5 +44,11 @@ body.is-mac {
         left: -2px;
       }
     }
+    #attractions .showtimes-cycle {
+      display: none !important;
+    }
+    #attractions .showtimes {
+      display: block !important;
+    }
   }
 }

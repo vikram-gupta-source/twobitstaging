@@ -794,8 +794,8 @@ $(function () {
         if($(".slick-media-nav").length) {
           $(".slick-media-nav").each(function () {
             let mediaSlider = $(this).data('slider');
-            console.log(mediaSlider)
             $(this).flickity({
+              adaptiveHeight: true,
               pageDots: false,
               asNavFor: "." + mediaSlider,
               prevNextButtons: false,
@@ -803,13 +803,14 @@ $(function () {
             });
           });
         }
-
-        $(".slick-days").slick(slick_days_settings);
-        $(".slick-times")
-          .slick(slick_times_settings)
-          .on("beforeChange", function (ev, slick, cur, next) {
-            $(".available-dates .cta-btn").removeClass("show");
-          });
+        if(!isMobile) {
+          $(".slick-days").slick(slick_days_settings);
+          $(".slick-times")
+            .slick(slick_times_settings)
+            .on("beforeChange", function (ev, slick, cur, next) {
+              $(".available-dates .cta-btn").removeClass("show");
+            });
+        }
 
       } else {
         if(!$(".attractions-slick").hasClass("slick-initialized")) {
@@ -818,11 +819,13 @@ $(function () {
         if(!$(".slick-shows").hasClass("slick-initialized")) {
           $(".slick-shows").slick(slick_shows_settings);
         }
-        if(!$(".slick-days").hasClass("slick-initialized")) {
-          $(".slick-days").slick(slick_days_settings);
-        }
-        if(!$(".slick-times").hasClass("slick-initialized")) {
-          $(".slick-times").slick(slick_times_settings);
+        if(!isMobile) {
+          if(!$(".slick-days").hasClass("slick-initialized")) {
+            $(".slick-days").slick(slick_days_settings);
+          }
+          if(!$(".slick-times").hasClass("slick-initialized")) {
+            $(".slick-times").slick(slick_times_settings);
+          }
         }
       }
 
