@@ -419,11 +419,26 @@
     overflow: hidden;
     .slick-media {
       transition: opacity 0.5s ease;
-      .flickity-button-icon {
-        transform: scale(1.3);
+      .flickity-button {
+        background-color: transparent;
+        color: $white;
+        .flickity-button-icon {
+          transform: scale(1.3);
+        }
       }
-      .media-item {
-        width: 100%;
+      > .flickity-viewport > .flickity-slider {
+        transform: none !important;
+        .media-item {
+          width: 100%;
+          left: 0 !important;
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
+          z-index: -1;
+          &.is-selected {
+            opacity: 1;
+            z-index: 0;
+          }
+        }
       }
       &:after {
         content: "flickity";
@@ -442,17 +457,30 @@
         .thumb {
           margin: 0 1px 0 0;
           width: calc((100% - 1px) / 5);
+          img {
+            min-height: 80px;
+          }
+          @media (max-width: $tablet) {
+            width: calc((100% - 1px) / 4);
+          }
           @media (max-width: $mobile) {
             width: calc((100% - 1px) / 4);
+            img {
+              min-height: 60px;
+            }
           }
           @media (max-width: $phone) {
             width: calc((100% - 1px) / 3);
+            img {
+              min-height: 50px;
+            }
           }
           &:before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
+            z-index: 1;
             right: 0;
             width: 0;
             height: 4px;

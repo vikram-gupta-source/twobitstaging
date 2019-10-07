@@ -787,18 +787,22 @@ $(function () {
           });
 
         var $mediaSlider = $(".slick-media").flickity({
-          "lazyLoad": true,
-          "pageDots": false,
-          "watchCSS": true
+          lazyLoad: true,
+          pageDots: false
         });
-        var $mediaNavSlider = $(".slick-media-nav").flickity({
-          "lazyLoad": true,
-          "pageDots": false,
-          "watchCSS": true,
-          "lazyLoad": 5,
-          "prevNextButtons": false,
-          "contain": true
-        });
+
+        if($(".slick-media-nav").length) {
+          $(".slick-media-nav").each(function () {
+            let mediaSlider = $(this).data('slider');
+            console.log(mediaSlider)
+            $(this).flickity({
+              pageDots: false,
+              asNavFor: "." + mediaSlider,
+              prevNextButtons: false,
+              contain: true
+            });
+          });
+        }
 
         $(".slick-days").slick(slick_days_settings);
         $(".slick-times")
