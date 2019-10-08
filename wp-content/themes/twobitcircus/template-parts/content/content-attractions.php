@@ -75,22 +75,22 @@
                       </div>
                       <?php if(!empty($gallery) || !empty($_video)) :?>
                       <div class="show-asset-wrapper">
-                        <div class="slick-media media-slider-<?php echo $show->ID;?>">
+                        <div class="slick-media">
                           <?php if(!empty($_video)) :?>
-                          <div class="media-item d-block">
+                          <div class="item d-block">
                             <div class="embed-lazy embed-responsive embed-responsive-16by9" data-video="https://player.vimeo.com/video/<?php echo $_video;?>"></div>
                           </div>
                           <?php endif ?>
                           <?php foreach($gallery as $gal) :?>
-                          <div class="media-item d-block">
-                            <div class="img d-block"><img class="img-fluid w-100" data-flickity-lazyload="<?php echo $gal['url']; ?>" alt="<?php echo $gal['title']; ?>"/></div>
+                          <div class="item d-block">
+                            <div class="img d-block pre-load-img" data-img="<?php echo $gal['url']; ?>"><img class="img-fluid w-100" alt="<?php echo $gal['title']; ?>"/></div>
                           </div>
                           <?php endforeach ?>
                         </div>
                         <?php $mediaAssetCnt = count($gallery) + (!empty($_video) ? 1 : 0);?>
                         <?php if($mediaAssetCnt > 1):?>
                         <div class="overlay">
-                          <div class="slick-media-nav" data-slider="media-slider-<?php echo $show->ID;?>">
+                          <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
                             <?php if(!empty($videoThumb)) :?>
                             <div class="thumb pre-load-img" data-img="<?php echo $videoThumb; ?>"><img class="img-fluid" alt="<?php echo $show->post_title;?>"/></div>
                             <?php endif ?>
