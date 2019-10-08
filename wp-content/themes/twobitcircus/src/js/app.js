@@ -831,7 +831,6 @@ $(function () {
           });
 
         slick_media_settings = (isIOSPad) ? slick_media_settings_pad : slick_media_settings;
-        console.log(slick_media_settings_pad)
         $(".slick-media")
           .slick(slick_media_settings)
           .on("beforeChange", function (ev, slick, cur, next) {

@@ -201,11 +201,10 @@
     > button {
       position: absolute;
       right: 0;
-      opacity: 0.9;
       left: inherit;
-      top: 38px;
-      @media (max-width: $mobile) {
-        top: -25px;
+      top: 21px;
+      @media (max-width: $tablet) {
+        top: -17px;
       }
       &.slick-next {
         right: 22px;
