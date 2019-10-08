@@ -419,6 +419,28 @@
     overflow: hidden;
     .slick-media {
       transition: opacity 0.5s ease;
+      @media (max-width: $mobile) {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        display: flex;
+        .item {
+          margin: 0 1px;
+          min-width: 85vw;
+        }
+        &::-webkit-scrollbar {
+          background: transparent;
+          width: 6px;
+          height: 6px;
+          opacity: 0.7;
+        }
+        &::-webkit-scrollbar-thumb {
+          box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.15);
+          background: $yellow;
+          border-radius: 10px;
+        }
+      }
     }
     &:hover {
       .slick-prev,

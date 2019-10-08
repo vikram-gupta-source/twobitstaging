@@ -20,6 +20,7 @@ import Player from "@vimeo/player";
 
 var isIOS = navigator.userAgent.match(/ipad|ipod|iphone|macintosh/gi);
 var isIOSPhone = navigator.userAgent.match(/ipad|ipod|iphone/gi);
+var isIOSPad = navigator.userAgent.match(/ipad/gi);
 var isMobile = navigator.userAgent.match(/ipad|ipod|iphone|android/gi);
 
 $(function () {
@@ -616,13 +617,30 @@ $(function () {
     asNavFor: ".slick-media",
     focusOnSelect: true,
     responsive: [{
-      breakpoint: 1199,
-      settings: {
-        slidesToShow: 4
+        breakpoint: 1199,
+        settings: {
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: "unslick"
       }
-    }]
+    ]
   };
   var slick_media_settings = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    asNavFor: ".slick-media-nav",
+    responsive: [{
+      breakpoint: 768,
+      settings: "unslick"
+    }]
+  };
+
+  var slick_media_settings_pad = {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -811,6 +829,9 @@ $(function () {
             let setShow = typeof show !== "undefined" ? show + "/" : "";
             history.pushState(null, null, "/attractions/" + setSlug + setShow);
           });
+
+        slick_media_settings = (isIOSPad) ? slick_media_settings_pad : slick_media_settings;
+        console.log(slick_media_settings_pad)
         $(".slick-media")
           .slick(slick_media_settings)
           .on("beforeChange", function (ev, slick, cur, next) {
@@ -820,8 +841,10 @@ $(function () {
               player.pause();
             }
           });
+
         if(!isMobile) {
           $(".slick-media-nav").slick(slick_media_nav_settings);
+
           $(".slick-days").slick(slick_days_settings);
           $(".slick-times")
             .slick(slick_times_settings)
@@ -837,6 +860,7 @@ $(function () {
           $(".slick-shows").slick(slick_shows_settings);
         }
         if(!$(".slick-media").hasClass("slick-initialized")) {
+          slick_media_settings = (isIOSPad) ? slick_media_settings_pad : slick_media_settings;
           $(".slick-media").slick(slick_media_settings);
         }
         if(!isMobile) {
