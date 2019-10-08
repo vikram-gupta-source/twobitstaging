@@ -626,8 +626,7 @@ $(function () {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
-    asNavFor: ".slick-media-nav"
+    arrows: true
   };
 
   var slick_filter_settings = {
