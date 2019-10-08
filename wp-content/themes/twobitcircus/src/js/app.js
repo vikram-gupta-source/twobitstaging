@@ -22,7 +22,7 @@ var isIOS = navigator.userAgent.match(/ipad|ipod|iphone|macintosh/gi);
 var isIOSPhone = navigator.userAgent.match(/ipad|ipod|iphone/gi);
 var isMobile = navigator.userAgent.match(/ipad|ipod|iphone|android/gi);
 
-$(function() {
+$(function () {
   //Wait for Preload Sprite before Starting
   var loadedItems = 0,
     $aboutElem = $("#about-intro"),
@@ -30,17 +30,17 @@ $(function() {
     $articleElem = $("article.page.type-page"),
     scrollHeightTop = 800,
     scrollHide = 300,
-    handleWaypoints = function() {
-      if ($(".inview").length) {
-        $(".inview").each(function() {
+    handleWaypoints = function () {
+      if($(".inview").length) {
+        $(".inview").each(function () {
           let delay = $(this).data("offset") ? $(this).data("offset") : "90%";
           let easeType = $(this).data("ease") ?
             $(this).data("ease") :
             "fadeInUp";
           let waypoint = new Waypoint({
             element: this,
-            handler: function(direction) {
-              if (direction == "down" && !$(this.element).hasClass(easeType)) {
+            handler: function (direction) {
+              if(direction == "down" && !$(this.element).hasClass(easeType)) {
                 $(this.element).addClass(easeType);
               }
             },
@@ -52,28 +52,28 @@ $(function() {
   handleWaypoints();
   $headerElem.addClass("start");
   $articleElem.addClass("start");
-  if (isIOS) {
+  if(isIOS) {
     $("body").addClass("is-mac");
   }
-  if (isIOSPhone) {
+  if(isIOSPhone) {
     $("body").addClass("is-mac-phone");
   }
   // Intro for About
-  if ($aboutElem.length) {
+  if($aboutElem.length) {
     imagesLoaded(
       "#about-intro", {
         background: true
       },
-      function() {
+      function () {
         $aboutElem.addClass("start");
-        setTimeout(function() {
+        setTimeout(function () {
           $("#about-header .caption-top .caption-content").addClass("fadeInUp");
         }, 2000);
       }
     );
   }
   // Scroll Handler
-  if ($("#arrow-cta").length && $(window).height() < scrollHeightTop) {
+  if($("#arrow-cta").length && $(window).height() < scrollHeightTop) {
     $("#arrow-cta").addClass("show");
   }
   // Handle resize
@@ -82,9 +82,9 @@ $(function() {
   $("body").css({
     "padding-top": navBarHt + "px"
   });
-  $(window).on("resize", function() {
+  $(window).on("resize", function () {
     clearTimeout(clearInt);
-    clearInt = setTimeout(function() {
+    clearInt = setTimeout(function () {
       navBarHt = $("#main-nav").height();
       $("body").css({
         "padding-top": navBarHt + "px"
@@ -93,18 +93,18 @@ $(function() {
     }, 500);
   });
   var prevScrollpos = window.pageYOffset;
-  $(window).scroll(function() {
+  $(window).scroll(function () {
     let currentScrollPos = window.pageYOffset;
-    if ($("#arrow-cta").length) {
-      if ($(this).scrollTop() >= scrollHide) {
+    if($("#arrow-cta").length) {
+      if($(this).scrollTop() >= scrollHide) {
         $("#arrow-cta").removeClass("show");
       } else {
-        if ($(window).height() < scrollHeightTop) {
+        if($(window).height() < scrollHeightTop) {
           $("#arrow-cta").addClass("show");
         }
       }
     }
-    if (
+    if(
       prevScrollpos > currentScrollPos ||
       currentScrollPos == 0 ||
       currentScrollPos < navBarHt + 25
@@ -249,27 +249,27 @@ $(function() {
     "main", {
       background: true
     },
-    function() {
-      if ($(".slick-filter").length) {
+    function () {
+      if($(".slick-filter").length) {
         $(".slick-filter").slick(slick_filter_settings);
       }
-      if ($(".slick-center-init").length) {
+      if($(".slick-center-init").length) {
         $(".slick-center-init").slick(slick_center_settings);
       }
-      if ($(".slick-event").length) {
+      if($(".slick-event").length) {
         $(".slick-event").slick(slick_event_settings);
       }
-      if ($(".slick-calendar").length) {
+      if($(".slick-calendar").length) {
         $(".slick-calendar").slick(slick_calendar_settings);
       }
-      if ($(".slick-social").length) {
+      if($(".slick-social").length) {
         $(".slick-social")
           .slick(slick_social_settings)
-          .on("beforeChange", function(event, slick, currentSlide, nextSlide) {
+          .on("beforeChange", function (event, slick, currentSlide, nextSlide) {
             var srcid = $(slick.$slides.get(nextSlide))
               .find(".embed-data")
               .data("src");
-            if (srcid) {
+            if(srcid) {
               $(slick.$slides.get(nextSlide))
                 .find(".embed-data")
                 .append(
@@ -280,7 +280,7 @@ $(function() {
             }
           });
       }
-      if ($("#news-content").length) {
+      if($("#news-content").length) {
         $(".slick-media").slick({
           infinite: true,
           slidesToShow: 1,
@@ -293,12 +293,12 @@ $(function() {
   );
 
   // Handle CLick for Nav Map
-  $(".nav-link-direction").on("click", function(evt) {
+  $(".nav-link-direction").on("click", function (evt) {
     evt.preventDefault();
     $("#map-modal").modal("toggle");
   });
   // Handle Arrow Scroll Top
-  $("#return-to-top").on("click", function(evt) {
+  $("#return-to-top").on("click", function (evt) {
     evt.preventDefault();
     $("html, body").animate({
         scrollTop: 0
@@ -307,35 +307,35 @@ $(function() {
     );
   });
   // Enable parallax
-  if ($(".parallax").length) {
+  if($(".parallax").length) {
     $(".parallax").parallax();
   }
   // Go-Back
   // Handle Back Button
   var mainUrl = document.location.host;
-  $(".go-back").on("click", function(e) {
+  $(".go-back").on("click", function (e) {
     e.preventDefault();
-    if (document.referrer.match(mainUrl)) {
+    if(document.referrer.match(mainUrl)) {
       window.location.href = document.referrer;
     } else {
       window.location.href = "/shows/";
     }
   });
   // Scroll to Top
-  $(window).scroll(function() {
-    if ($(this).scrollTop() >= 100) {
+  $(window).scroll(function () {
+    if($(this).scrollTop() >= 100) {
       $("#return-to-top").addClass("active");
     } else {
       $("#return-to-top").removeClass("active");
     }
   });
-  if ($(".grid-isotope").length) {
+  if($(".grid-isotope").length) {
     var $iso = new Isotope(".grid-isotope", {
       itemSelector: ".grid-item"
     });
-    $("#grid-filter a").on("click", function(evt) {
+    $("#grid-filter a").on("click", function (evt) {
       evt.preventDefault();
-      if (!$(this).hasClass("active")) {
+      if(!$(this).hasClass("active")) {
         $("#grid-filter a").removeClass("active");
         $(this).addClass("active");
         let subfilter = $(this).data("filter");
@@ -345,16 +345,16 @@ $(function() {
       }
     });
   }
-  if ($("#contact-block").length) {
+  if($("#contact-block").length) {
     let $select = $("#contact-block select[name='inquiry']");
     $('option[value="General Inquiries"]', $select).prop("selected", true);
     $select.trigger("click");
   }
-  if ($("#parties-block").length || $("#promo-block").length) {
-    $(".grid-item .event-link").on("click", function(evt) {
+  if($("#parties-block").length || $("#promo-block").length) {
+    $(".grid-item .event-link").on("click", function (evt) {
       evt.preventDefault();
       let $parent = $(this).parents(".grid-item");
-      if (!$parent.find(".card-title").hasClass("collapsed")) {
+      if(!$parent.find(".card-title").hasClass("collapsed")) {
         $(".grid-item .card-title").removeClass("collapsed");
         $(".grid-item .card-body").removeClass("show");
         $parent.find(".card-title").addClass("collapsed");
@@ -364,7 +364,7 @@ $(function() {
         $parent.find(".card-body").removeClass("show");
       }
     });
-    $("#parties-block .link-wrapper .btn").on("click", function(evt) {
+    $("#parties-block .link-wrapper .btn").on("click", function (evt) {
       evt.preventDefault();
       let _event = $(this)
         .parents(".grid-item")
@@ -382,7 +382,7 @@ $(function() {
       $("#event-form").modal("toggle");
     });
   }
-  if ($(".more-calendar-block").length) {
+  if($(".more-calendar-block").length) {
     var weekday = [];
     var month = [];
     weekday[0] = "Sun";
@@ -405,13 +405,13 @@ $(function() {
     month[10] = "Nov";
     month[11] = "Dec";
     var calendarEl = document.getElementById("full-calendar");
-    var addZero = function(i) {
-        if (i < 10) {
+    var addZero = function (i) {
+        if(i < 10) {
           i = "0" + i;
         }
         return i;
       },
-      formatAMPM = function(hours, minutes) {
+      formatAMPM = function (hours, minutes) {
         hrs = hours ? hours : 12;
         var hrs = hours > 12 ? hours - 12 : hours;
         var ampm = hours >= 12 ? "PM" : "AM";
@@ -422,9 +422,9 @@ $(function() {
       themeSystem: "bootstrap",
       events: _cal_events,
       displayEventTime: false,
-      eventClick: function(info) {
+      eventClick: function (info) {
         info.jsEvent.preventDefault();
-        if (!$("#event-window").is(":visible")) {
+        if(!$("#event-window").is(":visible")) {
           $("#event-window").addClass("show");
         }
         let $obj = $(info.el);
@@ -440,7 +440,7 @@ $(function() {
         $(".start", $target).text(
           "Starts: " + formatAMPM(sd.getHours(), sd.getMinutes())
         );
-        if (info.event.end)
+        if(info.event.end)
           $(".end", $target).text(
             "Ends: " + formatAMPM(ed.getHours(), ed.getMinutes())
           );
@@ -449,7 +449,7 @@ $(function() {
         }
         $(".card-img-top", $target).prop("src", info.event.id);
         $(".text", $target).text(info.event.textColor);
-        if (info.event.url) {
+        if(info.event.url) {
           $(".link", $target)
             .prop("href", info.event.url)
             .parent()
@@ -461,12 +461,12 @@ $(function() {
         }
       }
     });
-    $(".btn.full-calendar").on("click", function(evt) {
+    $(".btn.full-calendar").on("click", function (evt) {
       evt.preventDefault();
-      if (!$(this).hasClass("active")) {
+      if(!$(this).hasClass("active")) {
         $(this).addClass("active");
         $(".more-calendar-block").toggleClass("show");
-        if (!$("#full-calendar.fc").length) calendar.render();
+        if(!$("#full-calendar.fc").length) calendar.render();
         $(".full-calendar.btn span").text("Close Calendar");
       } else {
         $(this).removeClass("active");
@@ -474,30 +474,30 @@ $(function() {
         $(".full-calendar.btn span").text("View Full Calendar");
       }
     });
-    $("#event-window .close").on("click", function() {
+    $("#event-window .close").on("click", function () {
       $(this)
         .parents(".event-show")
         .toggleClass("show");
     });
   }
   // Close Main Menu
-  $("#close-btn").on("click", function() {
+  $("#close-btn").on("click", function () {
     $("body").removeClass("scroll-hidden");
     $("#main-nav .navbar-toggler").trigger("click");
   });
-  $("#expanded-menu").on("show.bs.collapse", function() {
+  $("#expanded-menu").on("show.bs.collapse", function () {
     $("body").addClass("scroll-hidden");
   });
 
-  if ($("#about").length) {
+  if($("#about").length) {
     var _h = $("#about-header").height();
     var controller = new ScrollMagic.Controller();
     var scene = new ScrollMagic.Scene({
         triggerElement: "#trigger-element",
         offset: -_h / 2
       })
-      .on("start end", function(e) {
-        if (e.scrollDirection == "FORWARD") {}
+      .on("start end", function (e) {
+        if(e.scrollDirection == "FORWARD") {}
       })
       .setClassToggle("#about-header", "scrolled")
       .addTo(controller);
@@ -506,23 +506,23 @@ $(function() {
         triggerElement: "#trigger-element",
         offset: _h / 2
       })
-      .on("start", function(e) {
-        if (e.scrollDirection == "REVERSE") {}
+      .on("start", function (e) {
+        if(e.scrollDirection == "REVERSE") {}
       })
       .setClassToggle("#about-header", "scrolled")
       .addTo(controller);
 
     let count = 0;
-    $(window).on("resize", function() {
+    $(window).on("resize", function () {
       clearTimeout(count);
-      count = setTimeout(function() {
+      count = setTimeout(function () {
         _h = $("#about-header").height();
       });
     });
   }
 
-  if ($("form#secret").length) {
-    $("form#secret").on("submit", function(e) {
+  if($("form#secret").length) {
+    $("form#secret").on("submit", function (e) {
       e.preventDefault();
       $("#submit-btn")
         .parent()
@@ -535,9 +535,9 @@ $(function() {
           action: "ajaxAirtable",
           secret: $("#secret-word").val()
         },
-        success: function(response) {
+        success: function (response) {
           var dataObject = $.parseJSON(response);
-          if (dataObject.succeed) {
+          if(dataObject.succeed) {
             window.location = dataObject.succeed;
           } else {
             window.location = dataObject.failed;
@@ -547,7 +547,7 @@ $(function() {
       return false;
     });
   }
-  if ($(".slick-package").length) {
+  if($(".slick-package").length) {
     $(".slick-package").slick({
       arrows: true,
       slidesToShow: 4,
@@ -616,27 +616,18 @@ $(function() {
     asNavFor: ".slick-media",
     focusOnSelect: true,
     responsive: [{
-        breakpoint: 1199,
-        settings: {
-          slidesToShow: 4
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: "unslick"
+      breakpoint: 1199,
+      settings: {
+        slidesToShow: 4
       }
-    ]
+    }]
   };
   var slick_media_settings = {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
-    asNavFor: ".slick-media-nav",
-    responsive: [{
-      breakpoint: 768,
-      settings: "unslick"
-    }]
+    asNavFor: ".slick-media-nav"
   };
 
   var slick_filter_settings = {
@@ -729,15 +720,15 @@ $(function() {
   };
 
   // Handle all Attraction Events
-  if ($("#attractions-block").length) {
+  if($("#attractions-block").length) {
     // ToolTips
     $('[data-tool-toggle="tooltip"]').tooltip({
       html: true
     });
     // Preload All Images and Set Video
-    var loadImg = function($elm) {
-      if ($elm.find(".pre-load-img").length) {
-        $elm.find(".pre-load-img").each(function() {
+    var loadImg = function ($elm) {
+      if($elm.find(".pre-load-img").length) {
+        $elm.find(".pre-load-img").each(function () {
           let url = $(this).data("img");
           $(this)
             .removeClass("pre-load-img")
@@ -747,8 +738,8 @@ $(function() {
           $(this).removeAttr("data-img");
         });
       }
-      if ($elm.find(".embed-lazy").length) {
-        $elm.find(".embed-lazy").each(function() {
+      if($elm.find(".embed-lazy").length) {
+        $elm.find(".embed-lazy").each(function () {
           let url = $(this).data("video");
           $(this)
             .removeClass("embed-lazy")
@@ -764,9 +755,9 @@ $(function() {
     // Hnadle Top NAV BAR
     $("#filters .navbar-nav")
       .slick(filter_navbar_settings)
-      .on("beforeChange", function(ev, slick, cur, next) {
+      .on("beforeChange", function (ev, slick, cur, next) {
         let $elSlide = $(slick.$slides[next]);
-        if ($(window).width() < 992) {
+        if($(window).width() < 992) {
           $elSlide
             .addClass("item-mobile")
             .find(".nav-item .nav-link")
@@ -775,22 +766,22 @@ $(function() {
       });
     // First Attraction img
     loadImg($(".attractions-slick .item-attraction:first-child"));
-    var attractionMeta = function(title) {
+    var attractionMeta = function (title) {
       let siteName = $('meta[property="og:site_name"]').attr('content');
       $('title').text(title + ' - ' + siteName);
       $('meta[name="twitter:title"]').attr('content', title + ' - ' + siteName);
       $('meta[property="og:title"]').attr('content', title + ' - ' + siteName);
     };
     // Callback Events Handlers
-    var initAttraction = function(resize) {
-      if (resize === false) {
+    var initAttraction = function (resize) {
+      if(resize === false) {
         $(".attractions-slick")
           .slick(slick_attractions_settings)
-          .on("afterChange", function(ev, slick, cur) {
+          .on("afterChange", function (ev, slick, cur) {
             let $elSlide = $(slick.$slides.get(cur))
               .parent()
               .find(".slick-media-nav");
-            if ($elSlide.length) {
+            if($elSlide.length) {
               $elSlide
                 .find(".slick-slide[data-slick-index=0]")
                 .addClass("slick-current slick-active");
@@ -799,15 +790,15 @@ $(function() {
         // Start SHows Slider
         $(".slick-shows")
           .slick(slick_shows_settings)
-          .on("beforeChange", function(ev, slick, cur, next) {
+          .on("beforeChange", function (ev, slick, cur, next) {
             let $elSlide = $(slick.$slides.get(cur));
             let $elNxtSlide = $(slick.$slides.get(next));
             let iframe = $elSlide.find("iframe");
-            if (iframe.length) {
+            if(iframe.length) {
               let player = new Player(iframe[0]);
               player.pause();
             }
-            if ($elNxtSlide.find(".slick-days").length) {
+            if($elNxtSlide.find(".slick-days").length) {
               $elNxtSlide
                 .find(
                   ".slick-days > .slick-list > .slick-track > .slick-slide:first-child"
@@ -821,54 +812,52 @@ $(function() {
             let setShow = typeof show !== "undefined" ? show + "/" : "";
             history.pushState(null, null, "/attractions/" + setSlug + setShow);
           });
-
-        if (!isIOSPhone) {
-          $(".slick-media")
-            .slick(slick_media_settings)
-            .on("beforeChange", function(ev, slick, cur, next) {
-              let iframe = $(slick.$slides.get(cur)).find("iframe");
-              if (iframe.length) {
-                let player = new Player(iframe[0]);
-                player.pause();
-              }
-            });
+        $(".slick-media")
+          .slick(slick_media_settings)
+          .on("beforeChange", function (ev, slick, cur, next) {
+            let iframe = $(slick.$slides.get(cur)).find("iframe");
+            if(iframe.length) {
+              let player = new Player(iframe[0]);
+              player.pause();
+            }
+          });
+        if(!isMobile) {
           $(".slick-media-nav").slick(slick_media_nav_settings);
-
           $(".slick-days").slick(slick_days_settings);
           $(".slick-times")
             .slick(slick_times_settings)
-            .on("beforeChange", function(ev, slick, cur, next) {
+            .on("beforeChange", function (ev, slick, cur, next) {
               $(".available-dates .cta-btn").removeClass("show");
             });
         }
       } else {
-        if (!$(".attractions-slick").hasClass("slick-initialized")) {
+        if(!$(".attractions-slick").hasClass("slick-initialized")) {
           $(".attractions-slick").slick(slick_attractions_settings);
         }
-        if (!$(".slick-shows").hasClass("slick-initialized")) {
+        if(!$(".slick-shows").hasClass("slick-initialized")) {
           $(".slick-shows").slick(slick_shows_settings);
         }
-        if (!isIOSPhone) {
-          if (!$(".slick-media").hasClass("slick-initialized")) {
-            $(".slick-media").slick(slick_media_settings);
-          }
-          if (!$(".slick-media-nav").hasClass("slick-initialized")) {
+        if(!$(".slick-media").hasClass("slick-initialized")) {
+          $(".slick-media").slick(slick_media_settings);
+        }
+        if(!isMobile) {
+          if(!$(".slick-media-nav").hasClass("slick-initialized")) {
             $(".slick-media-nav").slick(slick_media_nav_settings);
           }
-          if (!$(".slick-days").hasClass("slick-initialized")) {
+          if(!$(".slick-days").hasClass("slick-initialized")) {
             $(".slick-days").slick(slick_days_settings);
           }
-          if (!$(".slick-times").hasClass("slick-initialized")) {
+          if(!$(".slick-times").hasClass("slick-initialized")) {
             $(".slick-times").slick(slick_times_settings);
           }
         }
       }
 
       //Extend Days slick
-      $(".slick-days .slick-slide").on("click", function(evt) {
+      $(".slick-days .slick-slide").on("click", function (evt) {
         var $_this = $(this);
         var timer = 0;
-        timer = setTimeout(function() {
+        timer = setTimeout(function () {
           clearTimeout(timer);
           let ht = $_this
             .parents(".slick-shows")
@@ -884,10 +873,10 @@ $(function() {
       });
 
       // Handlers Show
-      $(".show-content-block .btn-group .btn-twobit").on("click", function(
+      $(".show-content-block .btn-group .btn-twobit").on("click", function (
         evt
       ) {
-        if ($(this).hasClass("next")) {
+        if($(this).hasClass("next")) {
           $(this)
             .parents(".slick-shows")
             .slick("slickNext");
@@ -899,9 +888,9 @@ $(function() {
       });
 
       // Confirm Purcahse
-      $(".slick-times .btn-twobit").on("click", function(evt) {
+      $(".slick-times .btn-twobit").on("click", function (evt) {
         evt.preventDefault();
-        if ($(this).hasClass("btn-disabled")) return false;
+        if($(this).hasClass("btn-disabled")) return false;
         let href = $(this).prop("href");
         $(this)
           .parents(".item-time")
@@ -920,16 +909,16 @@ $(function() {
       });
 
       // Append to Filter show
-      $("#filters .nav-item .nav-link").on("click", function(e) {
+      $("#filters .nav-item .nav-link").on("click", function (e) {
         e.preventDefault(e);
         $('[data-tool-toggle="tooltip"]').tooltip("hide");
-        if (!$(this).hasClass("active")) {
+        if(!$(this).hasClass("active")) {
           attractionMeta($(this).text());
           $(".dropdown-toggle").dropdown("update");
           $("#filters .nav-link").removeClass("active");
           $(this).addClass("active");
           let slug = $(this).attr("aria-controls");
-          if ($("#cat-" + slug).length) {
+          if($("#cat-" + slug).length) {
             history.pushState(null, null, "/attractions/" + slug + "/");
             loadImg($("#cat-" + slug));
             let index = $("#cat-" + slug)
@@ -939,17 +928,17 @@ $(function() {
             $("#cat-" + slug)
               .find(".slick-slide:first-child")
               .addClass("slick-current slick-active");
-            if ($("#cat-" + slug).find(".slick-days").length) {
+            if($("#cat-" + slug).find(".slick-days").length) {
               $("#cat-" + slug)
                 .find(
                   ".slick-days > .slick-list > .slick-track > .slick-slide:first-child"
                 )
                 .trigger("click");
             }
-            if ($(".slick-media").find("iframe").length) {
+            if($(".slick-media").find("iframe").length) {
               $(".slick-media")
                 .find("iframe")
-                .each(function(kf, fr) {
+                .each(function (kf, fr) {
                   let player = new Player($(this)[0]);
                   player.pause();
                 });
@@ -959,15 +948,15 @@ $(function() {
       });
 
       // Append to Filter show
-      $("#filters .dropdown-menu .dropdown-item").on("click", function(e) {
+      $("#filters .dropdown-menu .dropdown-item").on("click", function (e) {
         e.preventDefault(e);
-        if (!$(this).hasClass("active")) {
+        if(!$(this).hasClass("active")) {
           let slug = $(this)
             .parent()
             .data("cat");
           let show = $(this).attr("aria-controls");
           attractionMeta($(this).text());
-          if ($("#" + show).length) {
+          if($("#" + show).length) {
             history.pushState(
               null,
               null,
@@ -979,7 +968,7 @@ $(function() {
             $("#" + show)
               .parents(".slick-shows")
               .slick("slickGoTo", index);
-            if ($("#" + show).find(".slick-media-nav")) {
+            if($("#" + show).find(".slick-media-nav")) {
               $("#" + show)
                 .find(".slick-media-nav .slick-slide[data-slick-index=0]")
                 .addClass("slick-current slick-active");
@@ -992,9 +981,9 @@ $(function() {
     initAttraction(false);
 
     var resizeAttract = 0;
-    $(window).on("resize", function() {
+    $(window).on("resize", function () {
       clearTimeout(resizeAttract);
-      resizeAttract = setTimeout(function() {
+      resizeAttract = setTimeout(function () {
         initAttraction(true);
       }, 500);
     });
@@ -1003,17 +992,17 @@ $(function() {
     let urlParams = window.location.href.split("/");
     let urlCat = "";
     let urlShow = "";
-    if (typeof urlParams[3] !== "undefined" && urlParams[3] == "attractions") {
-      if (typeof urlParams[4] !== "undefined" && urlParams[4] != "#") {
+    if(typeof urlParams[3] !== "undefined" && urlParams[3] == "attractions") {
+      if(typeof urlParams[4] !== "undefined" && urlParams[4] != "#") {
         urlCat = urlParams[4];
       }
-      if (typeof urlParams[5] !== "undefined" && urlParams[5] != "#") {
+      if(typeof urlParams[5] !== "undefined" && urlParams[5] != "#") {
         urlShow = urlParams[5];
       }
     }
-    if (urlCat) {
+    if(urlCat) {
       $("a.nav-link[aria-controls=" + urlCat + "]").trigger("click");
-      if (urlShow) {
+      if(urlShow) {
         $("a.dropdown-item[aria-controls=" + urlShow + "]").trigger("click");
       } else {
         $("a.nav-link[aria-controls=" + urlCat + "]")
@@ -1024,14 +1013,14 @@ $(function() {
     }
   }
   // Get Location on Load
-  if ($(".nav-link-direction").length) {
+  if($(".nav-link-direction").length) {
     $.ajax({
       url: "/wp-admin/admin-ajax.php",
       type: "post",
       data: {
         action: "twobit_location_ajax"
       },
-      success: function(response) {
+      success: function (response) {
         let isOpCl = response.toUpperCase() +
           ' <i class="fa fa-lg fa-location-arrow" aria-hidden="true"></i>';
         $(".nav-link-direction .state").addClass(response).html(isOpCl);
