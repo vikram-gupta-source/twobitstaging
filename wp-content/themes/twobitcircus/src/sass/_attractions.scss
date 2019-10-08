@@ -203,9 +203,9 @@
       right: 0;
       opacity: 1;
       left: inherit;
-      top: 21px;
-      @media (max-width: $tablet) {
-        top: -17px;
+      top: 38px;
+      @media (max-width: $laptop) {
+        top: 33px;
       }
       &.slick-next {
         right: 22px;
