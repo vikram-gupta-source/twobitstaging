@@ -57,8 +57,11 @@
       <?php $feature_events = filter_locations(get_field('featured_events'));?>
       <div class="featured mt-3 slick-event inview animated">
         <?php foreach($feature_events as $feature) : ?>
-        <div class="card">
-          <?php if(!empty($feature['link'])):?>
+        <div class="card"> 
+          <?php if(!empty($feature['video_embed'])) :?>
+          <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/<?php echo $feature['video_embed'];?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>
+          </div>
+          <?php elseif(!empty($feature['link'])):?>
           <a href="<?php echo $feature['link'];?>"><img class="card-img-top img-fluid" src="<?php echo $feature['image']; ?>"/></a>
           <?php else :?>
           <img class="card-img-top img-fluid" src="<?php echo $feature['image']; ?>"/>
