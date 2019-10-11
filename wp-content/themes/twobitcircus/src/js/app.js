@@ -1052,6 +1052,7 @@ $(function () {
   }
   if($(".custom-modal").length) {
     $(".custom-modal").on('click', function (e) {
+      alert(1)
       e.preventDefault();
       var $_this = $(this);
       $('#custom-modal').modal('show');
