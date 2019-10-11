@@ -978,6 +978,20 @@ div.wpcf7-acceptance-missing {
     }
   }
 }
+#custom-modal .modal-content {
+  background-color: $black;
+  .modal-header {
+    padding: 5px 1rem 0;
+    border-bottom: 0px solid $black;
+    .close {
+      color: $white;
+      font-size: 1.8em;
+    }
+  }
+  .modal-body {
+    padding-top: 0.5em;
+  }
+}
 #return-to-top {
   position: fixed;
   z-index: 99;
