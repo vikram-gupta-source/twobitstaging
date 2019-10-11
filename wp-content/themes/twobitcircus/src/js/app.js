@@ -1051,8 +1051,9 @@ $(function () {
     return false;
   }
   if($(".custom-modal").length) {
+    alert(1)
     $(".custom-modal").on('click', function (e) {
-      alert(1)
+      alert(5)
       e.preventDefault();
       var $_this = $(this);
       $('#custom-modal').modal('show');
