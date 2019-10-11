@@ -1051,7 +1051,8 @@ $(function () {
     return false;
   }
   if($(".custom-modal").length) {
-    $(".custom-modal").on('click', function () {
+    $(".custom-modal").on('click', function (e) {
+      e.preventDefault();
       var $_this = $(this);
       $('#custom-modal').on('show.bs.modal', function (event) {
         let html = '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="' + $_this.attr('href') + '" allowfullscreen></iframe></div>';
