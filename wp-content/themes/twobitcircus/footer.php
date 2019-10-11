@@ -33,7 +33,8 @@ global $location;
   <a href="#" id="return-to-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
 
   <?php get_template_part( 'template-parts/partial/partial', 'map' ); ?>
+  <?php get_template_part( 'template-parts/partial/partial', 'modal' ); ?>
 
-  <?php wp_footer(); ?> 
+  <?php wp_footer(); ?>
 </body>
 </html>
