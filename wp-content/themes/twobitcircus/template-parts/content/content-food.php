@@ -51,7 +51,13 @@
             <h5 class="white"><?php echo get_field('banner_description'); ?></h5>
           </div>
         </div>
-        <div class="col-md-6 banner-image inview animated delay-2" data-ease="fadeIn"><img class="lazy-load img-fluid" data-src="<?php echo get_field('banner_image'); ?>"/></div>
+        <div class="col-md-6 banner-image inview animated delay-2" data-ease="fadeIn">
+          <?php if(!empty(get_field('video_embed'))) :?>
+          <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/<?php echo get_field('video_embed');?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe></div>
+          <?php else: ?>
+            <img class="lazy-load img-fluid" data-src="<?php echo get_field('banner_image'); ?>"/>
+          <?php endif ?>
+        </div>
       </div>
     </div>
   </section>
@@ -61,7 +67,7 @@
   <?php $menus = filter_locations(get_field('menus'));?>
   <section id="menu-block">
     <div class="container-fluid">
-      <div class="row no-gutters"> 
+      <div class="row no-gutters">
         <div class="col-12 bkg-img"  style="background-image: url('<?php echo $menus[0]['menu_image'] ?>');">
           <?php if(!empty($menus[0]['menu_download'])) :?>
           <div class="cta-wrapper inview animated" data-ease="fadeIn">
