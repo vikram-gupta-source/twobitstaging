@@ -16,7 +16,7 @@
     <div class="container-fluid">
       <div class="grid-flex">
         <?php foreach($events as $shows) : ?>
-        <div class="grid-item card" data-event="<?php echo $shows['event_type'];?>">
+        <div class="grid-item card" data-event="<?php echo $shows['event_type'];?>" id="<?php echo sanitize_title($shows['title']);?>">
           <a href="#" class="event-link card-image"><img class="img-fluid w-100" src="<?php echo $shows['event_image']; ?>"/></a>
           <?php if(!empty($shows['title'])) :?>
           <div class="card-title mb-0 d-flex justify-content-between align-items-center event-link">

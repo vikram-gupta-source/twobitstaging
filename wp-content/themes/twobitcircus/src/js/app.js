@@ -393,6 +393,12 @@ $(function () {
         .text(title);
       $("#event-form").modal("toggle");
     });
+    if($("#parties-block").length) {
+      var hash = window.location.hash.substring(1);
+      if(hash.length && $('#' + hash).length) {
+        $('#' + hash).find('.link-wrapper .btn').trigger('click');
+      }
+    }
   }
   if($(".more-calendar-block").length) {
     var weekday = [];
