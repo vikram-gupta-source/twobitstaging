@@ -395,9 +395,7 @@ $(function () {
     });
     if($("#parties-block").length) {
       var hash = window.location.hash.substring(1);
-      console.log(2)
       if(hash.length && $('#' + hash).length) {
-        console.log(hash)
         $('#' + hash).find('.link-wrapper .btn').trigger('click');
       }
     }
