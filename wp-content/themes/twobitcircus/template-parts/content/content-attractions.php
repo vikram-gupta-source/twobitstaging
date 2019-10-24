@@ -77,9 +77,12 @@
                       <div class="show-asset-wrapper">
                         <div class="slick-media">
                           <?php if(!empty($_video)) :?>
+                          <?php $videoParts = explode(',', $_video);?>
+                          <?php foreach($videoParts as $_vid) :?>
                           <div class="item d-block">
-                            <div class="embed-lazy embed-responsive embed-responsive-16by9" data-video="https://player.vimeo.com/video/<?php echo $_video;?>"></div>
+                            <div class="embed-lazy embed-responsive embed-responsive-16by9" data-video="https://player.vimeo.com/video/<?php echo trim($_vid);?>"></div>
                           </div>
+                          <?php endforeach ?>
                           <?php endif ?>
                           <?php foreach($gallery as $gal) :?>
                           <div class="item d-block">
