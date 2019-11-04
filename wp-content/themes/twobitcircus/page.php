@@ -27,7 +27,7 @@ get_header();
           get_template_part( 'template-parts/content/content', 'promo' );
         } elseif(is_page('attractions')) {
           get_template_part( 'template-parts/content/content', 'attractions' );
-        } elseif(is_page('parties-events')) {
+        } elseif((is_page('parties-events')) || (is_page('birthday'))) {
           get_template_part( 'template-parts/content/content', 'parties' );
         } elseif(is_page('media')) {
           get_template_part( 'template-parts/content/content', 'media' );
