@@ -807,6 +807,7 @@ article.page.type-page {
       background-image: url("/wp-content/themes/twobitcircus/img/home/yellow_pattern.png");
     }
     &.red-bk {
+      color: $white;
       background-image: url("/wp-content/themes/twobitcircus/img/header_main_red.png");
       @media (max-width: $mobile) {
         background-image: url("/wp-content/themes/twobitcircus/img/home/red_pattern.png");
