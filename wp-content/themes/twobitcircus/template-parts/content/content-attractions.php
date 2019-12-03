@@ -79,8 +79,8 @@
                           <?php $videoPart = explode(',', $_video);?>
                           <?php foreach($videoPart as $_vid) :?>
                           <?php $videoThumb = videoLink($_vid, true);?>
-                          <div class="item d-block"> 
-                            <div class="embed-lazy embed-responsive embed-responsive-16by9" data-video="https://player.vimeo.com/video/<?php echo trim($_vid);?>"></div>
+                          <div class="item d-block embed-lazy"> 
+                            <div class="preview pre-load-img" data-img="<?php echo $videoThumb; ?>" data-video="https://player.vimeo.com/video/<?php echo trim($_vid);?>"><img class="img-fluid w-100" alt="<?php echo $show->post_title;?>"/></div>
                           </div>
                           <?php endforeach ?>
                           <?php endif ?>
