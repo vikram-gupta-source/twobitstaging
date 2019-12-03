@@ -780,7 +780,7 @@ $(function () {
             .html(
               '<iframe src="' +
               url +
-              '?autoplay=0" width="640" height="360" frameborder="0" allowfullscreen data-ready="true"></iframe>'
+              '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>'
             );
         });
       }
