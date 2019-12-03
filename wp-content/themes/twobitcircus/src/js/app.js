@@ -771,7 +771,9 @@ $(function () {
             .prop("src", url);
           $(this).removeAttr("data-img");
         });
-      }  
+      }   
+    }; 
+    var loadEventMedia = function() {
       // Handle Event Video
       if($(".embed-lazy").length) {
         $(".embed-lazy .preview").on('click', function() { 
@@ -785,7 +787,7 @@ $(function () {
           $(".modal-body", this).empty();
         }) 
       } 
-    }; 
+    };
     // Hnadle Top NAV BAR
     $("#filters .navbar-nav")
       .slick(filter_navbar_settings)
@@ -1024,8 +1026,9 @@ $(function () {
       clearTimeout(resizeAttract);
       resizeAttract = setTimeout(function () {
         initAttraction(true);
+        loadEventMedia();
       }, 500);
-    });
+    }).trigger('resize');  
 
     // Check Deep link
     let urlParams = window.location.href.split("/");
