@@ -799,7 +799,7 @@ $(function () {
         }
       });
     // First Attraction img
-    loadImg($(".attractions-slick .item-attraction:first-child"));
+    //loadImg($(".attractions-slick .item-attraction:first-child"));
     var attractionMeta = function (title) {
       let siteName = $('meta[property="og:site_name"]').attr('content');
       $('title').text(title + ' - ' + siteName);
