@@ -780,7 +780,7 @@ $(function () {
             .html(
               '<iframe src="' +
               url +
-              '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>'
+              '?autoplay=0" width="640" height="360" frameborder="0" allowfullscreen data-ready="true"></iframe>'
             );
         });
       }
@@ -799,7 +799,7 @@ $(function () {
         }
       });
     // First Attraction img
-    //loadImg($(".attractions-slick .item-attraction:first-child"));
+    loadImg($(".attractions-slick .item-attraction:first-child"));
     var attractionMeta = function (title) {
       let siteName = $('meta[property="og:site_name"]').attr('content');
       $('title').text(title + ' - ' + siteName);
