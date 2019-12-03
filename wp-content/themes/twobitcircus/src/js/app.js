@@ -776,6 +776,7 @@ $(function () {
       if($(".embed-lazy").length) {
         $(".embed-lazy .preview").on('click', function() { 
           let url = $(this).data('video');  
+          alert(url);
           let html = '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="' + url + '?autoplay=1&amp;modestbranding=1&amp;showinfo=0"  allowscriptaccess="always" allow="autoplay"></iframe></div>';
           $('#custom-modal').find('.modal-body').html(html);
           $('#custom-modal').modal('show'); 
