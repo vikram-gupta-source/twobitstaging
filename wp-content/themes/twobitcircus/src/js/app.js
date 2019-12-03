@@ -773,7 +773,7 @@ $(function () {
         });
       }
       setTimeout(function() {
-        if($elm.find(".embed-lazy").length) {
+        if($elm.find(".embed-lazy2").length) {
           $elm.find(".embed-lazy").each(function () {
             let url = $(this).data("video");
             console.log(url);
@@ -786,7 +786,7 @@ $(function () {
               );
           });
         
-      }}, 800);
+      }}, 100);
     };
 
     // Hnadle Top NAV BAR
