@@ -775,7 +775,7 @@ $(function () {
     }; 
     var loadEventMedia = function() {
       // Handle Event Video
-      if($(".embed-lazy").length) {
+      if($(".embed-lazy123").length) {
         $(".embed-lazy .preview").on('click', function() { 
           let url = $(this).data('video');  
           alert(url);
