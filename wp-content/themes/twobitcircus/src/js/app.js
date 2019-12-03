@@ -772,18 +772,21 @@ $(function () {
           $(this).removeAttr("data-img");
         });
       }
-      if($elm.find(".embed-lazy").length) {
-        $elm.find(".embed-lazy").each(function () {
-          let url = $(this).data("video");
-          $(this)
-            .removeClass("embed-lazy")
-            .html(
-              '<iframe src="' +
-              url +
-              '?autoplay=0" width="640" height="360" frameborder="0" allowfullscreen data-ready="true"></iframe>'
-            );
-        });
-      }
+      setTimeout(function() {
+        if($elm.find(".embed-lazy").length) {
+          $elm.find(".embed-lazy").each(function () {
+            let url = $(this).data("video");
+            console.log(url);
+            $(this)
+              .removeClass("embed-lazy")
+              .html(
+                '<iframe src="' +
+                url +
+                '" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>'
+              );
+          });
+        
+      }}, 800);
     };
 
     // Hnadle Top NAV BAR
