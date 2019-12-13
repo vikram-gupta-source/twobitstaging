@@ -65,7 +65,7 @@ if ( ! class_exists( 'Calendar' ) ) {
         $recurring = [];
         $collect = [];
         $excludeEvent = [];
-        if( $spvent['show_date'] < date('m-d-Y') && empty($spvent['recurring_day'])) {
+        if( strtotime($spvent['show_date']) < time() && empty($spvent['recurring_day'])) {
           continue;
         }
         if($spvent['recurring_day']) {
