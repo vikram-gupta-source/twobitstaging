@@ -67,7 +67,7 @@ if ( ! class_exists( 'Calendar' ) ) {
         $excludeEvent = [];
         $testDate = explode( '-', $spvent['show_date'] );
         $testDateFormat = $testDate[2].'-'.$testDate[0].'-'.$testDate[1].' 00:00:00';
-        if( strtotime($testDateFormat) < strtotime(date('Y-m-d 11:59:59')) && empty($spvent['recurring_day'])) {
+        if( strtotime($testDateFormat) < strtotime(date('Y-m-d 23:59:59')) && empty($spvent['recurring_day'])) {
           //echo $testDateFormat. '--'. $spvent['show_date'] .'----'. $spvent['show_title'] . '11111111111<br>';
           continue;
         }
