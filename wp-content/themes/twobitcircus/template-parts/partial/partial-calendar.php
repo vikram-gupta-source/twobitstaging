@@ -8,8 +8,7 @@ date_default_timezone_set('America/Los_Angeles');
 $cal = new Calendar();
 $calendar = $cal->init();
 $_enddate = $cal->get_endDate();
-$_closed = $cal->get_closed();
-print_r($calendar);
+$_closed = $cal->get_closed(); 
 ?>
 <?php if ( !empty($calendar) ) : ?>
 <div id="calendar-block" class="entry-wrapper-padding">

@@ -40,6 +40,7 @@ if ( ! class_exists( 'Calendar' ) ) {
       $table_name = $wpdb->prefix . 'centeredge_booking';
       $_query = 'SELECT * FROM `'. $table_name .'` WHERE `outstock` != 1 AND `posted` <= "'. date('m-d-Y', $this->end_date) .'" GROUP BY `name`, `posted` ORDER BY `posted`, `ticket`';
       $data = $wpdb->get_results($_query);
+      print_r($data);
       if(!empty($data)) {
         foreach($data as $entry) {
           if(in_array(trim($entry->name), $this->allowShows)) {
