@@ -9,6 +9,7 @@ $cal = new Calendar();
 $calendar = $cal->init();
 $_enddate = $cal->get_endDate();
 $_closed = $cal->get_closed();
+print_r($calendar);
 ?>
 <?php if ( !empty($calendar) ) : ?>
 <div id="calendar-block" class="entry-wrapper-padding">
