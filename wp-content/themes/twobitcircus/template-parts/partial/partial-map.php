@@ -14,10 +14,11 @@
       <div class="modal-header">
         <h6 class="modal-title"><?php echo $location['address'];?>, <?php echo $location['city'];?>,<?php echo $location['state_abrv'];?><br><a href="tel:<?php echo cleanPhone($location['phone']);?>"><?php echo $location['phone'];?></a>
           <?php if(!empty($location['days'])) :?>
-          <div class="map-hrs">  
+          <div class="map-hrs roboto mt-2">  
             <?php foreach($location['days'] as $days) :?>
-              <div class="days  text-uppercase"><?php echo $days['day'];?>: <?php echo (!empty($days['open'])) ? $days['open'] .' - ' .  $days['close'] : 'Closed for Reboot'; ?></div>
+              <div class="days text-uppercase"><?php echo $days['day'];?>: <?php echo (!empty($days['open'])) ? $days['open'] .' - ' .  $days['close'] : 'Closed for Reboot'; ?></div>
             <?php endforeach ?> 
+            <p>* Check the calendar as times is subject to change</p>
           </div>
           <?php endif ?> 
         </h6>
