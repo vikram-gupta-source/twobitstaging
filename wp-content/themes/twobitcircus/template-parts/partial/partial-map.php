@@ -16,6 +16,13 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+        <?php if(!empty($location['days'])) :?>
+        <div class="map-hrs">  
+          <?php foreach($location['days'] as $days) :?>
+            <div class="days  text-uppercase"><?php echo $days['day'];?>: <?php (!empty($days['open'])) ? $days['open'] .' - ' .  $days['close'] : 'Closed for Reboot'; ?></div>
+          <?php endforeach ?> 
+        </div>
+        <?php endif ?> 
       </div>
       <div class="modal-body">
         <?php if(!empty($location['google_map_iframe'])) : ?>
