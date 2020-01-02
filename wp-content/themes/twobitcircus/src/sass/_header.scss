@@ -21,6 +21,11 @@
         font-weight: $bold;
         text-shadow: none;
         margin: -2.2rem -1rem 0;
+      } 
+      .map-hrs { 
+        font-size: 12px;
+        line-height: 1.2;
+        font-weight: 300;
       }
     }
     .directions a {
@@ -36,11 +41,6 @@
     #map {
       border: 3px solid $yellow;
     }
-  }
-  .map-hrs { 
-    font-size: 12px;
-    line-height: 1.2;
-    font-weight: 300;
   }
 }
 #expanded-menu {
