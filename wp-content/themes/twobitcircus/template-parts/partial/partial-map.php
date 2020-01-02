@@ -12,10 +12,18 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title"><?php echo $location['address'];?>, <?php echo $location['city'];?>,<?php echo $location['state_abrv'];?><br><a href="tel:<?php echo cleanPhone($location['phone']);?>"><?php echo $location['phone'];?></a></h6>
+        <h6 class="modal-title"><?php echo $location['address'];?>, <?php echo $location['city'];?>,<?php echo $location['state_abrv'];?><br><a href="tel:<?php echo cleanPhone($location['phone']);?>"><?php echo $location['phone'];?></a>
+          <?php if(!empty($location['days'])) :?>
+          <div class="map-hrs">  
+            <?php foreach($location['days'] as $days) :?>
+              <div class="days  text-uppercase"><?php echo $days['day'];?>: <?php echo (!empty($days['open'])) ? $days['open'] .' - ' .  $days['close'] : 'Closed for Reboot'; ?></div>
+            <?php endforeach ?> 
+          </div>
+          <?php endif ?> 
+        </h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
+        </button> 
       </div>
       <div class="modal-body">
         <?php if(!empty($location['google_map_iframe'])) : ?>
