@@ -292,13 +292,13 @@ function openClosed($days, $timezone, $closedDates) {
   $closedData = [];
   if(!empty($closedDates)) {
     $closedData = explode(PHP_EOL, trim($closedDates));
-    echo date('m/d/Y');
-    print_r($closedData);
+    //echo date('m/d/Y');
+    //print_r($closedData);
     if(!empty($closedData)) {
       foreach($closedData as $part) {
         $closedParts = explode(' ', trim($part));
         $dayofweek = $closedParts[0];
-        echo $dayofweek;
+        //echo $dayofweek;
         if(isset($closedParts[1])) {
           $timesParts = explode('-', trim($closedParts[1]));
           if(count($timesParts) > 1) {
