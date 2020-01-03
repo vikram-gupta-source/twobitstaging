@@ -292,7 +292,7 @@ function openClosed($days, $timezone, $closedDates) {
   $closedData = [];
   if(!empty($closedDates)) {
     $closedData = explode(PHP_EOL, trim($closedDates));
-    echo date('n/j/Y');
+    echo date('m/d/Y');
     print_r($closedData);
     if(!empty($closedData)) {
       foreach($closedData as $part) {
@@ -304,7 +304,7 @@ function openClosed($days, $timezone, $closedDates) {
           if(count($timesParts) > 1) {
             $startTime = strtotime($timesParts[0]);
             $endTime = strtotime($timesParts[1]);
-            if($dayofweek == date('n/j/Y')) {
+            if($dayofweek == date('m/d/Y')) {
               if(!empty($startTime) && ($startTime >= $endTime)) {
                 $endTime = strtotime('+1 day' . $timesParts[1]);
               } else {
