@@ -292,6 +292,7 @@ function openClosed($days, $timezone, $closedDates) {
   $closedData = [];
   if(!empty($closedDates)) {
     $closedData = explode(PHP_EOL, trim($closedDates));
+    print_r($closedData);
     if(!empty($closedData)) {
       foreach($closedData as $part) {
         $closedParts = explode(' ', trim($part));
