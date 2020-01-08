@@ -79,7 +79,7 @@
                           <?php $videoPart = explode(',', $_video);?>
                           <?php foreach($videoPart as $_vid) :?>
                           <?php $videoThumb = videoLink($_vid, true);?>
-                          <div class="item d-block embed-lazy"> 
+                          <div class="item d-block embed-lazy">
                             <div class="preview pre-load-img" data-img="<?php echo $videoThumb; ?>" data-video="https://player.vimeo.com/video/<?php echo trim($_vid);?>"><img class="img-fluid w-100" alt="<?php echo $show->post_title;?>"/></div>
                           </div>
                           <?php endforeach ?>
@@ -144,7 +144,7 @@
                         <div class="powered text-uppercase lubalinB">
                           <span><?php _e( 'Powered By' , 'twobitcircus'); ?></span>
                           <?php foreach(get_field('powered_by', $show->ID) as $pb) :?>
-                          <a href="<?php echo $pb['powered_link'] ;?>" target="_blank"><img class="img-fluid" src="<?php echo $pb['powered_image'] ;?>" alt="<?php echo $pb['title'] ;?>"/></a>
+                          <a href="<?php echo $pb['powered_link'] ;?>" target="_blank" <?php echo ($pb['max_width']) ? 'style="max-width: ' .$pb['max_width'] .'"' : '' ;?>><img class="img-fluid" src="<?php echo $pb['powered_image'] ;?>" alt="<?php echo $pb['title'] ;?>"/></a>
                           <?php endforeach ?>
                         </div>
                       </div>
