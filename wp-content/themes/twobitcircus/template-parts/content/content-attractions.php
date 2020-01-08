@@ -144,7 +144,7 @@
                         <div class="powered text-uppercase lubalinB">
                           <span><?php _e( 'Powered By' , 'twobitcircus'); ?></span>
                           <?php foreach(get_field('powered_by', $show->ID) as $pb) :?>
-                          <a href="<?php echo $pb['powered_link'] ;?>" target="_blank" <?php echo ($pb['max_width']) ? 'style="max-width: ' .$pb['max_width'] .'"' : '' ;?>><img class="img-fluid" src="<?php echo $pb['powered_image'] ;?>" alt="<?php echo $pb['title'] ;?>"/></a>
+                          <a href="<?php echo $pb['powered_link'] ;?>" target="_blank" <?php echo ($pb['max_width']) ? 'style="vertical-align: top;max-width: ' .$pb['max_width'] .'"' : '' ;?>><img class="img-fluid" src="<?php echo $pb['powered_image'] ;?>" alt="<?php echo $pb['title'] ;?>"/></a>
                           <?php endforeach ?>
                         </div>
                       </div>
