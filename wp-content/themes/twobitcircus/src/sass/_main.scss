@@ -123,9 +123,11 @@ a {
       width: 100%;
       height: 100%;
       overflow: hidden;
+      opacity: 1;
       background-size: 0%;
-      transition: background-size 0s 4s linear;
+      transition: background 0s 4s ease;
       &.fadeIn {
+        opacity: 1;
         /* show bgimage */
         background-size: cover;
       }
