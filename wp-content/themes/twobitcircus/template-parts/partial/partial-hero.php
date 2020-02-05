@@ -28,7 +28,7 @@
       <div class="carousel-item <?php echo $slideActive;?> <?php echo $darken;?>" <?php echo (!empty($slide['image']['url'])) ? 'style="background-image: url(\'' . $slide['image']['url'] . '\');"' : '' ;?>>
       <?php else :?>
       <div class="carousel-item video-embed <?php echo $slideActive;?> <?php echo $darken;?>">
-        <div class="video-wrapper inview animated delay-3s" data-ease="fadeIn" <?php echo (!empty($slide['image']['url'])) ? 'style="background-image: url(\'' . $slide['image']['url'] . '\');"' : '' ;?>>
+        <div class="video-wrapper inview animated" data-ease="fadeIn" <?php echo (!empty($slide['image']['url'])) ? 'style="background-image: url(\'' . $slide['image']['url'] . '\');"' : '' ;?>>
           <iframe id="video-<?php echo $embed;?>" src="https://player.vimeo.com/video/<?php echo $embed;?>?api=1&amp;autoplay=1&amp;background=1" width="100%" height="100%" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay" data-ready="true"></iframe>
         </div>
       <?php endif ?>
