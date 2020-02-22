@@ -85,10 +85,11 @@ if ( ! class_exists( 'CenterEdgeNew' ) ) {
             $this->insertDb($links);
           }
           file_put_contents(dirname(__FILE__)."/complex_processing.txt", $results);
-          //sleep(1);
+          sleep(1);
         }
       }
       file_put_contents(dirname(__FILE__)."/complex_complete.txt", time());
+      sleep(1);
     }
 
     // Handle DB Inserts
