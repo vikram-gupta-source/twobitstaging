@@ -13,7 +13,7 @@ if ( ! class_exists( 'CenterEdgeNew' ) ) {
 
   class CenterEdgeNew {
 
-    public $weeks = "+3 weeks"; // +3 weeks
+    public $weeks = "+2 weeks"; // +3 weeks
     private $earlier = 0;
     private $first = true;
     private $writeDb = true;
