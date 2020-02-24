@@ -43,6 +43,7 @@ if ( ! class_exists( 'CenterEdgeNew' ) ) {
     private function complexScrap() {
       $results = '';
       $codes = get_field('center_edge_complex_feeds', 'options');
+      file_put_contents(dirname(__FILE__)."/codes.json", json_encode($codes));
       if(empty($codes)) return null;
       for ($i=$this->earlier; $i<=$this->later; $i+=86400) {
         $setDate = date("m-d-Y", $i);
