@@ -44,7 +44,8 @@ if ( ! class_exists( 'Calendar' ) ) {
       if(!empty($data)) {
         //print_r($this->allowShows);
         foreach($data as $entry) {
-          echo $matchName = trim($entry->name);
+          print_r($this->allowShows);
+          $matchName = trim($entry->name);
           if(in_array($matchName, $this->allowShows)) {
             echo "++" . $matchName . '++';
             $_day = explode('-',$entry->posted)[1];
