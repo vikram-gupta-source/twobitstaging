@@ -31,7 +31,7 @@ if ( ! class_exists( 'Calendar' ) ) {
       $this->daysToShow = get_field('days_to_show', 'option');
       $this->current_date = time();
       $this->end_date = strtotime($this->daysToShow);
-      $this->allowShows = (!empty($_allowShow)) ? explode("\n", $_allowShow[0]['calendar_allow_shows']) : [];
+      $this->allowShows = (!empty($_allowShow)) ? explode(PHP_EOL, $_allowShow[0]['calendar_allow_shows']) : [];
       print_r($this->allowShows);
       $this->closed = (!empty($_closed)) ? explode(',', $_closed[0]['closed_days']) : [];
       $this->special_event = get_field('special_event', 'option');
