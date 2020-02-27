@@ -31,7 +31,7 @@ if ( ! class_exists( 'Calendar' ) ) {
       $this->daysToShow = get_field('days_to_show', 'option');
       $this->current_date = time();
       $this->end_date = strtotime($this->daysToShow);
-      $this->allowShows = (!empty($_allowShow)) ? explode(PHP_EOL, $_allowShow[0]['calendar_allow_shows']) : [];
+      $this->allowShows = (!empty($_allowShow)) ? explode("\r\n", $_allowShow[0]['calendar_allow_shows']) : [];
       $this->closed = (!empty($_closed)) ? explode(',', $_closed[0]['closed_days']) : [];
       $this->special_event = get_field('special_event', 'option');
     }
@@ -40,11 +40,8 @@ if ( ! class_exists( 'Calendar' ) ) {
       $table_name = $wpdb->prefix . 'centeredge_booking';
       $_query = 'SELECT * FROM `'. $table_name .'` WHERE `outstock` != 1 AND `posted` <= "'. date('Y-m-d', $this->end_date) .'" GROUP BY `name`, `posted` ORDER BY `posted`, `ticket`';
       $data = $wpdb->get_results($_query);
-      //print_r($data);
       if(!empty($data)) {
-        //print_r($this->allowShows);
         foreach($data as $entry) {
-          print_r($this->allowShows);
           $matchName = trim($entry->name);
           if(in_array($matchName, $this->allowShows)) {
             echo "++" . $matchName . '++';
