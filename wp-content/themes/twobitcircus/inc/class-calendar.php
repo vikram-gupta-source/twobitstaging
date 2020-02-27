@@ -32,7 +32,6 @@ if ( ! class_exists( 'Calendar' ) ) {
       $this->current_date = time();
       $this->end_date = strtotime($this->daysToShow);
       $this->allowShows = (!empty($_allowShow)) ? explode(PHP_EOL, $_allowShow[0]['calendar_allow_shows']) : [];
-      print_r($this->allowShows);
       $this->closed = (!empty($_closed)) ? explode(',', $_closed[0]['closed_days']) : [];
       $this->special_event = get_field('special_event', 'option');
     }
@@ -43,6 +42,7 @@ if ( ! class_exists( 'Calendar' ) ) {
       $data = $wpdb->get_results($_query);
       //print_r($data);
       if(!empty($data)) {
+        print_r($this->allowShows);
         foreach($data as $entry) {
           if(in_array($entry->name, $this->allowShows)) {
             echo $entry->name . '--';
