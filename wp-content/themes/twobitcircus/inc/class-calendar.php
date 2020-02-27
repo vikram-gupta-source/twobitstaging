@@ -43,8 +43,7 @@ if ( ! class_exists( 'Calendar' ) ) {
       if(!empty($data)) {
         foreach($data as $entry) {
           $matchName = trim($entry->name);
-          if(in_array($matchName, $this->allowShows)) {
-            echo "++" . $matchName . '++';
+          if(in_array($matchName, $this->allowShows)) { 
             $_day = explode('-',$entry->posted)[1];
             $this->calender[$_day][ date('H:i A', strtotime($entry->ticket))][] = $entry;
           }
