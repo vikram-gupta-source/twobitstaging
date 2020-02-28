@@ -28,7 +28,7 @@ if ( ! class_exists( 'Calendar' ) ) {
       $_allowShow = filter_locations(get_field('allow_shows', 'option'));
       $_closed = filter_locations(get_field('calendar_days_of_the_week_closed', 'option'));
       date_default_timezone_set($_region[0]['timezone']);
-      $this->daysToShow = get_field('days_to_show', 'option');
+      echo $this->daysToShow = get_field('days_to_show', 'option');
       $this->current_date = time();
       $this->end_date = strtotime($this->daysToShow);
       $this->allowShows = (!empty($_allowShow)) ? explode("\r\n", $_allowShow[0]['calendar_allow_shows']) : [];
@@ -38,7 +38,7 @@ if ( ! class_exists( 'Calendar' ) ) {
     public function init() {
       global $wpdb;
       $table_name = $wpdb->prefix . 'centeredge_booking';
-      $_query = 'SELECT * FROM `'. $table_name .'` WHERE `outstock` != 1 AND `posted` <= "'. date('Y-m-d', $this->end_date) .'" GROUP BY `name`, `posted` ORDER BY `posted`, `ticket`';
+      echo $_query = 'SELECT * FROM `'. $table_name .'` WHERE `outstock` != 1 AND `posted` <= "'. date('Y-m-d', $this->end_date) .'" GROUP BY `name`, `posted` ORDER BY `posted`, `ticket`';
       $data = $wpdb->get_results($_query);
       if(!empty($data)) {
         foreach($data as $entry) {
