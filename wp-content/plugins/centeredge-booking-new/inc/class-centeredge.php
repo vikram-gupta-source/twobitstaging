@@ -13,17 +13,8 @@ if ( ! class_exists( 'CenterEdgeNew' ) ) {
 
   class CenterEdgeNew {
 
-    public $weeks = "+2 weeks"; // +3 weeks
-    private $earlier = 0;
-    private $first = true;
-    private $writeDb = true;
     private $out = '';
-    private $complexUrl = 'https://twobitcircus.centeredgeonline.com/areas/areatimeslotlist?date=';
-
-    public function __construct() {
-      $this->earlier = time();
-      $this->later = strtotime($this->weeks);
-    }
+    const AWSURL = 'http://ec2-34-200-14-116.compute-1.amazonaws.com/data_times.json';
 
     public function centeredge_init() {
       // Handle Scrapping of complex single pages of Centeredge Pages
@@ -45,77 +36,34 @@ if ( ! class_exists( 'CenterEdgeNew' ) ) {
       $codes = get_field('center_edge_complex_feeds', 'options');
       file_put_contents(dirname(__FILE__)."/codes.json", json_encode($codes));
       if(empty($codes)) return null;
-      for ($i=$this->earlier; $i<=$this->later; $i+=86400) {
-        $setDate = date("m-d-Y", $i);
-        foreach($codes as $code) {
-          $links = [];
-          $url = $this->complexUrl . urlencode(date("m/d/Y", $i)) .'&areaId='. $code['show_code'] .'&subAreaId=&force=false';
-          $html = $this->load_content($url);
-          if(preg_match('/"success":false/', $html)) continue;
-          if(!empty($html)) {
-            $doc = new DOMDocument();
-            libxml_use_internal_errors(true);
-            $doc->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD); // loads your HTML
-            libxml_clear_errors();
-            $xpath = new DOMXPath($doc);
-            // returns a list of all links with rel=nofollow
-            $rows = $xpath->query('//div[@class="time-slot  "]');
-            if($rows->length > 0){
-              // Loop through each event
-              foreach($rows as $row) {
-                $_codes = $xpath->query(sprintf("//input[contains(@class, '%s')]", 'slot-id-option'), $row);
-                $times = $xpath->query(sprintf("//div[contains(@class, '%s')]", 'time-slot-progress'), $row);
-                foreach($times as $ky => $time) {
-                    $out = (preg_match('/OUT/i', $times[$ky]->nodeValue)) ? 1 : 0;
-                    $text = trim(str_ireplace(', SOLD OUT', '', $times[$ky]->nodeValue));
-                    $link = '/areas/areadatetime/'.$code['show_code'].'#/'.urlencode($setDate).'/'.trim($_codes[$ky]->getAttribute('value')).'/';
-                    $links[$code['title_of_show']][$setDate][$ky] = array(
-                      'href' => $link,
-                      'text' => $text,
-                      'out'  => $out
-                    );
-                }
-              }
-            }
-            $results .= $code['title_of_show'] . ' ' . $url . ' done.' . "\n";
-          } else {
-            $results .= $code['title_of_show'] . ' ' . $url . ' took to long.' . "\n";
-          }
-          if(!empty($links) && $this->writeDb === true) {
-            // Insert Into DB
-            $this->insertDb($links);
-          }
-          file_put_contents(dirname(__FILE__)."/complex_processing.txt", $results);
-          sleep(1);
-        }
+      //file_put_contents(dirname(__FILE__)."/start.txt", 'start');
+      $data = $this->load_content(self::AWSURL);
+      $links = json_decode(unserialize($data));
+      //file_put_contents(dirname(__FILE__)."/links.txt", $data);
+      if(!empty($links)) {
+        // Insert Into DB
+        $this->insertDb($links);
       }
-      file_put_contents(dirname(__FILE__)."/complex_complete.txt", time());
-      sleep(1);
     }
 
     // Handle DB Inserts
     private function insertDb($links) {
       global $wpdb;
-      $insert_sql = [];
       $table_name = $wpdb->prefix . 'centeredge_booking';
       // Clear out existing Entries
-      if($this->first === true) {
-        $wpdb->query('DELETE FROM ' . $table_name . ' WHERE `type` = "complex"');
-        $this->first = false;
-      }
-      foreach($links as $title => $event) {
-        foreach($event as $date => $items) {
-          foreach($items as $entry) {
-            $insert_sql[] ="('complex', '".esc_sql($title)."', '".esc_sql($date)."', '".esc_sql($entry['href'])."', '".esc_sql($entry['text'])."', '".esc_sql($entry['out'])."')";
-          }
+      //file_put_contents(dirname(__FILE__)."/db.txt", 'db');
+      $wpdb->query('DELETE FROM ' . $table_name . ' WHERE `type` = "complex"');
+      $wpdb->query('ALTER TABLE ' . $table_name . ' AUTO_INCREMENT = 1');
+      foreach($links as $items) {
+        $insert_sql = [];
+        foreach($items as $entry) {
+          $insert_sql[] ="('complex', '".esc_sql($entry[1])."', '".esc_sql($entry[2])."', '".esc_sql($entry[3])."', '".esc_sql($entry[4])."', '".esc_sql($entry[5])."')";
         }
-      }
-      $this->out .= json_encode($insert_sql);
-      file_put_contents(dirname(__FILE__)."/complex_out.txt", $this->out);
-      if(!empty($insert_sql)) {
-        $query = join(', ', $insert_sql);
-        $sql ="INSERT INTO ".$table_name." (`type`, `name`, `posted`, `link`, `ticket`, `outstock`) VALUES ". $query;
-        $wpdb->query($sql);
+        if(!empty($insert_sql)) {
+          $query = join(', ', $insert_sql);
+          $sql ="INSERT INTO ".$table_name." (`type`, `name`, `posted`, `link`, `ticket`, `outstock`) VALUES ". $query;
+          $wpdb->query($sql);
+        }
       }
     }
   }
