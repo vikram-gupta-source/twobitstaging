@@ -28,7 +28,7 @@ function remove_menus() {
 	remove_menu_page( 'edit-comments.php' );
   remove_menu_page( 'edit.php' );
 }
-add_action( 'admin_menu', 'remove_menus' );
+//add_action( 'admin_menu', 'remove_menus' );
 
 // Disable all user admin top bar
 add_filter('show_admin_bar', '__return_false');
