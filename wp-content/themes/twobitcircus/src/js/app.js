@@ -725,8 +725,8 @@ $(function() {
           let $elNxtSlide = $(slick.$slides.get(next));
           let iframe = $elSlide.find("iframe");
           if(iframe.length) {
-            let player = new Player(iframe[0]);
-            player.pause();
+            //let player = new Player(iframe[0]);
+            //player.pause();
           }
           if($elNxtSlide.find(".slick-days").length) {
             $elNxtSlide.find(".slick-days > .slick-list > .slick-track > .slick-slide:first-child").trigger("click");
@@ -741,8 +741,8 @@ $(function() {
         $(".slick-media").slick(slick_media_settings).on("beforeChange", function(ev, slick, cur, next) {
           let iframe = $(slick.$slides.get(cur)).find("iframe");
           if(iframe.length) {
-            let player = new Player(iframe[0]);
-            player.pause();
+            //let player = new Player(iframe[0]);
+            //player.pause();
           }
         });
         if(!isMobile) {
@@ -825,8 +825,8 @@ $(function() {
             }
             if($(".slick-media").find("iframe").length) {
               $(".slick-media").find("iframe").each(function(kf, fr) {
-                let player = new Player($(this)[0]);
-                player.pause();
+                //let player = new Player($(this)[0]);
+                //player.pause();
               });
             }
           }
