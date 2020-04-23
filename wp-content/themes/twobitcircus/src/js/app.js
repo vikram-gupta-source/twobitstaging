@@ -712,6 +712,7 @@ $(function() {
     };
     // Callback Events Handlers
     var initAttraction = function(resize) {
+      var youtube_regex = /^.*(youtu\.be\/|vi?\/|u\/\w\/|embed\/|\?vi?=|\&vi?=)([^#\&\?]*).*/;
       if(resize === false) {
         $(".attractions-slick").slick(slick_attractions_settings).on("afterChange", function(ev, slick, cur) {
           let $elSlide = $(slick.$slides.get(cur)).parent().find(".slick-media-nav");
@@ -724,9 +725,9 @@ $(function() {
           let $elSlide = $(slick.$slides.get(cur));
           let $elNxtSlide = $(slick.$slides.get(next));
           let iframe = $elSlide.find("iframe");
-          if(iframe.length) {
-            //let player = new Player(iframe[0]);
-            //player.pause();
+          if(iframe.length && !iframe.attr('src').match(youtube_regex)) {
+            let player = new Player(iframe[0]);
+            player.pause();
           }
           if($elNxtSlide.find(".slick-days").length) {
             $elNxtSlide.find(".slick-days > .slick-list > .slick-track > .slick-slide:first-child").trigger("click");
@@ -740,9 +741,9 @@ $(function() {
         slick_media_settings = (isIOSPad) ? slick_media_settings_pad : slick_media_settings;
         $(".slick-media").slick(slick_media_settings).on("beforeChange", function(ev, slick, cur, next) {
           let iframe = $(slick.$slides.get(cur)).find("iframe");
-          if(iframe.length) {
-            //let player = new Player(iframe[0]);
-            //player.pause();
+          if(iframe.length && !iframe.attr('src').match(youtube_regex)) {
+            let player = new Player(iframe[0]);
+            player.pause();
           }
         });
         if(!isMobile) {
@@ -825,8 +826,10 @@ $(function() {
             }
             if($(".slick-media").find("iframe").length) {
               $(".slick-media").find("iframe").each(function(kf, fr) {
-                //let player = new Player($(this)[0]);
-                //player.pause();
+                if(!$(this).attr('src').match(youtube_regex)) {
+                  let player = new Player($(this)[0]);
+                  player.pause();
+                }
               });
             }
           }
