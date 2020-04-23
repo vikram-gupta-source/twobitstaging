@@ -103,6 +103,7 @@ if ( ! function_exists( 'videoLink' ) ) {
     // use preg_match to find iframe src
     if(empty($url)) return null;
     if(preg_match('/vimeo/i', $url)) {
+      return $url;
       preg_match('"/\s*[a-zA-Z\/\/:\.]*vimeo.com\/video\/([^\\?\\&]+)/i', $url, $matches);
       $code = $matches[1];
       if(file_exists(ABSPATH . '/wp-content/uploads/vimeo/'.$code.'.webp'))
