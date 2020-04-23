@@ -102,10 +102,8 @@ if ( ! function_exists( 'videoLink' ) ) {
   function videoLink($url) {
     // use preg_match to find iframe src
     if(empty($url)) return null;
-    if(preg_match('/vimeo/i', $url)) {
-      return $url;
-      preg_match('"/\s*[a-zA-Z\/\/:\.]*vimeo.com\/video\/([^\\?\\&]+)/i', $url, $matches);
-      $code = $matches[1];
+    if (preg_match('%^https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)(?:[?]?.*)$%im', $url, $matches)) {
+      $code = $matches[3];
       if(file_exists(ABSPATH . '/wp-content/uploads/vimeo/'.$code.'.webp'))
         return '/wp-content/uploads/vimeo/' . $code .'.webp';
       if ($xml = simplexml_load_file('http://vimeo.com/api/v2/video/'.$code.'.xml')) {
@@ -116,8 +114,8 @@ if ( ! function_exists( 'videoLink' ) ) {
         return '/wp-content/uploads/vimeo/' . $_url;
   		}
     } else {
-      preg_match('"/\s*[a-zA-Z\/\/:\.]*youtube.com\/embed\/([^\\?\\&]+)/i', $url, $matches);
-      $code = $matches[1];
+      preg_match_all("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
+      $code = $matches[1][0];
       return 'http://i3.ytimg.com/vi/'.$code.'/maxresdefault.jpg';
     }
   }

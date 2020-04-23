@@ -79,7 +79,7 @@
                           <?php $videoPart = explode(',', $_video);?>
                           <?php foreach($videoPart as $_vid) :?>
                           <?php $videoThumb = videoLink($_vid, true);?>
-                          <div class="item d-block embed-lazy" data-samp="<?php echo $videoThumb;?>">
+                          <div class="item d-block embed-lazy">
                             <div class="preview pre-load-img" data-img="<?php echo $videoThumb; ?>" data-video="<?php echo trim($_vid);?>"><img class="img-fluid w-100" alt="<?php echo $show->post_title;?>"/></div>
                           </div>
                           <?php endforeach ?>
