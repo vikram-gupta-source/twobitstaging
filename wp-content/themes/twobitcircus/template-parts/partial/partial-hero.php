@@ -29,7 +29,7 @@
       <?php else :?>
       <div class="carousel-item video-embed <?php echo $slideActive;?> <?php echo $darken;?>">
         <div class="video-wrapper inview animated" data-ease="fadeIn" <?php echo (!empty($slide['image']['url'])) ? 'style="background-image: url(\'' . $slide['image']['url'] . '\');"' : '' ;?>>
-          <iframe id="video-<?php echo $sky;?>" src="<?php echo $embed;?>" width="100%" height="100%" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay" data-ready="true"></iframe>
+          <iframe id="video-<?php echo $sky;?>" src="<?php echo $embed;?>" style="pointer-events: none;"  width="100%" height="100%" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay" data-ready="true"></iframe>
         </div>
       <?php endif ?>
         <?php $postion_y = ($slide['position_y'] == 'top') ? 'top' : ((($slide['position_y'] == 'bottom')) ? 'bottom' : 'd-flex h-100 align-items-center justify-content-center') ?>
