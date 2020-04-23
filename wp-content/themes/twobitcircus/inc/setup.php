@@ -99,18 +99,26 @@ register_nav_menus(
   )
 );
 if ( ! function_exists( 'videoLink' ) ) {
-  function videoLink($code) {
+  function videoLink($url) {
     // use preg_match to find iframe src
-    if(empty($code)) return null;
-    if(file_exists(ABSPATH . '/wp-content/uploads/vimeo/'.$code.'.webp'))
-      return '/wp-content/uploads/vimeo/' . $code .'.webp';
-    if ($xml = simplexml_load_file('http://vimeo.com/api/v2/video/'.$code.'.xml')) {
-			$image = $xml->video->thumbnail_large;
-      $url =  $code.'.webp';
-      $filepath = ABSPATH . '/wp-content/uploads/vimeo/'.$url;
-      file_put_contents($filepath, file_get_contents($image));
-      return '/wp-content/uploads/vimeo/' . $url;
-		}
+    if(empty($url)) return null;
+    if(preg_match('/vimeo/i', $url)) {
+      preg_match('"/\s*[a-zA-Z\/\/:\.]*vimeo.com\/video\/([^\\?\\&]+)/i', $url, $matches);
+      $code = $matches[1];
+      if(file_exists(ABSPATH . '/wp-content/uploads/vimeo/'.$code.'.webp'))
+        return '/wp-content/uploads/vimeo/' . $code .'.webp';
+      if ($xml = simplexml_load_file('http://vimeo.com/api/v2/video/'.$code.'.xml')) {
+  			$image = $xml->video->thumbnail_large;
+        $_url =  $code.'.webp';
+        $filepath = ABSPATH . '/wp-content/uploads/vimeo/'.$_url;
+        file_put_contents($filepath, file_get_contents($image));
+        return '/wp-content/uploads/vimeo/' . $_url;
+  		}
+    } else {
+      preg_match('"/\s*[a-zA-Z\/\/:\.]*youtube.com\/embed\/([^\\?\\&]+)/i', $url, $matches);
+      $code = $matches[1];
+      return 'http://i3.ytimg.com/vi/'.$code.'/maxresdefault.jpg';
+    }
   }
 }
 if ( ! function_exists( 'twobitcircus_show_post_type' ) ) {
