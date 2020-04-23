@@ -19,7 +19,7 @@
         <?php foreach($promotions as $promo) : ?>
         <div class="grid-item card">
           <?php if(!empty($promo['video_embed'])) :?>
-          <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/<?php echo $promo['video_embed'];?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>
+          <div class="embed-responsive embed-responsive-16by9"><iframe src="<?php echo $promo['video_embed'];?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>
           </div>
           <?php else: ?>
           <a href="#" class="event-link card-image"><img class="img-fluid w-100" src="<?php echo $promo['image']; ?>"/></a>

@@ -29,7 +29,7 @@
             <div class="slick-media">
               <?php if(!empty($_video)) :?>
               <div class="item d-block">
-                <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/<?php echo $_video;?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>
+                <div class="embed-responsive embed-responsive-16by9"><iframe src="<?php echo $_video;?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>
                 </div>
               </div>
               <?php endif ?>

@@ -12,7 +12,7 @@
     <div class="row h-100">
       <div class="d-md-none"><img class="img-fluid" src="/wp-content/uploads/2019/09/CLUB01-HIGHLIGHTS-FINAL-2.jpg" alt="Latest News"></div>
       <div class="header-bkg-left py-5 my-auto">
-        <h1 class="headline inview animated text-center fadeInDown" data-ease="fadeInDown">Blog</h1> 
+        <h1 class="headline inview animated text-center fadeInDown" data-ease="fadeInDown">Blog</h1>
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
             <div class="slick-media">
               <?php if(!empty($_video)) :?>
               <div class="item d-block">
-                <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/<?php echo $_video;?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>
+                <div class="embed-responsive embed-responsive-16by9"><iframe src="<?php echo $_video;?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>
                 </div>
               </div>
               <?php endif ?>
