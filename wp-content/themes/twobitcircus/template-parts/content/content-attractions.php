@@ -56,7 +56,10 @@
 
             <div class="slick-shows" id="cat-<?php echo $cat;?>">
               <?php $num = count($shows['posts']); ?>
-              <?php foreach($shows['posts'] as $skey => $show) :?>
+              <?php foreach($shows['posts'] as $skey => $show) :
+                echo get_field('available_in', $show->ID);
+
+                ?>
                 <?php if(!filter_location_by_field(get_field('available_in', $show->ID))) continue; ?>
                 <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
                 <?php $info = filter_locations(get_field('information', $show->ID));?>
@@ -90,7 +93,7 @@
                           </div>
                           <?php endforeach ?>
                         </div>
-                        <?php $mediaAssetCnt = count($gallery) + (!empty($_video) ? 1 : 0);?>
+                        <?php $mediaAssetCnt = ((!empty($gallery)) ? count($gallery) : 0) + (!empty($_video) ? 1 : 0);?>
                         <?php if($mediaAssetCnt > 1):?>
                         <div class="overlay">
                           <div class="slick-media-nav media-<?php echo $mediaAssetCnt;?>">
@@ -144,7 +147,7 @@
                         <div class="powered text-uppercase lubalinB">
                           <span><?php _e( 'Powered By' , 'twobitcircus'); ?></span>
                           <?php foreach(get_field('powered_by', $show->ID) as $pb) :?>
-                          <a href="<?php echo $pb['powered_link'] ;?>" target="_blank" <?php echo ($pb['max_width']) ? 'style="vertical-align: top;max-width: ' .$pb['max_width'] .'"' : '' ;?>><img class="img-fluid" src="<?php echo $pb['powered_image'] ;?>" alt="<?php echo $pb['title'] ;?>"/></a>
+                          <a href="<?php echo $pb['powered_link'] ;?>" target="_blank" <?php echo (!empty($pb['max_width'])) ? 'style="vertical-align: top;max-width: ' .$pb['max_width'] .'"' : '' ;?>><img class="img-fluid" src="<?php echo $pb['powered_image'] ;?>" alt="<?php echo $pb['title'] ;?>"/></a>
                           <?php endforeach ?>
                         </div>
                       </div>

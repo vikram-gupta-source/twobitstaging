@@ -114,9 +114,8 @@ if ( ! function_exists( 'videoLink' ) ) {
         return '/wp-content/uploads/vimeo/' . $_url;
   		}
     } else {
-      preg_match_all("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
-      $code = $matches[1][0];
-      return 'http://i3.ytimg.com/vi/'.$code.'/mqdefault.jpg';
+      preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
+      return (!empty($matches[1])) ? 'http://i3.ytimg.com/vi/'.$matches[1].'/mqdefault.jpg'  : '';
     }
   }
 }
