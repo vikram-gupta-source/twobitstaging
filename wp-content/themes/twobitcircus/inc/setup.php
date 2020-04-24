@@ -116,7 +116,7 @@ if ( ! function_exists( 'videoLink' ) ) {
     } else {
       preg_match_all("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
       $code = $matches[1][0];
-      return 'http://i3.ytimg.com/vi/'.$code.'/sddefault.jpg';
+      return 'http://i3.ytimg.com/vi/'.$code.'/mqdefault.jpg';
     }
   }
 }
