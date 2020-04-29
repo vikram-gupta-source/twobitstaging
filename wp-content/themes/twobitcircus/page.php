@@ -23,7 +23,7 @@ get_header();
           get_template_part( 'template-parts/content/content', 'about' );
         } elseif(is_page('food-drink')) {
           get_template_part( 'template-parts/content/content', 'food' );
-        } elseif(is_page('promotions')) {
+        } elseif((is_page('promotions')) || (is_page('events'))) {
           get_template_part( 'template-parts/content/content', 'promo' );
         } elseif(is_page('attractions')) {
           get_template_part( 'template-parts/content/content', 'attractions' );
