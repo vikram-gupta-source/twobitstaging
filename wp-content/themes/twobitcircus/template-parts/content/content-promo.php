@@ -16,7 +16,7 @@
     <?php $promotions = filter_locations(get_field('promotions'));?>
     <div class="container-fluid">
       <?php if(!empty(get_field('promo_content'))) :?>
-      <div class="content-block my-5">
+      <div class="content-block container my-5 px-md-5">
         <?php the_field('promo_content');?>
       </div>
       <?php endif ?>
