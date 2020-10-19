@@ -15,6 +15,11 @@
     <?php if(!empty(get_field('promotions'))) :?>
     <?php $promotions = filter_locations(get_field('promotions'));?>
     <div class="container-fluid">
+      <?php if(!empty(get_field('promo-content'))) :?>
+      <div class="content-block my-5">
+        <?php the_field('promo-content');?>
+      </div>
+      <?php endif ?>
       <div class="grid-flex">
         <?php foreach($promotions as $promo) : ?>
         <div class="grid-item card">
