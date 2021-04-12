@@ -317,7 +317,6 @@ function get_locations($array)
 function openClosed($days, $timezone, $closedDates)
 {
     //date_default_timezone_set($timezone);
-    dd($timezone);
     if (empty($days)) {
         return 'closed';
     }
