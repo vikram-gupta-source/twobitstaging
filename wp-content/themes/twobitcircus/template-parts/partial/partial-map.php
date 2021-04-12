@@ -7,27 +7,27 @@
  global $location;
 ?>
 <!-- Modal -->
-<?php if(!empty($location)) : ?>
+<?php if (!empty($location)) : ?>
 <div class="modal fade" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="map-modal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h6 class="modal-title"><?php echo $location['address'];?>, <?php echo $location['city'];?>,<?php echo $location['state_abrv'];?><br><a href="tel:<?php echo cleanPhone($location['phone']);?>"><?php echo $location['phone'];?></a>
-          <?php if(!empty($location['days'])) :?>
-          <div class="map-hrs roboto mt-2">  
-            <?php foreach($location['days'] as $days) :?>
+          <?php if (!empty($location['days'])) :?>
+          <div class="map-hrs roboto mt-2">
+            <?php foreach ($location['days'] as $days) :?>
               <div class="days text-uppercase"><?php echo $days['day'];?>: <?php echo (!empty($days['open'])) ? $days['open'] .' - ' .  $days['close'] : 'Closed for Reboot'; ?></div>
-            <?php endforeach ?> 
+            <?php endforeach ?>
             <small class="mt-1">*PLEASE CHECK THE CALENDAR AT THE BOTTOM OF THE HOMEPAGE AS TIMES ARE SUBJECT TO CHANGE</small>
           </div>
-          <?php endif ?> 
+          <?php endif ?>
         </h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span> 
-        </button>  
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
-        <?php if(!empty($location['google_map_iframe'])) : ?>
+        <?php if (!empty($location['google_map_iframe'])) : ?>
         <div id="map" style="height:400px;">
           <?php echo $location['google_map_iframe'];?>
         </div>

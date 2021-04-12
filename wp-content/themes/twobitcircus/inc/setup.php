@@ -316,7 +316,7 @@ function get_locations($array)
 // Get Time Close of Open
 function openClosed($days, $timezone, $closedDates)
 {
-    //date_default_timezone_set($timezone);
+    date_default_timezone_set($timezone);
     if (empty($days)) {
         return 'closed';
     }
@@ -325,7 +325,6 @@ function openClosed($days, $timezone, $closedDates)
     if (!empty($closedDates)) {
         $closedData = explode(PHP_EOL, trim($closedDates));
         //echo date('m/d/Y');
-        //print_r($closedData);
         if (!empty($closedData)) {
             foreach ($closedData as $part) {
                 $closedParts = explode(' ', trim($part));
