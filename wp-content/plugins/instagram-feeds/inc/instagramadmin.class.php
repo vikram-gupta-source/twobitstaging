@@ -62,8 +62,14 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
     public function instagram_api_settings_callback() {
       $insta_api_options = get_option($this->prefix . 'insta_api_keys');
       ?>
-      <p><input type="button" name="wipe-feed-cache" id="wipe-feed-cache" class="button button-primary" value="Clear Instagram Cache">
-      <a href="/wp-admin/admin.php?page=instagram&action=populate"><input type="button" name="get-instagram" id="get-instagram" class="button button-primary" value="Get Latest Instagram"></a></p>
+      <p>
+        <input type="button" name="wipe-feed-cache" id="wipe-feed-cache" class="button button-primary" value="Clear Instagram Cache">
+        <?php if(!empty($insta_api_options['hash']) && !empty($insta_api_options['json'])) :?>
+        <a href="/wp-admin/admin.php?page=instagram&action=populate"><input type="button" name="get-instagram" id="get-instagram" class="button button-primary" value="Get Latest Instagram"></a>
+        <?php else :?>
+        <a href="https://www.instagram.com/<?php echo $insta_api_options['hash'];?>?__a=1" target="_blank"><input type="button" name="json-instagram" id="json-instagram" class="button button-primary" value="Get JSON"></a>
+        <?php endif ?>
+      </p>
       <div id="wipe-message"></div>
       <hr>
       <h2>Instagram API Settings</h2>
@@ -71,7 +77,7 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
         <div class="form-field">
           <label style="display:inline" for="<?php echo $this->prefix; ?>insta_api_keys[enable]">Enable Instagram </label>
           <input name="<?php echo $this->prefix; ?>insta_api_keys[enable]" type="checkbox" <?php echo (isset($insta_api_options['enable']) && $insta_api_options['enable']) ? 'checked' : ''; ?> />
-        </div>
+        </div> 
         <div class="form-field">
           <label for="<?php echo $this->prefix; ?>insta_api_keys[hash]">Instagram Hash Tag</label>
           <input name="<?php echo $this->prefix; ?>insta_api_keys[hash]" type="text" value="<?php echo $insta_api_options['hash']; ?>" />
@@ -81,8 +87,12 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
           <input name="<?php echo $this->prefix; ?>insta_api_keys[limit]" type="text" value="<?php echo $insta_api_options['limit']; ?>" />
         </div>
         <div class="form-field">
-          <label for="<?php echo $this->prefix; ?>insta_api_keys[likes]">Instagram Likes Required</label>
+          <label for="<?php echo $this->prefix; ?>insta_api_keys[likes]">Instagram Likes</label>
           <input name="<?php echo $this->prefix; ?>insta_api_keys[likes]" type="text" value="<?php echo $insta_api_options['likes']; ?>" />
+        </div>
+        <div class="form-field">
+          <label for="<?php echo $this->prefix; ?>insta_api_keys[json]">Instagram JSON Required</label>
+          <textarea name="<?php echo $this->prefix; ?>insta_api_keys[json]"><?php echo (!empty($insta_api_options['json'])) ? $insta_api_options['json'] : ''; ?></textarea>
         </div>
         <input id="action-instagram" name="action_instagram" type="hidden" value="" />
       </div>
@@ -115,7 +125,7 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
       </div>
       <?php
     }
-    // Hadnel Delete Table
+    // Hadnel Delete Cache Table
     public function delete_cache() {
       global $wpdb;
       if ( current_user_can( 'manage_options' ) ) {
@@ -123,6 +133,9 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
         $querystr = 'TRUNCATE TABLE ' . $table_name;
         $wpdb->query($querystr);
         self::wipe_directory();
+        $insta_api_options = get_option('instagram_insta_api_keys');
+        $insta_api_options['json'] = '';
+        update_option( 'instagram_insta_api_keys', $insta_api_options );
       }
       die();
     }
@@ -180,11 +193,11 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
   	public function column_default($item, $column_name){
   			switch($column_name) {
   				case 'pubdate':
-  				 	return date_i18n( get_option( 'date_format' ), strtotime($item->{$column_name}));
+  				 	return date_i18n( get_option( 'date_format' ), $item->{$column_name});
           case 'caption':
     				return wp_trim_words($item->{$column_name}, 25);
           case 'image':
-            return '<img style="width: 150px; height: auto;" src="'.$item->{$column_name}.'"/>';
+            return '<img style="width: 90px; height: auto;" src="'.$item->{$column_name}.'"/>';
           case 'link':
             return '<a href="'.$item->{$column_name}.'" target="_blank">'.$item->{$column_name}.'</a>';
           case 'status':
@@ -222,7 +235,7 @@ if ( ! class_exists( 'InstagramAdmin' ) ) {
   	}
   	public function get_sortable_columns() {
   			$sortable_columns = array(
-  				  'pubdate'      => array('pubdate',false), 
+  				  'pubdate'      => array('pubdate',false),
   					'status'  => array('status',false)
   			);
   			return $sortable_columns;
