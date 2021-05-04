@@ -26,12 +26,13 @@ if ( ! class_exists( 'InstagramFeed' ) ) {
       // Request to Include Social Class
       require_once dirname( __FILE__ ) . '/inc/instagrams.class.php';
       $insta_api_options = get_option('instagram_insta_api_keys');
-      if(!empty($insta_api_options['enable'])) { 
+      if(!empty($insta_api_options['enable'])) {
         //Test Instagram Connection
         if(!empty($insta_api_options['hash'])) {
           $isg = new Instagrams();
           $isg->hash = $insta_api_options['hash'];
           $isg->limit = $insta_api_options['limit'];
+          $isg->json = $insta_api_options['json'];
           $isgfeed = $isg->load_instagram_feed();
         }
       }
