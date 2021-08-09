@@ -8,7 +8,7 @@
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>" />
+	<meta charset="<?php bloginfo('charset'); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
 	<?php wp_head(); ?>
@@ -20,12 +20,13 @@
 	  gtag('js', new Date());
 	  gtag('config', 'UA-87816008-1');
 	</script>
-  <?php if(isset($location)) : ?>
+  <?php echo (!empty(get_field('tracking', 'option'))) ? get_field('tracking', 'option') : '';?>
+  <?php if (isset($location)) : ?>
   <script type='text/javascript'>
     // Google Map TwoBit Location
     var site_path = '<?php echo get_site_url();?>';
     var twobit = {
-      info: '<strong>Two Bit Circus</strong><br><?php echo $location['address'];?><br><?php echo $location['city'];?>, <?php echo $location['state_abrv'];?> <?php echo $location['zip_code'];?><br><a href="<?php echo $location['driving_map_link'];?>" target="_blank" rel="noopener"><b><?php _e( 'Get Directions', 'twobitcircus' );?></b></a>',
+      info: '<strong>Two Bit Circus</strong><br><?php echo $location['address'];?><br><?php echo $location['city'];?>, <?php echo $location['state_abrv'];?> <?php echo $location['zip_code'];?><br><a href="<?php echo $location['driving_map_link'];?>" target="_blank" rel="noopener"><b><?php _e('Get Directions', 'twobitcircus');?></b></a>',
       lat: <?php echo $location['latitude'];?>,
       long: <?php echo $location['longitude'];?>,
       icon:  site_path + "/wp-content/uploads/2019/07/Logo_anim_32.gif"
@@ -82,6 +83,6 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NHQ8NNQ"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   	<!-- End Google Tag Manager (noscript) -->
-  <?php get_template_part( 'template-parts/partial/partial', 'menu' ); ?>
+  <?php get_template_part('template-parts/partial/partial', 'menu'); ?>
 
   <main id="main" role="main">
