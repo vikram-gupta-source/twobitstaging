@@ -1,0 +1,25 @@
+// Contact
+#contact {
+  .container {
+    @media (max-width: $laptop) {
+      max-width: inherit;
+    }
+  }
+  #contact-block {
+    background-image: url("/wp-content/themes/twobitcircus/img/home/white_pattern.png");
+  }
+  #faq {
+    background-color: $green;
+    .card {
+      background-color: $yellow;
+      border: 0 solid rgba(30, 21, 32, 0.125);
+      border-radius: 0;
+      margin-bottom: 2px;
+      .card-header {
+        h5 {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

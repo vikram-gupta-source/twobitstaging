@@ -43,6 +43,8 @@ get_header();
           get_template_part( 'template-parts/content/content', 'manifesto' );
         } elseif(is_page('blog')) {
           get_template_part( 'template-parts/content/content', 'blog' );
+				} elseif(is_page('faqs')) {
+          get_template_part( 'template-parts/content/content', 'faqs' );
         } else {
           get_template_part( 'template-parts/content/content' );
         }
