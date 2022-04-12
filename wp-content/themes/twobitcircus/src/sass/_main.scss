@@ -985,7 +985,7 @@ article.page.type-page {
     padding-right: 4%;
     position: relative;
     @media (max-width: $tablet) {
-      max-width: 510px;
+      width: 510px;
       padding-right: 7%;
       min-width: auto;
     }
