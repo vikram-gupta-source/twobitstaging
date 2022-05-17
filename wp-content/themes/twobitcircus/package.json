@@ -42,6 +42,7 @@
     "lazyloadxt": "^1.1.0",
     "popper.js": "^1.12.9",
     "scrollmagic": "^2.0.7",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "cookie-storage": "^6.0.0"
   }
 }

@@ -12,8 +12,8 @@ if (! defined('ABSPATH')) {
 $wp_includes = array(
   '/setup.php',                           // Load setup.
   '/widget.php',                          // Load Wdget.
-    '/enqueue.php',                         // Enqueue scripts and styles.
-    '/class-wp-bootstrap-navwalker.php',    // Load custom WordPress nav walker.
+  '/enqueue.php',                         // Enqueue scripts and styles.
+  '/class-wp-bootstrap-navwalker.php',    // Load custom WordPress nav walker.
   '/login.php',                           // Load custom login.
   '/class-calendar.php',                  // Load calendar class.
   '/admin.php'                            // Load Admin Custom Setting
@@ -24,7 +24,7 @@ foreach ($wp_includes as $file) {
     if (! $filepath) {
         trigger_error(sprintf('Error locating /inc%s for inclusion', $file), E_USER_ERROR);
     }
-    require_once $filepath;
+    include_once $filepath;
 }
 
 function composeShows()
@@ -35,7 +35,7 @@ function composeShows()
     'posts_per_page' => 9999,
     'orderby'   => 'menu_order, post_title',
     'order'     => 'ASC'
-  );
+    );
     $query = new WP_Query($args);
     $posts = $query->posts;
     //print_r($posts);

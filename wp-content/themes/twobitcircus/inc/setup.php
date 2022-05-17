@@ -41,20 +41,22 @@ if (! function_exists('twobitcircus_register_custom_settings')) {
             array(
               'default' => '',
               'capability' => 'edit_theme_options'
-          )
+            )
         );
 
-        $settings->add_control(new WP_Customize_Control(
-            $settings,
-            'footer_copyright',
-            array(
-              'label'      => __('Footer Copyright', 'textdomain'),
-              'settings'   => 'footer_copyright',
-              'priority'   => 11,
-              'section'    => 'title_tagline',
-              'type'       => 'text',
-          )
-        ));
+        $settings->add_control(
+            new WP_Customize_Control(
+                $settings,
+                'footer_copyright',
+                array(
+                'label'      => __('Footer Copyright', 'textdomain'),
+                'settings'   => 'footer_copyright',
+                'priority'   => 11,
+                'section'    => 'title_tagline',
+                'type'       => 'text',
+                )
+            )
+        );
     }
     add_action('customize_register', 'twobitcircus_register_custom_settings');
 }
@@ -62,10 +64,10 @@ if (! function_exists('twobitcircus_register_custom_settings')) {
 add_theme_support(
     'custom-logo',
     array(
-   'width'      => 250,
-   'height'     => 250,
-   'flex-width' => true,
-  )
+    'width'      => 250,
+    'height'     => 250,
+    'flex-width' => true,
+    )
 );
 // Update Custom Logo Classes
 add_filter('get_custom_logo', 'twobitcircus_change_logo_class');
@@ -79,29 +81,38 @@ if (! function_exists('twobitcircus_register_custom_footer_settings')) {
             array(
               'default' => '',
               'capability' => 'edit_theme_options'
-          )
+            )
         );
 
-        $settings->add_control(new WP_Customize_Image_Control(
-            $settings,
-            'footer_logo',
-            array(
-              'label'      => __('Footer Logo', 'textdomain'),
-              'settings'   => 'footer_logo',
-              'priority'   => 9,
-              'section'    => 'title_tagline',
-          )
-        ));
+        $settings->add_control(
+            new WP_Customize_Image_Control(
+                $settings,
+                'footer_logo',
+                array(
+                'label'      => __('Footer Logo', 'textdomain'),
+                'settings'   => 'footer_logo',
+                'priority'   => 9,
+                'section'    => 'title_tagline',
+                )
+            )
+        );
     }
     add_action('customize_register', 'twobitcircus_register_custom_footer_settings');
 }
 // This theme uses wp_nav_menu()
 register_nav_menus(
     array(
-   'header' => __('Header Menu', 'twobitcircus'),
-   'footer' => __('Footer Menu', 'twobitcircus'),
-  )
+    'header' => __('Header Menu', 'twobitcircus'),
+    'footer' => __('Footer Menu', 'twobitcircus'),
+    )
 );
+// Print Array
+if (!function_exists('dd')) {
+    function dd($data)
+    {
+        echo '<pre>' . print_r($data, true) . '</pre>';
+    }
+}
 if (! function_exists('videoLink')) {
     function videoLink($url)
     {
@@ -132,20 +143,20 @@ if (! function_exists('twobitcircus_show_post_type')) {
     function twobitcircus_shows_post_type()
     {
         $supports = array(
-      'title',
-      'editor',
-      'excerpt',
-      'page-attributes',
-      );
+        'title',
+        'editor',
+        'excerpt',
+        'page-attributes',
+        );
         $labels = array(
-      'menu_name'     => __('Shows', 'twobitcircus'),
-      'name'          => __('Shows', 'twobitcircus'),
-      'singular_name' => __('Show', 'twobitcircus'),
-      'all_items' => __('All Shows', 'twobitcircus'),
-      'add_new_item'  => __('Add New Show', 'twobitcircus'),
-      'edit_item'     => __('Edit Show', 'twobitcircus'),
-      'add_new'       => __('Add Show', 'twobitcircus'),
-    );
+        'menu_name'     => __('Shows', 'twobitcircus'),
+        'name'          => __('Shows', 'twobitcircus'),
+        'singular_name' => __('Show', 'twobitcircus'),
+        'all_items' => __('All Shows', 'twobitcircus'),
+        'add_new_item'  => __('Add New Show', 'twobitcircus'),
+        'edit_item'     => __('Edit Show', 'twobitcircus'),
+        'add_new'       => __('Add Show', 'twobitcircus'),
+        );
         $args = array(
         'labels'              => $labels,
         'supports'            => $supports,
@@ -155,7 +166,7 @@ if (! function_exists('twobitcircus_show_post_type')) {
             'capability_type'       => 'post',
         'taxonomies'            => array( 'category' ),
         'menu_icon'     => 'dashicons-format-gallery',
-    );
+        );
         // Registering your Custom Post Type
         register_post_type('shows', $args);
     }
@@ -169,20 +180,20 @@ if (! function_exists('twobitcircus_news_post_type')) {
     function twobitcircus_news_post_type()
     {
         $supports = array(
-      'title',
-      'editor',
-      'excerpt',
-      'page-attributes',
-      );
+        'title',
+        'editor',
+        'excerpt',
+        'page-attributes',
+        );
         $labels = array(
-      'menu_name'     => __('News', 'twobitcircus'),
-      'name'          => __('News', 'twobitcircus'),
-      'singular_name' => __('News', 'twobitcircus'),
-      'all_items' => __('All News', 'twobitcircus'),
-      'add_new_item'  => __('Add New News', 'twobitcircus'),
-      'edit_item'     => __('Edit News', 'twobitcircus'),
-      'add_new'       => __('Add News', 'twobitcircus'),
-    );
+        'menu_name'     => __('News', 'twobitcircus'),
+        'name'          => __('News', 'twobitcircus'),
+        'singular_name' => __('News', 'twobitcircus'),
+        'all_items' => __('All News', 'twobitcircus'),
+        'add_new_item'  => __('Add New News', 'twobitcircus'),
+        'edit_item'     => __('Edit News', 'twobitcircus'),
+        'add_new'       => __('Add News', 'twobitcircus'),
+        );
         $args = array(
         'labels'              => $labels,
         'supports'            => $supports,
@@ -191,7 +202,7 @@ if (! function_exists('twobitcircus_news_post_type')) {
             'has_archive'           => true,
             'capability_type'       => 'post',
         'menu_icon'     => 'dashicons-admin-site-alt3',
-    );
+        );
         // Registering your Custom Post Type
         register_post_type('news', $args);
     }
@@ -203,14 +214,16 @@ add_action('init', 'twobitcircus_news_post_type', 0);
 // Handle Custom Shortcode
 function twobitcircus_button_shortcode($atts, $content=null)
 {
-    $attr = shortcode_atts(array(
+    $attr = shortcode_atts(
+        array(
         'link' => '#',
-    'type' => 'link',
-    'class' => '',
-    'parent' => '',
-    'ref' => '',
-    'target' => '',
-    ), $atts);
+        'type' => 'link',
+        'class' => '',
+        'parent' => '',
+        'ref' => '',
+        'target' => '',
+        ), $atts
+    );
     $target = ($attr['target']) ? 'target="' . esc_attr($attr['target']) . '" rel="noopener noreferrer"' : '';
     $link = ($attr['link']) ? esc_attr($attr['link']) : '#';
     $ref = ($attr['ref']) ? 'data-ref="' . esc_attr($attr['ref']) . '"' : '';
@@ -254,9 +267,12 @@ function posts_link_attributes()
 }
 // Handle Region & filters
 // Collect Region
-$region = (empty($_COOKIE['geo_location'])) ?  $geo->get_location_by_ip() : (json_decode(stripslashes($_COOKIE['geo_location'])));
-$location = get_locations(get_field('location_selection', 'option'))[0];
-
+function twobitcircus_load_location() {
+  global $location, $region, $geo;
+  $region = (empty($_COOKIE['geo_location'])) ?  $geo->get_location_by_ip() : (json_decode(stripslashes($_COOKIE['geo_location'])));
+  $location = get_locations(get_field('location_selection', 'option'));
+}
+add_action('init', 'twobitcircus_load_location', 0);
 // Clean Location so it find only location that in region
 function filter_location_by_field($field)
 {
@@ -275,7 +291,7 @@ function filter_location_by_field($field)
 function filter_locations($array)
 {
     global $region;
-    if (empty($field) || $region->status == 'fail') {
+    if (empty($array) || $region->status == 'fail') {
         return $array;
     }
     $_array = [];
@@ -297,21 +313,18 @@ function get_locations($array)
 {
     global $region;
     if (empty($array) || $region->status == 'fail') {
-        return $array;
+        return $array[0];
     }
     $_array = [];
     // Test Locations
     foreach ($array as $item) {
         if (isset($item['city']) && $item['city'] == $region->city) {
-            $_array[] = $item;
+            return $item;
         } elseif (isset($item['region']) && $item['region'] == $region->regionName) {
-            $_array[] = $item;
+            return $item;
         }
     }
-    if (empty($_array)) {
-        $_array[] = $array[0];
-    }
-    return $_array;
+    return $array[0];
 }
 // Get Time Close of Open
 function openClosed($days, $timezone, $closedDates)

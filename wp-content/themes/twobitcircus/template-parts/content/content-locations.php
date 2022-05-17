@@ -5,6 +5,7 @@
  * @package twobitcircus
  */
  global $location;
+ $locations = get_field('location_selection', 'option');
 ?>
 <article id="locations" <?php post_class(); ?>>
 
@@ -12,7 +13,19 @@
 
   <section id="findus-block" class="entry-wrapper-padding">
     <div class="container">
-      <h2 class="headline inview animated text-center mb-5 white"><?php echo get_field('find_us_title'); ?></h2>
+      <div class="d-md-flex justify-content-between align-items-center mb-4">
+        <h2 class="headline inview animated white"><?php echo get_field('find_us_title'); ?></h2>
+        <form class="switch-location">
+          <div class="form-white">
+            <h4 class="white text-uppercase">Change Location</h4>
+            <select id="switch-locations" name="switch-locations" class="form-control">
+              <?php foreach($locations as $loc) :?>
+              <option value="<?php echo $loc['region'];?>" <?php echo ($location['region'] == $loc['region']) ? 'selected' : '';?>><?php echo $loc['city'];?>, <?php echo $loc['region'];?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
+        </form>
+      </div>
       <div class="map-wrapper row no-gutters">
         <div class="map-col col-md-7 col-lg-8 col-xl-9">
           <?php if(!empty($location['google_map_iframe'])) : ?>

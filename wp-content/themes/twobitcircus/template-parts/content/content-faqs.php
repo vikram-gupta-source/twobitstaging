@@ -4,16 +4,17 @@
  *
  * @package twobitcircus
  */
+  $faqs = filter_locations(get_field('question_answers'));
 ?>
 <article id="contact" <?php post_class(); ?>>
 
   <?php get_template_part( 'template-parts/partial/partial', 'header-no-desc' ); ?>
- 
-  <?php if(get_field('question_answers')) :?>
+
+  <?php if(!empty($faqs)) :?>
   <section id="faq" class="entry-wrapper-padding">
     <div class="container">
       <div class="faq-wrapper accordion-wrapper inview animated delay-1 clearfix my-4">
-      <?php foreach(get_field('question_answers') as $key => $faq) :?>
+      <?php foreach($faqs as $key => $faq) :?>
 
         <div class="card">
           <div class="card-header" id="heading-<?php echo $key; ?>" role="button">

@@ -63,7 +63,7 @@ function custom_acf_flexible_content_layout_title($title, $field, $layout, $i)
         return get_sub_field('city')  . ', ' . get_sub_field('region');
     }
     if (!empty(get_sub_field('locations'))) {
-        $filter = (preg_match('/all|all/', get_sub_field('locations'))) ? 'All Locations' : str_replace('|', ', ', get_sub_field('locations'));
+        $filter = ((preg_match('/all\|all/', get_sub_field('locations'))) ? 'All Locations' : str_replace('|', ', ', get_sub_field('locations')));
         if (!empty(get_sub_field('title'))) {
             return $filter . ' - ' . get_sub_field('title');
         }
