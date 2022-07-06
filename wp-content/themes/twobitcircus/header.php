@@ -54,9 +54,6 @@
   <!-- End of global snippet: Please do not remove -->
   <!-- MAIL CHIMP Tracking -->
   <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/4d4b1d17d592f7bbe31182862/d5e39c5af151c49205aa0d0ae.js");</script>
-
-  <!-- CRAZYEGG Tracking -->
-  <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0078/9623.js" async="async"></script>
 </head>
 
 <body <?php body_class(); ?>>

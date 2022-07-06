@@ -44,7 +44,7 @@
   </section>
   <?php endif?>
 
-  <section id="jobs-banner-block" class="entry-wrapper-padding bkg-red" <?php echo ((!empty(get_field('banner_background_image'))) ? 'style="url('.get_field('banner_image').')"' : (!empty(get_field('banner_background_color'))) ? 'style="background-color:'.get_field('banner_background_color').'"' : '');?>>
+  <section id="jobs-banner-block" class="entry-wrapper-padding bkg-red" <?php echo (get_field('banner_background_image') ? 'style="url('.get_field('banner_image').')"' : (get_field('banner_background_color') ? 'style="background-color:'.get_field('banner_background_color').'"' : ''));?>>
     <div class="container">
       <h2 class="headline inview animated text-center white"><?php echo get_field('banner_title');?></h2>
       <div class="w-75 mx-auto text-center white inview animated delay-1">

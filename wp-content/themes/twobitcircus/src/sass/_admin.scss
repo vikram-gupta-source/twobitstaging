@@ -388,6 +388,21 @@ $adminLogo: "/wp-content/uploads/2019/05/animated-logo.gif";
   }
 }
 
+.postbox-header {
+  background-color: #ff724a;
+}
+
+.acf-postbox .acf-hndle-cog {
+  color: #fff;
+}
+
+.postbox .handle-order-higher,
+.postbox .handle-order-higher[aria-disabled=true],
+.postbox .handle-order-lower,
+.postbox .handle-order-lower[aria-disabled=true] {
+  color: #fff;
+}
+
 #get-instagram-message,
 #wipe-message {
   display: none;
