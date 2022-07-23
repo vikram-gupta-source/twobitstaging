@@ -1,8 +1,11 @@
 // Login
+
 body.login {
   background: #c7c7c7 url($adminLoginBkg) repeat center / cover;
+
   h1 {
     margin-top: 25%;
+
     a {
       width: 140px;
       height: 160px;
@@ -10,26 +13,33 @@ body.login {
       background-image: url($adminLogo) !important;
     }
   }
+
   a {
     color: $loginFontColor;
     text-decoration: none;
+
     &:hover {
       color: $highlight;
     }
   }
+
   #login_error,
   .message,
   .success {
     border-left: 4px solid $highlight;
     background-color: $errorBox;
+
     a {
       color: $highlight;
     }
   }
+
   form {
     box-shadow: none;
+    border: 0;
     background: transparent;
   }
+
   #login {
     padding: 0;
     box-shadow: -1px 0 3px rgba(0, 0, 0, 0.13);
@@ -38,11 +48,14 @@ body.login {
     background-color: $loginBkg;
     color: $loginFontColor;
   }
+
   #backtoblog {
     display: none !important;
   }
+
   #nav a {
     color: $loginFontColor;
+
     &:hover {
       color: $highlight;
     }
