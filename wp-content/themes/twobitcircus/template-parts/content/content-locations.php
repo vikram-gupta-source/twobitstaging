@@ -6,6 +6,7 @@
  */
  global $location;
  $locations = get_field('location_selection', 'option');
+ $enable_multi_location = get_field('enable_multi_location', 'option');
 ?>
 <article id="locations" <?php post_class(); ?>>
 
@@ -15,6 +16,7 @@
     <div class="container">
       <div class="d-md-flex justify-content-between align-items-center mb-4">
         <h2 class="headline inview animated white"><?php echo get_field('find_us_title'); ?></h2>
+        <?php if(!empty($enable_multi_location)) :?>
         <form class="switch-location">
           <div class="form-white">
             <h4 class="white text-uppercase">Change Location</h4>
@@ -25,6 +27,7 @@
             </select>
           </div>
         </form>
+        <?php endif ?>
       </div>
       <div class="map-wrapper row no-gutters">
         <div class="map-col col-md-7 col-lg-8 col-xl-9">
