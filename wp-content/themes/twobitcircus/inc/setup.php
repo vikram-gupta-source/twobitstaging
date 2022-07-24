@@ -318,12 +318,15 @@ function get_locations($array)
     $_array = [];
     // Test Locations
     foreach ($array as $item) {
-        if (isset($item['city']) && $item['city'] == $region->city) {
-            return $item;
-        } elseif (isset($item['region']) && $item['region'] == $region->regionName) {
-            return $item;
+        if(!empty($item['enable_location'])) {
+          if (isset($item['city']) && $item['city'] == $region->city) {
+              return $item;
+          } elseif (isset($item['region']) && $item['region'] == $region->regionName) {
+              return $item;
+          }
         }
     }
+    // Default 1st
     return $array[0];
 }
 // Get Time Close of Open
