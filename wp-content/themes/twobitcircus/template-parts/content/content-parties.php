@@ -5,6 +5,7 @@
  * @package twobitcircus
  */
  remove_filter ('the_content', 'wpautop');
+ $contactForm = filter_locations(get_field('contact_form', 'option'));
 ?>
 <article id="parties" <?php post_class(); ?>>
 
@@ -58,7 +59,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <?php echo do_shortcode('[contact-form-7 id="431" title="Parties & Events"]');?>
+          <?php foreach($contactForm as $form) : ?>
+          <?php echo $form['form'];?>
+          <?php endforeach ?>
         </div>
       </div>
     </div>

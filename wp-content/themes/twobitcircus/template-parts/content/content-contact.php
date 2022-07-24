@@ -16,7 +16,7 @@
       <div class="w-65 mx-auto">
         <?php the_content(); ?>
         <?php foreach($contactForm as $form) : ?>
-          <?php echo $form['form'];?>
+          <div class="mt-5 row"><?php echo $form['form'];?></div>
         <?php endforeach ?>
       </div>
     </div>
