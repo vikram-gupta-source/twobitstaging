@@ -15,7 +15,9 @@
     <div class="container">
       <div class="w-65 mx-auto">
         <?php the_content(); ?>
-        <?php echo $contactForm;?>
+        <?php foreach($contactForm as $form) : ?>
+          <?php echo $form['form'];?>
+        <?php endforeach ?>
       </div>
     </div>
   </section>
