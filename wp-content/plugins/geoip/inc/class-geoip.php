@@ -111,9 +111,13 @@ if ( ! class_exists( 'GeoIP' ) ) {
 
     public function get_location_by_ip( $ip = "" ) {
       $ip = $this->get_ip_address();
+			// $current_user = wp_get_current_user();
+			// if($current_user->ID == 2) {
+			// 	echo $ip;
+			// }
       try {
         $location = $this->get_location($ip);
-        setcookie('geo_location', json_encode($location), time()+60*60*24);
+        setcookie('geo_location', json_encode($location), time()+60*60*24, '/');
         return $location;
       } catch ( Exception $e ) {
         echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -142,8 +146,10 @@ if ( ! class_exists( 'GeoIP' ) ) {
   		$ip = isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $ip;
   		// varnish trash ?
   		$ip = str_replace( array( '::ffff:', ', 127.0.0.1'), '', $ip );
-  		// get varnish first ip
-  		$ip = strstr( $ip, ',') === false ? $ip : strstr( $ip, ',');
+			if(preg_match('/,/', $ip)) {
+				$ips = explode(',', $ip);
+				$ip = trim($ips[0]);
+			}
       if($ip == '127.0.0.1' || $ip == '::1') $ip = '24.176.217.66';
   		return $ip;
   	}
