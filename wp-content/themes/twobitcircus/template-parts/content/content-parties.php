@@ -6,6 +6,8 @@
  */
  remove_filter ('the_content', 'wpautop');
  $contactForm = filter_locations(get_field('contact_form', 'option'));
+
+ dd($contactForm);
 ?>
 <article id="parties" <?php post_class(); ?>>
 
