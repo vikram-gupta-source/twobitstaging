@@ -55,7 +55,7 @@
       <?php endif ?>
       <?php if(!empty(get_field('featured_events'))) :?>
       <?php $feature_events = filter_locations(get_field('featured_events'));?>
-      <div class="featured mt-3 slick-event inview animated">
+      <div class="featured mt-3 slick-event">
         <?php foreach($feature_events as $feature) : ?>
         <div class="card">
           <?php if(!empty($feature['video_embed'])) :?>
