@@ -5,6 +5,12 @@
  * @package twobitcircus
  */
  global $location;
+ $isAdmin = false;
+ $allowed_roles = array('administrator');
+ $current_user = wp_get_current_user();
+ if (array_intersect($allowed_roles, $current_user->roles)) {
+   $isAdmin = true;
+ }
  $locations = get_field('location_selection', 'option');
  $enable_multi_location = get_field('enable_multi_location', 'option');
 ?>
@@ -16,7 +22,7 @@
     <div class="container">
       <div class="d-md-flex justify-content-between align-items-center mb-4">
         <h2 class="headline inview animated white"><?php echo get_field('find_us_title'); ?></h2>
-        <?php if(!empty($enable_multi_location)) :?>
+        <?php if(!empty($enable_multi_location) || $isAdmin === true) :?>
         <form class="switch-location">
           <div class="form-white">
             <h4 class="white text-uppercase">Change Location</h4>
