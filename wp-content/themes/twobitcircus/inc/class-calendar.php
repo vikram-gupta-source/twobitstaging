@@ -28,7 +28,7 @@ if (! class_exists('Calendar')) {
             $_region = get_locations(get_field('location_selection', 'option'));
             $_allowShow = filter_locations(get_field('allow_shows', 'option'));
             $_closed = filter_locations(get_field('calendar_days_of_the_week_closed', 'option'));
-            date_default_timezone_set($_region[0]['timezone']);
+            if(!empty($_region['timezone'])) date_default_timezone_set($_region['timezone']);
             $this->daysToShow = get_field('days_to_show', 'option');
             $this->current_date = time();
             $this->end_date = strtotime($this->daysToShow);
@@ -73,11 +73,15 @@ if (! class_exists('Calendar')) {
                 $recurring = [];
                 $collect = [];
                 $excludeEvent = [];
-                $testDate = explode('-', $spvent['show_date']);
-                $testDateFormat = $testDate[2].'-'.$testDate[0].'-'.$testDate[1].' 23:59:59';
-                if (strtotime($testDateFormat) <= strtotime(date('Y-m-d 00:00:00')) && empty($spvent['recurring_day'])) {
-                    //echo $testDateFormat. '--'. $spvent['show_date'] .'----'. $spvent['show_title'] . '11111111111<br>';
-                    continue;
+                if(!empty($spvent['show_date'])) {
+                  $testDate = explode('-', $spvent['show_date']);
+                  $testDateFormat = $testDate[2].'-'.$testDate[0].'-'.$testDate[1].' 23:59:59';
+                  if (strtotime($testDateFormat) <= strtotime(date('Y-m-d 00:00:00')) && empty($spvent['recurring_day'])) {
+                      //echo $testDateFormat. '--'. $spvent['show_date'] .'----'. $spvent['show_title'] . '11111111111<br>';
+                      continue;
+                  }
+                } else {
+                  continue;
                 }
                 if ($spvent['recurring_day']) {
                     $nextRecurring = strtotime('next '.$spvent['recurring_day']['value']);
