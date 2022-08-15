@@ -117,12 +117,27 @@ if ( ! class_exists( 'GeoIP' ) ) {
 			// }
       try {
         $location = $this->get_location($ip);
+				if(!empty($location->status) && $location->status == 'success' && $location->countryCode == 'US') {
+					if($location->regionName != 'California') { //&& $location->regionName != 'Texas'
+						$location->regionName = 'California';
+						$location->city = 'Los Angeles';
+					}
+				} else {
+					$location = new stdClass();
+					$location->status = 'success';
+					$location->countryCode = 'US';
+					$location->regionName = 'California';
+					$location->city = 'Los Angeles';
+				}
         setcookie('geo_location', json_encode($location), time()+60*60*24, '/');
         return $location;
       } catch ( Exception $e ) {
-        echo 'Caught exception: ',  $e->getMessage(), "\n";
-        exit;
-        return null;
+				$location = new stdClass();
+				$location->status = 'success';
+				$location->countryCode = 'US';
+				$location->regionName = 'California';
+				$location->city = 'Los Angeles';
+				setcookie('geo_location', json_encode($location), time()+60*60*24, '/');
       }
     }
 
@@ -151,6 +166,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
 				$ip = trim($ips[0]);
 			}
       if($ip == '127.0.0.1' || $ip == '::1') $ip = '24.176.217.66';
+			$ip = '166.122.237.127';
   		return $ip;
   	}
   }
