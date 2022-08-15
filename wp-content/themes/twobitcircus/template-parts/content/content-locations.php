@@ -27,8 +27,10 @@
           <div class="form-white">
             <h4 class="white text-uppercase">Change Location</h4>
             <select id="switch-locations" name="switch-locations" class="form-control">
-            <?php foreach($locations as $loc) : ?>
-              <option value="<?php echo $loc['region'];?>" <?php echo ($location['region'] == $loc['region']) ? 'selected' : '';?>><?php echo $loc['city'];?>, <?php echo $loc['region'];?></option> 
+            <?php foreach($locations as $loc) :
+                if(!empty($loc['enable_location'])) : ?>
+              <option value="<?php echo $loc['region'];?>" <?php echo ($location['region'] == $loc['region']) ? 'selected' : '';?>><?php echo $loc['city'];?>, <?php echo $loc['region'];?></option>
+              <?php endif ?>
               <?php endforeach ?>
             </select>
           </div>
