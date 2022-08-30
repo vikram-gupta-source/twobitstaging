@@ -5,6 +5,7 @@
  * @package twobitcircus
  */
  global $location;
+
 ?>
 <!-- ******************* Mobile ******************* -->
 <div id="expanded-menu">
@@ -34,12 +35,16 @@
 <!-- ******************* Navbar ******************* -->
 <header id="main-nav" class="fixed-top" itemscope itemtype="http://schema.org/WebSite">
   <a class="skip-link sr-only sr-only-focusable" href="#main"><?php _e( 'Skip to content', 'twobitcircus' ); ?></a>
-  <?php if(!empty(get_field('notification', 'options'))) :?>
+  <?php if(!empty(get_field('notification_bar', 'options'))) :
+    $notification = filter_locations(get_field('notification_bar', 'options'));
+    if(!empty($notification[0])) :
+  ?>
   <div id="notification-bar">
     <div class="container text-center">
-      <?php echo get_field('notification', 'options');?>
+      <?php echo $notification[0]['message'];?>
     </div>
   </div>
+  <?php endif ?>
   <?php endif ?>
   <nav class="navbar">
     <div class="container position-relative pr-0">
