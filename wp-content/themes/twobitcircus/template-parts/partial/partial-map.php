@@ -18,8 +18,8 @@
             <?php foreach ($location['days'] as $days) :?>
               <div class="days text-uppercase"><?php echo $days['day'];?>: <?php echo (!empty($days['open'])) ? $days['open'] .' - ' .  $days['close'] : 'Closed for Reboot'; ?></div>
             <?php endforeach ?>
-            <?php if(!empty($location['message'])) :?>
-            <div class="mt-2"><?php echo $location['message'];?></div>
+            <?php if(!empty($location['content'])) :?>
+            <div class="mt-2"><?php echo $location['content'];?></div>
             <?php endif ?>
           </div>
           <?php endif ?>
