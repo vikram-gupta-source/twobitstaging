@@ -18,7 +18,9 @@
             <?php foreach ($location['days'] as $days) :?>
               <div class="days text-uppercase"><?php echo $days['day'];?>: <?php echo (!empty($days['open'])) ? $days['open'] .' - ' .  $days['close'] : 'Closed for Reboot'; ?></div>
             <?php endforeach ?>
-            <small class="mt-1">*PLEASE CHECK THE CALENDAR AT THE BOTTOM OF THE HOMEPAGE AS TIMES ARE SUBJECT TO CHANGE</small>
+            <?php if(!empty($location['message'])) :?>
+            <div class="mt-2"><?php echo $location['message'];?></div>
+            <?php endif ?>
           </div>
           <?php endif ?>
         </h6>
