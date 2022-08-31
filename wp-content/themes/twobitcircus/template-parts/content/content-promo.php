@@ -19,7 +19,7 @@
     <div class="container-fluid">
       <?php if(!empty($promotionContent[0])) :?>
       <div class="content-block container mt-2 mb-6 px-md-5">
-        <h2 class="default white"><?php echo $promotionContent[0]['content'];?></h2>
+        <h2 class="default white"><?php echo $promotionContent[0]['title'];?></h2>
         <div class="white"><?php echo $promotionContent[0]['content'];?></div>
       </div>
       <?php endif ?>
