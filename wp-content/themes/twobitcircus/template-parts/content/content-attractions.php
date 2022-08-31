@@ -26,7 +26,9 @@
                 <?php echo $shows['terms']->name;?>
               </a>
               <div class="dropdown-menu" data-cat="<?php echo $shows['terms']->slug;?>">
-                <?php foreach($shows['posts'] as $skey => $show) :?>
+                <?php foreach($shows['posts'] as $skey => $show) :
+                  if($show->post_status == 'private') continue;
+                ?>
                 <a class="dropdown-item" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a>
                 <?php endforeach ?>
               </div>
@@ -51,14 +53,16 @@
     <div class="container">
       <?php if(!empty($attractions)) :?>
         <div class="attractions-slick entry-wrapper-padding inview animated">
-          <?php foreach($attractions as $cat => $shows) :?>
+          <?php foreach($attractions as $cat => $shows) :
+            if($shows['posts'])
+          ?>
           <div class="item-attraction">
 
             <div class="slick-shows" id="cat-<?php echo $cat;?>">
               <?php $num = count($shows['posts']); ?>
               <?php foreach($shows['posts'] as $skey => $show) :
+                if($show->post_status == 'private') continue;
                 echo get_field('available_in', $show->ID);
-
                 ?>
                 <?php if(!filter_location_by_field(get_field('available_in', $show->ID))) continue; ?>
                 <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
