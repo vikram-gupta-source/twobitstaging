@@ -1,5 +1,5 @@
 <?php
-/*  Copyright 2013-2019 Renzo Johnson (email: renzojohnson at gmail.com)
+/*  Copyright 2010-2022 Renzo Johnson (email: renzo.johnson at gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,23 +17,37 @@
 */
 
 
+
 function mce_error() {
 
   if( !file_exists(WP_PLUGIN_DIR.'/contact-form-7/wp-contact-form-7.php') ) {
 
+    $respanalitc = vc_ga_send_event('Mailchimp Extension', 'ACTIVATED', 'No Installed CF7') ;
+
+		include SPARTAN_MCE_PLUGIN_DIR . '/lib/action.php' ;
+		//plugin_activation('contact-form-7/wp-contact-form-7.php');
+		wp_cache_flush();
+
+		/*
     deactivate_plugins( plugin_basename( WP_PLUGIN_DIR.'/contact-form-7-mailchimp-extension/cf7-mch-ext.php' ) );
+
     $mce_error_out = '<div id="message" class="error is-dismissible"><p>';
     $mce_error_out .= __('The Contact Form 7 plugin must be installed for the <b>MailChimp Extension</b> to work. <b><a href="'.admin_url('plugin-install.php?tab=plugin-information&plugin=contact-form-7&from=plugins&TB_iframe=true&width=600&height=550').'" class="thickbox" title="Contact Form 7">Install Contact Form 7  Now.</a></b>', 'mce_error');
     $mce_error_out .= '</p></div>';
-    echo $mce_error_out;
+    echo $mce_error_out; */
 
   } else if ( !class_exists( 'WPCF7') ) {
     //__FILE__
-    deactivate_plugins( plugin_basename( WP_PLUGIN_DIR.'/contact-form-7-mailchimp-extension/cf7-mch-ext.php' ) );
-    $mce_error_out = '<div id="message" class="error is-dismissible"><p>';
-    $mce_error_out .= __('The Contact Form 7 is installed, but <strong>you must activate Contact Form 7</strong> below for the <b>MailChimp Extension</b> to work. ','mce_error');
+
+    plugin_activation('contact-form-7/wp-contact-form-7.php');
+
+    $respanalitc = vc_ga_send_event('Mailchimp Extension', 'ACTIVATED', 'Full Activated');
+
+    //deactivate_plugins( plugin_basename( WP_PLUGIN_DIR.'/contact-form-7-mailchimp-extension/cf7-mch-ext.php' ) );
+   /* $mce_error_out = '<div id="message" class="error is-dismissible"><p>';
+    $mce_error_out .= __('The Contact Form 7 is installed, but <strong>you must activate Contact Form 7  </strong> below for the <b>MailChimp Extension</b> to work. ','mce_error');
     $mce_error_out .= '</p></div>';
-    echo $mce_error_out;
+    echo $mce_error_out; */
 
   }
 
@@ -44,20 +58,22 @@ add_action('admin_notices', 'mce_error');
 function mce_act_redirect( $plugin ) {
 
     if ( !class_exists( 'WPCF7') ) {
+
      }
     else {
         if( $plugin == SPARTAN_MCE_PLUGIN_BASENAME ) {
+            $respanalitc = vc_ga_send_event('Mailchimp Extension', 'ACTIVATED', 'Full Activated');
             mce_save_date_activation();
             mce_save_plugginid () ;
-            exit( wp_redirect( admin_url( 'admin.php?page=wpcf7&post='.mc_get_latest_item().'&active-tab=4' ) ) );
+
          }
     }
 
-    $respanalitc = vc_ga_send_event('Mailchimp Extension', 'activated', 'ACTIVATED');
-    $resppageview = wpcf7_mce_ga_pageview ();
+
+   // $resppageview = wpcf7_mce_ga_pageview ();
 
 }
-add_action( 'activated_plugin', 'mce_act_redirect' );
+//add_action( 'activated_plugin', 'mce_act_redirect' );
 
 
 function mce_save_date_activation() {
@@ -133,6 +149,23 @@ function mce_difer_dateact_date() {
   return $resultf;
 
 }
+
+function mce_diferdays_dateact_date() {
+  $option_name = 'mce_loyalty' ;
+  $today = getdate() ;
+  mce_save_date_activation();
+
+  $date_act = get_option( $option_name );
+
+  $datetime_ini = new DateTime("now");
+  $datetime_fin = new DateTime($date_act['year'].'-'.$date_act['mon'].'-'.$date_act['wday']);
+
+  $fechaF = date_diff($datetime_ini,$datetime_fin);
+
+  $resultf = $fechaF->format('%a');
+  return $resultf;
+}
+
 
 
 
@@ -214,9 +247,43 @@ function mce_news_notices () {
   $class = 'notice is-dismissible vc-notice welcome-panel';
   $check = 0 ;
   $tittle = '' ;
-  $message = mce_get_postnotice ($check,$tittle ) ;
+  //$message = mce_get_postnotice ($check,$tittle ) ;
+
+    $Defaulttittle = 'Chimpmatic Lite is now 0.5.61!' ;
+    $Defaultpanel = '<p class="about-description">Easier setup to get you up and running in no time. Please <a href="https://chimpmatic.com/contact" target="_blank" rel="noopener noreferrer">lets us know</a> what kind of features you would like to see added <a href="https://chimpmatic.com/contact" target="_blank" rel="noopener noreferrer">HERE</a></p>
+<div class="welcome-panel-column-container">
+<div class="welcome-panel-column">
+<h3>Get Started</h3>
+<p>Make sure it works as you expect <br><a class="button button-primary button-hero load-customize" href="/wp-admin/admin.php?page=wpcf7&amp;post=8&amp;active-tab=4">Review your settings <span alt="f111" class="dashicons dashicons-admin-generic" style="font-size: 17px;vertical-align: middle;"> </span> </a></p>
+</div>
+<div class="welcome-panel-column">
+<h3>Next Steps</h3>
+<p>Help me develop the plugin and provide support by <br><a class="donate button button-primary button-hero load-customize" href="https://www.paypal.me/renzojohnson" target="_blank" rel="noopener noreferrer">Donating even a small sum <span alt="f524" class="dashicons dashicons-tickets-alt"> </span></a></p>
+</div>
+</div>' ;
+
+  $banner = $Defaultpanel ;
+  $tittle = $Defaulttittle ;
+   //delete_site_option('mce_conten_panel_lateralbanner');
+
+   if ( get_site_option('mce_conten_panel_master') == null  ) {
+      add_site_option( 'mce_conten_panel_master', $Defaultpanel ) ;
+      add_site_option( 'mce_conten_tittle_master', $Defaulttittle ) ;
+      $banner = $Defaultpanel ;
+      $tittle = $Defaulttittle ;
+   }
+    else  {
+      $grabbanner = trim( get_site_option('mce_conten_panel_master') ) ;
+      $grabtittle = trim( get_site_option('mce_conten_tittle_master') ) ;
+
+      $banner = ( $grabbanner  == ''  ) ? $Defaultpanel : $grabbanner ;
+      $tittle = ( $grabtittle  == ''  ) ? $Defaulttittle : $grabtittle ;
+
+    }
+
+
   $tittle2 = '<h2>'.$tittle.'</h2>';
-  $message2 = $tittle2.$message ;
+  $message2 = $tittle2.$banner ;
 
   echo '<div id="mce-notice" class="'.$class.'"><div class="welcome-panel-content">'.$message2.'</div></div>';
 
@@ -267,22 +334,29 @@ if (  (  get_site_option('mce_show_update_news') == null )  or get_site_option('
 }
 
 
+
 function mce_get_postnotice (&$check,&$tittle) {
 
     $check = 0 ;
-    $response = wp_remote_get( 'https://renzojohnson.com/wp-json/wp/v2/posts?categories=15&orderby=modified&order=desc' );
+    $response = wp_remote_get( 'https://ping.chimpmatic.com/wp-json/wp/v2/posts?categories=1&orderby=modified&order=desc' );
 
     if ( is_wp_error( $response ) ) {
       $check = -1;
-      return;
+      return '';
     }
 
     $posts = json_decode( wp_remote_retrieve_body( $response ) );
 
     if ( empty( $posts ) or is_null ( $posts  ) ) {
         $check = -2;
-		    return  ;
+		    return ''  ;
 	  }
+
+  if ( $response["response"]["code"] != 200 ) {
+      $check = -3;
+		  return ''  ;
+  }
+
 
 	if ( ! empty( $posts ) ) {
 		  foreach ( $posts as $post ) {
@@ -333,5 +407,7 @@ function mce_get_postnotice (&$check,&$tittle) {
 	}
 
 }
+
+
 
 

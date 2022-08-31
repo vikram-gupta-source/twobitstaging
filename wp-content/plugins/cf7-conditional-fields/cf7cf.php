@@ -1,9 +1,10 @@
 <?php
 
-class ContactForm7ConditionalFields {
+class CF7CF {
     private $hidden_fields = array();
     private $visible_groups = array();
     private $hidden_groups = array();
+    private $repeaters = array();
 
     function __construct() {
 
@@ -29,10 +30,10 @@ class ContactForm7ConditionalFields {
         add_action('wp_ajax_cf7mls_validation', array($this,'cf7mls_validation_callback'),9);
         add_action('wp_ajax_nopriv_cf7mls_validation', array($this,'cf7mls_validation_callback'),9);
 
-        // check which fields are hidden during form submission and change some stuff accordingly
-        add_filter( 'wpcf7_posted_data', array($this, 'remove_hidden_post_data') );
-
         add_filter( 'wpcf7_validate', array($this, 'skip_validation_for_hidden_fields'), 2, 2 );
+
+        add_filter( 'wpcf7_validate_file*', array($this, 'skip_validation_for_hidden_file_field'), 30, 3);
+        add_filter( 'wpcf7_validate_multifile*', array($this, 'skip_validation_for_hidden_file_field'), 30, 3);
 
 	    // validation messages
 	    add_action('wpcf7_config_validator_validate', array($this,'wpcf7cf_config_validator_validate'));
@@ -63,9 +64,14 @@ class ContactForm7ConditionalFields {
 
     	foreach ($wpcf7_config_validator->collect_error_messages() as $err_type => $err) {
 
+//    	    print_r($err_type);
 
 		    $parts = explode('.',$err_type);
+
 		    $property = $parts[0];
+
+		    if ($property == 'form') continue; // the 'form' field can be safely validated by CF7. No need to suppress it.
+
 		    $sub_prop = $parts[1];
 		    $prop_val = $cf->prop($property)[$sub_prop];
 
@@ -122,7 +128,7 @@ class ContactForm7ConditionalFields {
             return;
 
         wpcf7_add_tag_generator('group',
-            __('Conditional Fields Group', 'wpcf7cf'),
+            __('Conditional Fields Group', 'cf7-conditional-fields'),
             'wpcf7-tg-pane-group',
             array(__CLASS__, 'tg_pane')
         );
@@ -134,60 +140,78 @@ class ContactForm7ConditionalFields {
         $args = wp_parse_args( $args, array() );
         $type = 'group';
 
-        $description = __( "Generate a group tag to group form elements that can be shown conditionally.", 'cf7cf' );
+        $description = __( "Generate a group tag to group form elements that can be shown conditionally.", 'cf7-conditional-fields' );
 
         include 'tg_pane_group.php';
     }
 
     /**
      * Remove validation requirements for fields that are hidden at the time of form submission.
-     * Called using add_filter( 'wpcf7_validate_[tag_type]', array($this, 'skip_validation_for_hidden_fields'), 2, 2 );
+     * Required/invalid fields should never trigger validation errors if they are inside a hidden group during submission.
+     * Called using add_filter( 'wpcf7_validate', array($this, 'skip_validation_for_hidden_fields'), 2, 2 );
      * where the priority of 2 causes this to kill any validations with a priority higher than 2
+     * 
+     * NOTE: CF7 is weirdly designed when it comes to validating a form with files.
+     *       Only the non-file fields are considered during the wpcf7_validate filter.
+     *       When validation passes for all fields (except the file fields), the files fields are validated individually.
+     *       ( see skip_validation_for_hidden_file_field )
      *
      * @param $result
      * @param $tag
      *
      * @return mixed
      */
-    function skip_validation_for_hidden_fields($result, $tags) {
+    function skip_validation_for_hidden_fields($result, $tags, $args = []) {
 
-        if (count($this->hidden_fields) == 0) return $result;
-
-        $return_result = new WPCF7_Validation();
+        if(isset($_POST)) {
+            $this->set_hidden_fields_arrays($_POST);
+        }
 
         $invalid_fields = $result->get_invalid_fields();
+        $return_result = new WPCF7_Validation();
 
-        if (!is_array($invalid_fields) || count($invalid_fields) == 0) return $result;
-
-        foreach ($invalid_fields as $invalid_field_key => $invalid_field_data) {
-            if (!in_array($invalid_field_key, $this->hidden_fields)) {
-                // the invalid field is not a hidden field, so we'll add it to the final validation result
-                $return_result->invalidate($invalid_field_key, $invalid_field_data['reason']);
+        if (count($this->hidden_fields) == 0 || !is_array($invalid_fields) || count($invalid_fields) == 0) {
+            $return_result = $result;
+        } else {
+            foreach ($invalid_fields as $invalid_field_key => $invalid_field_data) {
+                if (!in_array($invalid_field_key, $this->hidden_fields)) {
+                    foreach ($tags as $tag) {
+                        if ($tag['name'] === $invalid_field_key) {
+                           $return_result->invalidate($tag, $invalid_field_data['reason']);
+                        }
+                    }
+                }
             }
         }
 
-        return $return_result;
+        return apply_filters('wpcf7cf_validate', $return_result, $tags);
+
     }
 
-
     /**
-     * When a CF7 form is posted, check the form for hidden fields, then remove those fields from the post data
-     *
-     * @param $posted_data
-     *
-     * @return mixed
+     * Does the same thing as skip_validation_for_hidden_fields, but CF7 will check files again later
+     * via the wpcf7_unship_uploaded_files function
+     * so we need to skip validation a second time for individual file fields
      */
-    function remove_hidden_post_data($posted_data) {
-        $this->set_hidden_fields_arrays($posted_data);
+    function skip_validation_for_hidden_file_field($result, $tag, $args=[]) {
 
-// TODO: activating the code below will change the behaviour of the plugin, as all hidden fields will not be POSTed.
-//       We might consider activating this based on a setting in the future. But for now, we're not gonna use it.
+        if (!count($result->get_invalid_fields())) {
+            return $result;
+        }
+        if(isset($_POST)) {
+            $this->set_hidden_fields_arrays($_POST);
+        }
 
-//        foreach( $this->hidden_fields as $name => $value ) {
-//            unset( $posted_data[$value] ); // Yes, it should be $value, not $name. https://github.com/pwkip/contact-form-7-conditional-fields/pull/17
-//        }
+        $invalid_field_keys = array_keys($result->get_invalid_fields());
 
-        return $posted_data;
+        // if the current file is the only invalid tag in the result AND if the file is hidden: return a valid (blank) object
+        if (isset($this->hidden_fields) && is_array($this->hidden_fields) && in_array($tag->name, $this->hidden_fields) && count($invalid_field_keys) == 1) {
+            return new WPCF7_Validation();
+        }
+
+        // if the current file is not hidden, we'll just return the result (keep it invalid).
+        // (Note that this might also return the hidden files as invalid, but that shouldn't matter because the form is invalid, and the notification will be inside a hidden group)
+        return $result;
     }
 
     function cf7msm_merge_post_with_cookie($posted_data) {
@@ -200,7 +224,7 @@ class ContactForm7ConditionalFields {
 
         // this will temporarily set the hidden fields data to the posted_data.
         // later this function will be called again with the updated posted_data
-        $this->set_hidden_fields_arrays($posted_data);
+        $this->set_hidden_fields_arrays($_POST);
 
         // get cookie data
         $cookie_data = cf7msm_get('cf7msm_posted_data');
@@ -233,9 +257,7 @@ class ContactForm7ConditionalFields {
      */
     function set_hidden_fields_arrays($posted_data = false) {
 
-        if (!$posted_data) {
-            $posted_data = WPCF7_Submission::get_instance()->get_posted_data();
-        }
+        if (!$posted_data) $posted_data = $_POST;
 
         $hidden_fields = json_decode(stripslashes($posted_data['_wpcf7cf_hidden_group_fields']));
         if (is_array($hidden_fields) && count($hidden_fields) > 0) {
@@ -248,16 +270,28 @@ class ContactForm7ConditionalFields {
         }
         $this->hidden_groups = json_decode(stripslashes($posted_data['_wpcf7cf_hidden_groups']));
         $this->visible_groups = json_decode(stripslashes($posted_data['_wpcf7cf_visible_groups']));
+        $this->repeaters = json_decode(stripslashes($posted_data['_wpcf7cf_repeaters']));
+        $this->steps = json_decode(stripslashes($posted_data['_wpcf7cf_steps']));
     }
 
 	function hide_hidden_mail_fields($form,$abort,$submission) {
 		$props = $form->get_properties();
 		$mails = ['mail','mail_2','messages'];
 		foreach ($mails as $mail) {
+            if (!is_array($props[$mail])) { continue; }
 			foreach ($props[$mail] as $key=>$val) {
-				$props[$mail][$key] = preg_replace_callback(WPCF7CF_REGEX_MAIL_GROUP, array($this, 'hide_hidden_mail_fields_regex_callback'), $val );
-			}
-		}
+
+                $parser = new Wpcf7cfMailParser($val, $this->visible_groups, $this->hidden_groups, $this->repeaters, $_POST);
+
+				// $props[$mail][$key] = preg_replace_callback(WPCF7CF_REGEX_MAIL_GROUP, array($this, 'hide_hidden_mail_fields_regex_callback'), $val );
+				$props[$mail][$key] = $parser->getParsedMail();
+            }
+
+
+        }
+
+
+        //$props['mail']['body'] = 'xxx';
 		$form->set_properties($props);
 	}
 
@@ -276,15 +310,112 @@ class ContactForm7ConditionalFields {
             return $matches[0];
         }
     }
+
+    public static function parse_conditions($string, $format='array') {
+        // Parse stuff like "show [g1] if [field] equals 2" to Array
+
+        preg_match_all(WPCF7CF_REGEX_CONDITIONS, $string, $matches);
+
+        $conditions = [];
+
+        $prev_then_field = '';
+        foreach ($matches[0] as $i=>$line) {
+            $then_field = $matches[1][$i];
+            $if_field   = $matches[2][$i];
+            $operator   = $matches[3][$i];
+            $if_value   = $matches[4][$i];
+
+            $index = count($conditions);
+
+            if ($then_field == '') {
+                $index = $index -1;
+                $then_field = $prev_then_field;
+            } else {
+                $conditions[$index]['then_field'] = $then_field;
+            }
+
+            $conditions[$index]['and_rules'][] = [
+                'if_field' => $if_field,
+                'operator' => $operator,
+                'if_value' => $if_value,
+            ];
+
+            $prev_then_field = $then_field;
+
+        }
+
+        $conditions = array_values($conditions);
+
+        if ($format == 'array') {
+            return $conditions;
+        } else if ($format == 'json') {
+            return json_encode($conditions);
+        }
+    }
+
+    /**
+     * load the conditions from the form's post_meta
+     *
+     * @param string $form_id
+     * @return array
+     */
+    public static function getConditions($form_id) {
+        // make sure conditions are an array.
+        $options = get_post_meta($form_id,'wpcf7cf_options',true);
+        return is_array($options) ? $options : array(); // the meta key 'wpcf7cf_options' is a bit misleading at this point, because it only holds the form's conditions, no other options/settings
+    }
+
+    /**
+     * load the conditions from the form's post_meta as plain text
+     *
+     * @param string $form_id
+     * @return void
+     */
+    public static function getConditionsPlainText($form_id) {
+        return CF7CF::serializeConditions(CF7CF::getConditions($form_id));
+    }
+
+    public static function serializeConditions($array) {
+
+        $lines = [];
+
+        foreach ($array as $entry) {
+            $then_field = $entry['then_field'];
+            $and_rules = $entry['and_rules'];
+            $indent = strlen($then_field) + 4;
+            foreach ($and_rules as $i => $rule) {
+                $if_field = $rule['if_field'];
+                $operator = $rule['operator'];
+                $if_value = $rule['if_value'];
+
+                if ($i == 0) {
+                    $lines[] = "show [${then_field}] if [${if_field}] ${operator} \"${if_value}\"";
+                } else {
+                    $lines[] = str_repeat(' ',$indent)."and if [${if_field}] ${operator} \"${if_value}\"";
+                }
+            }
+        }
+        
+        return implode("\n", $lines);
+    }
+    
+    /**
+     * save the conditions to the form's post_meta
+     *
+     * @param string $form_id
+     * @return void
+     */
+    public static function setConditions($form_id, $conditions) {
+        return update_post_meta($form_id,'wpcf7cf_options',$conditions); // the meta key 'wpcf7cf_options' is a bit misleading at this point, because it only holds the form's conditions, no other options/settings
+    }
 }
 
-new ContactForm7ConditionalFields;
+new CF7CF;
 
 add_filter( 'wpcf7_contact_form_properties', 'wpcf7cf_properties', 10, 2 );
 
 function wpcf7cf_properties($properties, $wpcf7form) {
-	// TODO: This function is called serveral times. The problem is that the filter is called each time we call get_properties() on a contact form.
-	// TODO: I haven't found a better way to solve this problem yet, any suggestions or push requests are welcome. (same problem in PRO/repeater.php)
+	// Before CF7 5.5.3, this function was called each time we call get_properties() on a contact form. Since CF7 5.5.3 this function is called only once in the WPCF7_ContactForm
 	if (!is_admin() || (defined('DOING_AJAX') && DOING_AJAX)) { // TODO: kind of hacky. maybe find a better solution. Needed because otherwise the group tags will be replaced in the editor as well.
         $form = $properties['form'];
 
@@ -308,11 +439,12 @@ function wpcf7cf_properties($properties, $wpcf7form) {
 	    			if ($i==0) continue;
 					else if ($tag_part == 'inline') $tag_html_type = 'span';
 					else if ($tag_part == 'clear_on_hide') $tag_html_data[] = 'data-clear_on_hide';
+					else if ($tag_part == 'disable_on_hide' && WPCF7CF_IS_PRO) $tag_html_data[] = 'data-disable_on_hide';
 			    }
 
 			    array_push($stack,$tag_html_type);
 
-			    echo '<'.$tag_html_type.' data-id="'.$tag_id.'" data-orig_id="'.$tag_id.'" '.implode(' ',$tag_html_data).' data-class="wpcf7cf_group">';
+			    echo '<'.$tag_html_type.' data-id="'.$tag_id.'" data-orig_data_id="'.$tag_id.'" '.implode(' ',$tag_html_data).' data-class="wpcf7cf_group">';
 		    } else if ($form_part == '[/group]') {
 	    		echo '</'.array_pop($stack).'>';
 		    } else {
@@ -334,16 +466,18 @@ function wpcf7cf_form_hidden_fields($hidden_fields) {
 
     $options = array(
         'form_id' => $current_form_id,
-        'conditions' => get_post_meta($current_form_id,'wpcf7cf_options', true),
-        'settings' => get_option(WPCF7CF_OPTIONS)
+        'conditions' => CF7CF::getConditions($current_form_id),
+        'settings' => wpcf7cf_get_settings()
     );
 
     unset($options['settings']['license_key']); // don't show license key in the source code duh.
 
 	return array_merge($hidden_fields, array(
-        '_wpcf7cf_hidden_group_fields' => '',
-        '_wpcf7cf_hidden_groups' => '',
-        '_wpcf7cf_visible_groups' => '',
+        '_wpcf7cf_hidden_group_fields' => '[]',
+        '_wpcf7cf_hidden_groups' => '[]',
+        '_wpcf7cf_visible_groups' => '[]',
+        '_wpcf7cf_repeaters' => '[]',
+        '_wpcf7cf_steps' => '{}',
         '_wpcf7cf_options' => ''.json_encode($options),
     ));
 }
@@ -399,3 +533,14 @@ function wpcf7cf_enqueue_styles() {
 	if (is_admin()) return;
 	wp_enqueue_style('cf7cf-style', plugins_url('style.css', __FILE__), array(), WPCF7CF_VERSION);
 }
+
+// Make sure CF7 doesn't target any disabled fields for validation
+// (HTML standard: "disabled fields don't get submitted", so no need to validate them)
+add_filter( 'wpcf7_feedback_response', function($response, $result) {
+    foreach ($response['invalid_fields'] as $i => $inv) {
+        if (isset($response['invalid_fields'][$i]['into'])) {
+            $response['invalid_fields'][$i]['into'] .= ':not(.wpcf7cf-disabled)';
+        }
+    }
+    return $response;
+}, 2, 10 );

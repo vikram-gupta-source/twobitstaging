@@ -1,5 +1,5 @@
 <?php
-/*  Copyright 2013-2019 Renzo Johnson (email: renzojohnson at gmail.com)
+/*  Copyright 2010-2022 Renzo Johnson (email: renzo.johnson at gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,11 +17,12 @@
 */
 
 
+
 function vc_utm() {
 
   global $wpdb;
 
-  $utms  = '?utm_source=MailChimp';
+  $utms  = '?utm_source=ChimpmaticLite';
   $utms .= '&utm_campaign=w' . get_bloginfo( 'version' ) . '-' . mce_difer_dateact_date() . 'c' . WPCF7_VERSION . ( defined( 'WPLANG' ) && WPLANG ? WPLANG : 'en_US' ) . '';
   $utms .= '&utm_medium=cme-' . SPARTAN_MCE_VERSION . '';
   $utms .= '&utm_term=P' . PHP_VERSION . 'Sq' . $wpdb->db_version() . '-';
@@ -31,8 +32,9 @@ function vc_utm() {
 
 function mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags,$mce_txcomodin) {
   ?>
-   <div >
-      <small><input type="hidden" id="mce_txtcomodin" name="wpcf7-mailchimp[mce_txtcomodin]" value="<?php echo( isset( $mce_txcomodin ) ) ? esc_textarea( $mce_txcomodin ) : ''; ?>" style="width:0%;" /></small>
+   <div class="mystery">
+
+    <input type="hidden" id="mce_txtcomodin" name="wpcf7-mailchimp[mce_txtcomodin]" value="<?php echo( isset( $mce_txcomodin ) ) ? esc_textarea( $mce_txcomodin ) : ''; ?>" style="width:0%;" />
     <div class="mce-custom-fields">
       <div class="mail-field">
         <div id="mce_panel_listamail" >
@@ -40,7 +42,7 @@ function mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags,$mce_txcomodin) 
             <?php mce_html_panel_listmail( $apivalid, $listdata, $cf7_mch); // Get listas ?>
 
         </div>
-        <small class="description">If you dont see all your lists, hit the Connect button again <a href="<?php echo MCE_URL ?>/mailchimp-list-id<?php echo vc_utm() ?>MC-list-id" class="helping-field" target="_blank" title="get help with MailChimp List ID:"> Get more help <span class="red-icon dashicons dashicons-admin-links"></span></a></small>
+        <small class="description">Hit the Connect button to load your lists <a href="https://chimpmatic.com/help/how-to-get-your-mailchimp-api-key<?php echo vc_utm() ?>MC-list-id" class="helping-field" target="_blank" title="get help with MailChimp List ID:"> Learn More</a></small>
       </div>
     </div>
 
@@ -48,15 +50,126 @@ function mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags,$mce_txcomodin) 
       <div class="mail-field md-half">
         <label for="wpcf7-mailchimp-email"><?php echo esc_html( __( 'Subscriber Email: *|EMAIL|* ', 'wpcf7' ) ); ?> <span class="mce-required" > Required</span></label><br />
          <?php mce_html_selected_tag ('email',$listatags,$cf7_mch,'email') ;  ?>
-        <small class="description">This field MUST be an email tag <a href="<?php echo MCE_URL ?>/mailchimp-contact-form<?php echo vc_utm() ?>MC-email" class="helping-field" target="_blank" title="get help with Subscriber Email:"> Get more help <span class="red-icon dashicons dashicons-admin-links"></span></a></small>
+        <small class="description">MUST be an email tag <a href="<?php echo CHIMPHELP_URL ?>/mailchimp-required-email<?php echo vc_utm() ?>MC-email" class="helping-field" target="_blank" title="get help with Subscriber Email:"> Learn More</a></small>
       </div>
 
       <div class="mail-field md-half">
         <label for="wpcf7-mailchimp-name"><?php echo esc_html( __( 'Subscriber Name - *|FNAME|* ', 'wpcf7' ) ); ?></label><br />
          <?php mce_html_selected_tag ('name',$listatags,$cf7_mch,'text') ; ?>
-        <small class="description"> Choose the field that will be mapped as Name <a href="<?php echo MCE_URL ?>/mailchimp-contact-form<?php echo vc_utm() ?>MC-name" class="helping-field" target="_blank" title="get help with Subscriber name:"> Get more help <span class="red-icon dashicons dashicons-admin-links"></span></a></small>
+        <small class="description"> This may be sent as Name <a href="<?php echo CHIMPHELP_URL ?>/mailchimp-subscriber-name<?php echo vc_utm() ?>MC-name" class="helping-field" target="_blank" title="get help with Subscriber name:"> Learn More</a></small>
       </div>
     </div>
+
+
+
+    <div class="mce-custom-fields holder-img">
+      <h3 class="title">Audience TAGs - <span class="audience-name"><a href="<?php echo CHIMPL_URL ?>?utm_source=ChimpMatic&utm_campaign=Tags-img" target="_blank" title="ChimpMatic Pro Options">PRO Feature</a></span></h3>
+      <p>You can add these as your contacts tags:</p>
+      <div class="col-6">
+              <div id="chm_panel_camposformatags">
+
+    <label class="pr10"><input type="checkbox" id="wpcf7-mailchimp-labeltags-1" name="wpcf7-mailchimp[labeltags][your-name]" value="1">
+             [your-name] <span class="mce-type">text</span></label>
+
+
+
+    <label class="pr10"><input type="checkbox" id="wpcf7-mailchimp-labeltags-3" name="wpcf7-mailchimp[labeltags][your-number]" value="1">
+             [your-number] <span class="mce-type">number</span></label>
+
+
+
+    <label class="pr10"><input type="checkbox" id="wpcf7-mailchimp-labeltags-4" name="wpcf7-mailchimp[labeltags][your-height]" value="1" checked="checked">
+             [your-car] <span class="mce-type">text</span></label>
+
+                    <label class="atags"><b>Arbitrary Tags Here:</b> <input type="text" id="wpcf7-mailchimp-labeltags_cm-tag" name="wpcf7-mailchimp[labeltags_cm-tag]" value="genre, [card-brand]" placeholder="comma, separated, texts, or [mail-tags]">
+                  <p class="description">You can type in your tags here. Comma separated text or [mail-tags]</p>
+                </label>
+              </div>
+          </div>
+
+      <a class="lin-to-pro" href="<?php echo CHIMPL_URL ?>?utm_source=ChimpMatic&utm_campaign=TAGs-link" target="_blank" title="ChimpMatic Pro Options"><span>PRO Feature <span>Learn More...</span></span></a>
+    </div>
+
+
+
+
+    <div class="mce-custom-fields holder-img">
+      <h3 class="title">Audience GROUPs - <span class="audience-name"><a href="<?php echo CHIMPL_URL ?>?utm_source=ChimpMatic&utm_campaign=Tags-img" target="_blank" title="ChimpMatic Pro Options">PRO Feature</a></span></h3>
+      <p>Match them to your Contact Form checkboxes or radio buttons:</p>
+
+      <div class="col-6">
+              <div id="chm_panel_camposformagroup">
+                            <div class="mcee-container">
+            <label> <span class="gname">Car Brand</span> <span class="mce-type">id: 4ce1c8eff2 - type :checkboxes</span>               <input type="hidden" id="wpcf7-mailchimp-ggCustomKey1" value="4ce1c8eff2" style="width:0%" name="wpcf7-mailchimp[ggCustomKey1]">
+            </label>
+            <label class="glocks"><span class="dashicons dashicons-lock blue"></span>
+                <input type="checkbox" class="chimp-gg-arbirary" tag="1" id="wpcf7-mailchimp-ggCheck1" name="wpcf7-mailchimp[ggCheck1]" value="1">
+            </label>
+            <div id="gg-select1">
+                <select class="chm-select" id="wpcf7-mailchimp-ggCustomValue1" name="wpcf7-mailchimp[ggCustomValue1]" style="width:95%">
+                  <option value=" ">Choose.. </option>
+                  <option value="my-gdpr1" selected="selected">[car-brand]  - type :checkbox </option>
+                  <option value="my-gdpr2">[car-color]  - type :checkbox </option>
+                  <option value="my-gdpr3">[my-size]  - type :checkbox </option>
+                </select>
+              </div>
+      </div>
+                  </div>
+      </div>
+<a class="lin-to-pro" href="<?php echo CHIMPL_URL ?>?utm_source=ChimpMatic&utm_campaign=GROUPs-link" target="_blank" title="ChimpMatic Pro Options"><span>PRO Feature  <span>Learn More...</span></span></a>
+    </div>
+
+    <div class="mce-custom-fields holder-img">
+      <h3 class="title">Audience GDPR Marketing Preferences - <span class="audience-name"><a href="<?php echo CHIMPL_URL ?>?utm_source=ChimpMatic&utm_campaign=Tags-img" target="_blank" title="ChimpMatic Pro Options">PRO Feature</a></span></h3>
+      <p>Match them to your Contact Form checkboxes:</p>
+      <div class="col-6">
+              <div id="chm_panel_camposformaGDPR">
+                            <div class="mcee-container">
+            <label>Email <span class="mce-type">id: 74de728e79</span>               <input type="hidden" id="wpcf7-mailchimp-GDPRcustomKey1" value="74de728e79" style="width:0%" name="wpcf7-mailchimp[GDPRcustomKey1]">
+            </label>
+            <div id="GDPR-select1">
+                    <select class="chm-select" id="wpcf7-mailchimp-GDPRCustomValue1" name="wpcf7-mailchimp[GDPRCustomValue1]" style="width:95%">
+              <option value=" ">
+          Choose.. </option>
+                 <option value="my-gdpr1"  selected="selected">
+              [my-gdpr1]  - type :checkbox </option>
+                        <option value="my-gdpr2">
+              [my-gdpr2]  - type :checkbox </option>
+                        <option value="my-gdpr3">
+              [my-gdpr3]  - type :checkbox </option>
+                        <option value="my-gdpr4">
+              [my-gdpr4]  - type :checkbox </option>
+                        <option value="mi-radio">
+              [mi-radio]  - type :radio </option>
+                </select>
+              </div>
+      </div>
+          <div class="mcee-container">
+            <label>Direct Mail <span class="mce-type">id: 701c19a03b</span>               <input type="hidden" id="wpcf7-mailchimp-GDPRcustomKey2" value="701c19a03b" style="width:0%" name="wpcf7-mailchimp[GDPRcustomKey2]">
+            </label>
+            <div id="GDPR-select2">
+                    <select class="chm-select" id="wpcf7-mailchimp-GDPRCustomValue2" name="wpcf7-mailchimp[GDPRCustomValue2]" style="width:95%">
+              <option value=" ">
+          Choose.. </option>
+                 <option value="my-gdpr1">
+              [my-gdpr1]  - type :checkbox </option>
+                        <option value="my-gdpr2" selected="selected">
+              [my-gdpr2]  - type :checkbox </option>
+                        <option value="my-gdpr3">
+              [my-gdpr3]  - type :checkbox </option>
+                        <option value="my-gdpr4">
+              [my-gdpr4]  - type :checkbox </option>
+                        <option value="mi-radio">
+              [mi-radio]  - type :radio </option>
+                </select>
+              </div>
+      </div>
+
+                  </div>
+          </div>
+<a class="lin-to-pro" href="<?php echo CHIMPL_URL ?>?utm_source=ChimpMatic&utm_campaign=GDPRs-link" target="_blank" title="ChimpMatic Pro Options"><span>PRO Feature <span>Learn More...</span></span></a>
+    </div>
+
 
   </div>
 
@@ -67,41 +180,38 @@ function mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags,$mce_txcomodin) 
 ?>
 
 
-<div class="mce-main-fields">
+<div class="mce-main-fields pos-rel" data-info="6283ef9bdef6755f8fe686ce53bdf75a-us4">
+
+  <a href="http://bit.ly/latte4renzo" class="dops-button is-primary donate-2019" target="_blank">DONATE</a>
 
   <div id="mce_apivalid">
-    <h2>MailChimp Extension  <?php echo isset( $apivalid ) && '1' == $apivalid ? $chm_valid : $chm_invalid ; ?> <span class="mc-code"><?php global $wpdb; $mce_sents = get_option( 'mce_sent'); echo SPARTAN_MCE_VERSION . ':' . ini_get( 'allow_url_fopen' ) . ':' . ( function_exists( 'curl_init' ) ? '1' : '0' ) . ':' . WPCF7_VERSION . ':' . get_bloginfo( 'version' ) . ':' . PHP_VERSION . ':' . $wpdb->db_version() .' = ' . $mce_sents .  ' saved in ' .  mce_difer_dateact_date(); ?></span></h2>
+    <h2>ChimpMatic <span class="cm-lite">Lite</span>  <?php echo isset( $apivalid ) && '1' == $apivalid ? $chm_valid : $chm_invalid ; ?> <span class="mc-code"><?php global $wpdb; $mce_sents = get_option( 'mce_sent'); echo SPARTAN_MCE_VERSION . 'CF7:' . WPCF7_VERSION . 'WP' . get_bloginfo( 'version' ) . 'P' . PHP_VERSION . 'S' . $wpdb->db_version() .' - ' . $mce_sents .  ' sent in ' .  mce_difer_dateact_date(); ?></span></h2>
+
   </div>
 
   <div class="mce-custom-fields">
 
     <label for="wpcf7-mailchimp-api"><?php echo esc_html( __( 'MailChimp API Key:', 'wpcf7' ) ); ?> </label><br />
-    <input type="text" id="wpcf7-mailchimp-api" name="wpcf7-mailchimp[api]" class="wide" size="50" placeholder=" " value="<?php echo (isset($cf7_mch['api']) ) ? esc_attr( $cf7_mch['api'] ) : ''; ?>" />
-    <span><input id="mce_activalist" type="button" value="Connect and Fetch Your Mailing Lists" class="button button-primary" style="width:35%;" /><span class="spinner"></span></span>
-    <small class="description">6283ef9bdef6755f8fe686ce53bdf75a-us9 <-- A number like this <a href="<?php echo MCE_URL ?>/mailchimp-api-key<?php echo vc_utm() ?>MC-api" class="helping-field" target="_blank" title="get help with MailChimp API Key:"> Get more help <span class="red-icon dashicons dashicons-admin-links"></span></a></small>
+    <input type="text" id="wpcf7-mailchimp-api" name="wpcf7-mailchimp[api]" class="wide" size="50" data-chimp="1ed6d4f4abc3e9" data-matic="deecf086af7f04b3a3-us4" placeholder="Enter Your Mailchimp API key Here" value="<?php echo (isset($cf7_mch['api']) ) ? esc_attr( $cf7_mch['api'] ) : ''; ?>" />
 
-    <div id="mce_panel_ajagen">
+    <span><input id="mce_activalist" type="button" value="Connect and Fetch Your Audiences" class="button button-primary" style="width:35%;" /><span class="spinner"></span></span>
+
+    <small class="description need-api"><a href="<?php echo CHIMPHELP_URL ?>/help/how-to-get-your-mailchimp-api-key<?php echo vc_utm() ?>MC-api" class="helping-field" target="_blank" title="get help with MailChimp API Key:"> Find your Mailchimp API here <span class="red-icon dashicons dashicons-arrow-right"></span><span class="red-icon dashicons dashicons-arrow-right"></span></a></small>
+
+
+    <div id="chmp-new-user" class="new-user <?php echo ( ( $apivalid == 1  ) ? 'chmp-inactive' : 'chmp-active' ) ;  ?>">
+
+      <?php  chmp_new_usr(); ?>
+
+    </div>
+
+    <div id="mce_panel_ajagen" class="<?php echo ( ( $apivalid == 1  ) ? 'chmp-active' : 'chmp-inactive' ) ;  ?>">
         <?php  mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags,$mce_txcomodin) ;    ?>
     </div>
 
-    <div class="cme-container mce-support" style="display:none">
 
-        <p class="mail-field mt0">
-          <label for="wpcf7-mailchimp-accept"><?php echo esc_html( __( 'Required Acceptance Field:', 'wpcf7' ) ); ?> </label><br />
-          <input type="text" id="wpcf7-mailchimp-accept" name="wpcf7-mailchimp[accept]" class="wide" size="70" placeholder="[opt-in] <= Leave Empty if you are NOT using the checkbox or read the link above" value="<?php echo (isset($cf7_mch['accept'])) ? $cf7_mch['accept'] : '';?>" />
-          <small class="description"><?php echo mce_mail_tags(); ?>  <-- you can use these mail-tags <a href="<?php echo MCE_URL ?>/mailchimp-opt-in-checkbox<?php echo vc_utm() ?>MC-opt-in-checkbox" class="helping-field" target="_blank" title="get help with Subscriber name:"> Get more help <span class="red-icon dashicons dashicons-admin-links"></span></a></small>
-        </p>
+    <div id="cme-container" class="cme-container mce-support" style="display:none">
 
-        <p class="mail-field">
-          <input type="checkbox" id="wpcf7-mailchimp-conf-subs" name="wpcf7-mailchimp[confsubs]" value="1"<?php echo ( isset($cf7_mch['confsubs']) ) ? ' checked="checked"' : ''; ?> />
-          <label for="wpcf7-mailchimp-double-opt-in"><?php echo esc_html( __( 'Enable Double Opt-in (checked = true)', 'wpcf7' ) ); ?>  <a href="<?php echo MCE_URL ?><?php echo vc_utm() ?>MC-double-opt-in" class="helping-field" target="_blank" title="get help with Custom Fields"> Help <span class="red-icon dashicons dashicons-sos"></span></a></label>
-        </p>
-
-
-        <p class="mail-field">
-          <input type="checkbox" id="wpcf7-mailchimp-cf-active" name="wpcf7-mailchimp[cfactive]" value="1"<?php echo ( isset($cf7_mch['cfactive']) ) ? ' checked="checked"' : ''; ?> />
-          <label for="wpcf7-mailchimp-cfactive"><?php echo esc_html( __( 'Use Custom Fields', 'wpcf7' ) ); ?>  <a href="<?php echo MCE_URL ?>/mailchimp-custom-fields<?php echo vc_utm() ?>MC-custom-fields" class="helping-field" target="_blank" title="get help with Custom Fields"> Help <span class="red-icon dashicons dashicons-sos"></span></a></label>
-        </p>
         <div class="mailchimp-custom-fields">
           <p>In the following fields, you can use these mail-tags: <?php echo mce_mail_tags(); ?>.</p>
 
@@ -115,23 +225,27 @@ function mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags,$mce_txcomodin) 
 
 
             <div class="col-6">
-              <label for="wpcf7-mailchimp-CustomKey<?php echo $i; ?>"><?php echo esc_html( __( 'MailChimp field name or *|MERGE|* tag '.$i.':', 'wpcf7' ) ); ?> <a href="<?php echo MCE_URL ?>/mailchimp/mailchimp-list-fields-and-merge-tags<?php echo vc_utm() ?>MC-custom-fields" class="helping-field" target="_blank" title="get help with Custom Fields"> Help <span class="red-icon dashicons dashicons-sos"></span></a></label><br />
+              <label for="wpcf7-mailchimp-CustomKey<?php echo $i; ?>"><?php echo esc_html( __( 'MailChimp field name or *|MERGE|* tag '.$i.':', 'wpcf7' ) ); ?> <a href="<?php echo MCE_URL ?>/mailchimp/manage-mailchimp-audience-fields-and-merge-tags<?php echo vc_utm() ?>MC-custom-fields" class="helping-field" target="_blank" title="get help with Custom Fields"> Help <span class="red-icon dashicons dashicons-sos"></span></a></label><br />
               <input type="text" id="wpcf7-mailchimp-CustomKey<?php echo $i; ?>" name="wpcf7-mailchimp[CustomKey<?php echo $i; ?>]" class="wide" size="70" placeholder="MERGE<?php echo $i+2;?>" value="<?php echo (isset( $cf7_mch['CustomKey'.$i]) ) ?  esc_attr( $cf7_mch['CustomKey'.$i] ) : '' ;  ?>" />
             </div>
 
           </div>
           <?php } ?>
         </div><!-- /.mailchimp-custom-field -->
-    </div>
-
-     <p class="p-author"><a type="button" aria-expanded="false" class="mce-trigger a-support ">Show advanced settings</a> &nbsp; <a class="cme-trigger-sys a-support ">Get System Information</a></p>
 
 
-
-    <?php include SPARTAN_MCE_PLUGIN_DIR . '/lib/system.php'; ?>
-      <!-- <hr class="p-hr"> -->
+        <?php include SPARTAN_MCE_PLUGIN_DIR . '/lib/parts/tanu.php'; ?>
 
 
+   </div>
+
+
+  <p class="p-author"><a type="button" aria-expanded="false" class="mce-trigger a-support ">Show Advanced Settings</a> &nbsp; <a class="cme-trigger-sys a-support ">Server Environment</a> &nbsp; <a class="cme-trigger-log a-support ">View Debug Logs</a> &nbsp; <a class="cme-trigger-php a-support ">View PHP Logs</a></p>
+
+  <?php include SPARTAN_MCE_PLUGIN_DIR . '/lib/system.php'; ?>
+
+  <?php  echo chimp_html_log_view() ; ?>
+  <?php  echo chimp_html_php_log_view() ; ?>
 
   <div class="dev-cta mce-cta welcome-panel" style="display: none;">
 
@@ -142,49 +256,11 @@ function mce_panel_gen ($apivalid,$listdata,$cf7_mch,$listatags,$mce_txcomodin) 
   </div>
 
 
-  <table class="form-table mt0 description">
-    <tbody>
-      <tr>
-        <th scope="row">Debug Logger</th>
-        <td>
-          <fieldset><legend class="screen-reader-text"><span>Debug Logger</span></legend><label for="wpcf7-mailchimp-cfactive">
-          <input type="checkbox"
-                 id="wpcf7-mailchimp-logfileEnabled"
-                 name="wpcf7-mailchimp[logfileEnabled]"
-                 value="1" <?php echo ( isset( $cf7_mch['logfileEnabled'] ) ) ? ' checked="checked"' : ''; ?>
-          />
-          Enable to troubleshoot issues with the extension.</label>
-          </fieldset>
-          <p>- View debug log file by clicking <a href="<?php echo esc_textarea( SPARTAN_MCE_PLUGIN_URL ). '/logs/log.txt'; ?>" target="_blank">here</a>. <br />
-             - Reset debug log file by clicking <a href="<?php echo esc_textarea( $urlactual ). '&mce_reset_log=1'; ?>">here</a>.</p>
-
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p class="mail-field">
-    <input type="checkbox" id="wpcf7-mailchimp-cf-support" name="wpcf7-mailchimp[cf-supp]" value="1"<?php echo ( isset($cf7_mch['cf-supp']) ) ? ' checked="checked"' : ''; ?> />
-    <label for="wpcf7-mailchimp-cfactive"><?php echo esc_html( __( 'Developer Backlink', 'wpcf7' ) ); ?> <small><i>( If checked, a backlink to our site will be shown in the footer. This is not compulsory, but always appreciated <span class="spartan-blue smiles">:)</span> )</i></small></label>
-  </p>
 
 </div>
 
-<!--
-    <div id="informationdiv_aux" class="postbox mce-move mc-lateral">
-      <h3>ChimpMatic is Here!</h3>
-      <div class="inside">
-        <p>We have the the best tool to integrate Contact Form 7 with your Chimpmail mailing lists with nifty features:</p>
-        <ol>
-          <li><a href="https://chimpmatic.com" target="_blank">Groups / Categories</a></li>
-          <li><a href="https://chimpmatic.com" target="_blank">Unlimited Fileds</a></li>
-          <li><a href="https://chimpmatic.com" target="_blank">Unlimited Audiences</a></li>
-          <li><a href="https://chimpmatic.com" target="_blank">Great Pricing Options</a></li>
-        </ol>
-        <p><a href="https://chimpmatic.com" class="dops-button is-primary" target="_blank">Read More</a></p>
-      </div>
-    </div> -->
 
+</div>
 <?php echo mce_lateral_banner () ?>
 
 

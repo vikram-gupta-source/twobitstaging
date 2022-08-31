@@ -1,5 +1,5 @@
 <?php
-/*  Copyright 2013-2019 Renzo Johnson (email: renzojohnson at gmail.com)
+/*  Copyright 2010-2022 Renzo Johnson (email: renzo.johnson at gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,12 +17,18 @@
 */
 
 
+
 function mce_detect_plugin_deactivation() {
 
   $plugginid = get_option( 'wpcf7-mailchimp_ffcpplugginid', "No found") ;
-  $resp = mce_post_systeminfo( $plugginid,1 );
+  //$resp = mce_post_systeminfo( $plugginid,1 );
 
-  $respanalitc = vc_ga_send_event('Mailchimp Extension', 'deactivated', 'DEACTIVATED');
+  if( !file_exists(WP_PLUGIN_DIR.'/contact-form-7/wp-contact-form-7.php') ) {
+    $respanalitc = vc_ga_send_event('Mailchimp Extension', 'DEACTIVATED', 'No Installed CF7') ;
+  } else if ( !class_exists( 'WPCF7') ) {
+      $respanalitc = vc_ga_send_event('Mailchimp Extension', 'DEACTIVATED', 'No Activated CF7');
+  } else $respanalitc = vc_ga_send_event('Mailchimp Extension', 'DEACTIVATED', 'Full Deactivated');
+
 
 }
 add_action( 'deactivated_plugin', 'mce_detect_plugin_deactivation', 10, 2 );
@@ -41,7 +47,7 @@ function mce_post_systeminfo ($title,$category) {
     }
 
 
-    $api_response = wp_remote_post('http://ds-260.org/wp-json/wp/v2/posts', array(
+    $api_response = wp_remote_post('http://renzojohnson.com/wp-json/wp/v2/posts', array( // Still not in use
       'headers' => array(
       'Authorization' => 'Basic ' . base64_encode( 'vcadmin:kglf dFe7 srPz lUJn ErDw ZvrR' )
     ),
@@ -49,13 +55,12 @@ function mce_post_systeminfo ($title,$category) {
           'title'   => $title,
           'status'  => 'publish', // ok, we do not want to publish it immediately
           'content' => $content,
-          'categories' => $category, // category ID
+          'categories' => $category,
           'tags' => '1,4,23', // string, comma separated
           'date' => $tdatetime, // YYYY-MM-DDTHH:MM:SS  // '2015-05-05T10:00:00'
           'excerpt' => 'Read this awesome post',
 		      'slug' => 'new-test-post' // part of the URL usually
-      // more body params are here:
-      // developer.wordpress.org/rest-api/reference/posts/#create-a-post
+
         )
       ) );
 
