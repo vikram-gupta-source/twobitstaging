@@ -103,6 +103,7 @@ if (! function_exists('twobitcircus_register_custom_footer_settings')) {
 register_nav_menus(
     array(
     'header' => __('Header Menu', 'twobitcircus'),
+    'header_dallas' => __('Header Dallas Menu', 'twobitcircus'),
     'footer' => __('Footer Menu', 'twobitcircus'),
     )
 );

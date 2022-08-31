@@ -1,4 +1,5 @@
 // parties
+
 #parties-block {
   .container {
     @media (max-width: $laptop) {
@@ -6,22 +7,39 @@
     }
   }
 }
+
 #footer-event-block {
   background-color: $yellow;
 }
+
+.wpcf7 form.sent .wpcf7-response-output {
+  border-color: #46b450;
+  background: #b6ddb6;
+}
+
+.wpcf7 form.invalid .wpcf7-response-output,
+.wpcf7 form.payment-required .wpcf7-response-output,
+.wpcf7 form.unaccepted .wpcf7-response-output {
+  background-color: #fde281;
+  border-color: #ffb900;
+}
+
 #event-form {
   .modal-content {
     background-color: $black;
+
     .modal-header {
       border: 0;
       font-family: "Franchise Bold", "Roboto", sans-serif;
       line-height: 1em;
       color: $yellow;
+
       h5 {
         text-transform: uppercase;
         font-size: 3em;
         margin: 0 15px;
       }
+
       .close {
         font-size: 4em;
         color: white;
@@ -30,13 +48,15 @@
         margin: -1rem 0;
       }
     }
+
     div.wpcf7-mail-sent-ok {
       margin: 2em 15px 1em;
       border: 2px solid $dark-green;
       background-color: $green;
     }
-    div.wpcf7-validation-errors,
-    div.wpcf7-acceptance-missing {
+
+    div.wpcf7-acceptance-missing,
+    div.wpcf7-validation-errors {
       margin: 2em 15px 1em;
       border: 1px solid $yellow;
       background-color: $yellow;

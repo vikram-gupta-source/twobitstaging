@@ -5,7 +5,10 @@
  * @package twobitcircus
  */
  global $location;
-
+ $setmenu = 'header';
+ if(!empty($location) && $location['enable_location'] == 1 && $location['region'] == 'Texas') {
+   $setmenu = 'header_dallas';
+ }
 ?>
 <!-- ******************* Mobile ******************* -->
 <div id="expanded-menu">
@@ -15,7 +18,7 @@
     </div>
     <!-- The WordPress Menu goes here -->
     <?php wp_nav_menu( array(
-        'theme_location'  => 'header',
+        'theme_location'  => $setmenu,
         'container'         => 'div',
         'container_class'   => 'collapse show',
         'container_id'      => 'navigation-expand',
@@ -57,7 +60,7 @@
 
       <!-- The WordPress Menu goes here -->
       <?php wp_nav_menu( array(
-          'theme_location'  => 'header',
+          'theme_location'  => $setmenu,
           'container'         => 'div',
           'container_class'   => 'collapse show d-none d-lg-block',
           'container_id'      => 'navigation',

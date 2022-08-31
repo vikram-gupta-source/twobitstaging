@@ -510,7 +510,7 @@ $( function () {
         status: "success",
         countryCode: "US",
         regionName: loc,
-        city: ""
+        city: "Dallas"
       };
       let obj = JSON.stringify( data );
       cookieStorage.setItem( "geo_location", obj, { path: "/" } );
