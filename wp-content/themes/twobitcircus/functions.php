@@ -34,6 +34,7 @@ function composeShows()
     'post_type' => 'shows',
     'posts_per_page' => 9999,
     'post_status' => 'public',
+    'perm' => 'readable',
     'orderby'   => 'menu_order, post_title',
     'order'     => 'ASC'
     );
