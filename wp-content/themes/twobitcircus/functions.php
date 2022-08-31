@@ -33,6 +33,7 @@ function composeShows()
     $args = array(
     'post_type' => 'shows',
     'posts_per_page' => 9999,
+    'post_status' => 'public',
     'orderby'   => 'menu_order, post_title',
     'order'     => 'ASC'
     );
