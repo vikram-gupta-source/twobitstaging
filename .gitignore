@@ -113,3 +113,4 @@ wp-content/mu-plugins/wpe-wp-sign-on-plugin*
 *.asf
 *.wmv
 *.avi
+/wp-content/themes/twobitcircus/node_modules
