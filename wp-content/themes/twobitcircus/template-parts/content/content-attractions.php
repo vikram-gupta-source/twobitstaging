@@ -27,7 +27,7 @@
               </a>
               <div class="dropdown-menu" data-cat="<?php echo $shows['terms']->slug;?>">
                 <?php foreach($shows['posts'] as $skey => $show) :
-                  if($show->post_status == 'private') continue;
+                  if($show->post_status != 'publish') continue;
                 ?>
                 <a class="dropdown-item" href="#" aria-controls="<?php echo sanitize_title($show->post_title);?>"><?php echo $show->post_title;?></a>
                 <?php endforeach ?>
@@ -61,7 +61,7 @@
             <div class="slick-shows" id="cat-<?php echo $cat;?>">
               <?php $num = count($shows['posts']); ?>
               <?php foreach($shows['posts'] as $skey => $show) :
-                if($show->post_status == 'private') continue;
+                if($show->post_status != 'publish') continue;
                 echo get_field('available_in', $show->ID);
                 ?>
                 <?php if(!filter_location_by_field(get_field('available_in', $show->ID))) continue; ?>
