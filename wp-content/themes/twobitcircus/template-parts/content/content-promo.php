@@ -4,6 +4,8 @@
  *
  * @package twobitcircus
  */
+ $promotions = filter_locations(get_field('promotions'));
+ $promotionContent = filter_locations(get_field('promotion_content'));
 ?>
 <article id="promotions" <?php post_class(); ?>>
 
@@ -12,12 +14,13 @@
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <script defer async type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d40d77186a2f4a8"></script>
   <section id="promo-block" class="entry-wrapper-padding inview animated delay-3">
-    <?php if(!empty(get_field('promotions'))) :?>
-    <?php $promotions = filter_locations(get_field('promotions'));?>
+    <?php if(!empty($promotions)) :?>
+
     <div class="container-fluid">
-      <?php if(!empty(get_field('promo_content'))) :?>
+      <?php if(!empty($promotionContent[0])) :?>
       <div class="content-block container mt-2 mb-6 px-md-5">
-        <?php the_field('promo_content');?>
+        <h2 class="default white"><?php echo $promotionContent[0]['content'];?></h2>
+        <div class="white"><?php echo $promotionContent[0]['content'];?></div>
       </div>
       <?php endif ?>
       <div class="grid-flex">
