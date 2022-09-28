@@ -4,6 +4,7 @@
  *
  * @package twobitcircus
  */
+ global $region;
  $imgPath = '/wp-content/themes/twobitcircus/img/about/';
 ?>
 <article id="about" <?php post_class(); ?>>
