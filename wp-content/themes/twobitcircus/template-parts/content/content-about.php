@@ -6,6 +6,7 @@
  */
  global $region;
  $imgPath = '/wp-content/themes/twobitcircus/img/about/';
+ dd($region);
 ?>
 <article id="about" <?php post_class(); ?>>
 
@@ -196,7 +197,7 @@
     <div class="arrow"></div>
   </section>
 
-  <?php if(!empty(get_field('packages'))) :?>
+  <?php if(!empty(get_field('packages')) && (!empty($region->status) && $region->regionName != 'Texas')) :?>
   <section id="packages-block" class="pt-5">
     <div class="container text-center">
       <h2 class="headline text-uppercase inview animated"><?php echo get_field('package_title'); ?></h2>
