@@ -6,7 +6,6 @@
  */
  global $region;
  $imgPath = '/wp-content/themes/twobitcircus/img/about/';
- dd($region);
 ?>
 <article id="about" <?php post_class(); ?>>
 
