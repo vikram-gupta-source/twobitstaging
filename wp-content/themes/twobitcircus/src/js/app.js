@@ -516,8 +516,9 @@ $( function () {
         city: city
       };
       let obj = JSON.stringify( data );
+      cookieStorage.setItem( "geo_location2", obj, { path: "/" } );
       cookieStorage.setItem( "geo_location", obj, { path: "/" } );
-      location.reload();
+      //location.reload();
     } );
   }
   if ( $( ".slick-package" ).length ) {
