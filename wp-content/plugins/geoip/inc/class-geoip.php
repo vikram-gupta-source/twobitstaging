@@ -110,7 +110,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
     }
 
     public function get_location_by_ip( $ip = "" ) {
-      $ip = $this->get_ip_address();
+      $ip = '174.246.199.122';//$this->get_ip_address();
       try {
         $location = $this->get_location($ip);
 				if(!empty($location->status) && $location->status == 'success' && $location->countryCode == 'US') {
