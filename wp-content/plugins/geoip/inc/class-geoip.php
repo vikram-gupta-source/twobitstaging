@@ -113,6 +113,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
       $ip = '104.24.123.216';//$this->get_ip_address();
       try {
         $location = $this->get_location($ip);
+				dd($location);
 				if(!empty($location->status) && $location->status == 'success' && $location->countryCode == 'US') {
 					if($location->regionName != 'California' && $location->regionName != 'Texas') {
 						$location->regionName = 'California';
