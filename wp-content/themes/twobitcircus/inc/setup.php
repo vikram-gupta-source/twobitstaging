@@ -271,6 +271,7 @@ function posts_link_attributes()
 function twobitcircus_load_location() {
   global $location, $region, $geo;
   echo '----GET';
+  dd($_SESSION);
   print_r($_SESSION['geo_location']);
   $region = (!isset($_SESSION['geo_location'])) ?  $geo->get_location_by_ip() : (json_decode(stripslashes($_SESSION['geo_location'])));
   $location = get_locations(get_field('location_selection', 'option'));

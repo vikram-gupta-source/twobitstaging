@@ -125,6 +125,7 @@ if (! class_exists('GeoIP') ) {
             if(!session_id()) {
                 session_start();
             }
+						dd($_SESSION);
             $ip = '45.42.45.164';//$this->get_ip_address();
             try {
                 $location = $this->get_location($ip);
