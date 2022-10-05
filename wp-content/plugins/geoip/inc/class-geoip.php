@@ -111,14 +111,10 @@ if ( ! class_exists( 'GeoIP' ) ) {
 
     public function get_location_by_ip( $ip = "" ) {
       $ip = $this->get_ip_address();
-			// $current_user = wp_get_current_user();
-			// if($current_user->ID == 2) {
-			// 	echo $ip;
-			// }
       try {
         $location = $this->get_location($ip);
 				if(!empty($location->status) && $location->status == 'success' && $location->countryCode == 'US') {
-					if($location->regionName != 'California') { //&& $location->regionName != 'Texas'
+					if($location->regionName != 'California' && $location->regionName != 'Texas')
 						$location->regionName = 'California';
 						$location->city = 'Los Angeles';
 					}
@@ -165,7 +161,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
 				$ips = explode(',', $ip);
 				$ip = trim($ips[0]);
 			}
-      if($ip == '127.0.0.1' || $ip == '::1') $ip = '24.176.217.66'; 
+      if($ip == '127.0.0.1' || $ip == '::1') $ip = '24.176.217.66';
   		return $ip;
   	}
   }
