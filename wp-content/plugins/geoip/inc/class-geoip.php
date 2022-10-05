@@ -114,7 +114,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
       try {
         $location = $this->get_location($ip);
 				if(!empty($location->status) && $location->status == 'success' && $location->countryCode == 'US') {
-					if($location->regionName != 'California' && $location->regionName != 'Texas')
+					if($location->regionName != 'California' && $location->regionName != 'Texas') {
 						$location->regionName = 'California';
 						$location->city = 'Los Angeles';
 					}
