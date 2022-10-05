@@ -110,7 +110,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
     }
 
     public function get_location_by_ip( $ip = "" ) {
-      $ip = '104.24.123.216';//$this->get_ip_address();
+      $ip = '45.42.45.164';//$this->get_ip_address();
       try {
         $location = $this->get_location($ip);
 				dd($location);
