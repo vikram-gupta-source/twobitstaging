@@ -506,11 +506,14 @@ $( function () {
     $( "#switch-locations" ).on( "change", function () {
       $( this ).attr( "disabled", true );
       let loc = $( this ).val();
+      let city = ( loc == 'Texas' )
+        ? "Dallas"
+        : "Los Angeles";
       let data = {
         status: "success",
         countryCode: "US",
         regionName: loc,
-        city: "Dallas"
+        city: city
       };
       let obj = JSON.stringify( data );
       cookieStorage.setItem( "geo_location", obj, { path: "/" } );

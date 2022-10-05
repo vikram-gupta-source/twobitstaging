@@ -8,7 +8,7 @@
  $isAdmin = false;
  $allowed_roles = array('administrator');
  $current_user = wp_get_current_user();
- if (array_intersect($allowed_roles, $current_user->roles)) {
+ if (!empty($current_user->roles) && array_intersect($allowed_roles, $current_user->roles)) {
    $isAdmin = true;
  }
  $locations = get_field('location_selection', 'option');
