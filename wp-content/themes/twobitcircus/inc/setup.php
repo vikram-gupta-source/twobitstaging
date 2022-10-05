@@ -270,10 +270,9 @@ function posts_link_attributes()
 // Collect Region
 function twobitcircus_load_location() {
   global $location, $region, $geo;
-  echo '----GET';
-  dd($_SESSION);
-  print_r($_SESSION['geo_location']);
-  $region = (!isset($_SESSION['geo_location'])) ?  $geo->get_location_by_ip() : (json_decode(stripslashes($_SESSION['geo_location'])));
+  echo 'GET COOKIE:';
+  print_r($_COOKIE['geo_location']);
+  $region = (empty($_COOKIE['geo_location'])) ?  $geo->get_location_by_ip() : (json_decode(stripslashes($_COOKIE['geo_location'])));
   $location = get_locations(get_field('location_selection', 'option'));
 }
 add_action('init', 'twobitcircus_load_location', 0);
