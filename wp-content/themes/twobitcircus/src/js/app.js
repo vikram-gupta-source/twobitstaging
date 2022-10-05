@@ -516,12 +516,7 @@ $( function () {
         city: city
       };
       let obj = JSON.stringify( data );
-      cookieStorage.setItem( "geo_location", obj, {
-        path: "/",
-        expires: {
-          days: 30
-        }
-      } );
+      cookieStorage.setItem( "geo_location", obj, { path: "/" } );
       location.reload();
     } );
   }
