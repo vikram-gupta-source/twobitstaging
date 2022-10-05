@@ -517,8 +517,10 @@ $( function () {
       };
       let obj = JSON.stringify( data );
       cookieStorage.removeItem( "geo_location", obj, { path: "/" } );
-      // cookieStorage.setItem( "geo_location", obj, { path: "/" } );
-      //location.reload();
+      cookieStorage.setItem( "geo_location", obj, { path: "/" } );
+      setTimeout( function () {
+        window.location.reload();
+      }, 500 );
     } );
   }
   if ( $( ".slick-package" ).length ) {
