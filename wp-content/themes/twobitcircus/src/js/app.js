@@ -516,7 +516,7 @@ $( function () {
         city: city
       };
       let obj = JSON.stringify( data );
-      cookieStorage.setItem( "geo_location", obj, { path: "/" } );
+      cookieStorage.setItem( "geo_location", obj );
       location.reload();
     } );
   }
