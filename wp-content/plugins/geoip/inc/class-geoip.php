@@ -110,10 +110,10 @@ if ( ! class_exists( 'GeoIP' ) ) {
     }
 
     public function get_location_by_ip( $ip = "" ) {
+			echo 'IP';
       $ip = '45.42.45.164';//$this->get_ip_address();
       try {
         $location = $this->get_location($ip);
-				dd($location);
 				if(!empty($location->status) && $location->status == 'success' && $location->countryCode == 'US') {
 					if($location->regionName != 'California' && $location->regionName != 'Texas') {
 						$location->regionName = 'California';
