@@ -121,7 +121,7 @@ if (! class_exists('GeoIP') ) {
 
         public function get_location_by_ip( $ip = "" )
         {
-            $ip = '45.42.45.164';//$this->get_ip_address();
+            $ip = $this->get_ip_address();
             if(empty($_COOKIE['geo_location'])) {
                 try {
                     $location = $this->get_location($ip);

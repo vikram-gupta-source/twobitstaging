@@ -269,15 +269,11 @@ function posts_link_attributes()
 // Handle Region & filters
 // Collect Region
 function twobitcircus_load_location() {
-  global $location, $region, $geo; 
-  echo 1;
-  print_r($_COOKIE['geo_location']);
-  if(!isset($_COOKIE['geo_location'])) {
+  global $location, $region, $geo;
+  if(empty($_COOKIE['geo_location'])) {
     $region = $geo->get_location_by_ip();
-    echo 1; dd($region);
   } else {
-    $region = (json_decode(stripslashes($_COOKIE['geo_location'])));
-    echo 2; dd($region);
+    $region = (json_decode(stripslashes($_COOKIE['geo_location']))); 
   }
   $location = get_locations(get_field('location_selection', 'option'));
 }
