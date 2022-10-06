@@ -522,7 +522,7 @@ $( function () {
       //cookieStorage.setItem( "geo_location", obj, { path: "/" } );
       document.cookie = "geo_location=" + obj + expires + "; path=/";
       setTimeout( function () {
-        window.location.reload();
+        //window.location.reload();
       }, 1000 );
     } );
   }
