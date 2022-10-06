@@ -516,11 +516,11 @@ $( function () {
         city: city
       };
       let obj = JSON.stringify( data );
-      cookieStorage.removeItem( "geo_location", obj, { path: "/" } );
-      cookieStorage.setItem( "geo_location", obj, { path: "/" } );
-      setTimeout( function () {
-        window.location.reload();
-      }, 500 );
+      var date = new Date();
+      date.setTime( date.getTime() + ( 30 * 24 * 60 * 60 * 1000 ) );
+      let expires = "; expires=" + date.toUTCString();
+      //cookieStorage.setItem( "geo_location", obj, { path: "/" } );
+      document.cookie = "geo_location=" + obj + expires + "; path=/";
     } );
   }
   if ( $( ".slick-package" ).length ) {
