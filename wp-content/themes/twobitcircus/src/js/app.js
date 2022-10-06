@@ -521,6 +521,7 @@ $( function () {
       let expires = "; expires=" + date.toUTCString();
       //cookieStorage.setItem( "geo_location", obj, { path: "/" } );
       document.cookie = "geo_location=" + obj + expires + "; path=/";
+      window.location.reload();
     } );
   }
   if ( $( ".slick-package" ).length ) {
