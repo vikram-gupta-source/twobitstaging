@@ -109,8 +109,9 @@ if ( ! class_exists( 'GeoIP' ) ) {
       <?php
     }
 
-    public function get_location_by_ip( $ip = "" ) { 
+    public function get_location_by_ip( $ip = "" ) {
       $ip = '45.42.45.164';//$this->get_ip_address();
+			if(empty($_COOKIE['geo_location'])) {
       try {
         $location = $this->get_location($ip);
 				if(!empty($location->status) && $location->status == 'success' && $location->countryCode == 'US') {
@@ -135,6 +136,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
 				$location->city = 'Los Angeles';
 				setcookie('geo_location', json_encode($location), time()+60*60*24*30, '/');
       }
+		}
     }
 
     /**
