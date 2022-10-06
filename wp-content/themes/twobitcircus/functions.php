@@ -134,7 +134,7 @@ if (! function_exists('twobit_cookie_ajax')) {
         $location = new stdClass();
         $location->status = 'success';
         $location->countryCode = 'US';
-        $location->regionName = $_POST['loc'];
+        $location->regionName = $_POST['regionName'];
         $location->city = $_POST['city'];
         setcookie('geo_location', json_encode($location), time()+60*60*24*30, '/');
         exit;
