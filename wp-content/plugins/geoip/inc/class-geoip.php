@@ -109,8 +109,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
       <?php
     }
 
-    public function get_location_by_ip( $ip = "" ) {
-			echo 'IP';
+    public function get_location_by_ip( $ip = "" ) { 
       $ip = '45.42.45.164';//$this->get_ip_address();
       try {
         $location = $this->get_location($ip);
