@@ -110,7 +110,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
     }
 
     public function get_location_by_ip( $ip = "" ) {
-			echo 'IP:';
+			echo 'IP';
       $ip = '45.42.45.164';//$this->get_ip_address();
       try {
         $location = $this->get_location($ip);
@@ -126,7 +126,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
 					$location->regionName = 'California';
 					$location->city = 'Los Angeles';
 				}
-        setcookie('geo_location', '{"status":"'.$location->status.'","countryCode":"'.$location->countryCode.'","regionName":"'.$location->regionName.'","city":"'.$location->city.'"}', time()+60*60*24*30, '/');
+        setcookie('geo_location', json_encode($location), time()+60*60*24*30, '/');
         return $location;
       } catch ( Exception $e ) {
 				$location = new stdClass();
@@ -134,7 +134,7 @@ if ( ! class_exists( 'GeoIP' ) ) {
 				$location->countryCode = 'US';
 				$location->regionName = 'California';
 				$location->city = 'Los Angeles';
-				setcookie('geo_location', '{"status":"'.$location->status.'","countryCode":"'.$location->countryCode.'","regionName":"'.$location->regionName.'","city":"'.$location->city.'"}', time()+60*60*24*30, '/');
+				setcookie('geo_location', json_encode($location), time()+60*60*24*30, '/');
       }
     }
 
