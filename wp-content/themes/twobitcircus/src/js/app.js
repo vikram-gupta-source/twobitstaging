@@ -504,7 +504,6 @@ $( function () {
   }
   if ( $( "#switch-locations" ).length ) {
     $( "#switch-locations" ).on( "change", function () {
-      alert( 1 )
       $( this ).attr( "disabled", true );
       var loc = $( this ).val();
       var city = ( loc == 'Texas' )
@@ -521,7 +520,7 @@ $( function () {
           city: city
         },
         success: function ( response ) {
-          //window.location.reload();
+          window.location.reload();
         }
       } );
     } );
