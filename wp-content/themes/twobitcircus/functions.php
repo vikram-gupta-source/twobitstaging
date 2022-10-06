@@ -33,7 +33,7 @@ function composeShows()
     $args = array(
     'post_type' => 'shows',
     'posts_per_page' => 9999,
-    'post_status' => 'publish', 
+    'post_status' => 'publish',
     'orderby'   => 'menu_order, post_title',
     'order'     => 'ASC'
     );
@@ -122,6 +122,21 @@ if (! function_exists('twobit_location_ajax')) {
     {
         global $location;
         echo openClosed($location['days'], $location['timezone'], $location['close_dates']);
+        exit;
+    }
+}
+// Load in Ajax Locations
+add_action('wp_ajax_nopriv_twobit_cookie_ajax', 'twobit_cookie_ajax');
+add_action("wp_ajax_twobit_cookie_ajax", "twobit_cookie_ajax");
+if (! function_exists('twobit_cookie_ajax')) {
+    function twobit_cookie_ajax()
+    {
+        $location = new stdClass();
+        $location->status = 'success';
+        $location->countryCode = 'US';
+        $location->regionName = $_POST['loc'];
+        $location->city = $_POST['city'];
+        setcookie('geo_location', json_encode($location), time()+60*60*24*30, '/');
         exit;
     }
 }

@@ -505,25 +505,24 @@ $( function () {
   if ( $( "#switch-locations" ).length ) {
     $( "#switch-locations" ).on( "change", function () {
       $( this ).attr( "disabled", true );
-      let loc = $( this ).val();
-      let city = ( loc == 'Texas' )
+      var loc = $( this ).val();
+      var city = ( loc == 'Texas' )
         ? "Dallas"
         : "Los Angeles";
-      let data = {
-        status: "success",
-        countryCode: "US",
-        regionName: loc,
-        city: city
-      };
-      let obj = JSON.stringify( data );
-      var date = new Date();
-      date.setTime( date.getTime() + ( 30 * 24 * 60 * 60 * 1000 ) );
-      let expires = "; expires=" + date.toUTCString();
-      //cookieStorage.setItem( "geo_location", obj, { path: "/" } );
-      document.cookie = "geo_location=" + obj + expires + "; path=/";
-      setTimeout( function () {
-        //window.location.reload();
-      }, 1000 );
+      $.ajax( {
+        url: "/wp-admin/admin-ajax.php",
+        type: "post",
+        data: {
+          action: "twobit_cookie_ajax",
+          status: "success",
+          countryCode: "US",
+          regionName: loc,
+          city: city
+        },
+        success: function ( response ) {
+          //window.location.reload();
+        }
+      } );
     } );
   }
   if ( $( ".slick-package" ).length ) {
