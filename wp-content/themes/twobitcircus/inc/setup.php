@@ -269,7 +269,7 @@ function posts_link_attributes()
 // Handle Region & filters
 // Collect Region
 function twobitcircus_load_location() {
-  global $location, $region, $geo;
+  global $location, $region, $geo; 
   echo 1;
   print_r($_COOKIE['geo_location']);
   if(!isset($_COOKIE['geo_location'])) {
