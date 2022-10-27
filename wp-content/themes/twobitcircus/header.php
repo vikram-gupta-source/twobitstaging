@@ -8,12 +8,16 @@
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
-	<meta charset="<?php bloginfo('charset'); ?>" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="profile" href="https://gmpg.org/xfn/11" />
-	<?php wp_head(); ?>
-  <?php echo (!empty(get_field('tracking', 'option'))) ? get_field('tracking', 'option') : '';?>
+    <meta charset="<?php bloginfo('charset'); ?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="profile" href="https://gmpg.org/xfn/11" />
+    <?php wp_head(); ?>
   <?php if (isset($location)) : ?>
+        <?php if(isset($location['state_abrv']) && $location['state_abrv'] == 'TX') :?>
+            <?php echo (!empty(get_field('tracking_dallas', 'option'))) ? get_field('tracking_dallas', 'option') : '';?>
+  <?php else :?>
+      <?php echo (!empty(get_field('tracking', 'option'))) ? get_field('tracking', 'option') : '';?>
+  <?php endif ?>
   <script type='text/javascript'>
     // Google Map TwoBit Location
     var site_path = '<?php echo get_site_url();?>';
