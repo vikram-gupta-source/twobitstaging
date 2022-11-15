@@ -22,7 +22,7 @@
         'container'         => 'div',
         'container_class'   => 'collapse show',
         'container_id'      => 'navigation-expand',
-        'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
+        'depth'	          => 2, // 1 = no dropdowns, 2 = with dropdowns.
         'menu_id'         => 'main-expanded-menu',
         'menu_class'      => 'menu-table',
         'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
@@ -64,7 +64,7 @@
           'container'         => 'div',
           'container_class'   => 'collapse show d-none d-lg-block',
           'container_id'      => 'navigation',
-          'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
+          'depth'	          => 2, // 1 = no dropdowns, 2 = with dropdowns.
           'menu_class'      => 'menu-table d-flex flex-column flex-md-row justify-content-between',
           'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
           'walker'          => new WP_Bootstrap_Navwalker(),
