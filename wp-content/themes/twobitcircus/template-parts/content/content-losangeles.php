@@ -6,7 +6,7 @@
  */
  $pageId = 48;
  $partyId = 54;
- $locTarget = 1;
+ $locTarget = 0;
  $location = get_field('location_selection', 'option')[$locTarget];
  remove_filter('the_content', 'wpautop');
  $contactForm = get_field('contact_form', 'option')[$locTarget];

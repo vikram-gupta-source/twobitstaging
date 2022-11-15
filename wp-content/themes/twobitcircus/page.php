@@ -39,6 +39,8 @@ get_header();
                     get_template_part('template-parts/content/content', 'locations');
                 } elseif(is_page('dallas')) {
                     get_template_part('template-parts/content/content', 'dallas');
+                } elseif(is_page('losangeles')) {
+                    get_template_part('template-parts/content/content', 'losangeles');
                 } elseif(is_page('latest-news')) {
                     get_template_part('template-parts/content/content', 'news');
                 } elseif(is_page('our-manifesto')) {
