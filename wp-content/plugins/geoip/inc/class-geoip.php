@@ -137,7 +137,7 @@ if (! class_exists('GeoIP') ) {
                         $location->regionName = 'California';
                         $location->city = 'Los Angeles';
                     }
-                    setcookie('geo_location', json_encode($location), time()+60*60*24*30, '/');
+                    setcookie('geo_location', json_encode($location));
                     return $location;
                 } catch ( Exception $e ) {
                     $location = new stdClass();
@@ -145,7 +145,7 @@ if (! class_exists('GeoIP') ) {
                     $location->countryCode = 'US';
                     $location->regionName = 'California';
                     $location->city = 'Los Angeles';
-                    setcookie('geo_location', json_encode($location), time()+60*60*24*30, '/');
+                    setcookie('geo_location', json_encode($location));
                 }
             }
         }
