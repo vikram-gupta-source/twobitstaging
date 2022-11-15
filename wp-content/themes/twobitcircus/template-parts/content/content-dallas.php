@@ -63,10 +63,11 @@
     </div>
   </section>
 
-  <section id="parties-block" class="entry-wrapper-padding inview animated delay-3">
+  <section id="parties-block" class="entry-wrapper-padding inview animated" style="background-color: #000;">
     <?php if(!empty(get_field('event', $partyId))) :?>
         <?php $events = filter_locations(get_field('event', $partyId));?>
     <div class="container-fluid">
+      <h2 class="headline inview animated text-center white">PARTIES</h2>
       <div class="grid-flex">
         <?php foreach($events as $shows) : ?>
         <div class="grid-item card" data-event="<?php echo $shows['event_type'];?>" id="<?php echo sanitize_title($shows['title']);?>">
