@@ -136,15 +136,15 @@ if (! function_exists('twobit_cookie_ajax')) {
         $location->countryCode = 'US';
         $location->regionName = $_POST['regionName'];
         $location->city = $_POST['city'];
-        setcookie('geo_location', json_encode($location), time()+60*60*24*30, '/');
-        if(!is_user_logged_in()){
+        setcookie('geo_location', json_encode($location), 0, '/');
+        if(!is_user_logged_in()) {
               $creds = array();
               $creds['user_login'] = 'guest';
               $creds['user_password'] = 'LyfQNgZOA5^oqXX3b@NzNSs$';
               $creds['remember'] = true;
-              $user = wp_signon( $creds, false );
+              $user = wp_signon($creds, false);
               wp_redirect(home_url());
-          }
+        }
         exit;
     }
 }
