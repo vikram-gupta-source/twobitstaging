@@ -331,6 +331,7 @@ $( function () {
   }
   if ( $( "select[name='location']" ).length ) {
     $( "select[name='location']" ).on( 'change', function () {
+      console.log( 1 )
       $( "select[name='inquiry']" ).prop( 'selectedIndex', 0 );
       $( "select[name='inquiry2']" ).prop( 'selectedIndex', 0 );
     } );
