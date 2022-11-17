@@ -71,7 +71,7 @@
       <h2 class="headline inview animated text-center white">PARTIES</h2>
       <div class="grid-flex">
         <?php foreach($events as $shows) : ?>
-        <div class="grid-item card" data-event="<?php echo $shows['event_type'];?>" id="<?php echo sanitize_title($shows['title']);?>">
+        <div class="grid-item card" data-loc="CA" data-event="<?php echo $shows['event_type'];?>" id="<?php echo sanitize_title($shows['title']);?>">
             <?php if(!empty($shows['video_embed'])) :?>
           <div class="embed-responsive embed-responsive-16by9"><iframe src="<?php echo $shows['video_embed'];?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>
           </div>
