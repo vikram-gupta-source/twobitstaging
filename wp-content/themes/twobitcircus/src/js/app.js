@@ -319,12 +319,21 @@ $( function () {
   }
   if ( $( "#contact-block" ).length ) {
     let locTarget = $( "#contact-block" ).data( 'loc' );
-    let $select = $( "#event-form select[name='inquiry']" );
+    let $select = $( "#contact-block select[name='inquiry']" );
+    let $selectLocation = $( "#contact-block select[name='location']" );
     if ( locTarget && locTarget == 'TX' ) {
-      $select = $( "#event-form select[name='inquiry2']" );
+      $( 'option[value="Dallas, TX"]', $selectLocation ).prop( "selected", true );
+      $selectLocation.trigger( "click" );
+      $select = $( "#contact-block select[name='inquiry2']" );
     }
     $( 'option[value="General Inquiries"]', $select ).prop( "selected", true );
     $select.trigger( "click" );
+  }
+  if ( $( "select[name='location']" ).length ) {
+    $( "select[name='location']" ).on( 'change', function () {
+      $( "select[name='inquiry']" ).prop( 'selectedIndex', 0 );
+      $( "select[name='inquiry2']" ).prop( 'selectedIndex', 0 );
+    } );
   }
   if ( $( "#parties-block" ).length || $( "#promo-block" ).length ) {
     $( ".grid-item .event-link" ).on( "click", function ( evt ) {
@@ -346,12 +355,10 @@ $( function () {
       let _event = $( this ).parents( ".grid-item" ).data( "event" );
       let $select = $( "#event-form select[name='inquiry']" );
       let $selectLocation = $( "#event-form select[name='location']" );
-      if ( _loc ) {
-        if ( _loc == 'TX' ) {
-          $select = $( "#event-form select[name='inquiry2']" );
-          $( 'option[value="Dallas,TX"]', $selectLocation ).prop( "selected", true );
-          $selectLocation.trigger( "click" );
-        }
+      if ( _loc && _loc == 'TX' ) {
+        $select = $( "#event-form select[name='inquiry2']" );
+        $( 'option[value="Dallas, TX"]', $selectLocation ).prop( "selected", true );
+        $selectLocation.trigger( "click" );
       }
       $( 'option[value="' + _event + '"]', $select ).prop( "selected", true );
       $select.trigger( "click" );
