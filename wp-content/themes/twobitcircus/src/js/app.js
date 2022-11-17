@@ -318,7 +318,11 @@ $( function () {
     } );
   }
   if ( $( "#contact-block" ).length ) {
-    let $select = $( "#contact-block select[name='inquiry']" );
+    let locTarget = $( "#contact-block" ).data( 'loc' );
+    let $select = $( "#event-form select[name='inquiry']" );
+    if ( locTarget && locTarget == 'TX' ) {
+      $select = $( "#event-form select[name='inquiry2']" );
+    }
     $( 'option[value="General Inquiries"]', $select ).prop( "selected", true );
     $select.trigger( "click" );
   }
@@ -338,10 +342,20 @@ $( function () {
     } );
     $( "#parties-block .link-wrapper .btn" ).on( "click", function ( evt ) {
       evt.preventDefault();
+      let _loc = $( this ).parents( ".grid-item" ).data( "loc" );
       let _event = $( this ).parents( ".grid-item" ).data( "event" );
       let $select = $( "#event-form select[name='inquiry']" );
+      let $selectLocation = $( "#event-form select[name='location']" );
+      if ( _loc ) {
+        if ( _loc == 'TX' ) {
+          $select = $( "#event-form select[name='inquiry2']" );
+          $( 'option[value="Dallas,TX"]', $selectLocation ).prop( "selected", true );
+          $selectLocation.trigger( "click" );
+        }
+      }
       $( 'option[value="' + _event + '"]', $select ).prop( "selected", true );
       $select.trigger( "click" );
+      // Set Card Title
       let title = $( this ).parents( ".grid-item.card" ).find( ".card-title" ).text();
       $( "#event-form" ).find( ".modal-title" ).text( title );
       $( "#event-form" ).modal( "toggle" );

@@ -4,14 +4,15 @@
  *
  * @package twobitcircus
  */
+ global $location;
  $contactForm = filter_locations(get_field('contact_form', 'option'));
  $faqs = filter_locations(get_field('question_answers'));
 ?>
 <article id="contact" <?php post_class(); ?>>
 
-  <?php get_template_part( 'template-parts/partial/partial', 'header-no-desc' ); ?>
+  <?php get_template_part('template-parts/partial/partial', 'header-no-desc'); ?>
 
-  <section id="contact-block" class="entry-wrapper-padding bkg-img">
+  <section id="contact-block" class="entry-wrapper-padding bkg-img" data-loc="<?php echo $location['state_abrv'];?>">
     <div class="container">
       <div class="w-65 mx-auto">
         <?php the_content(); ?>
@@ -25,9 +26,9 @@
   <?php if(!empty($faqs)) :?>
   <section id="faq" class="entry-wrapper-padding">
     <div class="container">
-      <h2 class="headline inview animated text-center white"><?php echo __( 'FAQ', 'twobitcircus' ); ?></h2>
+      <h2 class="headline inview animated text-center white"><?php echo __('FAQ', 'twobitcircus'); ?></h2>
       <div class="faq-wrapper accordion-wrapper inview animated delay-1 clearfix my-4">
-      <?php foreach($faqs as $key => $faq) :?>
+        <?php foreach($faqs as $key => $faq) :?>
 
         <div class="card">
           <div class="card-header" id="heading-<?php echo $key; ?>" role="button">
@@ -43,7 +44,7 @@
           </div>
         </div>
 
-      <?php endforeach ?>
+        <?php endforeach ?>
       </div>
     </div>
   </section>
