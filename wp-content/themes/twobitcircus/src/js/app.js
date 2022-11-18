@@ -327,10 +327,9 @@ $( function () {
       $select = $( "#contact-block select[name='inquiry2']" );
     }
     setTimeout( function () {
-      console.log( 1 )
       $( 'option[value="General Inquiries"]', $select ).prop( "selected", true );
       $select.trigger( "click" );
-    }, 2000 );
+    }, 1000 );
   }
   if ( $( "select[name='location']" ).length ) {
     $( "select[name='location']" ).on( 'change', function () {
