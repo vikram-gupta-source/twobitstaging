@@ -11,6 +11,7 @@
  remove_filter('the_content', 'wpautop');
  $contactForm = get_field('contact_form', 'option')[$locTarget];
  $hours = get_field('hours', $pageId)[$locTarget];
+ $venues = get_field('venue_details', $pageId)[$locTarget];
 ?>
 <article id="locations" <?php post_class(); ?>>
 
@@ -101,12 +102,11 @@
     <?php endif ?>
   </section>
 
-  <?php if(get_field('venue_details', $pageId)) :?>
+  <?php if($venues) :?>
   <section id="venue-block" class="entry-wrapper-padding">
     <div class="container">
       <h2 class="headline inview animated text-center white"><?php echo get_field('venue_title', $pageId); ?></h2>
       <div class="venue-wrapper accordion-wrapper inview animated delay-1 clearfix">
-        <?php $venues = filter_locations(get_field('venue_details', $pageId));?>
         <?php foreach($venues as $vkey => $venue) :?>
 
         <div class="card">
