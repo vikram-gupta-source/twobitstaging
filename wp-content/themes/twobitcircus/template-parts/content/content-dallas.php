@@ -11,7 +11,8 @@
  remove_filter('the_content', 'wpautop');
  $contactForm = get_field('contact_form', 'option')[$locTarget];
  $hours = get_field('hours', $pageId)[$locTarget];
- $venues = get_field('venue_details', $pageId)[$locTarget];
+ $venue_details = get_field('venue_details', $pageId);
+ $footer = get_field('footer_block', $pageId)[$locTarget];
 ?>
 <article id="locations" <?php post_class(); ?>>
 
@@ -102,12 +103,16 @@
     <?php endif ?>
   </section>
 
-  <?php if($venues) :?>
+  <?php if($venue_details) : ?>
   <section id="venue-block" class="entry-wrapper-padding">
     <div class="container">
       <h2 class="headline inview animated text-center white"><?php echo get_field('venue_title', $pageId); ?></h2>
       <div class="venue-wrapper accordion-wrapper inview animated delay-1 clearfix">
-        <?php foreach($venues as $vkey => $venue) :?>
+        <?php foreach($venue_details as $vkey => $venue) :
+            if($venue['locations'] != 'Dallas|Texas' && $venue['locations'] != 'all|all') {
+                continue;
+            }
+            ?>
 
         <div class="card">
           <div class="card-header" id="heading-<?php echo $vkey; ?>" role="button">
@@ -146,16 +151,13 @@
     </div>
   </div>
 
-  <?php if(!empty(get_field('footer_block', $pageId))) :?>
-        <?php $footer = filter_locations(get_field('footer_block', $pageId));?>
-        <?php foreach($footer as $banner) : ?>
-  <section id="footer-event-block" class="entry-wrapper-padding inview animated delay bkg-img" style="background-image: url('<?php echo $banner['image'];?>');">
+  <?php if(!empty($footer)) :?>
+  <section id="footer-event-block" class="entry-wrapper-padding inview animated delay bkg-img" style="background-image: url('<?php echo $footer['image'];?>');">
     <div class="container text-center">
-      <h2 class="headline text-uppercase"><?php echo $banner['title'];?></h2>
-            <?php echo apply_filters('the_content', $banner['description']);?>
+      <h2 class="headline text-uppercase"><?php echo $footer['title'];?></h2>
+            <?php echo apply_filters('the_content', $footer['description']);?>
     </div>
   </section>
-        <?php endforeach ?>
   <?php endif ?>
 
 </article>
