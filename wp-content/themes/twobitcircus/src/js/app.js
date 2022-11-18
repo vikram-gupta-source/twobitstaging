@@ -326,8 +326,11 @@ $( function () {
       $selectLocation.trigger( "click" );
       $select = $( "#contact-block select[name='inquiry2']" );
     }
-    $( 'option[value="General Inquiries"]', $select ).prop( "selected", true );
-    $select.trigger( "click" );
+    setTimeout( function () {
+      console.log( 1 )
+      $( 'option[value="General Inquiries"]', $select ).prop( "selected", true );
+      $select.trigger( "click" );
+    }, 2000 );
   }
   if ( $( "select[name='location']" ).length ) {
     $( "select[name='location']" ).on( 'change', function () {
