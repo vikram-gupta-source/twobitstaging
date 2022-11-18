@@ -45,9 +45,7 @@
           <div class="inview animated delay-1" data-ease="fadeIn">
             <div class="white">
                 <?php $hours = filter_locations(get_field('hours', $pageId));?>
-                <?php foreach($hours as $hour) :?>
-                    <?php echo $hour['hours'];?>
-                <?php endforeach ?>
+                <?php echo $hours[1]['hours'];?> 
             </div>
           </div>
           <?php endif ?>
