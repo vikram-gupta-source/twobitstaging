@@ -10,6 +10,7 @@
  $location = get_field('location_selection', 'option')[$locTarget];
  remove_filter('the_content', 'wpautop');
  $contactForm = get_field('contact_form', 'option')[$locTarget];
+ $hours = get_field('hours', $pageId)[$locTarget];
 ?>
 <article id="locations" <?php post_class(); ?>>
 
@@ -41,11 +42,10 @@
           <?php endif ?>
         </div>
         <div class="hours-col col-md-5 col-lg-4 col-xl-3">
-          <?php if(get_field('hours', $pageId)) :?>
+          <?php if(!empty($hours)) :?>
           <div class="inview animated delay-1" data-ease="fadeIn">
             <div class="white">
-                <?php $hours = filter_locations(get_field('hours', $pageId));?>
-                <?php dd($hours);?>
+                <?php echo $hours['hours'];?>
             </div>
           </div>
           <?php endif ?>
