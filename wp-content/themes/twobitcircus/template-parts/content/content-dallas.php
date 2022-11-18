@@ -43,8 +43,7 @@
         <div class="hours-col col-md-5 col-lg-4 col-xl-3">
           <?php if(get_field('hours', $pageId)) :?>
           <div class="inview animated delay-1" data-ease="fadeIn">
-            <div class="white">
-                <?php $hours = filter_locations(get_field('hours', $pageId)[$locTarget]);?> 
+            <div class="white"> 
             </div>
           </div>
           <?php endif ?>
