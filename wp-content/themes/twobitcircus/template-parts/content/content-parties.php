@@ -6,7 +6,7 @@
  */
 global $location;
 remove_filter('the_content', 'wpautop');
-remove_filter('contact_form', 'wpautop');
+remove_filter('acf_the_content', 'wpautop');
 $contactForm = filter_locations(get_field('contact_form', 'option'));
 ?>
 <article id="parties" <?php post_class();?>>
