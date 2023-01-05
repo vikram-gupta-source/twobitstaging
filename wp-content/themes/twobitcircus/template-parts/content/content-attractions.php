@@ -58,8 +58,7 @@ $showCnt     = 0;
         <div class="container">
             <?php if (!empty($attractions)): ?>
             <div class="attractions-slick entry-wrapper-padding inview animated">
-                <?php foreach ($attractions as $cat => $shows):
-?>
+                <?php foreach ($attractions as $cat => $shows): ?>
                 <div class="item-attraction">
 
                     <div class="slick-shows" id="cat-<?php echo $cat; ?>">
