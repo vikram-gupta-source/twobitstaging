@@ -26,15 +26,14 @@ $showCnt     = 0;
                                 <?php echo $shows['terms']->name; ?>
                             </a>
                             <div class="dropdown-menu" data-cat="<?php echo $shows['terms']->slug; ?>">
-                                <?php foreach ($shows['posts'] as $skey => $show): ?>
-                                <?php if (!filter_location_by_field(get_field('available_in', $show->ID))) {
-    continue;
-}
-?>
-                                <?php if ($show->post_status != 'publish') {
-    continue;
-}
-?>
+                                <?php foreach ($shows['posts'] as $skey => $show):
+    if (!filter_location_by_field(get_field('available_in', $show->ID))) {
+        continue;
+    }
+    if ($show->post_status != 'publish') {
+        continue;
+    }
+    ?>
                                 <a class="dropdown-item" href="#" aria-controls="<?php echo sanitize_title($show->post_title); ?>"><?php echo $show->post_title; ?></a>
                                 <?php endforeach?>
                             </div>
@@ -59,7 +58,8 @@ $showCnt     = 0;
         <div class="container">
             <?php if (!empty($attractions)): ?>
             <div class="attractions-slick entry-wrapper-padding inview animated">
-                <?php foreach ($attractions as $cat => $shows): ?>
+                <?php foreach ($attractions as $cat => $shows):
+?>
                 <div class="item-attraction">
 
                     <div class="slick-shows" id="cat-<?php echo $cat; ?>">
@@ -153,7 +153,7 @@ $showCnt     = 0;
                                         <?php endif?>
                                     </div>
                                     <?php endif?>
-                                    <?php echo (!empty($info[0]['show_description'])) ? $info[0]['show_description'] : apply_filters('the_content', $show->post_content); ?>
+                                    <?php echo apply_filters('the_content', $show->post_content) ?>
                                     <?php if (!empty(get_field('powered_by', $show->ID))): ?>
                                     <div class="my-3">
                                         <div class="powered text-uppercase lubalinB">
