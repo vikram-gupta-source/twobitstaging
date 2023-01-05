@@ -58,20 +58,24 @@ $showCnt     = 0;
         <div class="container">
             <?php if (!empty($attractions)): ?>
             <div class="attractions-slick entry-wrapper-padding inview animated">
-                <?php foreach ($attractions as $cat => $shows): ?>
+                <?php foreach ($attractions as $cat => $shows):
+    if ($shows['posts']) {
+        ;
+    }
+    ?>
                 <div class="item-attraction">
 
                     <div class="slick-shows" id="cat-<?php echo $cat; ?>">
                         <?php $num = count($shows['posts']);?>
                         <?php foreach ($shows['posts'] as $skey => $show):
-    if ($show->post_status != 'publish') {
-        continue;
-    }
-    echo get_field('available_in', $show->ID);
-    ?>
+        if ($show->post_status != 'publish') {
+            continue;
+        }
+        echo get_field('available_in', $show->ID);
+        ?>
                         <?php if (!filter_location_by_field(get_field('available_in', $show->ID))) {
-        continue;
-    }?>
+            continue;
+        }?>
                         <?php $composedDates = composeTickets(get_field('tickets', $show->ID));?>
                         <?php $info          = filter_locations(get_field('information', $show->ID));?>
                         <?php $_cat          = get_the_category($show->ID);?>
@@ -152,7 +156,7 @@ $showCnt     = 0;
                                         <?php endif?>
                                     </div>
                                     <?php endif?>
-                                    <?php echo apply_filters('the_content', $show->post_content) ?>
+                                    <?php echo (!empty($info[0]['show_description'])) ? $info[0]['show_description'] : apply_filters('the_content', $show->post_content); ?>
                                     <?php if (!empty(get_field('powered_by', $show->ID))): ?>
                                     <div class="my-3">
                                         <div class="powered text-uppercase lubalinB">
