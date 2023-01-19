@@ -240,22 +240,6 @@
     display: none;
   }
 
-  .hours-op {
-    font-size: 10px;
-
-    @media (max-width: $mobile) {
-      display: none;
-    }
-  }
-
-  .loc {
-    margin-right: 0.25rem;
-
-    @media (max-width: $mobile) {
-      display: block;
-    }
-  }
-
   .direction {
     display: inline-block;
     line-height: 20px;
@@ -297,11 +281,9 @@
     }
 
     .state {
-      color: $dark-red;
+      color: $green;
 
       &.open {
-        color: $green;
-
         .fa-location-arrow {
           &:before {
             border: 2px solid $green;

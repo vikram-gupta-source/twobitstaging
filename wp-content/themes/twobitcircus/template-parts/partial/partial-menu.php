@@ -54,7 +54,7 @@ if (!empty($location) && $location['enable_location'] == 1 && $location['region'
             <?php the_custom_logo();?>
             <?php if (!empty($location['city'])): ?>
             <a title="Directions" href="#map-modal" class="nav-link-direction text-center">
-                <div class="hours-op">Operating Hours</div><span class="direction text-uppercase"><span class="loc"><?php echo $location['city'] ?></span><span class="state"></span></span>
+                <span class="direction text-uppercase"><?php echo $location['city'] ?><div class="state">Operating Hours <i class="fa fa-lg fa-location-arrow" aria-hidden="true" /></div></span>
             </a>
             <?php endif?>
 
