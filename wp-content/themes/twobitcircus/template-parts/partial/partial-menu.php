@@ -56,7 +56,7 @@ if (!empty($location) && $location['enable_location'] == 1 && $location['region'
             <a title="Directions" href="#map-modal" class="nav-link-direction text-center">
                 <span class="direction text-uppercase">
                     <div><?php echo $location['city'] ?></div>
-                    <div class="state">Operating Hours <i class="fa fa-lg fa-location-arrow" aria-hidden="true" /></div>
+                    <div class="state">Operating Hours</div>
                 </span>
             </a>
             <?php endif?>
