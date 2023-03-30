@@ -6,7 +6,7 @@
  */
 global $location;
 $setmenu = 'header';
-if (!empty($location) && $location['enable_location'] == 1 && $location['region'] == 'Texas') {
+if (!empty($location)) {
     $setmenu = 'header_dallas';
 }
 ?>
@@ -44,7 +44,7 @@ if (!empty($location) && $location['enable_location'] == 1 && $location['region'
     ?>
     <div id="notification-bar">
         <div class="container text-center">
-            <?php echo $notification[0]['message']; ?>
+            <?php echo $notification[0]; ?>
         </div>
     </div>
     <?php endif?>

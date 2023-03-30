@@ -275,6 +275,7 @@ function twobitcircus_load_location() {
   } else {
     $region = (json_decode(stripslashes($_COOKIE['geo_location']))); 
   }
+  $location = '';
   $location = get_locations(get_field('location_selection', 'option'));
 }
 add_action('init', 'twobitcircus_load_location', 0);
@@ -296,11 +297,12 @@ function filter_location_by_field($field)
 function filter_locations($array)
 {
     global $region;
-    if (empty($array) || $region->status == 'fail') {
+    if (empty($array)) {
         return $array;
     }
     $_array = [];
     // Test City
+    if(!empty($_array)){
     foreach ($array as $item) {
         $_item = explode('|', $item['locations']);
         if ($_item[0] == 'all') {
@@ -311,13 +313,14 @@ function filter_locations($array)
             $_array[] = $item;
         }
     }
+}
     return $_array;
 }
 // Clean Location so it find only location that in region
 function get_locations($array)
 {
     global $region;
-    if (empty($array) || $region->status == 'fail') {
+    if (empty($array) || ((!empty($region)) && $region->status == 'fail')) {
         return $array[0];
     }
     $_array = [];

@@ -3,8 +3,8 @@ Contributors: humanityco
 Tags: gdpr, ccpa, cookies, consent, compliance
 Requires at least: 4.7
 Requires PHP: 5.4
-Tested up to: 6.0.1
-Stable tag: 2.4.0
+Tested up to: 6.2
+Stable tag: 2.4.8
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -106,10 +106,10 @@ Yes! Cookie Notice is a free software.
 = Is Cookie Compliance free? =
 Yes, but with limits. Cookie Compliance includes both free and paid plans to choose from depending on your needs and your website traffic.
 
-= Does the Cookie Notice make my site fully compliant with GDPR? =
+= Does the Cookie Notice make my site fully compliant with GDPR or US Privacy Laws? =
 No. The plugin-only version DOES NOT include technical compliance features such as automatic script blocking, consent purpose categories, or consent record storage. These features are only available through the Cookie Compliance integration.
 
-= Does the Cookie Compiance integration make my site fully compliant with GDPR? =
+= Does the Cookie Compiance integration make my site fully compliant with GDPR and US Privacy Laws? =
 Yes! The plugin + web appliaction version includes technical compliance features to meet requirements for over 100 countries and legal jurisdictions.
 
 == Screenshots ==
@@ -120,6 +120,43 @@ Yes! The plugin + web appliaction version includes technical compliance features
 4. Cookie Compliance settings
 
 == Changelog ==
+
+= 2.4.8 =
+* New: Added Pages to Conditional display
+* Fix: Homepage display issue
+* Fix: Background color issue
+* Tweak: Improved WP Rocket support
+* Tweak: Improved SG Optimizer support
+
+= 2.4.7 =
+* New: Conditional display of the banner
+* Tweak: Improved sanitization and validation of data
+* Tweak: PHP 8.1 and 8.2 compatibility
+* Tweak: Added async attribute when autoblocking is disabled
+
+= 2.4.6 =
+* Fix: Cookie Compliance inactive status issue
+
+= 2.4.5 =
+* Tweak: Remove the notice from the Elementor page builder
+* Tweak: Remove the notice from widgets screen
+* Fix: Improved Contact Form 7 reCaptcha compatibility
+
+= 2.4.4 =
+* Fix: Undefined index: status and subscription
+
+= 2.4.3 =
+* Fix: Deprecated preg_replace() notice in PHP 8.1
+
+= 2.4.2 =
+* New: Compatibility with Autoptimize plugin
+* Fix: Improved Contact Form 7 reCaptcha support
+* Fix: Fixed non-static method cookies_set()
+
+= 2.4.1 =
+* New: Contact Form 7 reCaptcha support
+* Tweak: Switched health status from critical to recommended when Cookie Compliance is not integrated
+* Tweak: Add SimeSite=Lax for created cookies
 
 = 2.4.0 =
 * New: Advanced Multisite support
@@ -428,5 +465,9 @@ Initial release
 
 == Upgrade Notice ==
 
-= 2.4.0 =
-* New: Advanced Multisite support
+= 2.4.8 =
+* New: Added Pages to Conditional display
+* Fix: Homepage display issue
+* Fix: Background color issue
+* Tweak: Improved WP Rocket support
+* Tweak: Improved SG Optimizer support
